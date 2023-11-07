@@ -84,6 +84,7 @@ charge
 discharge
 
 <img width="915" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/64be99fb-769b-4ce5-839e-1b2a66a95da4">
+
 ### quote
 
 [S07459.pdf](https://github.com/milutintech/LADA/files/13288886/S07459.pdf)
