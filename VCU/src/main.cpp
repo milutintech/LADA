@@ -1,6 +1,16 @@
 #include <Arduino.h>
-
 #include <esp_task_wdt.h>
+
+void Task1code (void * pvParameters);
+void Task2code (void * pvParameters);
+
+void sendBSC();
+void sendDMC();
+void reciveBSC();
+void reciveDMC();
+void setLCDBSC();
+void setLCDDMC();
+
 TaskHandle_t Task1;
 TaskHandle_t Task2;
 
@@ -189,7 +199,8 @@ void Task1code( void * pvParameters ){
   for(;;){
     esp_task_wdt_init(5, true);
     if(VehicleMode){
-        sendBSC();
+
+      sendBSC();
       // sendDMC();
       reciveBSC();
       reciveDMC();
