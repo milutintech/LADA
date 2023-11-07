@@ -86,7 +86,7 @@ void setup() {
                     1,           /* priority of the task */
                     &Task2,      /* Task handle to keep track of created task */
                     1);          /* pin task to core 1 */
-    delay(500); 
+  delay(500); 
 }
 bool VehicleMode = 0;
 //DMC
