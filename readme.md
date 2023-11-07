@@ -47,7 +47,9 @@ left disconnected.
 <img width="1215" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/ad228a8d-6bfb-4327-bc98-67f4e28c8786">
 
 
-### The BMS has two primary modes of operation: Charge Mode and Ready Mode. The BMS will enter into Charge Mode any time 12 - 24v is applied to the CHARGE power pin (Main I/O pin 3), regardlessof whether READY power is also present or not.
+### Lade und Ready Modi
+
+The BMS has two primary modes of operation: Charge Mode and Ready Mode. The BMS will enter into Charge Mode any time 12 - 24v is applied to the CHARGE power pin (Main I/O pin 3), regardlessof whether READY power is also present or not.
 
 https://www.orionbms.com/manuals/pdf/orionbms2_operational_manual.pdf
 
