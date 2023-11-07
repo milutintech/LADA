@@ -2,19 +2,17 @@
 ## Interieur
 ### Mittelkonsole
 Open Auto Pro
-
-Waveshare display
-
-PI 4
-
-CPC200-CCPA (Car Play)
-
-CSR8510 A10 (Bt
-
-HIFI BERRY
-
-https://bluewavestudio.io/community/thread-3044.html
-
+- Waveshare display 
+  - https://www.waveshare.com/product/raspberry-pi/displays/lcd-oled/15.6hp-capqled.htm
+- PI 4
+  - https://www.pi-shop.ch/raspberry-pi-4-model-b-8gb
+- CPC200-CCPA (Car Play)
+  -https://www.mytrendyphone.ch/shop/carlinkit-cpc200-ccpa-drahtlose-carplay-android-auto-adapter-304415p.html?gclid=CjwKCAiA3aeqBhBzEiwAxFiOBi3R6-FiMQM87529C-vewYi9WbjxqfM-s6FcQSQeUMXNf6h3jQiDPxoCrb8QAvD_BwE
+- CSR8510 A10 (Bt)
+  -https://www.digitec.ch/de/s1/product/tp-link-ub500-sender-bluetooth-audio-adapter-16644981
+- HIFI BERRY
+  -https://www.reichelt.com/ch/de/raspberry-pi-shield-beocreate-4-channel-amplifier-rpi-hb-beocreate-p218586.html?PROVID=2808&gclid=CjwKCAiA3aeqBhBzEiwAxFiOBsO-QmUIh61FRokT5aY90-eXIpBP11wS4Q5fO7jmrViyCtoBBXhQuxoC0AgQAvD_BwE
+  
 ### Tacho
 Digifitz
 
