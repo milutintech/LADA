@@ -46,9 +46,8 @@ left disconnected.
 
 <img width="1215" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/ad228a8d-6bfb-4327-bc98-67f4e28c8786">
 
-###The BMS has two primary modes of operation: Charge Mode and Ready Mode. The BMS will enter
-into Charge Mode any time 12 - 24v is applied to the CHARGE power pin (Main I/O pin 3), regardless
-of whether READY power is also present or not.
+
+### The BMS has two primary modes of operation: Charge Mode and Ready Mode. The BMS will enter into Charge Mode any time 12 - 24v is applied to the CHARGE power pin (Main I/O pin 3), regardlessof whether READY power is also present or not.
 
 https://www.orionbms.com/manuals/pdf/orionbms2_operational_manual.pdf
 
@@ -75,3 +74,14 @@ BMS is in CHARGE mode or not (if configured).
 Charging" parameter available on the “Charge Limits” profile settings tab.
 > 8. The maximum allowable cell voltage is limited to the "Max. Voltage While Charging" parameter
 available on the “Cell Settings” profile settings tab.
+
+### Flussdiagramme Charge und Discharge
+
+charge
+
+<img width="897" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/df37af26-407f-4e66-90c3-341093233b45">
+
+discharge
+
+<img width="915" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/64be99fb-769b-4ce5-839e-1b2a66a95da4">
+
