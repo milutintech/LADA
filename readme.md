@@ -7,7 +7,7 @@ Open Auto Pro
 - PI 4
   - https://www.pi-shop.ch/raspberry-pi-4-model-b-8gb
 - CPC200-CCPA (Car Play)
-  -https://www.mytrendyphone.ch/shop/carlinkit-cpc200-ccpa-drahtlose-carplay-android-auto-adapter-304415p.html?gclid=CjwKCAiA3aeqBhBzEiwAxFiOBi3R6-FiMQM87529C-vewYi9WbjxqfM-s6FcQSQeUMXNf6h3jQiDPxoCrb8QAvD_BwE
+  - https://www.mytrendyphone.ch/shop/carlinkit-cpc200-ccpa-drahtlose-carplay-android-auto-adapter-304415p.html?gclid=CjwKCAiA3aeqBhBzEiwAxFiOBi3R6-FiMQM87529C-vewYi9WbjxqfM-s6FcQSQeUMXNf6h3jQiDPxoCrb8QAvD_BwE
 - CSR8510 A10 (Bt)
   -https://www.digitec.ch/de/s1/product/tp-link-ub500-sender-bluetooth-audio-adapter-16644981
 - HIFI BERRY
