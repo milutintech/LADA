@@ -1,3 +1,6 @@
+// Author: Christian Obrecht
+// Date: 07.11.2023
+// Description: Communication with BSC over CAN
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
 #include <SPI.h>

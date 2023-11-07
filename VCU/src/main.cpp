@@ -1,3 +1,7 @@
+// Author: Christian Obrecht
+// Date: 07.11.2023
+// Description: Communication with BSC and DMC over CAN
+
 #include <Arduino.h>
 #include <esp_task_wdt.h>
 

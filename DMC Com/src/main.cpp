@@ -1,3 +1,6 @@
+// Author: Christian Obrecht
+// Date: 07.11.2023
+// Description: Communication with DMC over CAN
 #include <SPI.h>
 #define DMCCTRL 0x210
 #define CAN_2515
