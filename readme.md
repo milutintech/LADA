@@ -1,6 +1,6 @@
 # LADA
 ## Interieur
-### Mittelkonsole
+### Mittelkonsole  Kosten ca 500.-
 Open Auto Pro
 - Waveshare display 
   - https://www.waveshare.com/product/raspberry-pi/displays/lcd-oled/15.6hp-capqled.htm
