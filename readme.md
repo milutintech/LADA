@@ -16,7 +16,7 @@ Open Auto Pro
 ### Tacho
 Digifitz
 
-## BMS
+## BMS Kosten ca 2700.-
 Orion 
 ### Ansteuerung
 <img width="1110" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/e5c6d471-01e4-414f-a05f-dc18713be604">
