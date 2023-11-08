@@ -2,12 +2,22 @@
 // Date: 07.11.2023
 // Description: Communication with BSC and DMC over CAN
 
+//Libraries
 #include <Arduino.h>
 #include <esp_task_wdt.h>
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+#include <SPI.h>
 
+//Create Tasks for each Core
 void Task1code (void * pvParameters);
 void Task2code (void * pvParameters);
 
+//Task Handles
+TaskHandle_t Task1;
+TaskHandle_t Task2;
+
+//Function Declarations
 void sendBSC();
 void sendDMC();
 void reciveBSC();
@@ -15,24 +25,20 @@ void reciveDMC();
 void setLCDBSC();
 void setLCDDMC();
 
-TaskHandle_t Task1;
-TaskHandle_t Task2;
-
+//Pinout
 #define SCK 4
 #define MOSI 6
 #define MISO 5
-// Git tests 2
 
 
-#include <Wire.h> 
-#include <LiquidCrystal_I2C.h>
-#include <SPI.h>
+//Defining CAN Indexes
 #define BSC_COMM 0x260
 #define BSC_LIM 0x261
 #define CAN_2515
 #define DMCCTRL 0x210
 #define DMCLIM 0x211
 #define DMCCTRL2 0x212
+
 #if defined(SEEED_WIO_TERMINAL) && defined(CAN_2518FD)
 
 
@@ -57,14 +63,21 @@ mcp2518fd CAN(SPI_CS_PIN); // Set CS pin
 mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
 #define MAX_DATA_SIZE 8
 #endif
+
 LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
+
 void setup() {
+
   pinMode(18, INPUT);
+  //Init the i2c bus
   Wire.begin(1,2);
+  //Init the LCD
   lcd.init();                      
   lcd.init();
   lcd.backlight();
+
   Serial.begin(115200);
+
   #if MAX_DATA_SIZE > 8
   CAN.setMode(CAN_NORMAL_MODE);
   #endif
@@ -93,8 +106,13 @@ void setup() {
   delay(500); 
 }
 bool VehicleMode = 0;
+
+//*********************************************************************//
+//Deffining Variables for Can transmission
 //DMC
-//0x210
+//*********************************************************************//
+//Sending Variables
+//Variables for 0x210
 bool enableDMC = 0;
 bool modeDMC = 1;
 bool oscLim = 0;
@@ -112,7 +130,7 @@ unsigned char lowNibSpd = 0;
 unsigned char highNibSpd = 0;
 unsigned char lowNibTrq = 0;
 unsigned char highNibTrq = 0;
-//0x211
+//Variables for 0x211
 int DMC_DcVLimMot = 380;
 int DMC_DcVLimGen = 422;
 int DMC_DcCLimMot = 200;
@@ -122,7 +140,7 @@ int DMC_DcVLimMot_Scale = 0;
 int DMC_DcVLimGen_Scale = 0;
 int DMC_DcCLimMot_Scale = 0;
 int DMC_DcCLimGen_Scale = 0;
-//0x212
+//Variables for0x212
 int DMC_TrqSlewrate = 1300;
 int DMC_SpdSlewrate = 655;
 int DMC_MechPwrMaxMot = 20000;
@@ -131,13 +149,14 @@ int DMC_MechPwrMaxGen = 20000;
 int DMC_TrqSlewrate_Scale = 0;
 int DMC_MechPwrMaxMot_Scale = 0;
 int DMC_MechPwrMaxGen_Scale = 0;
+
 //recive Variable
-//Variables For 0x458
+//Variables for 0x458
 float DMC_TempInv = 0;
 float DMC_TempMot = 0;
 int8_t DMC_TempSys = 0;
 
-//Variables For 0x258
+//Variables for 0x258
 bool DMC_Ready = 0;
 bool DMC_Running = 0;
 
@@ -148,17 +167,27 @@ bool DMC_TrqLimitation = 0;
 float DMC_TrqAvl = 0;
 float DMC_TrqAct = 0;
 float DMC_SpdAct = 0;
-//Variables For 0x259
+//Variables for 0x259
 float DMC_DcVltAct = 0;
 float DMC_DcCurrAct = 0;
 float DMC_AcCurrAct = 0;
 int32_t DMC_MechPwr = 0;
 
+//*********************************************************************//
+//Deffining Variables for Can transmission
 //BSC
+//*********************************************************************//
+
 //SendingVariables
+//Variables for 0x260
 bool enableBSC = 0;
 bool modeBSC = 1;
+int Hvoltage = 400;  
+int Lvoltage = 8;
+int LvoltageScale = 0;
+int HvoltageScale = 0;
 
+//Variables for 0x261
 int BSC6_HVVOL_LOWLIM = 240;
 int BSC6_HVVOL_LOWLIM_SCALED = 0;
 int BSC6_LVCUR_UPLIM_BUCK = 240;
@@ -171,10 +200,7 @@ int BSC6_HVCUR_UPLIM_BOOST = 11;
 int BSC6_HVCUR_UPLIM_BOOST_SCALED = 0;
 
 
-int Hvoltage = 400;  
-int Lvoltage = 8;
-int LvoltageScale = 0;
-int HvoltageScale = 0;
+
 
 //Reciveing Variables
 //Variables For 0x26A	
@@ -193,7 +219,7 @@ unsigned char controllBufferDMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllBuffer2DMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char limitBufferDMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0}; //Storage for controll mesages
-unsigned char limitBuffer[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Storage for limit Values
+unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Storage for limit Values
 
 
 //Can Com on Core 0
@@ -334,15 +360,15 @@ void sendBSC(){
   BSC6_LVVOL_LOWLIM_SCALED = BSC6_LVVOL_LOWLIM * 10;
   BSC6_HVCUR_UPLIM_BOOST_SCALED = BSC6_HVCUR_UPLIM_BOOST * 10;
 
-  limitBuffer[0] = BSC6_HVVOL_LOWLIM_SCALED;
-  limitBuffer[1] = BSC6_LVCUR_UPLIM_BUCK;
-  limitBuffer[2] = BSC6_HVCUR_UPLIM_BUCK_SCALED;
-  limitBuffer[3] = BSC6_LVVOL_LOWLIM_SCALED;
-  limitBuffer[4] = BSC6_LVCUR_UPLIM_BOOST;
-  limitBuffer[5] = BSC6_HVCUR_UPLIM_BOOST_SCALED;
+  limitBufferBSC[0] = BSC6_HVVOL_LOWLIM_SCALED;
+  limitBufferBSC[1] = BSC6_LVCUR_UPLIM_BUCK;
+  limitBufferBSC[2] = BSC6_HVCUR_UPLIM_BUCK_SCALED;
+  limitBufferBSC[3] = BSC6_LVVOL_LOWLIM_SCALED;
+  limitBufferBSC[4] = BSC6_LVCUR_UPLIM_BOOST;
+  limitBufferBSC[5] = BSC6_HVCUR_UPLIM_BOOST_SCALED;
 
   CAN.sendMsgBuf(BSC_COMM, 0, 3, controllBufferBSC);
-  CAN.sendMsgBuf(BSC_LIM, 0, 6, limitBuffer);
+  CAN.sendMsgBuf(BSC_LIM, 0, 6, limitBufferBSC);
 }
 void sendDMC(){
   DMC_TrqSlewrate_Scale = DMC_TrqSlewrate * 50;
