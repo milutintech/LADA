@@ -37,7 +37,7 @@ void setDACGain(bool gain);
 void setLDAC(uint8_t LDAC);
 uint16_t readADC(uint8_t DACnum);
 
-int16_t calculateTorque5S(uint16_t sampleSet[5],bool reverseSig);
+int16_t calculateTorque5S(bool reverseSig);
 
 
 //Pinout
@@ -104,14 +104,14 @@ int dacAdress = 0x10;
 #define _ADAC_SOFT_RESET     B00001111 // Software reset - Resets the AD5593R
  
  
-#define _ADAC_VREF_ON     B00000010
-#define _ADAC_SEQUENCE_ON B00000010
+#define _ADAC_VREF_ON        B00000010 // VREF on
+#define _ADAC_SEQUENCE_ON    B00000010 // Sequence on
  
-#define _ADAC_DAC_WRITE       B00010000
-#define _ADAC_ADC_READ        B01000000
-#define _ADAC_DAC_READ        B01010000
-#define _ADAC_GPIO_READ       B01110000
-#define _ADAC_REG_READ        B01100000
+#define _ADAC_DAC_WRITE      B00010000 // DAC write
+#define _ADAC_ADC_READ       B01000000 // ADC read
+#define _ADAC_DAC_READ       B01010000 // DAC read
+#define _ADAC_GPIO_READ      B01110000 // GPIO read
+#define _ADAC_REG_READ       B01100000 // Register read
                   //DAC0                 DAC7
 bool DACenable[8] = {1, 1, 1, 0, 0, 0, 0, 0};
 bool ADCenable[8] = {0, 0, 0, 0, 0, 1, 1, 1};
@@ -171,6 +171,7 @@ bool VehicleMode = 0;
 //*********************************************************************//
 uint8_t sampleSetCounter = 0;
 int16_t sampleSetPedal[5] = {0,0,0,0,0};
+bool reversSig = 0;
 
 //*********************************************************************//
 //Deffining Variables for Can transmission
@@ -293,6 +294,7 @@ void Task1code( void * pvParameters ){
     if(VehicleMode){
       if(sampleSetCounter >5){sampleSetCounter = 0;}  //Reset SampleSetCounter
       sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
+      DMC_TrqRq_Scale = calculateTorque5S(reversSig);
       sendBSC();
       sendDMC();
       reciveBSC();
@@ -463,7 +465,7 @@ void sendDMC(){
   limitBufferDMC[6] = DMC_DcCLimGen_Scale >> 8;
   limitBufferDMC[7] = DMC_DcCLimGen_Scale & 0x00FF;
 
-  DMC_TrqRq_Scale = DMC_TrqRq * 100;
+
   lowNibSpd = DMC_SpdRq	 & 0x00FF;
   highNibSpd = DMC_SpdRq	 >> 8;
   lowNibTrq = DMC_TrqRq_Scale & 0x00FF;
@@ -661,12 +663,12 @@ void setLDAC(uint8_t LDAC){
   Serial.println( Wire.endTransmission());
 }
 
-int16_t calculateTorque5S(uint16_t sampleSet[5],bool reverseSig){
+int16_t calculateTorque5S(bool reverseSig){
   int16_t SampeldPotiValue = 0;
   int16_t DMC_TorqueCalc = 0;
 
   for(int i = 0; i < 5; i++){
-    SampeldPotiValue = SampeldPotiValue + sampleSet[i];
+    SampeldPotiValue = SampeldPotiValue + sampleSetPedal[i];
   }
   SampeldPotiValue = SampeldPotiValue / 5;
   DMC_TorqueCalc = map(SampeldPotiValue, 0, 4096, 0, 32767);
