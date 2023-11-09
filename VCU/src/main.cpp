@@ -35,7 +35,7 @@ void setupGPI();
 void setDACVal(uint8_t DACnum, uint16_t DACvalue);
 void setDACGain(bool gain);
 void setLDAC(uint8_t LDAC);
-void readADC();
+uint16_t readADC(uint8_t DACnum);
 
 
 //Pinout
@@ -618,13 +618,16 @@ void setDACVal(uint8_t DACnum, uint16_t DACvalue){
   Serial.println( Wire.endTransmission());
 }
 
-void readADC(){
+uint16_t readADC(uint8_t DACnum){
+  uint16_t ADCvalue = 0;
+  DACnum = DACnum & 0x0F;
   Wire.beginTransmission(dacAdress);
   Wire.write(_ADAC_DAC_WRITE|DACnum);
-  Wire.write(DACvalue >> 8);  // [D0]
-  Wire.write(DACvalue & 0x00FF);  // [D0]
+  Wire.write(ADCvalue >> 8);  // [D0]
+  Wire.write(ADCvalue & 0x00FF);  // [D0]
  
   Serial.println( Wire.endTransmission());
+  return ADCvalue;
 }
 
 void setDACGain(bool gain){
