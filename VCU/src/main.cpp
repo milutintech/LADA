@@ -37,6 +37,8 @@ void setDACGain(bool gain);
 void setLDAC(uint8_t LDAC);
 uint16_t readADC(uint8_t DACnum);
 
+int16_t calculateTorque5S(uint16_t sampleSet[5],bool reverseSig);
+
 
 //Pinout
 #define SCK 4
@@ -116,6 +118,8 @@ bool ADCenable[8] = {0, 0, 0, 0, 0, 1, 1, 1};
 bool GPIenable[8] = {0, 0, 0, 0, 1, 0, 0, 0};
 bool GPOenable[8] = {0, 0, 0, 1, 0, 0, 0, 0};
  
+#define ADCPoti 1
+
 float voltage = 2.65;
 
 int value = 0;
@@ -160,6 +164,13 @@ void setup() {
   delay(500); 
 }
 bool VehicleMode = 0;
+
+//*********************************************************************//
+//Deffining Variables for Operation
+//General
+//*********************************************************************//
+uint8_t sampleSetCounter = 0;
+int16_t sampleSetPedal[5] = {0,0,0,0,0};
 
 //*********************************************************************//
 //Deffining Variables for Can transmission
@@ -280,11 +291,13 @@ void Task1code( void * pvParameters ){
   for(;;){
     esp_task_wdt_init(5, true);
     if(VehicleMode){
-
+      if(sampleSetCounter >5){sampleSetCounter = 0;}
+      sampleSetPedal[sampleSetCounter] = readADC(ADCPoti)
       sendBSC();
-      // sendDMC();
+      sendDMC();
       reciveBSC();
       reciveDMC();
+      sampleSetCounter ++;
     }
   } 
 }
@@ -647,5 +660,19 @@ void setLDAC(uint8_t LDAC){
  
   Serial.println( Wire.endTransmission());
 }
- 
+
+int16_t calculateTorque5S(uint16_t sampleSet[5],bool reverseSig){
+  int16_t SampeldPotiValue = 0;
+  int16_t DMC_TorqueCalc = 0;
+
+  for(int i = 0; i < 5; i++){
+    SampeldPotiValue = SampeldPotiValue + sampleSet[i];
+  }
+  SampeldPotiValue = SampeldPotiValue / 5;
+  DMC_TorqueCalc = map(SampeldPotiValue, 0, 4096, 0, 32767);
+  if(reverseSig){
+    DMC_TorqueCalc = 0 - DMC_TorqueCalc;
+  }
+  return DMC_TorqueCalc;
+}
 void loop() {}
