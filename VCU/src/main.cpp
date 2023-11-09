@@ -291,13 +291,13 @@ void Task1code( void * pvParameters ){
   for(;;){
     esp_task_wdt_init(5, true);
     if(VehicleMode){
-      if(sampleSetCounter >5){sampleSetCounter = 0;}
-      sampleSetPedal[sampleSetCounter] = readADC(ADCPoti)
+      if(sampleSetCounter >5){sampleSetCounter = 0;}  //Reset SampleSetCounter
+      sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
       sendBSC();
       sendDMC();
       reciveBSC();
-      reciveDMC();
-      sampleSetCounter ++;
+      reciveDMC();  
+      sampleSetCounter ++;  //Increment SampleSetCounter
     }
   } 
 }
