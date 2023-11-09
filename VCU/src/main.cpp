@@ -142,12 +142,15 @@ void setup() {
                     1);          /* pin task to core 1 */
   delay(500); 
 }
-bool VehicleMode = 0;
+uint8_t VehicleMode = 0;
 
 //*********************************************************************//
 //Deffining Variables for Operation
 //General
 //*********************************************************************//
+#define Standby 0
+#define Run 1
+#define Charging 2
 uint8_t sampleSetCounter = 0;
 int16_t sampleSetPedal[5] = {0,0,0,0,0};
 bool reversSig = 0;
@@ -168,7 +171,6 @@ bool errLatch = 0;
 int errorCnt = 0;
 
 int DMC_SpdRq	 = 10000;  // Desired DMC_SpdRq	 in rpm
-int DMC_TrqRq = 20;
 int DMC_TrqRq_Scale = 0;
 int raw = 0;
 unsigned char lowNibSpd = 0;
@@ -270,16 +272,29 @@ void Task1code( void * pvParameters ){
   Serial.println(xPortGetCoreID());
   for(;;){
     esp_task_wdt_init(5, true);
-    if(VehicleMode){
-      if(sampleSetCounter >5){sampleSetCounter = 0;}  //Reset SampleSetCounter
-      sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
-      DMC_TrqRq_Scale = calculateTorque5S(reversSig);
-      sendBSC();
-      sendDMC();
-      reciveBSC();
-      reciveDMC();  
-      sampleSetCounter ++;  //Increment SampleSetCounter
+    switch(VehicleMode){
+      case Standby:
+
+      break;
+      case Run:
+        if(sampleSetCounter >5){sampleSetCounter = 0;}  //Reset SampleSetCounter
+        sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
+        DMC_TrqRq_Scale = calculateTorque5S(reversSig);
+        sendBSC();
+        sendDMC();
+        reciveBSC();
+        reciveDMC();  
+        sampleSetCounter ++;  //Increment SampleSetCounter
+      break;
+
+      case Charging:
+
+      break;
+      default:
+        VehicleMode = Standby;
+      break;
     }
+
   } 
 }
 //Backbone on Core 1
