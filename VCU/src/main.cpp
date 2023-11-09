@@ -1,6 +1,6 @@
 // Author: Christian Obrecht
 // Date: 07.11.2023
-// Description: Communication with BSC and DMC over CAN
+// Description: Communication with BSC and DMC over CAN and Controll of ADAC
 
 
 //Libraries
