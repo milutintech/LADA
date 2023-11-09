@@ -9,6 +9,7 @@
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
 #include <SPI.h>
+#include "mcp2515_can.h"
 
 //Create Tasks for each Core
 void Task1code (void * pvParameters);
@@ -44,7 +45,10 @@ int16_t calculateTorque5S(bool reverseSig);
 #define SCK 4
 #define MOSI 6
 #define MISO 5
-
+const int SPI_CS_PIN = 36;
+const int CAN_INT_PIN = 11;
+mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
+#define MAX_DATA_SIZE 8
 
 //Defining CAN Indexes
 #define BSC_COMM 0x260
@@ -53,31 +57,6 @@ int16_t calculateTorque5S(bool reverseSig);
 #define DMCCTRL 0x210
 #define DMCLIM 0x211
 #define DMCCTRL2 0x212
-
-#if defined(SEEED_WIO_TERMINAL) && defined(CAN_2518FD)
-
-
-const int SPI_CS_PIN  = BCM8;
-const int CAN_INT_PIN = BCM25;
-#else
-
-const int SPI_CS_PIN = 36;
-const int CAN_INT_PIN = 11;
-#endif
-
-#ifdef CAN_2518FD
-#include "mcp2518fd_can.h"
-mcp2518fd CAN(SPI_CS_PIN); // Set CS pin
-
-#define MAX_DATA_SIZE 8
-
-#endif
-
-#ifdef CAN_2515
-#include "mcp2515_can.h"
-mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
-#define MAX_DATA_SIZE 8
-#endif
 
 LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
