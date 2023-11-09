@@ -46,6 +46,7 @@ void setup() {
   lcd.print("BSC6");
 
 }
+//SendingVariables
 bool enable = 1;
 bool mode = 1;
 bool oscLim = 0;
