@@ -117,6 +117,7 @@ void setup() {
   lcd.backlight();
 
   Serial.begin(115200);
+ 
 
   #if MAX_DATA_SIZE > 8
   CAN.setMode(CAN_NORMAL_MODE);
@@ -157,7 +158,7 @@ void setup() {
 uint8_t sampleSetCounter = 0;
 int16_t sampleSetPedal[5] = {0,0,0,0,0};
 bool reversSig = 0;
-uint8_t VehicleMode = 1;
+uint8_t VehicleMode = Run;
 //*********************************************************************//
 //Deffining Variables for Can transmission
 //DMC
@@ -273,7 +274,7 @@ unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Storage for lim
 void Task1code( void * pvParameters ){
 
   for(;;){
-    esp_task_wdt_init(5, true);
+    esp_task_wdt_init(10, true);
     switch(VehicleMode){
       case Standby:
 
@@ -282,7 +283,7 @@ void Task1code( void * pvParameters ){
         if(sampleSetCounter >5){sampleSetCounter = 0;}  //Reset SampleSetCounter
         sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
-        Serial.println("HEY");
+        Serial.println(DMC_TrqRq_Scale);
         sendBSC();
         sendDMC();
         reciveBSC();
