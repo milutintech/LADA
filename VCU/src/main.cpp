@@ -27,7 +27,7 @@ void reciveDMC();
 void setLCDBSC();
 void setLCDDMC();
 
-void initDAC();
+void initADAC();
 void setVref(bool enable);
 void setupDAC();
 void setupADC();
@@ -91,6 +91,7 @@ int dacAdress = 0x10;
 #define _ADAC_DAC_READ       B01010000 // DAC read
 #define _ADAC_GPIO_READ      B01110000 // GPIO read
 #define _ADAC_REG_READ       B01100000 // Register read
+
                   //DAC0                 DAC7
 bool DACenable[8] = {1, 1, 1, 0, 0, 0, 0, 0};
 bool ADCenable[8] = {0, 0, 0, 0, 0, 1, 1, 1};
@@ -104,7 +105,9 @@ float voltage = 2.65;
 int value = 0;
 
 void setup() {
-
+  pinMode(16, OUTPUT);
+  digitalWrite(16, HIGH);
+  initADAC();
   pinMode(18, INPUT);
   //Init the i2c bus
   Wire.begin(1,2);
@@ -142,7 +145,7 @@ void setup() {
                     1);          /* pin task to core 1 */
   delay(500); 
 }
-uint8_t VehicleMode = 0;
+
 
 //*********************************************************************//
 //Deffining Variables for Operation
@@ -154,7 +157,7 @@ uint8_t VehicleMode = 0;
 uint8_t sampleSetCounter = 0;
 int16_t sampleSetPedal[5] = {0,0,0,0,0};
 bool reversSig = 0;
-
+uint8_t VehicleMode = 1;
 //*********************************************************************//
 //Deffining Variables for Can transmission
 //DMC
@@ -268,8 +271,7 @@ unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Storage for lim
 
 //Can Com on Core 0
 void Task1code( void * pvParameters ){
-  Serial.print("Task1 running on core ");
-  Serial.println(xPortGetCoreID());
+
   for(;;){
     esp_task_wdt_init(5, true);
     switch(VehicleMode){
@@ -280,6 +282,7 @@ void Task1code( void * pvParameters ){
         if(sampleSetCounter >5){sampleSetCounter = 0;}  //Reset SampleSetCounter
         sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
+        Serial.println("HEY");
         sendBSC();
         sendDMC();
         reciveBSC();
@@ -299,8 +302,7 @@ void Task1code( void * pvParameters ){
 }
 //Backbone on Core 1
 void Task2code( void * pvParameters ){
-  Serial.print("Task2 running on core ");
-  Serial.println(xPortGetCoreID());
+  
   for(;;){
     esp_task_wdt_init(5, true);
     if(digitalRead(39)){
@@ -535,7 +537,7 @@ void reciveDMC(){
 //Functions for ADAC
 //Inputs
 //*********************************************************************//
-void initDAC(){
+void initADAC(){
   voltage = voltage + 0.001;
   value = (voltage / 5)*pow(2,12);
   setVref(1);
@@ -557,7 +559,7 @@ void setVref(bool enable){
   Wire.write(setup);  // [D0]
   Wire.write(B00000000);  // [D0]
  
-  Serial.println( Wire.endTransmission());
+  Wire.endTransmission();
 }
  
 void setupDAC(){
@@ -567,11 +569,10 @@ void setupDAC(){
   for(int i = 0; i <= 7; i++){
     setup = setup | DACenable[i] << i;
   }
-  Serial.println(setup);
   Wire.write(0x00);  // [D0]
   Wire.write(setup);  // [D0]
  
-  Serial.println( Wire.endTransmission());
+  Wire.endTransmission();
 }
  
 void setupADC(){
@@ -581,11 +582,10 @@ void setupADC(){
   for(int i = 0; i <= 7; i++){
     setup = setup | ADCenable[i] << i;
   }
-  Serial.println(setup);
   Wire.write(0x00);  // [D0]
   Wire.write(setup);  // [D0]
  
-  Serial.println( Wire.endTransmission());
+  Wire.endTransmission();
 }
  
 void setupGPO(){
@@ -595,11 +595,11 @@ void setupGPO(){
   for(int i = 0; i <= 7; i++){
     setup = setup | GPOenable[i] << i;
   }
-  Serial.println(setup);
+  
   Wire.write(0x00);  // [D0]
   Wire.write(setup);  // [D0]
  
-  Serial.println( Wire.endTransmission());
+  Wire.endTransmission();
 }
  
 void setupGPI(){
@@ -609,11 +609,10 @@ void setupGPI(){
   for(int i = 0; i <= 7; i++){
     setup = setup | GPIenable[i] << i;
   }
-  Serial.println(setup);
   Wire.write(0x00);  // [D0]
   Wire.write(setup);  // [D0]
  
-  Serial.println( Wire.endTransmission());
+  Wire.endTransmission();
 }
  
 void setDACVal(uint8_t DACnum, uint16_t DACvalue){
@@ -624,18 +623,28 @@ void setDACVal(uint8_t DACnum, uint16_t DACvalue){
   Wire.write(DACvalue >> 8);  // [D0]
   Wire.write(DACvalue & 0x00FF);  // [D0]
  
-  Serial.println( Wire.endTransmission());
+  Wire.endTransmission();
 }
 
 uint16_t readADC(uint8_t DACnum){
   uint16_t ADCvalue = 0;
   DACnum = DACnum & 0x0F;
+
   Wire.beginTransmission(dacAdress);
-  Wire.write(_ADAC_DAC_WRITE|DACnum);
-  Wire.write(ADCvalue >> 8);  // [D0]
-  Wire.write(ADCvalue & 0x00FF);  // [D0]
+  Wire.write(_ADAC_ADC_SEQUENCE);
+  Wire.write(0x02);
+  Wire.write(byte(1 << DACnum));
+  Wire.endTransmission();
+
+  Wire.beginTransmission(dacAdress);
+  Wire.write(_ADAC_ADC_READ);
+  Wire.endTransmission();
  
-  Serial.println( Wire.endTransmission());
+  Wire.requestFrom(int(dacAdress), int(2), int(1));
+  if (Wire.available()) ADCvalue = (Wire.read() & 0x0f) << 8;
+  if (Wire.available()) ADCvalue = ADCvalue | Wire.read();
+
+  Wire.endTransmission();
   return ADCvalue;
 }
 
@@ -645,7 +654,7 @@ void setDACGain(bool gain){
   Wire.write(0x00);  // [D0]
   Wire.write(gain << 4);  // [D0]
  
-  Serial.println( Wire.endTransmission());
+ Wire.endTransmission();
 }
  
 void setLDAC(uint8_t LDAC){
@@ -654,7 +663,7 @@ void setLDAC(uint8_t LDAC){
   Wire.write(0x00);  // [D0]
   Wire.write(LDAC & 0x03);  // [D0]
  
-  Serial.println( Wire.endTransmission());
+  Wire.endTransmission();
 }
 
 int16_t calculateTorque5S(bool reverseSig){
