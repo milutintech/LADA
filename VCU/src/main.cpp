@@ -282,9 +282,11 @@ void Task1code( void * pvParameters ){
       break;
       case Run:
         if(sampleSetCounter >5){sampleSetCounter = 0;}  //Reset SampleSetCounter
+      
         sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
-        //Serial.println(DMC_TrqRq_Scale);
+        Serial.println(DMC_TrqRq_Scale);
+  
         sendBSC();
         sendDMC();
         reciveBSC();
