@@ -99,7 +99,7 @@ bool ADCenable[8] = {0, 0, 0, 0, 0, 1, 1, 1};
 bool GPIenable[8] = {0, 0, 0, 0, 1, 0, 0, 0};
 bool GPOenable[8] = {0, 0, 0, 1, 0, 0, 0, 0};
  
-#define ADCPoti 1
+#define ADCPoti 7
 
 float voltage = 2.65;
 
@@ -108,11 +108,12 @@ int value = 0;
 void setup() {
   pinMode(16, OUTPUT);
   digitalWrite(16, HIGH);
-  initADAC();
+  
   pinMode(18, INPUT);
   //Init the i2c bus
   Wire.begin(1,2);
   //Init the LCD
+  initADAC();
   lcd.init();                      
   lcd.init();
   lcd.backlight();
@@ -281,9 +282,7 @@ void Task1code( void * pvParameters ){
 
       break;
       case Run:
-        if(sampleSetCounter >5){sampleSetCounter = 0;}  //Reset SampleSetCounter
-      
-        sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
+       
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
         Serial.println(DMC_TrqRq_Scale);
   
@@ -309,6 +308,9 @@ void Task2code( void * pvParameters ){
   
   for(;;){
     esp_task_wdt_init(5, true);
+    for(sampleSetCounter = 0; sampleSetCounter < 5; sampleSetCounter ++){  
+    sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
+    }
     if(digitalRead(39)){
       enableBSC = 1;
       enableDMC = 1;
@@ -319,6 +321,8 @@ void Task2code( void * pvParameters ){
     }
     setLCDBSC();
     setLCDDMC();
+    lcd.setCursor(0,2);
+    lcd.print(readADC(ADCPoti));
     if(errorCnt < 40 && DMC_SensorWarning | DMC_GenErr){
       errorCnt ++;
       errLatch = 1;
