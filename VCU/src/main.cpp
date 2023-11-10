@@ -18,6 +18,7 @@ void Task2code (void * pvParameters);
 //Task Handles
 TaskHandle_t Task1;
 TaskHandle_t Task2;
+//Test für PAPA
 
 //Function Declarations
 void sendBSC();
@@ -267,14 +268,14 @@ unsigned char controllBufferDMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllBuffer2DMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char limitBufferDMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0}; //Storage for controll mesages
-unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Storage for limit Values
+unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Stroage for limit Values
 
 
 //Can Com on Core 0
 void Task1code( void * pvParameters ){
 
   for(;;){
-    esp_task_wdt_init(10, true);
+    esp_task_wdt_init(5, true);
     switch(VehicleMode){
       case Standby:
 
@@ -283,7 +284,7 @@ void Task1code( void * pvParameters ){
         if(sampleSetCounter >5){sampleSetCounter = 0;}  //Reset SampleSetCounter
         sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
-        Serial.println(DMC_TrqRq_Scale);
+        //Serial.println(DMC_TrqRq_Scale);
         sendBSC();
         sendDMC();
         reciveBSC();
