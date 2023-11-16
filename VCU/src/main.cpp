@@ -30,7 +30,6 @@ void setLCDDMC();
 void reciveNLG();
 void sendNLG();
 
-void startBSC();
 void chargeManage();
 
 void armBattery(bool arm);
@@ -478,7 +477,7 @@ void chargeManage(){
       break;
     case NLG_ACT_READY2CHARGE:
       NLG_StateDem = NLG_DEM_CHARGE;  //Demand Charge
-      startBSC();
+      enableBSC = 1;
       break;
     default:
       armBattery(0);
@@ -493,9 +492,6 @@ void chargeManage(){
     armDMC(0);
     }
   
-}
-void startBSC(){
-
 }
 void armBattery(bool arm){
   //TODO
@@ -809,6 +805,7 @@ void reciveNLG(){
 //Functions for ADAC
 //Inputs
 //*********************************************************************//
+
 void initADAC(){
   voltage = voltage + 0.001;
   value = (voltage / 5)*pow(2,12);
