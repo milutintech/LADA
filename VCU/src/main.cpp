@@ -18,7 +18,7 @@ void BACKBONE (void * pvParameters);
 //Task Handles
 TaskHandle_t Task1;
 TaskHandle_t Task2;
-//Test für PAPA
+
 
 //Function Declarations
 void sendBSC();
@@ -30,6 +30,7 @@ void setLCDDMC();
 void reciveNLG();
 void sendNLG();
 
+void armColingSys(bool arm);
 void chargeManage();
 
 void armBattery(bool arm);
@@ -127,6 +128,8 @@ int value = 0;
 //Deffining Variables for Operation
 //General
 //*********************************************************************//
+#define BUTTON_PIN_BITMASK 0x2400 //IO10, IO13
+
 #define Standby 0
 #define Run 1
 #define Charging 2
@@ -138,8 +141,8 @@ int value = 0;
 #define NLG_ACT_CHARGE 4
 #define NLG_ACT_SHUTDOWN 5
 
-#define NLG_HW_Wakeup 9 //Input for VCU
-#define IGNITION 99 //Input for VCU
+#define NLG_HW_Wakeup 10 //Input for VCU
+#define IGNITION 13 //Input for VCU
 
 #define NLG_DEM_STANDBY 0
 #define NLG_DEM_CHARGE 1
@@ -149,7 +152,7 @@ bool NLG_Charged = 0;
 uint8_t sampleSetCounter = 0;
 int16_t sampleSetPedal[5] = {0,0,0,0,0};
 bool reversSig = 0;
-uint8_t VehicleMode = Run;
+uint8_t VehicleMode = Standby;
 
 //*********************************************************************//
 //Deffining Variables for Can transmission
@@ -331,6 +334,7 @@ unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Stroage for lim
 unsigned char controllBufferNLG1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 void setup() {
+  esp_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK,ESP_EXT1_WAKEUP_ANY_HIGH);
   pinMode(16, OUTPUT);
   digitalWrite(16, HIGH);
   pinMode(IGNITION, INPUT);
@@ -414,25 +418,30 @@ void BACKBONE( void * pvParameters ){
   
   for(;;){
     esp_task_wdt_init(5, true);
+    Serial.println("Wake");
     switch(VehicleMode){
       case Standby:
         armBattery(0);
         armNLG(0);
         armBSC(0);
         armDMC(0);
+        armColingSys(0);
         if(digitalRead(NLG_HW_Wakeup)){VehicleMode = Charging;}
         if(digitalRead(IGNITION)){VehicleMode = Run;}
         enableBSC = 0;
         enableDMC = 0;
+        Serial.println("enteringSleep");
+        esp_deep_sleep_start();
       break;
       
       case Run:
         if(digitalRead(NLG_HW_Wakeup)){VehicleMode = Charging;}
         if(!digitalRead(IGNITION)){VehicleMode = Standby;}
-          armBattery(1);
-          armNLG(0);
-          armBSC(1);
-          armDMC(1);
+        armColingSys(1);
+        armBattery(1);
+        armNLG(0);
+        armBSC(1);
+        armDMC(1);
         for(sampleSetCounter = 0; sampleSetCounter < 5; sampleSetCounter ++){  
         sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
         }
@@ -451,6 +460,7 @@ void BACKBONE( void * pvParameters ){
         }
       break;
       case Charging:
+        armColingSys(1);
         enableBSC = 1;
         chargeManage();
         if(!digitalRead(NLG_HW_Wakeup)){VehicleMode = Standby;}
@@ -483,7 +493,6 @@ void chargeManage(){
       break;
     case NLG_ACT_CHARGE:
       NLG_LedDem = 4;                 //LED green
-      enableBSC = 1;
       break;
     default:
       armBattery(0);
@@ -498,6 +507,10 @@ void chargeManage(){
     armDMC(0);
     }
   
+}
+void armColingSys(bool arm){
+  //TODO
+  Serial.println("Not DONE Cooling ARM/DISARM");
 }
 void armBattery(bool arm){
   //TODO
