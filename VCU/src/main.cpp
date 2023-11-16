@@ -47,7 +47,6 @@ void setDACVal(uint8_t DACnum, uint16_t DACvalue);
 void setDACGain(bool gain);
 void setLDAC(uint8_t LDAC);
 uint16_t readADC(uint8_t DACnum);
-
 int16_t calculateTorque5S(bool reverseSig);
 
 
@@ -145,7 +144,6 @@ int value = 0;
 #define NLG_DEM_STANDBY 0
 #define NLG_DEM_CHARGE 1
 #define NLG_DEM_SLEEP 6
-
 bool NLG_Charged = 0;
 
 uint8_t sampleSetCounter = 0;
@@ -453,6 +451,7 @@ void BACKBONE( void * pvParameters ){
         }
       break;
       case Charging:
+        enableBSC = 1;
         chargeManage();
         if(!digitalRead(NLG_HW_Wakeup)){VehicleMode = Standby;}
         
@@ -468,15 +467,22 @@ void chargeManage(){
     switch (NLG_StateAct){
     case  NLG_ACT_SLEEP :
       NLG_StateDem = NLG_DEM_SLEEP;   //Demand Standby
+      NLG_LedDem = 9;                 //LED purple
       break;
     case NLG_ACT_STANDBY:
+      NLG_LedDem = 9;                 //LED purple
       armBattery(1);
       armNLG(1);
       armBSC(1);
       armDMC(0);
       break;
     case NLG_ACT_READY2CHARGE:
+      NLG_LedDem = 3;                 //LED pulsating green
       NLG_StateDem = NLG_DEM_CHARGE;  //Demand Charge
+      enableBSC = 1;
+      break;
+    case NLG_ACT_CHARGE:
+      NLG_LedDem = 4;                 //LED green
       enableBSC = 1;
       break;
     default:
