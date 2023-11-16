@@ -10,6 +10,9 @@
 #include <LiquidCrystal_I2C.h>
 #include <SPI.h>
 #include "mcp2515_can.h"
+#include <esp_adc_cal.h>
+#include <esp32-hal-adc.h>
+
 
 //Create Tasks for each Core
 void CAN_COM (void * pvParameters);
@@ -27,6 +30,7 @@ void reciveBSC();
 void reciveDMC();
 void setLCDBSC();
 void setLCDDMC();
+void setLCDNLG();
 void reciveNLG();
 void sendNLG();
 
@@ -133,6 +137,8 @@ int value = 0;
 #define Standby 0
 #define Run 1
 #define Charging 2
+
+#define GASPEDAL 9
 
 #define NLG_ACT_SLEEP 0
 #define NLG_ACT_WAKEUP 1 
@@ -339,6 +345,10 @@ void setup() {
   digitalWrite(16, HIGH);
   pinMode(IGNITION, INPUT);
   pinMode(NLG_HW_Wakeup, INPUT);
+  analogReadResolution(12);
+  pinMode(GASPEDAL, INPUT);
+  adcAttachPin(GASPEDAL);
+
   pinMode(18, INPUT);
   //Init the i2c bus
   Wire.begin(1,2);
@@ -349,7 +359,6 @@ void setup() {
   lcd.backlight();
 
   Serial.begin(115200);
- 
 
   #if MAX_DATA_SIZE > 8
   CAN.setMode(CAN_NORMAL_MODE);
@@ -365,7 +374,7 @@ void setup() {
                     1,           /* priority of the task */
                     &Task1,      /* Task handle to keep track of created task */
                     0);          /* pin task to core 0 */                  
-  delay(500); 
+  delay(1); 
 
   //create a task that will be executed in the Task2code() function, with priority 1 and executed on core 1
   xTaskCreatePinnedToCore(
@@ -376,7 +385,7 @@ void setup() {
                     1,           /* priority of the task */
                     &Task2,      /* Task handle to keep track of created task */
                     1);          /* pin task to core 1 */
-  delay(500); 
+  delay(1); 
 }
 
 //Can Com on Core 0
@@ -418,9 +427,10 @@ void BACKBONE( void * pvParameters ){
   
   for(;;){
     esp_task_wdt_init(5, true);
-    Serial.println("Wake");
+    //Serial.println("Wake");
     switch(VehicleMode){
       case Standby:
+        NLG_Charged = 0;
         armBattery(0);
         armNLG(0);
         armBSC(0);
@@ -431,11 +441,17 @@ void BACKBONE( void * pvParameters ){
         enableBSC = 0;
         enableDMC = 0;
         Serial.println("enteringSleep");
-        esp_deep_sleep_start();
+        if((!digitalRead(IGNITION)) && (!digitalRead(NLG_HW_Wakeup))){
+          lcd.clear();
+          lcd.noBacklight();
+          esp_deep_sleep_start();
+        }
+
       break;
       
       case Run:
-        if(digitalRead(NLG_HW_Wakeup)){VehicleMode = Charging;}
+        NLG_Charged = 0;
+        lcd.backlight();
         if(!digitalRead(IGNITION)){VehicleMode = Standby;}
         armColingSys(1);
         armBattery(1);
@@ -443,14 +459,16 @@ void BACKBONE( void * pvParameters ){
         armBSC(1);
         armDMC(1);
         for(sampleSetCounter = 0; sampleSetCounter < 5; sampleSetCounter ++){  
-        sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
+        sampleSetPedal[sampleSetCounter] = analogRead(GASPEDAL); //Read ADC into sampleSet
         }
         enableBSC = 1;
         enableDMC = 1;
         setLCDBSC();
         setLCDDMC();
         lcd.setCursor(0,2);
-        lcd.print(readADC(ADCPoti));
+        lcd.print(DMC_TrqRq_Scale);
+        lcd.setCursor(0,3);
+        lcd.print(analogRead(GASPEDAL));
         if(errorCnt < 40 && DMC_SensorWarning | DMC_GenErr){
           errorCnt ++;
           errLatch = 1;
@@ -460,10 +478,14 @@ void BACKBONE( void * pvParameters ){
         }
       break;
       case Charging:
+        lcd.backlight();
+        if(digitalRead(IGNITION)){VehicleMode = Run;}
+        setLCDBSC();
+        setLCDNLG();
         armColingSys(1);
         enableBSC = 1;
         chargeManage();
-        if(!digitalRead(NLG_HW_Wakeup)){VehicleMode = Standby;}
+        
         
       break;
       default:
@@ -480,6 +502,7 @@ void chargeManage(){
       NLG_LedDem = 9;                 //LED purple
       break;
     case NLG_ACT_STANDBY:
+      if(NLG_Charged){VehicleMode = Standby;}
       NLG_LedDem = 9;                 //LED purple
       armBattery(1);
       armNLG(1);
@@ -493,6 +516,7 @@ void chargeManage(){
       break;
     case NLG_ACT_CHARGE:
       NLG_LedDem = 4;                 //LED green
+      NLG_Charged = 1;
       break;
     default:
       armBattery(0);
@@ -527,6 +551,39 @@ void armDMC(bool arm){
 void armNLG(bool arm){
   //TODO  !! PRECHARGE nicht vergessen
   Serial.println("Not DONE NLG ARM/DISARM");
+}
+void setLCDNLG(){
+  lcd.setCursor(0,1);
+  lcd.print("NLG6");
+  lcd.setCursor(5,1);
+  //0 Sleep, 1 Wakeup, 2 Standby, 3 Ready2Charge, 4 Charge, 5 Shtdown
+  switch (BSC6_MODE){
+    case 0:
+      lcd.print("SLEEP"); 
+    break;
+    case 1:
+      lcd.print("WAKEUP");
+    break;
+    case 2:
+      lcd.print("STANDBY");
+    break;
+    case 3:
+      lcd.print("R2CHARGE");
+    break;
+    case 4:
+      lcd.print("Charge");
+    break;
+    case 5:
+      lcd.print("Shutdown");
+    break;
+    default:
+      lcd.print("ERROR");
+    break;
+  }
+  lcd.setCursor(13,1);
+  lcd.print(NLG_DcHvVoltAct);
+  lcd.setCursor(19,1);
+  lcd.print("V");
 }
 void setLCDBSC(){
   lcd.setCursor(0,0);
@@ -958,6 +1015,13 @@ int16_t calculateTorque5S(bool reverseSig){
   int16_t SampeldPotiValue = 0;
   int16_t DMC_TorqueCalc = 0;
 
+  std::sort(sampleSetPedal, sampleSetPedal + 5);
+  for (int i = 0; i < 5 - 1; ++i) {
+        if (sampleSetPedal[i + 1] - sampleSetPedal[i] > 600) {
+            // Replace the value with the median of the adjacent values
+            sampleSetPedal[i + 1] = (sampleSetPedal[i] + sampleSetPedal[i + 1]) / 2;
+        }
+    }
   for(int i = 0; i < 5; i++){
     SampeldPotiValue = SampeldPotiValue + sampleSetPedal[i];
   }
