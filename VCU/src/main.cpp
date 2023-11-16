@@ -350,6 +350,7 @@ unsigned char controllBuffer2DMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char limitBufferDMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0}; //Storage for controll mesages
 unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Stroage for limit Values
+unsigned char controllBufferNLG1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 
 //Can Com on Core 0
