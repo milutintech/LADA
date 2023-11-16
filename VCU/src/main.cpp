@@ -12,8 +12,8 @@
 #include "mcp2515_can.h"
 
 //Create Tasks for each Core
-void Task1code (void * pvParameters);
-void Task2code (void * pvParameters);
+void CAN_COM (void * pvParameters);
+void BACKBONE (void * pvParameters);
 
 //Task Handles
 TaskHandle_t Task1;
@@ -137,7 +137,7 @@ void setup() {
   
   //create a task that will be executed in the Task1code() function, with priority 1 and executed on core 0
   xTaskCreatePinnedToCore(
-                    Task1code,   /* Task function. */
+                    CAN_COM,   /* Task function. */
                     "Task1",     /* name of task. */
                     10000,       /* Stack size of task */
                     NULL,        /* parameter of the task */
@@ -148,7 +148,7 @@ void setup() {
 
   //create a task that will be executed in the Task2code() function, with priority 1 and executed on core 1
   xTaskCreatePinnedToCore(
-                    Task2code,   /* Task function. */
+                    BACKBONE,   /* Task function. */
                     "Task2",     /* name of task. */
                     10000,       /* Stack size of task */
                     NULL,        /* parameter of the task */
@@ -354,7 +354,7 @@ unsigned char controllBufferNLG1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 
 //Can Com on Core 0
-void Task1code( void * pvParameters ){
+void CAN_COM( void * pvParameters ){
 
   for(;;){
     esp_task_wdt_init(5, true);
@@ -385,7 +385,7 @@ void Task1code( void * pvParameters ){
   } 
 }
 //Backbone on Core 1
-void Task2code( void * pvParameters ){
+void BACKBONE( void * pvParameters ){
   
   for(;;){
     esp_task_wdt_init(5, true);
