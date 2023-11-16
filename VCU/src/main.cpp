@@ -27,6 +27,16 @@ void reciveBSC();
 void reciveDMC();
 void setLCDBSC();
 void setLCDDMC();
+void reciveNLG();
+void sendNLG();
+
+void startBSC();
+void chargeManage();
+
+void armBattery(bool arm);
+void armNLG(bool arm);
+void armBSC(bool arm);
+void armDMC(bool arm);
 
 void initADAC();
 void setVref(bool enable);
@@ -114,50 +124,6 @@ float voltage = 2.65;
 
 int value = 0;
 
-void setup() {
-  pinMode(16, OUTPUT);
-  digitalWrite(16, HIGH);
-  
-  pinMode(18, INPUT);
-  //Init the i2c bus
-  Wire.begin(1,2);
-  //Init the LCD
-  initADAC();
-  lcd.init();                      
-  lcd.init();
-  lcd.backlight();
-
-  Serial.begin(115200);
- 
-
-  #if MAX_DATA_SIZE > 8
-  CAN.setMode(CAN_NORMAL_MODE);
-  #endif
-  CAN.begin(CAN_500KBPS);            // init can bus : baudrate = 500k
-  
-  //create a task that will be executed in the Task1code() function, with priority 1 and executed on core 0
-  xTaskCreatePinnedToCore(
-                    CAN_COM,   /* Task function. */
-                    "Task1",     /* name of task. */
-                    10000,       /* Stack size of task */
-                    NULL,        /* parameter of the task */
-                    1,           /* priority of the task */
-                    &Task1,      /* Task handle to keep track of created task */
-                    0);          /* pin task to core 0 */                  
-  delay(500); 
-
-  //create a task that will be executed in the Task2code() function, with priority 1 and executed on core 1
-  xTaskCreatePinnedToCore(
-                    BACKBONE,   /* Task function. */
-                    "Task2",     /* name of task. */
-                    10000,       /* Stack size of task */
-                    NULL,        /* parameter of the task */
-                    1,           /* priority of the task */
-                    &Task2,      /* Task handle to keep track of created task */
-                    1);          /* pin task to core 1 */
-  delay(500); 
-}
-
 
 //*********************************************************************//
 //Deffining Variables for Operation
@@ -166,6 +132,23 @@ void setup() {
 #define Standby 0
 #define Run 1
 #define Charging 2
+
+#define NLG_ACT_SLEEP 0
+#define NLG_ACT_WAKEUP 1 
+#define NLG_ACT_STANDBY 2
+#define NLG_ACT_READY2CHARGE 3
+#define NLG_ACT_CHARGE 4
+#define NLG_ACT_SHUTDOWN 5
+
+#define NLG_HW_Wakeup 9 //Input for VCU
+#define IGNITION 99 //Input for VCU
+
+#define NLG_DEM_STANDBY 0
+#define NLG_DEM_CHARGE 1
+#define NLG_DEM_SLEEP 6
+
+bool NLG_Charged = 0;
+
 uint8_t sampleSetCounter = 0;
 int16_t sampleSetPedal[5] = {0,0,0,0,0};
 bool reversSig = 0;
@@ -178,35 +161,36 @@ uint8_t VehicleMode = Run;
 
 //Sending Variables
 //Variables for 0x711
-bool NLG_C_ClrError = 0;
-bool NLG_C_UnlockConRq = 0;
+bool NLG_C_ClrError = 0;         //Clear error latch
+bool NLG_C_UnlockConRq = 0;      //Unlock connector request
 bool NLG_C_VentiRq = 0;
-int  NLG_DcHvVoltLimMax = 400;
-int NLG_DcHvVoltLimMax_Scale = 0;
+int  NLG_DcHvVoltLimMax = 400;   //Maximum HV voltage
+
 int NLG_DcHvCurrLimMax = 50;
-int NLG_DcHvCurrLimMax_Scale = 0;
-uint16_t NLG_AcCurrLimMax_Scale = 0;
-uint8_t NLG_StateDem = 0;
-uint16_t NLG_LedDem = 0;
-uint16_t NLG_AcCurrLimMax = 0;
+uint8_t NLG_StateDem = 0;       //Setting State demand: 0 = Standby, 1 = Charge, 6 = Sleep
+uint16_t NLG_LedDem = 0;        //Charge LED demanded See table 
+uint16_t NLG_AcCurrLimMax = 0;  //Maximum AC current
 
 bool NLG_C_EnPhaseShift = 0;
 uint16_t NLG_AcPhaseShift = 0;
-uint16_t NLG_AcPhaseShift_Scale = 0;
-uint16_t prep = 0;
 
+uint16_t NLG_AcPhaseShift_Scale = 0;
+uint16_t NLG_AcCurrLimMax_Scale = 0;
+int NLG_DcHvCurrLimMax_Scale = 0;
+int NLG_DcHvVoltLimMax_Scale = 0;
 //recive Variable
 //Variables for 0x709
-uint16_t NLG_AcWhAct = 0;
-uint16_t NLG_DcHvWhAct = 0;
-uint16_t NLG_MaxTempAct = 0;
-int16_t NLG_TempCon = 0;
-float NLG_DcHvAhAct = 0;
+uint16_t NLG_AcWhAct = 0; //Actual AC kWh
+uint16_t NLG_DcHvWhAct = 0; //Actual DC kWh
+
+uint16_t NLG_MaxTempAct = 0;  //Maximum actual internal temperature
+int16_t NLG_TempCon = 0;  //Actual temperatur connector
+float NLG_DcHvAhAct = 0;  //Actual DC Ah
 //Variables for 0x728
-uint8_t NLG_StateCtrlPilot = 0;
-uint16_t NLG_DcHvVoltAct = 0;
-uint8_t NLG_StateAct = 0;
-bool NLG_S_DcHvCurrLim = 0;
+uint8_t NLG_StateCtrlPilot = 0; //State ControlPilot (see IEC 61851)
+uint16_t NLG_DcHvVoltAct = 0; //Actual HV battery output voltage
+uint8_t NLG_StateAct = 0; //0 Sleep, 1 Wakeup, 2 Standby, 3 Ready2Charge, 4 Charge, 5 Shtdown
+bool NLG_S_DcHvCurrLim = 0; 
 bool NLG_S_DcHvVoltLim = 0;
 int16_t NLG_AcPhaseUsdNLG_S_DcHvVoltLim = 0;
 bool NLG_S_ProximityLim = 0;
@@ -224,7 +208,7 @@ bool NLG_S_HwWakeup = 0;
 bool NLG_S_HwEnable = 0;
 bool NLG_S_Err = 0;
 bool NLG_S_War = 0;
-uint16_t NLG_DcHvCurrAct = 0;
+uint16_t NLG_DcHvCurrAct = 0; //Actual HV battery output current
 //Variables for 0x739
 uint8_t NLG_ACT_PLUGCom = 0;
 uint8_t NLG_StatusCP = 0;
@@ -255,7 +239,7 @@ bool errLatch = 0;
 
 int errorCnt = 0;
 
-int DMC_SpdRq	 = 10000;  // Desired DMC_SpdRq	 in rpm
+int DMC_SpdRq	 = 6000;  // Desired DMC_SpdRq	 in rpm
 int DMC_TrqRq_Scale = 0;
 int raw = 0;
 unsigned char lowNibSpd = 0;
@@ -328,9 +312,6 @@ int BSC6_LVCUR_UPLIM_BOOST = 20;
 int BSC6_HVCUR_UPLIM_BOOST = 11;
 int BSC6_HVCUR_UPLIM_BOOST_SCALED = 0;
 
-
-
-
 //Reciveing Variables
 //Variables For 0x26A	
 float BSC6_HVVOL_ACT = 0;
@@ -352,6 +333,50 @@ unsigned char controllBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0}; //Storage for con
 unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Stroage for limit Values
 unsigned char controllBufferNLG1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
+void setup() {
+  pinMode(16, OUTPUT);
+  digitalWrite(16, HIGH);
+  pinMode(IGNITION, INPUT);
+  pinMode(NLG_HW_Wakeup, INPUT);
+  pinMode(18, INPUT);
+  //Init the i2c bus
+  Wire.begin(1,2);
+  //Init the LCD
+  initADAC();
+  lcd.init();                      
+  lcd.init();
+  lcd.backlight();
+
+  Serial.begin(115200);
+ 
+
+  #if MAX_DATA_SIZE > 8
+  CAN.setMode(CAN_NORMAL_MODE);
+  #endif
+  CAN.begin(CAN_500KBPS);            // init can bus : baudrate = 500k
+  
+  //create a task that will be executed in the Task1code() function, with priority 1 and executed on core 0
+  xTaskCreatePinnedToCore(
+                    CAN_COM,   /* Task function. */
+                    "Task1",     /* name of task. */
+                    10000,       /* Stack size of task */
+                    NULL,        /* parameter of the task */
+                    1,           /* priority of the task */
+                    &Task1,      /* Task handle to keep track of created task */
+                    0);          /* pin task to core 0 */                  
+  delay(500); 
+
+  //create a task that will be executed in the Task2code() function, with priority 1 and executed on core 1
+  xTaskCreatePinnedToCore(
+                    BACKBONE,   /* Task function. */
+                    "Task2",     /* name of task. */
+                    10000,       /* Stack size of task */
+                    NULL,        /* parameter of the task */
+                    1,           /* priority of the task */
+                    &Task2,      /* Task handle to keep track of created task */
+                    1);          /* pin task to core 1 */
+  delay(500); 
+}
 
 //Can Com on Core 0
 void CAN_COM( void * pvParameters ){
@@ -371,11 +396,14 @@ void CAN_COM( void * pvParameters ){
         sendDMC();
         reciveBSC();
         reciveDMC();  
-        sampleSetCounter ++;  //Increment SampleSetCounter
+        
       break;
 
       case Charging:
-
+        sendBSC();
+        sendNLG();
+        reciveBSC();
+        reciveNLG();
       break;
       default:
         VehicleMode = Standby;
@@ -389,31 +417,102 @@ void BACKBONE( void * pvParameters ){
   
   for(;;){
     esp_task_wdt_init(5, true);
-    for(sampleSetCounter = 0; sampleSetCounter < 5; sampleSetCounter ++){  
-    sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
-    }
-    if(digitalRead(39)){
-      enableBSC = 1;
-      enableDMC = 1;
-    }
-    else{
-      enableBSC = 0;
-      enableDMC = 0;
-    }
-    setLCDBSC();
-    setLCDDMC();
-    lcd.setCursor(0,2);
-    lcd.print(readADC(ADCPoti));
-    if(errorCnt < 40 && DMC_SensorWarning | DMC_GenErr){
-      errorCnt ++;
-      errLatch = 1;
-    }
-    else{
-      errorCnt = 0;
-    }
-  } 
+    switch(VehicleMode){
+      case Standby:
+        armBattery(0);
+        armNLG(0);
+        armBSC(0);
+        armDMC(0);
+        if(digitalRead(NLG_HW_Wakeup)){VehicleMode = Charging;}
+        if(digitalRead(IGNITION)){VehicleMode = Run;}
+        enableBSC = 0;
+        enableDMC = 0;
+      break;
+      
+      case Run:
+        if(digitalRead(NLG_HW_Wakeup)){VehicleMode = Charging;}
+        if(!digitalRead(IGNITION)){VehicleMode = Standby;}
+          armBattery(1);
+          armNLG(0);
+          armBSC(1);
+          armDMC(1);
+        for(sampleSetCounter = 0; sampleSetCounter < 5; sampleSetCounter ++){  
+        sampleSetPedal[sampleSetCounter] = readADC(ADCPoti); //Read ADC into sampleSet
+        }
+        enableBSC = 1;
+        enableDMC = 1;
+        setLCDBSC();
+        setLCDDMC();
+        lcd.setCursor(0,2);
+        lcd.print(readADC(ADCPoti));
+        if(errorCnt < 40 && DMC_SensorWarning | DMC_GenErr){
+          errorCnt ++;
+          errLatch = 1;
+        }
+        else{
+          errorCnt = 0;
+        }
+      break;
+      case Charging:
+        chargeManage();
+        if(!digitalRead(NLG_HW_Wakeup)){VehicleMode = Standby;}
+        
+      break;
+      default:
+        VehicleMode = Standby;
+      break;
+    } 
+  }
 }
+void chargeManage(){
+  if(VehicleMode == Charging){
+    switch (NLG_StateAct){
+    case  NLG_ACT_SLEEP :
+      NLG_StateDem = NLG_DEM_SLEEP;   //Demand Standby
+      break;
+    case NLG_ACT_STANDBY:
+      armBattery(1);
+      armNLG(1);
+      armBSC(1);
+      armDMC(0);
+      break;
+    case NLG_ACT_READY2CHARGE:
+      NLG_StateDem = NLG_DEM_CHARGE;  //Demand Charge
+      startBSC();
+      break;
+    default:
+      armBattery(0);
+      armNLG(0);
+      break;
+    }
+  }
+  else {
+    armBattery(0);
+    armNLG(0);
+    armBSC(0);
+    armDMC(0);
+    }
+  
+}
+void startBSC(){
 
+}
+void armBattery(bool arm){
+  //TODO
+  Serial.println("Not DONE Battery ARM/DISARM");
+}
+void armBSC(bool arm){
+  //TODO
+  Serial.println("Not DONE BSC ARM/DISARM");
+}
+void armDMC(bool arm){
+  //TODO
+  Serial.println("Not DONE DMC ARM/DISARM");
+}
+void armNLG(bool arm){
+  //TODO  !! PRECHARGE nicht vergessen
+  Serial.println("Not DONE NLG ARM/DISARM");
+}
 void setLCDBSC(){
   lcd.setCursor(0,0);
   lcd.print("BSC6");
@@ -621,6 +720,7 @@ void reciveDMC(){
     }
   }
 }
+
 void sendNLG(){
     NLG_DcHvVoltLimMax_Scale = NLG_DcHvVoltLimMax * 10;
     NLG_DcHvCurrLimMax_Scale = NLG_DcHvCurrLimMax * 10;
