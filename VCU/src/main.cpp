@@ -138,7 +138,7 @@ int value = 0;
 #define Run 1
 #define Charging 2
 
-#define GASPEDAL 9
+#define GASPEDAL 6
 
 #define NLG_ACT_SLEEP 0
 #define NLG_ACT_WAKEUP 1 
@@ -345,9 +345,7 @@ void setup() {
   digitalWrite(16, HIGH);
   pinMode(IGNITION, INPUT);
   pinMode(NLG_HW_Wakeup, INPUT);
-  analogReadResolution(12);
-  pinMode(GASPEDAL, INPUT);
-  adcAttachPin(GASPEDAL);
+
 
   pinMode(18, INPUT);
   //Init the i2c bus
@@ -459,7 +457,7 @@ void BACKBONE( void * pvParameters ){
         armBSC(1);
         armDMC(1);
         for(sampleSetCounter = 0; sampleSetCounter < 5; sampleSetCounter ++){  
-        sampleSetPedal[sampleSetCounter] = analogRead(GASPEDAL); //Read ADC into sampleSet
+        sampleSetPedal[sampleSetCounter] = readADC(GASPEDAL); //Read ADC into sampleSet
         }
         enableBSC = 1;
         enableDMC = 1;
@@ -468,7 +466,7 @@ void BACKBONE( void * pvParameters ){
         lcd.setCursor(0,2);
         lcd.print(DMC_TrqRq_Scale);
         lcd.setCursor(0,3);
-        lcd.print(analogRead(GASPEDAL));
+        lcd.print(readADC(GASPEDAL));
         if(errorCnt < 40 && DMC_SensorWarning | DMC_GenErr){
           errorCnt ++;
           errLatch = 1;
@@ -503,11 +501,14 @@ void chargeManage(){
       break;
     case NLG_ACT_STANDBY:
       if(NLG_Charged){VehicleMode = Standby;}
-      NLG_LedDem = 9;                 //LED purple
-      armBattery(1);
-      armNLG(1);
-      armBSC(1);
-      armDMC(0);
+      else{
+        lcd.clear();
+        NLG_LedDem = 9;                 //LED purple
+        armBattery(1);
+        armNLG(1);
+        armBSC(1);
+        armDMC(0);
+      }
       break;
     case NLG_ACT_READY2CHARGE:
       NLG_LedDem = 3;                 //LED pulsating green
@@ -549,7 +550,7 @@ void armDMC(bool arm){
   Serial.println("Not DONE DMC ARM/DISARM");
 }
 void armNLG(bool arm){
-  //TODO  !! PRECHARGE nicht vergessen
+  //TODO  !! PRECHARGE nicht vergessen !!!! fucking KL15 NED vergeseene
   Serial.println("Not DONE NLG ARM/DISARM");
 }
 void setLCDNLG(){
