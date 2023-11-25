@@ -88,3 +88,8 @@ discharge
 ### Offerte BMS
 
 [S07459.pdf](https://github.com/milutintech/LADA/files/13288886/S07459.pdf)
+
+### NLG
+
+<img width="1489" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/da1aeda8-defe-435c-aebb-bac56ac5d024">
+
