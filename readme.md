@@ -93,3 +93,16 @@ discharge
 
 <img width="1489" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/da1aeda8-defe-435c-aebb-bac56ac5d024">
 
+### Pinout remote relay
+Relay 1 io42
+Relay 2 io41
+Relay 3 io40
+Relay 4 io39
+Relay 5 io38
+Relay 6 io37
+CS      io3
+RST     io4
+MOSI    io35
+MISO    io21
+CSK     io36
+
