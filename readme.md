@@ -110,15 +110,15 @@ discharge
 
 ## Relay 6 io37
 
-## CS      io3
+## CS      io7
 
 ## RST     io4
 
-## MOSI    io35
+## MOSI    io5
 
-## MISO    io21
+## MISO    io4
 
-## CSK     io36
+## CSK     io6
 
-## INIT    io45
+## INIT    io17
 
