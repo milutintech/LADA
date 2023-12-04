@@ -106,7 +106,7 @@ discharge
 
 ## Relay 4 io39
 
-## Relay 5 io38
+## Relay 5 io38
 
 ## Relay 6 io37
 
