@@ -94,25 +94,29 @@ discharge
 <img width="1489" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/da1aeda8-defe-435c-aebb-bac56ac5d024">
 
 ### Pinout remote relay
-Relay 1 io42
 
-Relay 2 io41
+## Protocoll CAN remote relay
+# ID: 0x999
+# FirstByte = (0,0,Relay1,Relay2,Relay3,Relay4,Relay5,Relay6)
+## Relay 1 io42
 
-Relay 3 io40
+## Relay 2 io41
 
-Relay 4 io39
+## Relay 3 io40
 
-Relay 5 io38
+## Relay 4 io39
 
-Relay 6 io37
+## Relay 5 io38
 
-CS      io3
+## Relay 6 io37
 
-RST     io4
+## CS      io3
 
-MOSI    io35
+## RST     io4
 
-MISO    io21
+## MOSI    io35
 
-CSK     io36
+## MISO    io21
+
+## CSK     io36
 
