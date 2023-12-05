@@ -100,6 +100,7 @@ discharge
 > - Relais 1 Bat arm
 > - Relais 2 KühlPumpe
 > - Relais 3 Lüfter
+> - Relais 4 NLG KL15
 
 ## Pinout remote relais
 
