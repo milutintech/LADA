@@ -24,6 +24,7 @@ TaskHandle_t Task2;
 
 
 //Function Declarations
+void relayControll();
 void sendBSC();
 void sendDMC();
 void reciveBSC();
@@ -64,8 +65,13 @@ const int CAN_INT_PIN = 11;
 mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
 #define MAX_DATA_SIZE 8
 
+#define RELAIS1 1
+#define RELAIS2 2
+#define RELAIS3 3
+#define RELAIS4 4
+#define RELAIS5 5
+
 //Defining CAN Indexes
-#define CAN_2515
 
 
 #define BSC_COMM 0x260
@@ -140,6 +146,9 @@ int value = 0;
 
 #define GASPEDAL 6
 
+#define MIN_U_BAT 380
+#define MAX_U_BAT 420
+
 #define NLG_ACT_SLEEP 0
 #define NLG_ACT_WAKEUP 1 
 #define NLG_ACT_STANDBY 2
@@ -147,6 +156,7 @@ int value = 0;
 #define NLG_ACT_CHARGE 4
 #define NLG_ACT_SHUTDOWN 5
 
+#define PRECHARGE_TIME 2
 #define NLG_HW_Wakeup 10 //Input for VCU
 #define IGNITION 13 //Input for VCU
 
@@ -155,10 +165,24 @@ int value = 0;
 #define NLG_DEM_SLEEP 6
 bool NLG_Charged = 0;
 
+bool CanError = false;
+
 uint8_t sampleSetCounter = 0;
 int16_t sampleSetPedal[5] = {0,0,0,0,0};
 bool reversSig = 0;
 uint8_t VehicleMode = Standby;
+
+//Precharge Variables
+uint16_t prechargeTime = PRECHARGE_TIME * 1000;
+
+unsigned long prechargeTimerBSC = 0;
+unsigned long prechargeTimerDMC = 0;
+unsigned long prechargeTimerNLG = 0;
+
+
+bool BSCprecharged = 0;
+bool NLGprecharged = 0;
+bool DMCprecharged = 0;
 
 //*********************************************************************//
 //Deffining Variables for Can transmission
@@ -170,7 +194,7 @@ uint8_t VehicleMode = Standby;
 bool NLG_C_ClrError = 0;         //Clear error latch
 bool NLG_C_UnlockConRq = 0;      //Unlock connector request
 bool NLG_C_VentiRq = 0;
-int  NLG_DcHvVoltLimMax = 400;   //Maximum HV voltage
+int  NLG_DcHvVoltLimMax = MAX_U_BAT;   //Maximum HV voltage
 
 int NLG_DcHvCurrLimMax = 50;
 uint8_t NLG_StateDem = 0;       //Setting State demand: 0 = Standby, 1 = Charge, 6 = Sleep
@@ -253,10 +277,10 @@ unsigned char highNibSpd = 0;
 unsigned char lowNibTrq = 0;
 unsigned char highNibTrq = 0;
 //Variables for 0x211
-int DMC_DcVLimMot = 380;
-int DMC_DcVLimGen = 422;
-int DMC_DcCLimMot = 200;
-int DMC_DcCLimGen = 100;
+int DMC_DcVLimMot = MIN_U_BAT;
+int DMC_DcVLimGen = MAX_U_BAT;
+int DMC_DcCLimMot = 600;
+int DMC_DcCLimGen = 420;
 
 int DMC_DcVLimMot_Scale = 0;
 int DMC_DcVLimGen_Scale = 0;
@@ -295,27 +319,30 @@ float DMC_DcCurrAct = 0;
 float DMC_AcCurrAct = 0;
 int32_t DMC_MechPwr = 0;
 
-
+//*********************************************************************//
+//Deffining Variables for Can transmission
+//BSC
+//*********************************************************************//
 
 //SendingVariables
 //Variables for 0x260
 bool enableBSC = 0;
-bool modeBSC = 1;
-int Hvoltage = 400;  
-int Lvoltage = 8;
+bool modeBSC = 0;     //Buck mode = 0, Boost mode = 1
+int Hvoltage = MAX_U_BAT;  
+int Lvoltage = 14;
 int LvoltageScale = 0;
 int HvoltageScale = 0;
 
 //Variables for 0x261
-int BSC6_HVVOL_LOWLIM = 240;
+int BSC6_HVVOL_LOWLIM = MIN_U_BAT;
 int BSC6_HVVOL_LOWLIM_SCALED = 0;
-int BSC6_LVCUR_UPLIM_BUCK = 240;
-int BSC6_HVCUR_UPLIM_BUCK = 11;
+int BSC6_LVCUR_UPLIM_BUCK = 15;
+int BSC6_HVCUR_UPLIM_BUCK = 20;
 int BSC6_HVCUR_UPLIM_BUCK_SCALED = 0;
-int BSC6_LVVOL_LOWLIM = 4;
+int BSC6_LVVOL_LOWLIM = 11;
 int BSC6_LVVOL_LOWLIM_SCALED = 0;
-int BSC6_LVCUR_UPLIM_BOOST = 20;
-int BSC6_HVCUR_UPLIM_BOOST = 11;
+int BSC6_LVCUR_UPLIM_BOOST = 0;
+int BSC6_HVCUR_UPLIM_BOOST = 0;
 int BSC6_HVCUR_UPLIM_BOOST_SCALED = 0;
 
 //Reciveing Variables
@@ -338,15 +365,15 @@ unsigned char limitBufferDMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0}; //Storage for controll mesages
 unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Stroage for limit Values
 unsigned char controllBufferNLG1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+unsigned char controllRelayBuffer[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
 
 void setup() {
+
   esp_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK,ESP_EXT1_WAKEUP_ANY_HIGH);
   pinMode(16, OUTPUT);
   digitalWrite(16, HIGH);
   pinMode(IGNITION, INPUT);
   pinMode(NLG_HW_Wakeup, INPUT);
-
-
   pinMode(18, INPUT);
   //Init the i2c bus
   Wire.begin(1,2);
@@ -358,10 +385,6 @@ void setup() {
 
   Serial.begin(115200);
 
-  #if MAX_DATA_SIZE > 8
-  CAN.setMode(CAN_NORMAL_MODE);
-  #endif
-  CAN.begin(CAN_500KBPS);            // init can bus : baudrate = 500k
   
   //create a task that will be executed in the Task1code() function, with priority 1 and executed on core 0
   xTaskCreatePinnedToCore(
@@ -389,17 +412,35 @@ void setup() {
 //Can Com on Core 0
 void CAN_COM( void * pvParameters ){
 
+  while (CAN_OK != CAN.begin(CAN_500KBPS)) {     // init can bus : baudrate = 500k
+        Serial.println("CAN init fail, retry...");
+        CanError = true;
+        delay(100);
+  }
+  CanError = false;
+
   for(;;){
     esp_task_wdt_init(5, true);
+    relayControll();
     switch(VehicleMode){
       case Standby:
 
       break;
       case Run:
-       
+        //BMS DMC max current
+        if((DMC_SpdAct < 100) && (readADC(GASPEDAL) < 200)){
+          DMC_DcCLimMot = 10;
+        }
+        else{
+          //DMC_DcCLimMot = BMS max current
+        }
+        
+        for(sampleSetCounter = 0; sampleSetCounter < 5; sampleSetCounter ++){  
+          sampleSetPedal[sampleSetCounter] = readADC(GASPEDAL); //Read ADC into sampleSet
+        }
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
         Serial.println(DMC_TrqRq_Scale);
-  
+
         sendBSC();
         sendDMC();
         reciveBSC();
@@ -408,6 +449,8 @@ void CAN_COM( void * pvParameters ){
       break;
 
       case Charging:
+        //BMS DMC max current 
+        //NLG_DcHvCurrLimMax = BMS max current charging
         sendBSC();
         sendNLG();
         reciveBSC();
@@ -456,8 +499,11 @@ void BACKBONE( void * pvParameters ){
         armNLG(0);
         armBSC(1);
         armDMC(1);
-        for(sampleSetCounter = 0; sampleSetCounter < 5; sampleSetCounter ++){  
-        sampleSetPedal[sampleSetCounter] = readADC(GASPEDAL); //Read ADC into sampleSet
+        if(reversSig){
+          digitalWrite(RELAIS5, HIGH);
+        }
+        else{
+          digitalWrite(RELAIS5, LOW);
         }
         enableBSC = 1;
         enableDMC = 1;
@@ -477,7 +523,11 @@ void BACKBONE( void * pvParameters ){
       break;
       case Charging:
         lcd.backlight();
-        if(digitalRead(IGNITION)){VehicleMode = Run;}
+        if(digitalRead(IGNITION)){
+          VehicleMode = Run;
+          digitalWrite(RELAIS4, LOW);
+          }
+        digitalWrite(RELAIS4, HIGH);
         setLCDBSC();
         setLCDNLG();
         armColingSys(1);
@@ -518,6 +568,7 @@ void chargeManage(){
     case NLG_ACT_CHARGE:
       NLG_LedDem = 4;                 //LED green
       NLG_Charged = 1;
+      //Demand Standby by BMS has to be Implemented
       break;
     default:
       armBattery(0);
@@ -533,25 +584,94 @@ void chargeManage(){
     }
   
 }
+void relayControll(){
+  CAN.sendMsgBuf(0x999, 0, 8, controllRelayBuffer);
+}
+
 void armColingSys(bool arm){
-  //TODO
-  Serial.println("Not DONE Cooling ARM/DISARM");
+  //switch relais2 on VCU for pump
+  //switch relais3 on VCU for FAN
+  digitalWrite(RELAIS2, arm);
+  
+  if(arm  && ((DMC_TempInv > 60)|(DMC_TempMot > 80)|(NLG_TempCoolPlate > 60 ))){
+    digitalWrite(RELAIS3, 1);
+  }
+  else{
+    digitalWrite(RELAIS3, 0);
+  }
 }
+
 void armBattery(bool arm){
-  //TODO
-  Serial.println("Not DONE Battery ARM/DISARM");
+  //switch relais2 on VCU
+  digitalWrite(RELAIS1, arm);
+  delay(500);
 }
+
 void armBSC(bool arm){
-  //TODO
-  Serial.println("Not DONE BSC ARM/DISARM");
+  //REMOTE Relay 1 DMC precharge
+  //REMOTE Relay 2 BSC Main
+  if(arm){
+    if(!BSCprecharged){
+      prechargeTimerBSC = millis();
+      controllRelayBuffer[0] = 0xFF;  //Precharge on
+      BSCprecharged = true;
+    }
+    if(prechargeTimerBSC + prechargeTime < millis()){
+      
+      controllRelayBuffer[1] = 0xFF; //Main cont on
+      controllRelayBuffer[0] = 0x00; //Precharge off
+    }
+  }
+  else{
+    controllRelayBuffer[0] = 0x00;
+    controllRelayBuffer[1] = 0x00;
+    BSCprecharged = false;
+  }
 }
 void armDMC(bool arm){
-  //TODO
-  Serial.println("Not DONE DMC ARM/DISARM");
+  //REMOTE Relay 3 DMC precharge
+  //REMOTE Relay 4 DMC Main
+  if(arm){
+    if(!DMCprecharged){
+      prechargeTimerDMC = millis();
+      controllRelayBuffer[2] = 0xFF;  //Precharge on
+      BSCprecharged = true;
+    }
+    if(prechargeTimerDMC + prechargeTime < millis()){
+      
+      controllRelayBuffer[3] = 0xFF; //Main cont on
+      controllRelayBuffer[2] = 0x00; //Precharge off
+    }
+  }
+  else{
+    controllRelayBuffer[2] = 0x00;
+    controllRelayBuffer[3] = 0x00;
+    DMCprecharged = false;
+  }
 }
+
 void armNLG(bool arm){
-  //TODO  !! PRECHARGE nicht vergessen !!!! fucking KL15 NED vergeseene
-  Serial.println("Not DONE NLG ARM/DISARM");
+  //REMOTE Relay 5
+  //REMOTE Relay 6
+  //fucking KL15 NED vergeseene
+  if(arm){
+    if(!DMCprecharged){
+      prechargeTimerDMC = millis();
+      controllRelayBuffer[4] = 0xFF;  //Precharge on
+      BSCprecharged = true;
+    }
+    if(prechargeTimerDMC + prechargeTime < millis()){
+      
+      controllRelayBuffer[5] = 0xFF; //Main cont on
+      controllRelayBuffer[4] = 0x00; //Precharge off
+    }
+  }
+  else{
+    controllRelayBuffer[4] = 0x00;
+    controllRelayBuffer[5] = 0x00;
+    DMCprecharged = false;
+  }
+  
 }
 void setLCDNLG(){
   lcd.setCursor(0,1);
