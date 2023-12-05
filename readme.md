@@ -93,8 +93,15 @@ discharge
 
 <img width="1489" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/da1aeda8-defe-435c-aebb-bac56ac5d024">
 
-### Pinout remote relay
+### Relais
 
+## Pinout remote relay
+> Relais 1 BSCprecharge
+> Relais 2 BSCmain
+> Relais 3 DMCprecharge
+> Relais 4 DMCmain
+> Relais 5 NLGprecharge
+> Relais 6 NLGmain
 ## Protocoll CAN remote relay
 # ID: 0x999
 # FirstByte = (0,0,Relay1,Relay2,Relay3,Relay4,Relay5,Relay6)
