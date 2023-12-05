@@ -95,13 +95,17 @@ discharge
 
 ### Relais
 
-## Pinout remote relay
+## Pinout VCU relais
+
+## Pinout remote relais
+
 > Relais 1 BSCprecharge
 > Relais 2 BSCmain
 > Relais 3 DMCprecharge
 > Relais 4 DMCmain
 > Relais 5 NLGprecharge
 > Relais 6 NLGmain
+> 
 ## Protocoll CAN remote relay
 # ID: 0x999
 # FirstByte = (0,0,Relay1,Relay2,Relay3,Relay4,Relay5,Relay6)
