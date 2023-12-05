@@ -97,6 +97,10 @@ discharge
 
 ## Pinout VCU relais
 
+> Relais 1 Bat arm
+> Relais 2 KühlPumpe
+> Relais 3 Lüfter
+
 ## Pinout remote relais
 
 > Relais 1 BSCprecharge
