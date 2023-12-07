@@ -4,14 +4,14 @@
 
 
 //Libraries
-#include <Arduino.h>
-#include <esp_task_wdt.h>
-#include <Wire.h> 
-#include <LiquidCrystal_I2C.h>
-#include <SPI.h>
-#include "mcp2515_can.h"
-#include <esp_adc_cal.h>
-#include <esp32-hal-adc.h>
+#include <Arduino.h>              //For Arduino syntax
+#include <esp_task_wdt.h>         //Multicore tasking
+#include <Wire.h>                 //I2C bus driver
+#include <LiquidCrystal_I2C.h>    //Display driver
+#include <SPI.h>                  //SPI bus driver
+#include "mcp2515_can.h"          //Can Bus driver
+#include <esp_adc_cal.h>          //ADC calib
+#include <esp32-hal-adc.h>        //ADC driver
 
 
 //Create Tasks for each Core
@@ -57,36 +57,41 @@ int16_t calculateTorque5S(bool reverseSig);
 
 
 //Pinout
+//SPI
 #define SCK 4
 #define MOSI 6
 #define MISO 5
+//CAN
 const int SPI_CS_PIN = 36;
 const int CAN_INT_PIN = 11;
 mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
 #define MAX_DATA_SIZE 8
 
-#define RELAIS1 1
-#define RELAIS2 2
-#define RELAIS3 3
-#define RELAIS4 4
-#define RELAIS5 5
+//Relay pinout
+#define RELAIS1 40
+#define RELAIS2 14
+#define RELAIS3 48
+#define RELAIS4 17
+#define RELAIS5 9
 
 //Defining CAN Indexes
 
-
+//BSC Indexes
 #define BSC_COMM 0x260
 #define BSC_LIM 0x261
 
+//DMC Indexes
 #define DMCCTRL 0x210
 #define DMCLIM 0x211
 #define DMCCTRL2 0x212
 
+//NLG Indexes
 #define NLG_DEM_LIM 0x711
 #define NLG_ACT_ERR 0x799
 #define NLG_ACT_LIM 0x728
 #define NLG_ACT_PLUG 0x739
 
-
+//setupp LCD
 LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
 //*********************************************************************//
@@ -138,17 +143,24 @@ int value = 0;
 //Deffining Variables for Operation
 //General
 //*********************************************************************//
+
+//Define Wakeup interrupt Pins
 #define BUTTON_PIN_BITMASK 0x2400 //IO10, IO13
 
+//Define Vehicle states
 #define Standby 0
 #define Run 1
 #define Charging 2
 
+//Define Gaspedal Pin
 #define GASPEDAL 6
 
-#define MIN_U_BAT 380
-#define MAX_U_BAT 420
+//Battery Voltage values
+#define MIN_U_BAT 360 //3.4V*104S
+#define NOM_U_BAT 382 //3.67V*104S
+#define MAX_U_BAT 436 //4.2V*104S
 
+//Define Charger states
 #define NLG_ACT_SLEEP 0
 #define NLG_ACT_WAKEUP 1 
 #define NLG_ACT_STANDBY 2
@@ -156,23 +168,31 @@ int value = 0;
 #define NLG_ACT_CHARGE 4
 #define NLG_ACT_SHUTDOWN 5
 
-#define PRECHARGE_TIME 2
+
+
 #define NLG_HW_Wakeup 10 //Input for VCU
 #define IGNITION 13 //Input for VCU
+#define UNLCKCON 35 //Input for VCU
 
+//define possible charger state demands
 #define NLG_DEM_STANDBY 0
 #define NLG_DEM_CHARGE 1
 #define NLG_DEM_SLEEP 6
-bool NLG_Charged = 0;
+
+bool NLG_Charged = 0; //Safe when vehicle has cahrged 
 
 bool CanError = false;
 
+//driving variables
 uint8_t sampleSetCounter = 0;
 int16_t sampleSetPedal[5] = {0,0,0,0,0};
 bool reversSig = 0;
-uint8_t VehicleMode = Standby;
+
+uint8_t VehicleMode = Standby;  // Set default vehicle Mode to standby
 
 //Precharge Variables
+#define PRECHARGE_TIME 2  //HV precharge Time
+
 uint16_t prechargeTime = PRECHARGE_TIME * 1000;
 
 unsigned long prechargeTimerBSC = 0;
@@ -368,22 +388,15 @@ unsigned char controllBufferNLG1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllRelayBuffer[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
 
 void setup() {
-
+  pinMode(IGNITION, INPUT);
+  pinMode(NLG_HW_Wakeup, INPUT);
+  pinMode(UNLCKCON, INPUT);
   esp_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK,ESP_EXT1_WAKEUP_ANY_HIGH);
   pinMode(16, OUTPUT);
   digitalWrite(16, HIGH);
-  pinMode(IGNITION, INPUT);
-  pinMode(NLG_HW_Wakeup, INPUT);
   pinMode(18, INPUT);
-  //Init the i2c bus
-  Wire.begin(1,2);
-  //Init the LCD
-  initADAC();
-  lcd.init();                      
-  lcd.init();
-  lcd.backlight();
-
-  Serial.begin(115200);
+  SPI.begin(SCK, MISO, MOSI, SPI_CS_PIN);
+  
 
   
   //create a task that will be executed in the Task1code() function, with priority 1 and executed on core 0
@@ -395,33 +408,37 @@ void setup() {
                     1,           /* priority of the task */
                     &Task1,      /* Task handle to keep track of created task */
                     0);          /* pin task to core 0 */                  
-  delay(1); 
+  delay(100); 
 
   //create a task that will be executed in the Task2code() function, with priority 1 and executed on core 1
   xTaskCreatePinnedToCore(
                     BACKBONE,   /* Task function. */
                     "Task2",     /* name of task. */
-                    10000,       /* Stack size of task */
+                    20000,       /* Stack size of task */
                     NULL,        /* parameter of the task */
                     1,           /* priority of the task */
                     &Task2,      /* Task handle to keep track of created task */
                     1);          /* pin task to core 1 */
-  delay(1); 
+  delay(100); 
 }
 
 //Can Com on Core 0
 void CAN_COM( void * pvParameters ){
-
+  
+  /*
   while (CAN_OK != CAN.begin(CAN_500KBPS)) {     // init can bus : baudrate = 500k
         Serial.println("CAN init fail, retry...");
         CanError = true;
         delay(100);
   }
   CanError = false;
-
+  */
+ CAN.begin(CAN_500KBPS);
+  Wire.begin(1,2);
+  //CAN.begin(CAN_500KBPS);
   for(;;){
     esp_task_wdt_init(5, true);
-    relayControll();
+    
     switch(VehicleMode){
       case Standby:
 
@@ -439,8 +456,8 @@ void CAN_COM( void * pvParameters ){
           sampleSetPedal[sampleSetCounter] = readADC(GASPEDAL); //Read ADC into sampleSet
         }
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
-        Serial.println(DMC_TrqRq_Scale);
-
+        //Serial.println(DMC_TrqRq_Scale);
+        relayControll();
         sendBSC();
         sendDMC();
         reciveBSC();
@@ -451,6 +468,7 @@ void CAN_COM( void * pvParameters ){
       case Charging:
         //BMS DMC max current 
         //NLG_DcHvCurrLimMax = BMS max current charging
+        relayControll();
         sendBSC();
         sendNLG();
         reciveBSC();
@@ -466,11 +484,24 @@ void CAN_COM( void * pvParameters ){
 //Backbone on Core 1
 void BACKBONE( void * pvParameters ){
   
+   //Init the i2c bus
+  
+  Wire.begin(1,2);
+  /*
+  //Init the LCD
+  initADAC();
+  lcd.init();                      
+  lcd.init();
+  lcd.backlight();
+  */
+  Serial.begin(115200);
+
   for(;;){
     esp_task_wdt_init(5, true);
     //Serial.println("Wake");
     switch(VehicleMode){
       case Standby:
+        Serial.println("Standby");
         NLG_Charged = 0;
         armBattery(0);
         armNLG(0);
@@ -481,18 +512,21 @@ void BACKBONE( void * pvParameters ){
         if(digitalRead(IGNITION)){VehicleMode = Run;}
         enableBSC = 0;
         enableDMC = 0;
-        Serial.println("enteringSleep");
+        
+
         if((!digitalRead(IGNITION)) && (!digitalRead(NLG_HW_Wakeup))){
-          lcd.clear();
-          lcd.noBacklight();
+          //lcd.clear();
+          //lcd.noBacklight();
+          Serial.println("enteringSleep");
           esp_deep_sleep_start();
         }
 
       break;
       
       case Run:
+        Serial.println("Run");
         NLG_Charged = 0;
-        lcd.backlight();
+        //lcd.backlight();
         if(!digitalRead(IGNITION)){VehicleMode = Standby;}
         armColingSys(1);
         armBattery(1);
@@ -507,12 +541,12 @@ void BACKBONE( void * pvParameters ){
         }
         enableBSC = 1;
         enableDMC = 1;
-        setLCDBSC();
-        setLCDDMC();
-        lcd.setCursor(0,2);
-        lcd.print(DMC_TrqRq_Scale);
-        lcd.setCursor(0,3);
-        lcd.print(readADC(GASPEDAL));
+        //setLCDBSC();
+        //setLCDDMC();
+        //lcd.setCursor(0,2);
+        //lcd.print(DMC_TrqRq_Scale);
+        //lcd.setCursor(0,3);
+        //lcd.print(readADC(GASPEDAL));
         if(errorCnt < 40 && DMC_SensorWarning | DMC_GenErr){
           errorCnt ++;
           errLatch = 1;
@@ -522,14 +556,15 @@ void BACKBONE( void * pvParameters ){
         }
       break;
       case Charging:
-        lcd.backlight();
+        Serial.println("Charging");
+        //lcd.backlight();
         if(digitalRead(IGNITION)){
           VehicleMode = Run;
           digitalWrite(RELAIS4, LOW);
           }
         digitalWrite(RELAIS4, HIGH);
-        setLCDBSC();
-        setLCDNLG();
+        //setLCDBSC();
+        //setLCDNLG();
         armColingSys(1);
         enableBSC = 1;
         chargeManage();
@@ -542,37 +577,47 @@ void BACKBONE( void * pvParameters ){
     } 
   }
 }
+
 void chargeManage(){
   if(VehicleMode == Charging){
-    switch (NLG_StateAct){
-    case  NLG_ACT_SLEEP :
-      NLG_StateDem = NLG_DEM_SLEEP;   //Demand Standby
-      NLG_LedDem = 9;                 //LED purple
-      break;
-    case NLG_ACT_STANDBY:
-      if(NLG_Charged){VehicleMode = Standby;}
-      else{
-        lcd.clear();
-        NLG_LedDem = 9;                 //LED purple
-        armBattery(1);
-        armNLG(1);
-        armBSC(1);
-        armDMC(0);
-      }
-      break;
-    case NLG_ACT_READY2CHARGE:
-      NLG_LedDem = 3;                 //LED pulsating green
-      NLG_StateDem = NLG_DEM_CHARGE;  //Demand Charge
-      enableBSC = 1;
-      break;
-    case NLG_ACT_CHARGE:
-      NLG_LedDem = 4;                 //LED green
+    if(digitalRead(UNLCKCON)){
+      NLG_StateDem = NLG_DEM_STANDBY;
+      NLG_C_UnlockConRq = 1;
       NLG_Charged = 1;
-      //Demand Standby by BMS has to be Implemented
+    }
+    else{
+      NLG_C_UnlockConRq = 0;
+    }
+
+    switch (NLG_StateAct){
+      case  NLG_ACT_SLEEP :
+        NLG_StateDem = NLG_DEM_SLEEP;   //Demand Standby
+        NLG_LedDem = 9;                 //LED purple
       break;
-    default:
-      armBattery(0);
-      armNLG(0);
+      case NLG_ACT_STANDBY:
+        if(NLG_Charged){VehicleMode = Standby;}
+        else{
+          lcd.clear();
+          NLG_LedDem = 9;                 //LED purple
+          armBattery(1);
+          armNLG(1);
+          armBSC(1);
+          armDMC(0);
+        }
+      break;
+      case NLG_ACT_READY2CHARGE:
+        NLG_LedDem = 3;                 //LED pulsating green
+        NLG_StateDem = NLG_DEM_CHARGE;  //Demand Charge
+        enableBSC = 1;
+      break;
+      case NLG_ACT_CHARGE:
+        NLG_LedDem = 4;                 //LED green
+        NLG_Charged = 1;
+        //Demand Standby by BMS has to be Implemented
+        break;
+      default:
+        armBattery(0);
+        armNLG(0);
       break;
     }
   }
