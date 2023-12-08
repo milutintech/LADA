@@ -160,6 +160,9 @@ int value = 0;
 #define NOM_U_BAT 382 //3.67V*104S
 #define MAX_U_BAT 436 //4.2V*104S
 
+#define MAX_DMC_CURRENT 600 //A
+#define MAX_NLG_CURRENT 32 //A
+
 //Define Charger states
 #define NLG_ACT_SLEEP 0
 #define NLG_ACT_WAKEUP 1 
@@ -203,6 +206,16 @@ unsigned long prechargeTimerNLG = 0;
 bool BSCprecharged = 0;
 bool NLGprecharged = 0;
 bool DMCprecharged = 0;
+//*********************************************************************//
+//Deffining Variables for Can transmission
+//BMS
+//*********************************************************************//
+int BMS_SOC = 0;
+int BMS_U_BAT = 0;
+int BMS_I_BAT = 0;  
+int BMS_MAX_Discharge = 0;
+int BMS_MAX_Charge = 0;
+
 
 //*********************************************************************//
 //Deffining Variables for Can transmission
@@ -216,7 +229,7 @@ bool NLG_C_UnlockConRq = 0;      //Unlock connector request
 bool NLG_C_VentiRq = 0;
 int  NLG_DcHvVoltLimMax = MAX_U_BAT;   //Maximum HV voltage
 
-int NLG_DcHvCurrLimMax = 50;
+int NLG_DcHvCurrLimMax = MAX_NLG_CURRENT;
 uint8_t NLG_StateDem = 0;       //Setting State demand: 0 = Standby, 1 = Charge, 6 = Sleep
 uint16_t NLG_LedDem = 0;        //Charge LED demanded See table 
 uint16_t NLG_AcCurrLimMax = 0;  //Maximum AC current
@@ -449,7 +462,12 @@ void CAN_COM( void * pvParameters ){
           DMC_DcCLimMot = 10;
         }
         else{
-          //DMC_DcCLimMot = BMS max current
+          if(BMS_MAX_Discharge < MAX_DMC_CURRENT){
+            DMC_DcCLimMot = BMS_MAX_Discharge;
+          }
+          else{
+            DMC_DcCLimMot = MAX_DMC_CURRENT;
+          }
         }
         
         for(sampleSetCounter = 0; sampleSetCounter < 5; sampleSetCounter ++){  
@@ -467,7 +485,12 @@ void CAN_COM( void * pvParameters ){
 
       case Charging:
         //BMS DMC max current 
-        //NLG_DcHvCurrLimMax = BMS max current charging
+        if(BMS_MAX_Charge < MAX_NLG_CURRENT){
+          NLG_DcHvCurrLimMax = BMS_MAX_Charge;
+        }
+        else{
+          NLG_DcHvCurrLimMax = MAX_NLG_CURRENT;
+        }
         relayControll();
         sendBSC();
         sendNLG();
