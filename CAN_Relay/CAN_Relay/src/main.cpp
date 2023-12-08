@@ -21,11 +21,13 @@ mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
 #define Relay6 37
 
 unsigned char controllBufferRelay[8] = {0, 0, 0, 0, 0, 0, 0, 0}; 
+unsigned char controllRelayBuffer[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
 
 uint8_t  len;
 uint32_t id;
 
 void setup() {
+SPI.begin(SCK, MISO, MOSI, SPI_CS_PIN);
 pinMode(RST, OUTPUT);
 digitalWrite(RST, HIGH);
 Serial.begin(115200);
@@ -44,7 +46,7 @@ pinMode(Relay6, OUTPUT);
 
 void loop() {
   Serial.println("loop");
-
+  CAN.sendMsgBuf(0x999, 0, 8, controllRelayBuffer);
   if (CAN_MSGAVAIL == CAN.checkReceive()) {
     
     

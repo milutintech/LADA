@@ -64,7 +64,7 @@ int16_t calculateTorque5S(bool reverseSig);
 //CAN
 const int SPI_CS_PIN = 36;
 const int CAN_INT_PIN = 11;
-mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
+
 #define MAX_DATA_SIZE 8
 
 //Relay pinout
@@ -162,6 +162,7 @@ int value = 0;
 
 #define MAX_DMC_CURRENT 600 //A
 #define MAX_NLG_CURRENT 32 //A
+#define PRECHARGE_CURRENT 20 //A
 
 //Define Charger states
 #define NLG_ACT_SLEEP 0
@@ -182,6 +183,10 @@ int value = 0;
 #define NLG_DEM_CHARGE 1
 #define NLG_DEM_SLEEP 6
 
+
+#define BSC6_BUCK 0
+#define BSC6_BOOST 1
+bool HasPrecharged = 0; 
 bool NLG_Charged = 0; //Safe when vehicle has cahrged 
 
 bool CanError = false;
@@ -189,7 +194,8 @@ bool CanError = false;
 //driving variables
 uint8_t sampleSetCounter = 0;
 int16_t sampleSetPedal[5] = {0,0,0,0,0};
-bool reversSig = 0;
+bool reversSig = 1;
+mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
 
 uint8_t VehicleMode = Standby;  // Set default vehicle Mode to standby
 
@@ -374,8 +380,8 @@ int BSC6_HVCUR_UPLIM_BUCK = 20;
 int BSC6_HVCUR_UPLIM_BUCK_SCALED = 0;
 int BSC6_LVVOL_LOWLIM = 11;
 int BSC6_LVVOL_LOWLIM_SCALED = 0;
-int BSC6_LVCUR_UPLIM_BOOST = 0;
-int BSC6_HVCUR_UPLIM_BOOST = 0;
+int BSC6_LVCUR_UPLIM_BOOST = 100;
+int BSC6_HVCUR_UPLIM_BOOST = PRECHARGE_CURRENT;
 int BSC6_HVCUR_UPLIM_BOOST_SCALED = 0;
 
 //Reciveing Variables
@@ -407,8 +413,11 @@ void setup() {
   esp_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK,ESP_EXT1_WAKEUP_ANY_HIGH);
   pinMode(16, OUTPUT);
   digitalWrite(16, HIGH);
+  pinMode(15, OUTPUT);
+  digitalWrite(15, HIGH);
   pinMode(18, INPUT);
   SPI.begin(SCK, MISO, MOSI, SPI_CS_PIN);
+  
   
 
   
@@ -438,15 +447,14 @@ void setup() {
 //Can Com on Core 0
 void CAN_COM( void * pvParameters ){
   
-  /*
-  while (CAN_OK != CAN.begin(CAN_500KBPS)) {     // init can bus : baudrate = 500k
-        Serial.println("CAN init fail, retry...");
-        CanError = true;
+  
+while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrate = 500k
+        Serial.println("CAN BUS Shield init fail");
         delay(100);
-  }
+    }
   CanError = false;
-  */
- CAN.begin(CAN_500KBPS);
+  
+ //CAN.begin(CAN_500KBPS);
   Wire.begin(1,2);
   //CAN.begin(CAN_500KBPS);
   for(;;){
@@ -458,7 +466,11 @@ void CAN_COM( void * pvParameters ){
       break;
       case Run:
         //BMS DMC max current
-        if((DMC_SpdAct < 100) && (readADC(GASPEDAL) < 200)){
+        //Do Not add anythig here cycle limit is 5ms
+        for(sampleSetCounter = 0; sampleSetCounter < 2; sampleSetCounter ++){  
+          sampleSetPedal[sampleSetCounter] = readADC(GASPEDAL); //Read ADC into sampleSet
+        }
+        if((DMC_SpdAct < 100) && sampleSetPedal[1] < 200){
           DMC_DcCLimMot = 10;
         }
         else{
@@ -470,9 +482,6 @@ void CAN_COM( void * pvParameters ){
           }
         }
         
-        for(sampleSetCounter = 0; sampleSetCounter < 5; sampleSetCounter ++){  
-          sampleSetPedal[sampleSetCounter] = readADC(GASPEDAL); //Read ADC into sampleSet
-        }
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
         //Serial.println(DMC_TrqRq_Scale);
         relayControll();
@@ -491,7 +500,6 @@ void CAN_COM( void * pvParameters ){
         else{
           NLG_DcHvCurrLimMax = MAX_NLG_CURRENT;
         }
-        relayControll();
         sendBSC();
         sendNLG();
         reciveBSC();
@@ -507,8 +515,12 @@ void CAN_COM( void * pvParameters ){
 //Backbone on Core 1
 void BACKBONE( void * pvParameters ){
   
+  pinMode(RELAIS1, OUTPUT);
+  pinMode(RELAIS2, OUTPUT); 
+  pinMode(RELAIS3, OUTPUT);
+  pinMode(RELAIS4, OUTPUT);
+  pinMode(RELAIS5, OUTPUT);
    //Init the i2c bus
-  
   Wire.begin(1,2);
   /*
   //Init the LCD
@@ -526,15 +538,13 @@ void BACKBONE( void * pvParameters ){
       case Standby:
         Serial.println("Standby");
         NLG_Charged = 0;
+        enableBSC = 0;
+        enableDMC = 0;
         armBattery(0);
-        armNLG(0);
-        armBSC(0);
-        armDMC(0);
         armColingSys(0);
         if(digitalRead(NLG_HW_Wakeup)){VehicleMode = Charging;}
         if(digitalRead(IGNITION)){VehicleMode = Run;}
-        enableBSC = 0;
-        enableDMC = 0;
+        
         
 
         if((!digitalRead(IGNITION)) && (!digitalRead(NLG_HW_Wakeup))){
@@ -553,9 +563,6 @@ void BACKBONE( void * pvParameters ){
         if(!digitalRead(IGNITION)){VehicleMode = Standby;}
         armColingSys(1);
         armBattery(1);
-        armNLG(0);
-        armBSC(1);
-        armDMC(1);
         if(reversSig){
           digitalWrite(RELAIS5, HIGH);
         }
@@ -623,9 +630,7 @@ void chargeManage(){
           lcd.clear();
           NLG_LedDem = 9;                 //LED purple
           armBattery(1);
-          armNLG(1);
-          armBSC(1);
-          armDMC(0);
+        
         }
       break;
       case NLG_ACT_READY2CHARGE:
@@ -640,15 +645,13 @@ void chargeManage(){
         break;
       default:
         armBattery(0);
-        armNLG(0);
+        
       break;
     }
   }
   else {
     armBattery(0);
-    armNLG(0);
-    armBSC(0);
-    armDMC(0);
+
     }
   
 }
@@ -671,76 +674,29 @@ void armColingSys(bool arm){
 
 void armBattery(bool arm){
   //switch relais2 on VCU
-  digitalWrite(RELAIS1, arm);
-  delay(500);
-}
-
-void armBSC(bool arm){
-  //REMOTE Relay 1 DMC precharge
-  //REMOTE Relay 2 BSC Main
   if(arm){
-    if(!BSCprecharged){
-      prechargeTimerBSC = millis();
-      controllRelayBuffer[0] = 0xFF;  //Precharge on
-      BSCprecharged = true;
+    if(!HasPrecharged){
+      BSC6_MODE = BSC6_BOOST;
+      Hvoltage = BMS_U_BAT;
+      enableBSC = 1;
+      digitalWrite(RELAIS1, 0);
+      if((BSC6_HVVOL_ACT + 20) >= BMS_U_BAT){
+        HasPrecharged = 1;
+        digitalWrite(RELAIS1, 1);
+        enableBSC = 0;
+      }
     }
-    if(prechargeTimerBSC + prechargeTime < millis()){
-      
-      controllRelayBuffer[1] = 0xFF; //Main cont on
-      controllRelayBuffer[0] = 0x00; //Precharge off
+    else if(HasPrecharged){
+      BSC6_MODE = BSC6_BUCK;
+      enableBSC = 1;
     }
   }
   else{
-    controllRelayBuffer[0] = 0x00;
-    controllRelayBuffer[1] = 0x00;
-    BSCprecharged = false;
-  }
-}
-void armDMC(bool arm){
-  //REMOTE Relay 3 DMC precharge
-  //REMOTE Relay 4 DMC Main
-  if(arm){
-    if(!DMCprecharged){
-      prechargeTimerDMC = millis();
-      controllRelayBuffer[2] = 0xFF;  //Precharge on
-      BSCprecharged = true;
-    }
-    if(prechargeTimerDMC + prechargeTime < millis()){
-      
-      controllRelayBuffer[3] = 0xFF; //Main cont on
-      controllRelayBuffer[2] = 0x00; //Precharge off
-    }
-  }
-  else{
-    controllRelayBuffer[2] = 0x00;
-    controllRelayBuffer[3] = 0x00;
-    DMCprecharged = false;
+    enableBSC = 0;
+    digitalWrite(RELAIS1, 0);
   }
 }
 
-void armNLG(bool arm){
-  //REMOTE Relay 5
-  //REMOTE Relay 6
-  //fucking KL15 NED vergeseene
-  if(arm){
-    if(!DMCprecharged){
-      prechargeTimerDMC = millis();
-      controllRelayBuffer[4] = 0xFF;  //Precharge on
-      BSCprecharged = true;
-    }
-    if(prechargeTimerDMC + prechargeTime < millis()){
-      
-      controllRelayBuffer[5] = 0xFF; //Main cont on
-      controllRelayBuffer[4] = 0x00; //Precharge off
-    }
-  }
-  else{
-    controllRelayBuffer[4] = 0x00;
-    controllRelayBuffer[5] = 0x00;
-    DMCprecharged = false;
-  }
-  
-}
 void setLCDNLG(){
   lcd.setCursor(0,1);
   lcd.print("NLG6");
@@ -997,9 +953,7 @@ void sendNLG(){
     controllBufferNLG1[5] = NLG_AcCurrLimMax_Scale & 0x00FF;
     controllBufferNLG1[6] = NLG_C_EnPhaseShift << 4 | (NLG_AcPhaseShift_Scale >> 8) & 0x07;
     controllBufferNLG1[7] = NLG_AcPhaseShift_Scale & 0x00FF;
-    CAN.sendMsgBuf(NLG_DEM_LIM, 0, 8, controllBufferNLG1);
-    delay(100);                       // send data per 100ms
-   
+    CAN.sendMsgBuf(NLG_DEM_LIM, 0, 8, controllBufferNLG1);   
 }
 void reciveNLG(){
 
@@ -1204,17 +1158,10 @@ int16_t calculateTorque5S(bool reverseSig){
   int16_t SampeldPotiValue = 0;
   int16_t DMC_TorqueCalc = 0;
 
-  std::sort(sampleSetPedal, sampleSetPedal + 5);
-  for (int i = 0; i < 5 - 1; ++i) {
-        if (sampleSetPedal[i + 1] - sampleSetPedal[i] > 600) {
-            // Replace the value with the median of the adjacent values
-            sampleSetPedal[i + 1] = (sampleSetPedal[i] + sampleSetPedal[i + 1]) / 2;
-        }
-    }
-  for(int i = 0; i < 5; i++){
+  for(int i = 0; i < 2; i++){
     SampeldPotiValue = SampeldPotiValue + sampleSetPedal[i];
   }
-  SampeldPotiValue = SampeldPotiValue / 5;
+  SampeldPotiValue = SampeldPotiValue / 2;
   DMC_TorqueCalc = map(SampeldPotiValue, 0, 4096, 0, 32767);
   if(reverseSig){
     DMC_TorqueCalc = 0 - DMC_TorqueCalc;
