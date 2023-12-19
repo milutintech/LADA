@@ -23,37 +23,36 @@ TaskHandle_t Task1;
 TaskHandle_t Task2;
 
 
-//Function Declarations
+//Function Prototypes
 void relayControll();
-void sendBSC();
-void sendDMC();
-void reciveBSC();
-void reciveDMC();
-void setLCDBSC();
-void setLCDDMC();
-void setLCDNLG();
-void reciveNLG();
-void sendNLG();
 
-void armColingSys(bool arm);
-void chargeManage();
+//CAN functions
+void sendNLG();               //Send NLG CAN Messages
+void sendBSC();               //Send BSC CAN Messages
+void sendDMC();               //Send DMC CAN Messages
+void reciveBSC();             //Recive BSC CAN Messages
+void reciveDMC();             //Recive DMC CAN Messages
+void reciveNLG();             //Recive NLG CAN Messages
 
-void armBattery(bool arm);
-void armNLG(bool arm);
-void armBSC(bool arm);
-void armDMC(bool arm);
 
-void initADAC();
-void setVref(bool enable);
-void setupDAC();
-void setupADC();
-void setupGPO();
-void setupGPI();
-void setDACVal(uint8_t DACnum, uint16_t DACvalue);
-void setDACGain(bool gain);
-void setLDAC(uint8_t LDAC);
-uint16_t readADC(uint8_t DACnum);
-int16_t calculateTorque5S(bool reverseSig);
+void armColingSys(bool arm);  //Arm Cooling System
+void armBattery(bool arm);    //Arm HV-Battery
+
+void chargeManage();          //Manage Charging Process
+
+
+
+void initADAC();              //Init ADAC chip on I2C bus
+void setVref(bool enable);    //Enable or disable Vref of the ADAC
+void setupDAC();              //Setup DACs
+void setupADC();              //Setup ADCs
+void setupGPO();              //Setup GPOs
+void setupGPI();              //Setup GPIs
+void setDACVal(uint8_t DACnum, uint16_t DACvalue);  //Set DAC value
+void setDACGain(bool gain);   //Set DAC gain
+void setLDAC(uint8_t LDAC);   //Set LDAC mode
+uint16_t readADC(uint8_t DACnum); //Read ADC value
+int16_t calculateTorque5S(bool reverseSig); //Calculate Torque from Pedal Position
 
 
 //Pinout
@@ -68,11 +67,11 @@ const int CAN_INT_PIN = 11;
 #define MAX_DATA_SIZE 8
 
 //Relay pinout
-#define RELAIS1 40
-#define RELAIS2 14
-#define RELAIS3 48
-#define RELAIS4 17
-#define RELAIS5 9
+#define RELAIS1 40  //HV Battery
+#define RELAIS2 14  //Cooling Pump
+#define RELAIS3 48  //Cooling Fan
+#define RELAIS4 17  //Charger KL15
+#define RELAIS5 91  //Reverse Signal
 
 //Defining CAN Indexes
 
@@ -90,9 +89,6 @@ const int CAN_INT_PIN = 11;
 #define NLG_ACT_ERR 0x799
 #define NLG_ACT_LIM 0x728
 #define NLG_ACT_PLUG 0x739
-
-//setupp LCD
-LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
 //*********************************************************************//
 //Deffining Variables for ADAC
@@ -145,7 +141,7 @@ int value = 0;
 //*********************************************************************//
 
 //Define Wakeup interrupt Pins
-#define BUTTON_PIN_BITMASK 0x2400 //IO10, IO13
+#define BUTTON_PIN_BITMASK 0x2400 //IO10, IO13 need to add one for unlock connector  https://randomnerdtutorials.com/esp32-external-wake-up-deep-sleep/
 
 //Define Vehicle states
 #define Standby 0
@@ -173,21 +169,22 @@ int value = 0;
 #define NLG_ACT_SHUTDOWN 5
 
 
-
-#define NLG_HW_Wakeup 10 //Input for VCU
-#define IGNITION 13 //Input for VCU
-#define UNLCKCON 35 //Input for VCU
+//INPUT deffinitions
+#define NLG_HW_Wakeup 10  //Input for VCU
+#define IGNITION 13       //Input for VCU
+#define UNLCKCON 35       //Input for VCU
 
 //define possible charger state demands
 #define NLG_DEM_STANDBY 0
 #define NLG_DEM_CHARGE 1
 #define NLG_DEM_SLEEP 6
 
-
+//BSC run modes
 #define BSC6_BUCK 0
 #define BSC6_BOOST 1
-bool HasPrecharged = 0; 
-bool NLG_Charged = 0; //Safe when vehicle has cahrged 
+
+bool HasPrecharged = 0; //Safe when vehicle has precharged  
+bool NLG_Charged = 0; //Safe when vehicle has carged 
 
 bool CanError = false;
 
@@ -199,19 +196,6 @@ mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
 
 uint8_t VehicleMode = Standby;  // Set default vehicle Mode to standby
 
-//Precharge Variables
-#define PRECHARGE_TIME 2  //HV precharge Time
-
-uint16_t prechargeTime = PRECHARGE_TIME * 1000;
-
-unsigned long prechargeTimerBSC = 0;
-unsigned long prechargeTimerDMC = 0;
-unsigned long prechargeTimerNLG = 0;
-
-
-bool BSCprecharged = 0;
-bool NLGprecharged = 0;
-bool DMCprecharged = 0;
 //*********************************************************************//
 //Deffining Variables for Can transmission
 //BMS
@@ -247,6 +231,7 @@ uint16_t NLG_AcPhaseShift_Scale = 0;
 uint16_t NLG_AcCurrLimMax_Scale = 0;
 int NLG_DcHvCurrLimMax_Scale = 0;
 int NLG_DcHvVoltLimMax_Scale = 0;
+
 //recive Variable
 //Variables for 0x709
 uint16_t NLG_AcWhAct = 0; //Actual AC kWh
@@ -297,8 +282,12 @@ int16_t NLG_TempCoolPlate = 0;
 //Deffining Variables for Can transmission
 //DMC
 //*********************************************************************//
+
+//**********************//
 //Sending Variables
 //Variables for 0x210
+//**********************//
+
 bool enableDMC = 0;
 bool modeDMC = 1;
 bool oscLim = 0;
@@ -315,7 +304,12 @@ unsigned char lowNibSpd = 0;
 unsigned char highNibSpd = 0;
 unsigned char lowNibTrq = 0;
 unsigned char highNibTrq = 0;
+
+//**********************//
+//Sending Variables
 //Variables for 0x211
+//**********************//
+
 int DMC_DcVLimMot = MIN_U_BAT;
 int DMC_DcVLimGen = MAX_U_BAT;
 int DMC_DcCLimMot = 600;
@@ -325,7 +319,12 @@ int DMC_DcVLimMot_Scale = 0;
 int DMC_DcVLimGen_Scale = 0;
 int DMC_DcCLimMot_Scale = 0;
 int DMC_DcCLimGen_Scale = 0;
-//Variables for0x212
+
+//**********************//
+//Sending Variables
+//Variables for 0x212
+//**********************//
+
 int DMC_TrqSlewrate = 1300;
 int DMC_SpdSlewrate = 655;
 int DMC_MechPwrMaxMot = 20000;
@@ -335,13 +334,20 @@ int DMC_TrqSlewrate_Scale = 0;
 int DMC_MechPwrMaxMot_Scale = 0;
 int DMC_MechPwrMaxGen_Scale = 0;
 
+//**********************//
 //recive Variable
 //Variables for 0x458
+//**********************//
+
 float DMC_TempInv = 0;
 float DMC_TempMot = 0;
 int8_t DMC_TempSys = 0;
 
+//**********************//
+//recive Variable
 //Variables for 0x258
+//**********************//
+
 bool DMC_Ready = 0;
 bool DMC_Running = 0;
 
@@ -352,7 +358,12 @@ bool DMC_TrqLimitation = 0;
 float DMC_TrqAvl = 0;
 float DMC_TrqAct = 0;
 float DMC_SpdAct = 0;
+
+//**********************//
+//recive Variable
 //Variables for 0x259
+//**********************//
+
 float DMC_DcVltAct = 0;
 float DMC_DcCurrAct = 0;
 float DMC_AcCurrAct = 0;
@@ -363,8 +374,11 @@ int32_t DMC_MechPwr = 0;
 //BSC
 //*********************************************************************//
 
-//SendingVariables
+//**********************//
+//Sending Variables
 //Variables for 0x260
+//**********************//
+
 bool enableBSC = 0;
 bool modeBSC = 0;     //Buck mode = 0, Boost mode = 1
 int Hvoltage = MAX_U_BAT;  
@@ -372,7 +386,11 @@ int Lvoltage = 14;
 int LvoltageScale = 0;
 int HvoltageScale = 0;
 
+//**********************//
+//Sending Variables
 //Variables for 0x261
+//**********************//
+
 int BSC6_HVVOL_LOWLIM = MIN_U_BAT;
 int BSC6_HVVOL_LOWLIM_SCALED = 0;
 int BSC6_LVCUR_UPLIM_BUCK = 15;
@@ -384,8 +402,11 @@ int BSC6_LVCUR_UPLIM_BOOST = 100;
 int BSC6_HVCUR_UPLIM_BOOST = PRECHARGE_CURRENT;
 int BSC6_HVCUR_UPLIM_BOOST_SCALED = 0;
 
+//**********************//
 //Reciveing Variables
 //Variables For 0x26A	
+//**********************//
+
 float BSC6_HVVOL_ACT = 0;
 float BSC6_LVVOLT_ACT = 0;
 float BSC6_HVCUR_ACT = 0;
@@ -407,10 +428,11 @@ unsigned char controllBufferNLG1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllRelayBuffer[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
 
 void setup() {
-  pinMode(IGNITION, INPUT);
-  pinMode(NLG_HW_Wakeup, INPUT);
-  pinMode(UNLCKCON, INPUT);
-  esp_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK,ESP_EXT1_WAKEUP_ANY_HIGH);
+
+  pinMode(IGNITION, INPUT); //define ignition pin as input
+  pinMode(NLG_HW_Wakeup, INPUT); //define NLG_HW_Wakeup pin as input
+  pinMode(UNLCKCON, INPUT); //define UNLCKCON pin as input
+  esp_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK,ESP_EXT1_WAKEUP_ANY_HIGH);  //set up sleep interrupt rutine for ignition and NLG_HW_Wakeup and unlockcon
   pinMode(16, OUTPUT);
   digitalWrite(16, HIGH);
   pinMode(15, OUTPUT);
@@ -520,15 +542,9 @@ void BACKBONE( void * pvParameters ){
   pinMode(RELAIS3, OUTPUT);
   pinMode(RELAIS4, OUTPUT);
   pinMode(RELAIS5, OUTPUT);
-   //Init the i2c bus
+  //Init the i2c bus
   Wire.begin(1,2);
-  /*
-  //Init the LCD
-  initADAC();
-  lcd.init();                      
-  lcd.init();
-  lcd.backlight();
-  */
+  //INIT LCD
   Serial.begin(115200);
 
   for(;;){
@@ -544,12 +560,7 @@ void BACKBONE( void * pvParameters ){
         armColingSys(0);
         if(digitalRead(NLG_HW_Wakeup)){VehicleMode = Charging;}
         if(digitalRead(IGNITION)){VehicleMode = Run;}
-        
-        
-
         if((!digitalRead(IGNITION)) && (!digitalRead(NLG_HW_Wakeup))){
-          //lcd.clear();
-          //lcd.noBacklight();
           Serial.println("enteringSleep");
           esp_deep_sleep_start();
         }
@@ -559,7 +570,6 @@ void BACKBONE( void * pvParameters ){
       case Run:
         Serial.println("Run");
         NLG_Charged = 0;
-        //lcd.backlight();
         if(!digitalRead(IGNITION)){VehicleMode = Standby;}
         armColingSys(1);
         armBattery(1);
@@ -571,12 +581,6 @@ void BACKBONE( void * pvParameters ){
         }
         enableBSC = 1;
         enableDMC = 1;
-        //setLCDBSC();
-        //setLCDDMC();
-        //lcd.setCursor(0,2);
-        //lcd.print(DMC_TrqRq_Scale);
-        //lcd.setCursor(0,3);
-        //lcd.print(readADC(GASPEDAL));
         if(errorCnt < 40 && DMC_SensorWarning | DMC_GenErr){
           errorCnt ++;
           errLatch = 1;
@@ -587,14 +591,11 @@ void BACKBONE( void * pvParameters ){
       break;
       case Charging:
         Serial.println("Charging");
-        //lcd.backlight();
         if(digitalRead(IGNITION)){
           VehicleMode = Run;
           digitalWrite(RELAIS4, LOW);
           }
         digitalWrite(RELAIS4, HIGH);
-        //setLCDBSC();
-        //setLCDNLG();
         armColingSys(1);
         enableBSC = 1;
         chargeManage();
@@ -697,87 +698,7 @@ void armBattery(bool arm){
   }
 }
 
-void setLCDNLG(){
-  lcd.setCursor(0,1);
-  lcd.print("NLG6");
-  lcd.setCursor(5,1);
-  //0 Sleep, 1 Wakeup, 2 Standby, 3 Ready2Charge, 4 Charge, 5 Shtdown
-  switch (BSC6_MODE){
-    case 0:
-      lcd.print("SLEEP"); 
-    break;
-    case 1:
-      lcd.print("WAKEUP");
-    break;
-    case 2:
-      lcd.print("STANDBY");
-    break;
-    case 3:
-      lcd.print("R2CHARGE");
-    break;
-    case 4:
-      lcd.print("Charge");
-    break;
-    case 5:
-      lcd.print("Shutdown");
-    break;
-    default:
-      lcd.print("ERROR");
-    break;
-  }
-  lcd.setCursor(13,1);
-  lcd.print(NLG_DcHvVoltAct);
-  lcd.setCursor(19,1);
-  lcd.print("V");
-}
-void setLCDBSC(){
-  lcd.setCursor(0,0);
-  lcd.print("BSC6");
-  lcd.setCursor(5,0);
-  
-  switch (BSC6_MODE){
-    case 0:
-      lcd.print("Ready.."); 
-    break;
-    case 1:
-      lcd.print("Running");
-    break;
-    case 6:
-      lcd.print("Running");
-    break;
-    case 16:
-      lcd.print("NoCAN");
-    break;
-    default:
-      lcd.print("ERROR");
-    break;
-  }
-  lcd.setCursor(13,0);
-  lcd.print(BSC6_LVVOLT_ACT);
-  lcd.setCursor(19,0);
-  lcd.print("V");
-}
-void setLCDDMC(){
-  lcd.setCursor(0,1);
-  lcd.print("DMC5");
-  lcd.setCursor(5,1);
-  if(DMC_SensorWarning | DMC_GenErr){
-    lcd.print("ERROR");
-  }
-  else if (DMC_Ready){
-    lcd.print("Ready.."); 
-  }
-  else if (DMC_Running){
-    lcd.print("Running");
-  }
-  else{
-    lcd.print("ERROR");
-  }
-  lcd.setCursor(13,1);
-  lcd.print(DMC_DcCurrAct);
-  lcd.setCursor(19,1);
-  lcd.print("A");
-}
+
 void reciveBSC(){
  //Reciveing Can
     // check if data coming
@@ -1024,7 +945,7 @@ void reciveNLG(){
 //Functions for ADAC
 //Inputs
 //*********************************************************************//
-
+//Initalisation of the adac
 void initADAC(){
   voltage = voltage + 0.001;
   value = (voltage / 5)*pow(2,12);
@@ -1039,7 +960,7 @@ void initADAC(){
  
   setDACGain(1);
 }
- 
+//setting up the reffrence voltage
 void setVref(bool enable){
   Wire.beginTransmission(dacAdress);
   Wire.write(_ADAC_POWER_REF_CTRL);  // [D0]
@@ -1049,7 +970,7 @@ void setVref(bool enable){
  
   Wire.endTransmission();
 }
- 
+//setting up the DAC channels
 void setupDAC(){
   Wire.beginTransmission(dacAdress);
   Wire.write(_ADAC_DAC_CONFIG);
@@ -1062,7 +983,7 @@ void setupDAC(){
  
   Wire.endTransmission();
 }
- 
+//setting up the ADC channels
 void setupADC(){
   Wire.beginTransmission(dacAdress);
   Wire.write(_ADAC_ADC_CONFIG);
@@ -1075,7 +996,7 @@ void setupADC(){
  
   Wire.endTransmission();
 }
- 
+//setting up the GPO channels
 void setupGPO(){
   Wire.beginTransmission(dacAdress);
   Wire.write(_ADAC_GPIO_WR_CONFIG);
@@ -1089,7 +1010,7 @@ void setupGPO(){
  
   Wire.endTransmission();
 }
- 
+//setting up the GPI channels
 void setupGPI(){
   Wire.beginTransmission(dacAdress);
   Wire.write(_ADAC_GPIO_RD_CONFIG);
@@ -1102,7 +1023,7 @@ void setupGPI(){
  
   Wire.endTransmission();
 }
- 
+//setting the DAC value
 void setDACVal(uint8_t DACnum, uint16_t DACvalue){
   DACnum = DACnum & 0x0F;
   DACvalue = DACvalue & 0x0FFF;
@@ -1113,7 +1034,7 @@ void setDACVal(uint8_t DACnum, uint16_t DACvalue){
  
   Wire.endTransmission();
 }
-
+//reading the ADC value
 uint16_t readADC(uint8_t DACnum){
   uint16_t ADCvalue = 0;
   DACnum = DACnum & 0x0F;
@@ -1135,7 +1056,7 @@ uint16_t readADC(uint8_t DACnum){
   Wire.endTransmission();
   return ADCvalue;
 }
-
+//Setting the gain of the DAC
 void setDACGain(bool gain){
   Wire.beginTransmission(dacAdress);
   Wire.write(_ADAC_GP_CONTROL);
@@ -1144,7 +1065,7 @@ void setDACGain(bool gain){
  
  Wire.endTransmission();
 }
- 
+//setting the LDAC channel
 void setLDAC(uint8_t LDAC){
   Wire.beginTransmission(dacAdress);
   Wire.write(_ADAC_LDAC_MODE);
@@ -1153,7 +1074,7 @@ void setLDAC(uint8_t LDAC){
  
   Wire.endTransmission();
 }
-
+//sampel the throttle pedal
 int16_t calculateTorque5S(bool reverseSig){
   int16_t SampeldPotiValue = 0;
   int16_t DMC_TorqueCalc = 0;
