@@ -436,7 +436,7 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
   Wire.begin(1,2);
   //CAN.begin(CAN_500KBPS);
   ADS.begin();
-  ADS.setGain(0);
+  ADS.setGain(2);
   for(;;){
     esp_task_wdt_init(5, true);
     
