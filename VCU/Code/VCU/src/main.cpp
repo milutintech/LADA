@@ -40,7 +40,7 @@ void armBattery(bool arm);    //Arm HV-Battery
 
 void chargeManage();          //Manage Charging Process
 
-
+uint8_t print_GPIO_wake_up();
 
 void initADAC();              //Init ADAC chip on I2C bus
 void setVref(bool enable);    //Enable or disable Vref of the ADAC
@@ -67,11 +67,11 @@ const int CAN_INT_PIN = 11;
 #define MAX_DATA_SIZE 8
 
 //Relay pinout
-#define RELAIS1 40  //HV Battery
-#define RELAIS2 14  //Cooling Pump
-#define RELAIS3 48  //Cooling Fan
-#define RELAIS4 17  //Charger KL15
-#define RELAIS5 91  //Reverse Signal
+#define RELAIS1 11  //HV Battery
+#define RELAIS2 12  //Cooling Pump
+#define RELAIS3 13  //Cooling Fan
+#define RELAIS4 14  //Charger KL15
+#define RELAIS5 17  //Reverse Signal
 
 //Defining CAN Indexes
 
@@ -127,7 +127,7 @@ bool DACenable[8] = {1, 1, 1, 0, 0, 0, 0, 0};
 bool ADCenable[8] = {0, 0, 0, 0, 0, 1, 1, 1};
 bool GPIenable[8] = {0, 0, 0, 0, 1, 0, 0, 0};
 bool GPOenable[8] = {0, 0, 0, 1, 0, 0, 0, 0};
- 
+
 #define ADCPoti 7
 
 float voltage = 2.65;
@@ -141,15 +141,15 @@ int value = 0;
 //*********************************************************************//
 
 //Define Wakeup interrupt Pins
-#define BUTTON_PIN_BITMASK 0x2400 //IO10, IO13 need to add one for unlock connector  https://randomnerdtutorials.com/esp32-external-wake-up-deep-sleep/
+#define BUTTON_PIN_BITMASK 0x380 //IO7, IO8, IO9 https://randomnerdtutorials.com/esp32-external-wake-up-deep-sleep/
 
 //Define Vehicle states
 #define Standby 0
 #define Run 1
 #define Charging 2
 
-//Define Gaspedal Pin
-#define GASPEDAL 6
+//Define Gaspedal Chanel 
+#define GASPEDAL 1
 
 //Battery Voltage values
 #define MIN_U_BAT 360 //3.4V*104S
@@ -170,9 +170,9 @@ int value = 0;
 
 
 //INPUT deffinitions
-#define NLG_HW_Wakeup 10  //Input for VCU
-#define IGNITION 13       //Input for VCU
-#define UNLCKCON 35       //Input for VCU
+#define NLG_HW_Wakeup 7  //Input for VCU
+#define IGNITION 8       //Input for VCU
+#define UNLCKCON 9       //Input for VCU
 
 //define possible charger state demands
 #define NLG_DEM_STANDBY 0
@@ -195,7 +195,7 @@ bool reversSig = 1;
 mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
 
 uint8_t VehicleMode = Standby;  // Set default vehicle Mode to standby
-
+uint8_t WakeupReason = 0;       // Set default Wakeup reason to 0
 //*********************************************************************//
 //Deffining Variables for Can transmission
 //BMS
@@ -427,8 +427,13 @@ unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Stroage for lim
 unsigned char controllBufferNLG1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllRelayBuffer[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
 
+void IRAM_ATTR unlockCON() {
+  NLG_StateDem = NLG_DEM_STANDBY;
+  NLG_C_UnlockConRq = 1;
+  NLG_Charged = 1;
+}
 void setup() {
-
+  
   pinMode(IGNITION, INPUT); //define ignition pin as input
   pinMode(NLG_HW_Wakeup, INPUT); //define NLG_HW_Wakeup pin as input
   pinMode(UNLCKCON, INPUT); //define UNLCKCON pin as input
@@ -536,7 +541,9 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
 }
 //Backbone on Core 1
 void BACKBONE( void * pvParameters ){
-  
+
+  attachInterrupt(digitalPinToInterrupt(UNLCKCON), unlockCON, RISING);
+
   pinMode(RELAIS1, OUTPUT);
   pinMode(RELAIS2, OUTPUT); 
   pinMode(RELAIS3, OUTPUT);
@@ -546,6 +553,24 @@ void BACKBONE( void * pvParameters ){
   Wire.begin(1,2);
   //INIT LCD
   Serial.begin(115200);
+  WakeupReason = print_GPIO_wake_up();
+
+  switch(WakeupReason){
+    case NLG_HW_Wakeup:
+
+    break;
+    case IGNITION:
+      VehicleMode = Run; 
+    break;
+    case UNLCKCON:
+      NLG_StateDem = NLG_DEM_STANDBY;
+      NLG_C_UnlockConRq = 1;
+      NLG_Charged = 1;
+    break;
+    default:
+      VehicleMode = Standby;
+    break;
+  }
 
   for(;;){
     esp_task_wdt_init(5, true);
@@ -611,15 +636,6 @@ void BACKBONE( void * pvParameters ){
 
 void chargeManage(){
   if(VehicleMode == Charging){
-    if(digitalRead(UNLCKCON)){
-      NLG_StateDem = NLG_DEM_STANDBY;
-      NLG_C_UnlockConRq = 1;
-      NLG_Charged = 1;
-    }
-    else{
-      NLG_C_UnlockConRq = 0;
-    }
-
     switch (NLG_StateAct){
       case  NLG_ACT_SLEEP :
         NLG_StateDem = NLG_DEM_SLEEP;   //Demand Standby
@@ -1088,5 +1104,9 @@ int16_t calculateTorque5S(bool reverseSig){
     DMC_TorqueCalc = 0 - DMC_TorqueCalc;
   }
   return DMC_TorqueCalc;
+}
+uint8_t print_GPIO_wake_up(){
+  uint64_t GPIO_reason = esp_sleep_get_ext1_wakeup_status();
+  return (log(GPIO_reason))/log(2);
 }
 void loop() {}
