@@ -102,15 +102,15 @@ discharge
 > - Relais 3 Lüfter
 > - Relais 4 NLG KL15
 > - Relais 5 Rückfahrlicht
+> - Relais 6 DMC KL15
+> - Relais 4 BSC KL15
 
-## Pinout remote relais
+## Pinout Input
 
-> - Relais 1 BSCprecharge
-> - Relais 2 BSCmain
-> - Relais 3 DMCprecharge
-> - Relais 4 DMCmain
-> - Relais 5 NLGprecharge
-> - Relais 6 NLGmain
+> - P1 NLG_HW_Wakeup
+> - P2 IGNITION
+> - P3 UNLCKCON
+> - P4 
 
 ## Protocoll CAN remote relay
 # ID: 0x999
