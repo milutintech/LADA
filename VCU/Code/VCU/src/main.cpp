@@ -7,7 +7,6 @@
 #include <Arduino.h>              //For Arduino syntax
 #include <esp_task_wdt.h>         //Multicore tasking
 #include <Wire.h>                 //I2C bus driver
-#include <LiquidCrystal_I2C.h>    //Display driver
 #include <SPI.h>                  //SPI bus driver
 #include "mcp2515_can.h"          //Can Bus driver
 #include <esp_adc_cal.h>          //ADC calib
@@ -42,16 +41,7 @@ void chargeManage();          //Manage Charging Process
 
 uint8_t print_GPIO_wake_up();
 
-void initADAC();              //Init ADAC chip on I2C bus
-void setVref(bool enable);    //Enable or disable Vref of the ADAC
-void setupDAC();              //Setup DACs
-void setupADC();              //Setup ADCs
-void setupGPO();              //Setup GPOs
-void setupGPI();              //Setup GPIs
-void setDACVal(uint8_t DACnum, uint16_t DACvalue);  //Set DAC value
-void setDACGain(bool gain);   //Set DAC gain
-void setLDAC(uint8_t LDAC);   //Set LDAC mode
-uint16_t readADC(uint8_t DACnum); //Read ADC value
+
 int16_t calculateTorque5S(bool reverseSig); //Calculate Torque from Pedal Position
 
 
@@ -72,7 +62,9 @@ const int CAN_INT_PIN = 11;
 #define RELAIS3 13  //Cooling Fan
 #define RELAIS4 14  //Charger KL15
 #define RELAIS5 17  //Reverse Signal
-
+#define RELAIS6 18  //Not Used
+#define RELAIS7 21  //Not Used
+#define RELAIS8 33  //Not Used
 //Defining CAN Indexes
 
 //BSC Indexes
@@ -89,51 +81,6 @@ const int CAN_INT_PIN = 11;
 #define NLG_ACT_ERR 0x799
 #define NLG_ACT_LIM 0x728
 #define NLG_ACT_PLUG 0x739
-
-//*********************************************************************//
-//Deffining Variables for ADAC
-//Inputs
-//*********************************************************************//
-
-int dacAdress = 0x10;
-#define _ADAC_NULL           B00000000
-#define _ADAC_ADC_SEQUENCE   B00000010 // ADC sequence register - Selects ADCs for conversion
-#define _ADAC_GP_CONTROL     B00000011 // General-purpose control register - DAC and ADC control register
-#define _ADAC_ADC_CONFIG     B00000100 // ADC pin configuration - Selects which pins are ADC inputs
-#define _ADAC_DAC_CONFIG     B00000101 // DAC pin configuration - Selects which pins are DAC outputs
-#define _ADAC_PULL_DOWN      B00000110 // Pull-down configuration - Selects which pins have an 85 kO pull-down resistor to GND
-#define _ADAC_LDAC_MODE      B00000111 // LDAC mode - Selects the operation of the load DAC
-#define _ADAC_GPIO_WR_CONFIG B00001000 // GPIO write configuration - Selects which pins are general-purpose outputs
-#define _ADAC_GPIO_WR_DATA   B00001001 // GPIO write data - Writes data to general-purpose outputs
-#define _ADAC_GPIO_RD_CONFIG B00001010 // GPIO read configuration - Selects which pins are general-purpose inputs
-#define _ADAC_POWER_REF_CTRL B00001011 // Power-down/reference control - Powers down the DACs and enables/disables the reference
-#define _ADAC_OPEN_DRAIN_CFG B00001100 // Open-drain configuration - Selects open-drain or push-pull for geeral-purpose outputs
-#define _ADAC_THREE_STATE    B00001101 // Three-state pins - Selects which pins are three-stated
-#define _ADAC_RESERVED       B00001110 // Reserved
-#define _ADAC_SOFT_RESET     B00001111 // Software reset - Resets the AD5593R
- 
- 
-#define _ADAC_VREF_ON        B00000010 // VREF on
-#define _ADAC_SEQUENCE_ON    B00000010 // Sequence on
- 
-#define _ADAC_DAC_WRITE      B00010000 // DAC write
-#define _ADAC_ADC_READ       B01000000 // ADC read
-#define _ADAC_DAC_READ       B01010000 // DAC read
-#define _ADAC_GPIO_READ      B01110000 // GPIO read
-#define _ADAC_REG_READ       B01100000 // Register read
-
-                  //DAC0                 DAC7
-bool DACenable[8] = {1, 1, 1, 0, 0, 0, 0, 0};
-bool ADCenable[8] = {0, 0, 0, 0, 0, 1, 1, 1};
-bool GPIenable[8] = {0, 0, 0, 0, 1, 0, 0, 0};
-bool GPOenable[8] = {0, 0, 0, 1, 0, 0, 0, 0};
-
-#define ADCPoti 7
-
-float voltage = 2.65;
-
-int value = 0;
-
 
 //*********************************************************************//
 //Deffining Variables for Operation
@@ -495,7 +442,7 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
         //BMS DMC max current
         //Do Not add anythig here cycle limit is 5ms
         for(sampleSetCounter = 0; sampleSetCounter < 2; sampleSetCounter ++){  
-          sampleSetPedal[sampleSetCounter] = readADC(GASPEDAL); //Read ADC into sampleSet
+          //sampleSetPedal[sampleSetCounter] = readADC(GASPEDAL); //Read ADC into sampleSet
         }
         if((DMC_SpdAct < 100) && sampleSetPedal[1] < 200){
           DMC_DcCLimMot = 10;
@@ -549,6 +496,9 @@ void BACKBONE( void * pvParameters ){
   pinMode(RELAIS3, OUTPUT);
   pinMode(RELAIS4, OUTPUT);
   pinMode(RELAIS5, OUTPUT);
+  pinMode(RELAIS6, OUTPUT);
+  pinMode(RELAIS7, OUTPUT);
+  pinMode(RELAIS8, OUTPUT);
   //Init the i2c bus
   Wire.begin(1,2);
   //INIT LCD
@@ -557,7 +507,7 @@ void BACKBONE( void * pvParameters ){
 
   switch(WakeupReason){
     case NLG_HW_Wakeup:
-
+      VehicleMode = Charging;
     break;
     case IGNITION:
       VehicleMode = Run; 
@@ -644,7 +594,6 @@ void chargeManage(){
       case NLG_ACT_STANDBY:
         if(NLG_Charged){VehicleMode = Standby;}
         else{
-          lcd.clear();
           NLG_LedDem = 9;                 //LED purple
           armBattery(1);
         
@@ -957,149 +906,18 @@ void reciveNLG(){
       break;
     }
 }
-//*********************************************************************//
-//Functions for ADAC
-//Inputs
-//*********************************************************************//
-//Initalisation of the adac
-void initADAC(){
-  voltage = voltage + 0.001;
-  value = (voltage / 5)*pow(2,12);
-  setVref(1);
- 
-  setupDAC();
-  setupADC();
-  setupGPI();
-  setupGPO();
- 
-  setLDAC(0);
- 
-  setDACGain(1);
-}
-//setting up the reffrence voltage
-void setVref(bool enable){
-  Wire.beginTransmission(dacAdress);
-  Wire.write(_ADAC_POWER_REF_CTRL);  // [D0]
-  uint8_t setup = enable << 1;
-  Wire.write(setup);  // [D0]
-  Wire.write(B00000000);  // [D0]
- 
-  Wire.endTransmission();
-}
-//setting up the DAC channels
-void setupDAC(){
-  Wire.beginTransmission(dacAdress);
-  Wire.write(_ADAC_DAC_CONFIG);
-  uint8_t setup = 0;
-  for(int i = 0; i <= 7; i++){
-    setup = setup | DACenable[i] << i;
-  }
-  Wire.write(0x00);  // [D0]
-  Wire.write(setup);  // [D0]
- 
-  Wire.endTransmission();
-}
-//setting up the ADC channels
-void setupADC(){
-  Wire.beginTransmission(dacAdress);
-  Wire.write(_ADAC_ADC_CONFIG);
-  uint8_t setup = 0;
-  for(int i = 0; i <= 7; i++){
-    setup = setup | ADCenable[i] << i;
-  }
-  Wire.write(0x00);  // [D0]
-  Wire.write(setup);  // [D0]
- 
-  Wire.endTransmission();
-}
-//setting up the GPO channels
-void setupGPO(){
-  Wire.beginTransmission(dacAdress);
-  Wire.write(_ADAC_GPIO_WR_CONFIG);
-  uint8_t setup = 0;
-  for(int i = 0; i <= 7; i++){
-    setup = setup | GPOenable[i] << i;
-  }
-  
-  Wire.write(0x00);  // [D0]
-  Wire.write(setup);  // [D0]
- 
-  Wire.endTransmission();
-}
-//setting up the GPI channels
-void setupGPI(){
-  Wire.beginTransmission(dacAdress);
-  Wire.write(_ADAC_GPIO_RD_CONFIG);
-  uint8_t setup = 0;
-  for(int i = 0; i <= 7; i++){
-    setup = setup | GPIenable[i] << i;
-  }
-  Wire.write(0x00);  // [D0]
-  Wire.write(setup);  // [D0]
- 
-  Wire.endTransmission();
-}
-//setting the DAC value
-void setDACVal(uint8_t DACnum, uint16_t DACvalue){
-  DACnum = DACnum & 0x0F;
-  DACvalue = DACvalue & 0x0FFF;
-  Wire.beginTransmission(dacAdress);
-  Wire.write(_ADAC_DAC_WRITE|DACnum);
-  Wire.write(DACvalue >> 8);  // [D0]
-  Wire.write(DACvalue & 0x00FF);  // [D0]
- 
-  Wire.endTransmission();
-}
-//reading the ADC value
-uint16_t readADC(uint8_t DACnum){
-  uint16_t ADCvalue = 0;
-  DACnum = DACnum & 0x0F;
 
-  Wire.beginTransmission(dacAdress);
-  Wire.write(_ADAC_ADC_SEQUENCE);
-  Wire.write(0x02);
-  Wire.write(byte(1 << DACnum));
-  Wire.endTransmission();
-
-  Wire.beginTransmission(dacAdress);
-  Wire.write(_ADAC_ADC_READ);
-  Wire.endTransmission();
- 
-  Wire.requestFrom(int(dacAdress), int(2), int(1));
-  if (Wire.available()) ADCvalue = (Wire.read() & 0x0f) << 8;
-  if (Wire.available()) ADCvalue = ADCvalue | Wire.read();
-
-  Wire.endTransmission();
-  return ADCvalue;
-}
-//Setting the gain of the DAC
-void setDACGain(bool gain){
-  Wire.beginTransmission(dacAdress);
-  Wire.write(_ADAC_GP_CONTROL);
-  Wire.write(0x00);  // [D0]
-  Wire.write(gain << 4);  // [D0]
- 
- Wire.endTransmission();
-}
-//setting the LDAC channel
-void setLDAC(uint8_t LDAC){
-  Wire.beginTransmission(dacAdress);
-  Wire.write(_ADAC_LDAC_MODE);
-  Wire.write(0x00);  // [D0]
-  Wire.write(LDAC & 0x03);  // [D0]
- 
-  Wire.endTransmission();
-}
 //sampel the throttle pedal
 int16_t calculateTorque5S(bool reverseSig){
   int16_t SampeldPotiValue = 0;
   int16_t DMC_TorqueCalc = 0;
-
+  int16_t DMCpre = 0;
   for(int i = 0; i < 2; i++){
     SampeldPotiValue = SampeldPotiValue + sampleSetPedal[i];
   }
   SampeldPotiValue = SampeldPotiValue / 2;
-  DMC_TorqueCalc = map(SampeldPotiValue, 0, 4096, 0, 32767);
+  DMCpre = pow(SampeldPotiValue * 0.9857,1.2654);
+  DMC_TorqueCalc = map(DMCpre, 0, 36574, 0, 32767);
   if(reverseSig){
     DMC_TorqueCalc = 0 - DMC_TorqueCalc;
   }
