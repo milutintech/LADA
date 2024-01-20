@@ -102,6 +102,8 @@ discharge
 > - Relais 3 Lüfter
 > - Relais 4 NLG KL15
 > - Relais 5 Rückfahrlicht
+> - Relais 6 DMC KL15
+> - Relais 4 BSC KL15
 
 ## Pinout remote relais
 
