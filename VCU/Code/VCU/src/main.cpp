@@ -11,7 +11,7 @@
 #include "mcp2515_can.h"          //Can Bus driver
 #include <esp_adc_cal.h>          //ADC calib
 #include <esp32-hal-adc.h>        //ADC driver
-
+#include "ADS1X15.h"
 
 //Create Tasks for each Core
 void CAN_COM (void * pvParameters);
@@ -65,6 +65,9 @@ const int CAN_INT_PIN = 11;
 #define RELAIS6 18  //Not Used
 #define RELAIS7 21  //Not Used
 #define RELAIS8 33  //Not Used
+
+ADS1115 ADS(0x48);
+
 //Defining CAN Indexes
 
 //BSC Indexes
@@ -96,7 +99,8 @@ const int CAN_INT_PIN = 11;
 #define Charging 2
 
 //Define Gaspedal Chanel 
-#define GASPEDAL 1
+#define GASPEDAL1 0
+#define GASPEDAL2 1
 
 //Battery Voltage values
 #define MIN_U_BAT 360 //3.4V*104S
@@ -431,6 +435,8 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
  //CAN.begin(CAN_500KBPS);
   Wire.begin(1,2);
   //CAN.begin(CAN_500KBPS);
+  ADS.begin();
+  ADS.setGain(0);
   for(;;){
     esp_task_wdt_init(5, true);
     
@@ -441,9 +447,10 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
       case Run:
         //BMS DMC max current
         //Do Not add anythig here cycle limit is 5ms
-        for(sampleSetCounter = 0; sampleSetCounter < 2; sampleSetCounter ++){  
-          //sampleSetPedal[sampleSetCounter] = readADC(GASPEDAL); //Read ADC into sampleSet
-        }
+        sampleSetPedal[0] = ADS.readADC(GASPEDAL1); ; //Read ADC into sampleSet
+        sampleSetPedal[1] = ADS.readADC(GASPEDAL2); ; //Read ADC into sampleSet
+        sampleSetPedal[2] = ADS.readADC(GASPEDAL1); ; //Read ADC into sampleSet
+        sampleSetPedal[3] = ADS.readADC(GASPEDAL2); ; //Read ADC into sampleSet
         if((DMC_SpdAct < 100) && sampleSetPedal[1] < 200){
           DMC_DcCLimMot = 10;
         }
@@ -912,10 +919,10 @@ int16_t calculateTorque5S(bool reverseSig){
   int16_t SampeldPotiValue = 0;
   int16_t DMC_TorqueCalc = 0;
   int16_t DMCpre = 0;
-  for(int i = 0; i < 2; i++){
+  for(int i = 0; i < 4; i++){
     SampeldPotiValue = SampeldPotiValue + sampleSetPedal[i];
   }
-  SampeldPotiValue = SampeldPotiValue / 2;
+  SampeldPotiValue = SampeldPotiValue / 4;
   DMCpre = pow(SampeldPotiValue * 0.9857,1.2654);
   DMC_TorqueCalc = map(DMCpre, 0, 36574, 0, 32767);
   if(reverseSig){
