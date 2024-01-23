@@ -66,6 +66,7 @@ const int CAN_INT_PIN = 11;
 #define RELAIS7 21  //Not Used
 #define RELAIS8 33  //Not Used
 
+//set ADC set adress
 ADS1115 ADS(0x48);
 
 //Defining CAN Indexes
@@ -107,9 +108,9 @@ ADS1115 ADS(0x48);
 #define NOM_U_BAT 382 //3.67V*104S
 #define MAX_U_BAT 436 //4.2V*104S
 
-#define MAX_DMC_CURRENT 600 //A
+#define MAX_DMC_CURRENT 600 //A 
 #define MAX_NLG_CURRENT 32 //A
-#define PRECHARGE_CURRENT 20 //A
+#define PRECHARGE_CURRENT 20 //A Curret of BSC in boost mode
 
 //Define Charger states
 #define NLG_ACT_SLEEP 0
@@ -140,9 +141,12 @@ bool NLG_Charged = 0; //Safe when vehicle has carged
 bool CanError = false;
 
 //driving variables
+//Storage for Pedal Position
 uint8_t sampleSetCounter = 0;
 int16_t sampleSetPedal[5] = {0,0,0,0,0};
-bool reversSig = 1;
+
+bool reversSig = 1; //reverse from direction selector
+
 mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
 
 uint8_t VehicleMode = Standby;  // Set default vehicle Mode to standby
@@ -151,6 +155,7 @@ uint8_t WakeupReason = 0;       // Set default Wakeup reason to 0
 //Deffining Variables for Can transmission
 //BMS
 //*********************************************************************//
+//Should be set by BMS
 int BMS_SOC = 0;
 int BMS_U_BAT = 0;
 int BMS_I_BAT = 0;  
@@ -229,6 +234,8 @@ uint8_t NLG_AcPhaseDet = 0;
 uint8_t NLG_CoolingRequest = 0;
 int16_t NLG_TempCoolPlate = 0;
 
+
+bool conUlockInterrupt = 0; //Interrupt for connector unlock
 //*********************************************************************//
 //Deffining Variables for Can transmission
 //DMC
@@ -261,10 +268,10 @@ unsigned char highNibTrq = 0;
 //Variables for 0x211
 //**********************//
 
-int DMC_DcVLimMot = MIN_U_BAT;
-int DMC_DcVLimGen = MAX_U_BAT;
-int DMC_DcCLimMot = 600;
-int DMC_DcCLimGen = 420;
+int DMC_DcVLimMot = MIN_U_BAT; //Setting battery low voltage limit
+int DMC_DcVLimGen = MAX_U_BAT; //Setting battery high voltage limit
+int DMC_DcCLimMot = 600;      //Setting driving Current limit
+int DMC_DcCLimGen = 420;      //Setting regen Current limit
 
 int DMC_DcVLimMot_Scale = 0;
 int DMC_DcVLimGen_Scale = 0;
@@ -378,10 +385,15 @@ unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Stroage for lim
 unsigned char controllBufferNLG1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllRelayBuffer[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
 
+//Interrupt rutine for connector unlock
 void IRAM_ATTR unlockCON() {
-  NLG_StateDem = NLG_DEM_STANDBY;
-  NLG_C_UnlockConRq = 1;
-  NLG_Charged = 1;
+  if(NLG_S_ConLocked){
+    VehicleMode = Charging;
+    conUlockInterrupt = 1;
+  }
+  else{
+    VehicleMode = Standby;
+  }
 }
 void setup() {
   
@@ -496,8 +508,8 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
 //Backbone on Core 1
 void BACKBONE( void * pvParameters ){
 
-  attachInterrupt(digitalPinToInterrupt(UNLCKCON), unlockCON, RISING);
-
+  attachInterrupt(digitalPinToInterrupt(UNLCKCON), unlockCON, RISING);  //Interrupt for connector unlock
+  //Set up Relais pins as output
   pinMode(RELAIS1, OUTPUT);
   pinMode(RELAIS2, OUTPUT); 
   pinMode(RELAIS3, OUTPUT);
@@ -506,23 +518,32 @@ void BACKBONE( void * pvParameters ){
   pinMode(RELAIS6, OUTPUT);
   pinMode(RELAIS7, OUTPUT);
   pinMode(RELAIS8, OUTPUT);
+
   //Init the i2c bus
   Wire.begin(1,2);
-  //INIT LCD
+  
   Serial.begin(115200);
+  //Read out the wake up reason
   WakeupReason = print_GPIO_wake_up();
 
   switch(WakeupReason){
     case NLG_HW_Wakeup:
+      //NLG demands wakeup because type 2 charger detected
       VehicleMode = Charging;
     break;
     case IGNITION:
+      //KL15 detected vehicle is in run mode
       VehicleMode = Run; 
     break;
     case UNLCKCON:
-      NLG_StateDem = NLG_DEM_STANDBY;
-      NLG_C_UnlockConRq = 1;
-      NLG_Charged = 1;
+      //Connector unlock detected
+      if(NLG_S_ConLocked){
+        VehicleMode = Charging;
+        conUlockInterrupt = 1;
+      }
+      else{
+        VehicleMode = Standby;
+      }
     break;
     default:
       VehicleMode = Standby;
@@ -530,10 +551,12 @@ void BACKBONE( void * pvParameters ){
   }
 
   for(;;){
+    //reset watchdog timer its a rough gestimation
     esp_task_wdt_init(5, true);
     //Serial.println("Wake");
     switch(VehicleMode){
       case Standby:
+        //No input detectet from ext sources
         Serial.println("Standby");
         NLG_Charged = 0;
         enableBSC = 0;
@@ -571,18 +594,27 @@ void BACKBONE( void * pvParameters ){
           errorCnt = 0;
         }
       break;
+
       case Charging:
-        Serial.println("Charging");
-        if(digitalRead(IGNITION)){
-          VehicleMode = Run;
-          digitalWrite(RELAIS4, LOW);
+        //Check if Con  unlock interrupt is set
+        if(conUlockInterrupt){
+          if(NLG_S_ConLocked){
+            NLG_StateDem = NLG_DEM_STANDBY;
+            NLG_C_UnlockConRq = 1;
+            NLG_Charged = 1;
           }
+          else{
+            conUlockInterrupt = 0;
+            vehicleMode = Standby;
+          }
+        }
+        else{
+        Serial.println("Charging");
         digitalWrite(RELAIS4, HIGH);
         armColingSys(1);
         enableBSC = 1;
         chargeManage();
-        
-        
+        }
       break;
       default:
         VehicleMode = Standby;
@@ -599,7 +631,10 @@ void chargeManage(){
         NLG_LedDem = 9;                 //LED purple
       break;
       case NLG_ACT_STANDBY:
-        if(NLG_Charged){VehicleMode = Standby;}
+        if(NLG_Charged){
+          VehicleMode = Standby;
+          NLG_C_UnlockConRq = 1;
+          }
         else{
           NLG_LedDem = 9;                 //LED purple
           armBattery(1);
