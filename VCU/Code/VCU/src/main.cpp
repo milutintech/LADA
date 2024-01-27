@@ -12,6 +12,7 @@
 #include <esp_adc_cal.h>          //ADC calib
 #include <esp32-hal-adc.h>        //ADC driver
 #include "ADS1X15.h"
+#include "AD5593R.h"
 
 //Create Tasks for each Core
 void CAN_COM (void * pvParameters);
@@ -103,6 +104,8 @@ ADS1115 ADS(0x48);
 #define GASPEDAL1 0
 #define GASPEDAL2 1
 
+//Pin for reverse signal 0 = forward, 1 = reverse pin 0 on AD
+#define REVERSE 0
 //Battery Voltage values
 #define MIN_U_BAT 360 //3.4V*104S
 #define NOM_U_BAT 382 //3.67V*104S
@@ -449,6 +452,8 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
   //CAN.begin(CAN_500KBPS);
   ADS.begin();
   ADS.setGain(2);
+  initADAC(0x10, 1, 1);
+  setADCpin(0);
   for(;;){
     esp_task_wdt_init(5, true);
     
@@ -463,6 +468,12 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
         sampleSetPedal[1] = ADS.readADC(GASPEDAL2); ; //Read ADC into sampleSet
         sampleSetPedal[2] = ADS.readADC(GASPEDAL1); ; //Read ADC into sampleSet
         sampleSetPedal[3] = ADS.readADC(GASPEDAL2); ; //Read ADC into sampleSet
+        if(readADC(1)>100){
+          reversSig = 1;
+        }
+        else{
+          reversSig = 0;
+        }
         if((DMC_SpdAct < 100) && sampleSetPedal[1] < 200){
           DMC_DcCLimMot = 10;
         }
@@ -576,22 +587,30 @@ void BACKBONE( void * pvParameters ){
         Serial.println("Run");
         NLG_Charged = 0;
         if(!digitalRead(IGNITION)){VehicleMode = Standby;}
+
         armColingSys(1);
         armBattery(1);
-        if(reversSig){
-          digitalWrite(RELAIS5, HIGH);
+
+        if(reversSig){digitalWrite(RELAIS5, HIGH);}
+        else{digitalWrite(RELAIS5, LOW);}
+
+        enableBSC = 1;
+
+        if(DMC_Ready){
+          enableDMC = 1;
         }
         else{
-          digitalWrite(RELAIS5, LOW);
+          enableDMC = 0;
         }
-        enableBSC = 1;
         enableDMC = 1;
         if(errorCnt < 40 && DMC_SensorWarning | DMC_GenErr){
+          enableDMC = 0;
           errorCnt ++;
           errLatch = 1;
         }
         else{
           errorCnt = 0;
+          enableDMC = 1;
         }
       break;
 
@@ -605,7 +624,7 @@ void BACKBONE( void * pvParameters ){
           }
           else{
             conUlockInterrupt = 0;
-            vehicleMode = Standby;
+            VehicleMode = Standby;
           }
         }
         else{
