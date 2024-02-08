@@ -452,7 +452,7 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
   //CAN.begin(CAN_500KBPS);
   ADS.begin();
   ADS.setGain(2);
-  initADAC(0x10, 1, 1);
+  initADAC(0b1001000, 1, 1);
   setADCpin(0);
   for(;;){
     esp_task_wdt_init(5, true);
@@ -464,10 +464,10 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
       case Run:
         //BMS DMC max current
         //Do Not add anythig here cycle limit is 5ms
-        sampleSetPedal[0] = ADS.readADC(GASPEDAL1); ; //Read ADC into sampleSet
-        sampleSetPedal[1] = ADS.readADC(GASPEDAL2); ; //Read ADC into sampleSet
-        sampleSetPedal[2] = ADS.readADC(GASPEDAL1); ; //Read ADC into sampleSet
-        sampleSetPedal[3] = ADS.readADC(GASPEDAL2); ; //Read ADC into sampleSet
+        sampleSetPedal[0] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
+        sampleSetPedal[1] = ADS.readADC(GASPEDAL2);  //Read ADC into sampleSet
+        sampleSetPedal[2] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
+        sampleSetPedal[3] = ADS.readADC(GASPEDAL2);  //Read ADC into sampleSet
         if(readADC(1)>100){
           reversSig = 1;
         }
@@ -487,7 +487,7 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
         }
         
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
-        //Serial.println(DMC_TrqRq_Scale);
+        Serial.println( sampleSetPedal[3]);
         relayControll();
         sendBSC();
         sendDMC();
