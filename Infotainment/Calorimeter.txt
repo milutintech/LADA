@@ -1,0 +1,461 @@
+import serial
+import time
+import csv
+import sys
+import glob
+import os
+#import Streamlit
+import streamlit as st
+from streamlit_option_menu import option_menu
+from streamlit_modal import Modal
+import streamlit.components.v1 as components
+import pandas as pd
+import numpy as np
+import plotly.express as px
+import matplotlib.pyplot as plt
+from PIL import Image
+import altair as alt
+import pyvisa
+from pyvisa.errors import VisaIOError
+
+
+
+#color constants
+typicalBaud = 9600 #57600 #115200 #9600
+Grey100 = "#F5F5F5"
+Grey200 = "#EEEEEE"
+Grey300 = "#E0E0E0"
+Grey400 = "#BDBDBD"
+Grey500 = "#9E9E9E"
+Grey600 = "#757575"
+Grey700 = "#616161"
+Grey800 = "#424242"
+Grey900 = "#212121"
+
+BGrey   = "#373b3e"
+BAnthrazit =  "#46525a"
+Red100  = "#be0000"
+
+#variables
+if 'x' not in st.session_state:
+    st.session_state.x = 0
+    
+if 'com' not in st.session_state:
+    st.session_state.com = 0
+    
+if 'i' not in st.session_state:
+    st.session_state.i = 0
+
+if "DFdata" not in st.session_state:
+    st.session_state.DFdata = 0
+    
+if "rm" not in st.session_state:
+    st.session_state.rm = 0
+    
+if "instr1" not in st.session_state:
+    st.session_state.instr1 = 0
+
+if "instr2" not in st.session_state:
+    st.session_state.instr2 = 0
+    
+if "DeviceIDN" not in st.session_state:
+    st.session_state.DeviceIDN = 0
+    
+if "VisaResources" not in st.session_state:
+    st.session_state.VisaResources = 0
+    
+if "NewSampleCnt" not in st.session_state:
+    st.session_state.NewSampleCnt = 0
+    
+if "TestRunning" not in st.session_state:
+    st.session_state.TestRunning = 0
+    
+if "timeNow" not in st.session_state:
+    st.session_state.timeNow = 0
+    
+if "SampleCount" not in st.session_state:
+    st.session_state.SampleCount = 0
+
+
+# --- Functions ---
+
+def str2df(data: str) -> pd.DataFrame:
+    components = data.split(',')
+    sensor_values = dict()  # same sensor_values = {}
+    i = 1
+    for value in components:
+        print(value)
+        try:
+            #sensor_values.update("T_S_I{:d}".format(i), float(value))
+            sensor_values["T_S_I{:d}".format(i)] =  [float(value)]
+            i += 1
+        except:
+            print("Error: value can not be converter to float")
+  
+    new_data = pd.DataFrame(sensor_values)
+    return new_data
+
+
+def serial_ports():
+    """ Lists serial port names
+
+        :raises EnvironmentError:
+            On unsupported or unknown platforms
+        :returns:
+            A list of the serial ports available on the system
+    """
+    if sys.platform.startswith('win'):
+        ports = ['COM%s' % (i + 1) for i in range(256)]
+    elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+        # this excludes your current terminal "/dev/tty"
+        ports = glob.glob('/dev/tty[A-Za-z]*')
+    elif sys.platform.startswith('darwin'):
+        ports = glob.glob('/dev/tty.*')
+    else:
+        raise EnvironmentError('Unsupported platform')
+
+    result = []
+    for port in ports:
+        try:
+            s = serial.Serial(port)
+            s.close()
+            result.append(port)
+        except (OSError, serial.SerialException):
+            pass
+    return result
+
+def establishSerial():
+    return serial.Serial(st.session_state.com, baud, timeout = 0.1)
+
+def quitSerial(self):
+    return serial.Serial.close()
+
+# --- Main ---
+st.set_page_config(page_title="Calorimeter", page_icon=":rainbow:", layout="wide")
+
+# --- Title ---
+with st.container():
+    image_column, text_column = st.columns((1, 8))
+    with image_column:
+        st.image(image="04_Software\Calorimeter_CSV_converter_py\BRUSA_HYP_Logo_NEG_RGB.png", width=200)
+    with text_column:
+        selected = option_menu(
+            menu_title=None,
+            options=["Home", "Run Test", "Test Setup"],
+            icons=["house", "rocket-takeoff", "gear"],
+            orientation="horizontal"
+        )
+
+    st.write("---")
+
+# ---- Menu ----
+# --- Home ---
+if selected == "Home":
+    st.title('Home')
+    st.markdown(
+        '''
+            Calorimeter GUI
+        '''
+    )
+    
+    st.subheader("WIP = Work in Progress!")
+    
+    st.title("ReadMe.md:")
+    st.markdown("The Calorimeter is a apprentice 'IPA', this project is now in refinment. A Calorimeter is used to meassure the realworld Powerloss of passiv components mainly inductors. The measurement PCB is based on a [ESP32s3 WROOM](https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf) and is designed to read the analoge Voltages of a maximum of 10 Thermal Resistors.")
+    st.subheader("PHYSICAL CONSTRUCTION")
+    st.markdown(
+        '''
+        - The Calorimeter-Box is constructed from a Aluminium Box, wich is isolated with inslation mat and put inside a styrofoam box for further insulation.
+        - In the current Setup we only use 8 NTCs though:
+            - 3 on the Outside (As reverence)
+            - 5 on the Inside (For the measurement)
+                - 4 Inside the oil
+                - 1 above the oil
+        ''')
+    st.subheader("Getting Started, Install and Flashing")
+    st.markdown(
+        '''
+            TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
+        '''
+    )
+    st.subheader("Flashing via ArduinoIDE")
+    st.markdown(
+        '''
+            1.	Installation process: AS discribed on [Random Neards Tutorials](https://randomnerdtutorials.com/installing-esp32-arduino-ide-2-0/)
+            2.  Clone the latest Software Version to your Local Computer
+            3.	Open the Software in Arduino and Install all Libaries, wich aren't Installed yet.
+            4.	Compile and Flash the software via the Arduino GUI, at the start of the flashing Process you will mostlikly have to do the [Bootmode Selection](https://docs.espressif.com/projects/esptool/en/latest/esp32s3/advanced-topics/boot-mode-selection.html) thats what the two Buttons on the PCB are for.
+            5.  If the Flashing was sucessfull the LED should start blinking.
+
+            -   For further flashes of the ESP32s3 you will only have to repeat steps 3-5
+        '''
+    )
+    st.subheader("Flashing via VS Code (Not setup yet (Azure Ticket 17))")
+    st.markdown(
+        '''
+            1.	Installation process: AS discribed in xxx
+            2.	Software dependencies
+            3.	Latest releases
+            4.	API references
+        '''
+    )
+    st.subheader("Build and Test")
+    st.markdown(
+        '''
+            Build and Flash is done as discribed above, in **"Flashing via ArduinoIDE"** and **"Flashing via VS Code"**.
+            
+            Software Tests have to be layed out (Azure Ticket 18)
+        '''
+        )
+    st.subheader("Contribute")
+    st.markdown(
+        '''
+            After the Software Tests have been established the Contribution will be possible.
+
+
+            TODO: Explain how other users and developers can contribute to make your code better. 
+
+            If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
+            - [ASP.NET Core](https://github.com/aspnet/Home)
+            - [Visual Studio Code](https://github.com/Microsoft/vscode)
+            - [Chakra Core](https://github.com/Microsoft/ChakraCore)
+        '''
+    )
+    st.subheader("Supported SCPI / VISA Commands")
+    st.markdown(
+        '''
+            - *IDN?     -> Get Device Identification
+            - *TST?     -> Get Error-Status
+            - Sample:
+                - ~NO        -> Set Number of Samples for average Calculation~
+                - CNT       -> Set Number of Measurements
+                - TIME      -> Set Time between Measurements
+                - ~NO?       -> Get Number of Samples for average Calculation~
+                - CNT?      -> Get Number of Measurements
+                - TIME?     -> Get Time between Measurements
+                - GETTemp#? -> Get Temperature measurement from selected Sensor
+                - GETRaw#?  -> Get Raw measurement Data from selected Sensor
+            - SYSTem:
+                - GET?      -> Get Device Identification
+                - AdcBits?  -> Get Number of bits used for ADC
+                - RefVolt?  -> Get Reference Voltage for Temperature Calculation
+                - ~SensNo?   -> Get Number of used Temperature Sensors~
+                - NomRes?   -> Get Nominal Resistance of NTCs
+                - NomTemp?  -> Get Nominal Temperature corresponding to NomRes
+                - BValNtc?  -> Get B Factor of used NTC
+                - KelToCel? -> Get Conversion Factor From Kelvin to Celsius
+
+                - AdcBits   -> Set Number of bits used for ADC
+                - RefVolt   -> Set Reference Voltage for Temperature Calculation
+                - ~SensNo    -> Set Number of used Temperature Sensors~
+                - NomRes    -> Set Nominal Resistance of NTCs
+                - NomTemp   -> Set Nominal Temperature corresponding to NomRes
+                - BValNtc   -> Set B Factor of used NTC
+
+                - LedOn     -> Illuminate LED on Calorimeter Board
+                - LedOff    -> Unilluminate LED on Calorimeter Board
+                
+            ~Crossed~ commands are currently not working.
+        '''
+    )
+    st.subheader("Errors")
+    st.markdown(
+        '''
+            1xxx - GUI Error  
+            1010: "An Error occured! Unable to optain requested Data from Instrument, Please try again."
+            - GUI was unable to optain requested Data from Instrument
+            - Non or wrong Instrument is Connected?
+            - Instrument Error, restart the Instrument
+            
+            1011: "SCPI not working or not started."
+            - GUI was unable to get SCPI Data
+            - Start SCPI
+            - Restart the GUI
+
+            0xxx - Instrument Error  
+            0010: "An Error occured! Unable to send requested Data from selected Sensor, Please try again."
+            - Calorimeter was unable to provide the requested measurement
+            - Wrong Sensor Input selected? -> Higher than max number of Sensors (SYSTem:SensNo?)
+            - Instrument Error, restart the Instrument
+        '''
+    )
+
+
+# --- Run Test ---
+if selected == "Run Test":
+    st.title('Run Test')
+    
+    # - Real Plot -
+    st.session_state.DFdata = pd.DataFrame(
+        {
+            "T_S_I1": [],
+            "T_S_I2": [],
+            "T_S_I3": [],
+            "T_S_I4": [],
+            "T_S_I5": [],
+            "T_S_A1": [],
+            "T_S_A2": [],
+            "T_S_A3": [],
+        },
+    )
+    
+    chart = st.line_chart(st.session_state.DFdata)
+    
+      
+    if st.button("Start Test and record", type="primary", help="Click this Button to start the Test and record all incomming data."):
+        #while st.session_state.x.isOpen() == True:
+            # Read a line from the serial console.
+        #    data = str(st.session_state.x.readline().decode('utf-8')).rstrip()
+        #    if data is not '':
+        #        print(data)
+        
+        st.session_state.timeNow = 0
+        
+        st.session_state.TestRunning = 1
+        
+        
+        st.session_state.SampleCount = int(st.session_state.instr1.query("SAMPle:CNT?"))   
+        
+        with open('SensorData1.csv', 'a', newline='') as sensor_file:
+            sensor_writer = csv.writer(sensor_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            # Write the header.
+            sensor_writer.writerow(["Time", "Sensor I1", "Sensor I2", "Sensor I3", "Sensor I4", "Sensor I5", "Sensor A1", "Sensor A2", "Sensor A3"])
+            
+            SampleTime = int(st.session_state.instr1.query("SAMPle:TIME?"))
+
+            for x in range(st.session_state.SampleCount): 
+                
+                # Read a line from the serial console.
+                # data = str(st.session_state.x.readline().decode('utf-8')).rstrip()      # read data from serial
+                
+                SI1 = st.session_state.instr1.query("SAMPle:GETTemp1?").replace("\r", "")
+                SI2 = st.session_state.instr1.query("SAMPle:GETTemp2?").replace("\r", "")
+                SI3 = st.session_state.instr1.query("SAMPle:GETTemp3?").replace("\r", "")
+                SI4 = st.session_state.instr1.query("SAMPle:GETTemp4?").replace("\r", "")
+                SI5 = st.session_state.instr1.query("SAMPle:GETTemp5?").replace("\r", "")
+                
+                SA1 = st.session_state.instr1.query("SAMPle:GETTemp6?").replace("\r", "")
+                SA2 = st.session_state.instr1.query("SAMPle:GETTemp7?").replace("\r", "")
+                SA3 = st.session_state.instr1.query("SAMPle:GETTemp8?").replace("\r", "")
+                
+                
+                data = [SI1, SI2, SI3, SI4, SI5, SA1, SA2, SA3]             # für CSV
+                
+                sensor_writer.writerow([st.session_state.timeNow, SI1, SI2, SI3, SI4, SI5, SA1, SA2, SA3]) # für csv
+                
+                st.session_state.timeNow = st.session_state.timeNow + 1
+                #print(st.session_state.timeNow)
+                
+                #print(data)
+                #print(st.session_state.SampleCount)
+                
+                if len(data) > 4:
+                    #os.system('cls')
+
+                    #data: str
+                    
+                    
+                    sensor_values = dict()  # objekt vorbereiten
+                    i = 1
+                                        
+                    for value in data: 
+                        #print(value)
+                        try:
+                            #sensor_values.update("T_S_I{:d}".format(i), float(value))
+                            sensor_values["T_S_I{:d}".format(i)] =  [float(value)]
+                            i += 1
+                        except:
+                            print("Error: value can not be converter to float")
+                
+                    new_data = pd.DataFrame(sensor_values)
+                    
+                    new_row = new_data.rename(columns={'T_S_I6': 'T_S_A1', 'T_S_I7': 'T_S_A2', 'T_S_I8': 'T_S_A3'}) # umbenennen von columns
+
+                    #print("data: ")
+                    #print(new_row)
+                    chart.add_rows(new_row)
+                    
+                    
+                #if st.button("Stop current test", key=978456, type="secondary", help="Click this Button to Stop the Test."):
+                #    st.session_state.TestRunning = 0
+                
+                
+                time.sleep(SampleTime)
+                
+            st.write("Test Done!")
+        
+    #if st.button("stop serial record", type="primary", help="Click this Button to Stop the serial record."):
+    #    quitSerial()
+    
+# --- Test Setup ---
+# -- Device Setup --
+if selected == "Test Setup":
+    st.title('Device Setup')
+    st.write("---")
+    st.subheader("Instrument Setup")
+    try:
+        if st.button("Start SCPI via pyVisa", type="primary"):
+            st.session_state.rm = pyvisa.ResourceManager('C:/WINDOWS/system32/visa64.dll') #'@ivi')
+            st.session_state.visaResources = st.session_state.rm.list_resources()
+            
+        selectedDevice = st.selectbox(
+            'select a Device:',
+            st.session_state.visaResources,
+            placeholder="Choose Device",
+            index=0
+        )
+        
+        if st.button("Open Selected Device", type="primary"):
+            st.session_state.instr1 = st.session_state.rm.open_resource(selectedDevice, read_termination='\n', write_termination = '\n')
+            
+            st.session_state.DeviceIDN = st.session_state.instr1.query("*IDN?")
+            
+        st.write("Connected to Instrument: ",  st.session_state.DeviceIDN)
+        # st.write("Instrument Error Status: ", st.session_state.instr1.query("*TST?"))
+            
+        if st.button("Close Selected Device", type="secondary"):
+            st.session_state.instr1.close()
+            
+        if st.button("Quit SCPI Communication", type="secondary"):
+            st.session_state.rm.close()
+            del st.session_state.rm
+    except:
+        st.write("Error 1011: SCPI not working or not started.")
+        
+    
+
+    st.write("---")
+    st.subheader("Set Instrument Parameters")
+    try:
+        # SampleNo = st.session_state.instr1.query("SAMPle:NUM?")
+        SampleCnt = st.session_state.instr1.query("SAMPle:CNT?")
+        SampleTime = st.session_state.instr1.query("SAMPle:TIME?")
+        
+        # NewSampleNo = st.number_input("Set Sample Count for average Calculation (1-20)", value=10, placeholder="Type a number...")
+        # st.write("Sample Number is currently set to:  \n",  SampleNo)
+        
+        NewSampleTime = st.number_input("Set amount of time between Samples (1-60s)", value=5, placeholder="Type a number...")
+        st.write("Sample Time is currently set to:  \n",  SampleTime)
+        
+        st.session_state.NewSampleCnt = st.number_input("Set Number of Measurements (0-1000)", value=0, placeholder="Type a number...")
+        st.write("MeasurementCount is currently set to:  \n",  SampleCnt)
+        
+        if st.button("Sync new Parameters", type="primary"):        
+            # st.session_state.instr1.write("SAMPle:NO " + str(NewSampleNo))
+            st.session_state.instr1.write("SAMPle:CNT " + str(st.session_state.NewSampleCnt))
+            st.session_state.instr1.write("SAMPle:TIME " + str(NewSampleTime))
+    except:
+        st.write("An Error occured!  \nUnable to optain requested Data from Instrument  \nPlease try again.")
+        st.write("Error Code: 1010")
+        
+    st.write("---")
+    st.subheader("Debug Menue")
+    
+    if st.toggle("Show Debug Menue"):
+        DebugDataSend = st.text_input("Type Custome SCPI Command", value="", placeholder="Type a command...")
+        try:
+            st.session_state.instr1.write(DebugDataSend)
+            DebugDataRead = st.session_state.instr1.read()
+            st.write("Debug Data:  \n", DebugDataRead)
+        except:
+            st.write("Send a Command first...")
