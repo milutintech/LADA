@@ -102,6 +102,21 @@ button {
 # Inject custom CSS with the above styles
 st.markdown(vertical_center_css, unsafe_allow_html=True)
 
+# Path to your icon image (this should be a local path or URL)
+icon_path = 'Images/Lada_symbol.png'
+
+# Create columns for the layout: one for the icon, one for the button
+col1, col2 = st.columns([1, 8])
+
+# Display the icon in the first column using Markdown
+with col1:
+    st.markdown(f"![icon]({icon_path})", unsafe_allow_html=True)
+
+# Place a button in the second column
+with col2:
+    if st.button('Your Button Text'):
+        st.write('Button clicked!')
+
 # Use a column layout with a flex container to center content vertically
 col0, col1, col2, col3, col4 = st.columns([1, 1,3,1, 1])
 
