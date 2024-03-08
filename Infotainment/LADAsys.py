@@ -34,7 +34,25 @@ st.set_page_config(page_title="LADAsys", page_icon=":blue_car:", layout="wide")
 
 
 # --- Functions ---
+def get_base64(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
 
+
+def set_background(png_file):
+    bin_str = get_base64(png_file)
+    page_bg_img = '''
+    <style>
+    .stApp {
+    background-image: url("data:image/png;base64,%s");
+    background-size: cover;
+    }
+    </style>
+    ''' % bin_str
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+
+set_background('Images/Background.png')
 
 # --- Custom CSS ---
 # Custom CSS to center content vertically in Streamlit
@@ -48,7 +66,7 @@ div.stButton > button:first-child {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 500px;
+    height: 300px;
 }
 </style>
 """
@@ -56,26 +74,17 @@ div.stButton > button:first-child {
 
 
 
-background_image = """
-<style>
-[data-testid="stAppViewContainer"] > .main {
-    background-image: url("https://img.freepik.com/free-photo/abstract-colorful-splash-3d-background-generative-ai-background_60438-2503.jpg?w=2000&t=st=1709903923~exp=1709904523~hmac=da587f2827b648b31e9ab3bc19717c177231c0571a41009fe768867026442876");
-    background-size: 100vw 100vh;  # This sets the size to cover 100% of the viewport width and height
-    background-position: center;  
-    background-repeat: no-repeat;
-}
-</style>
-"""
 
-st.markdown(background_image, unsafe_allow_html=True)
 
 st.markdown(
     """
 <style>
 button {
     height: auto;
-    padding-top: 100px !important;
-    padding-bottom: 100px !important;
+    padding-top: 150px !important;
+    padding-bottom: 150px !important;
+    padding-left: 50px !important;
+    padding-right: 50px !important;
 }
 </style>
 """,
@@ -94,10 +103,23 @@ button {
 st.markdown(vertical_center_css, unsafe_allow_html=True)
 
 # Use a column layout with a flex container to center content vertically
-col1, col2, col3 = st.columns([1,4,1])
+col0, col1, col2, col3, col4 = st.columns([1, 1,3,1, 1])
+
+
+with col1:
+    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
+    # Place your content here; for demonstration, a button is used
+    st.button("CAR")
+    #st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
     # Place your content here; for demonstration, a button is used
-    st.button("Click Me!")
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.button("Charging")
+    #st.markdown('</div>', unsafe_allow_html=True)
+
+with col3:
+    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
+    # Place your content here; for demonstration, a button is used
+    st.button("Debug")
+    #st.markdown('</div>', unsafe_allow_html=True)
