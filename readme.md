@@ -107,10 +107,13 @@ discharge
 
 ## Pinout Input
 
-> - P1 NLG_HW_Wakeup
-> - P2 IGNITION
-> - P3 UNLCKCON
-> - P4 
+> - P1/9 NLG_HW_Wakeup
+> - P2/22 IGNITION
+> - P3/10 UNLCKCON
+> - P4/23
+> - A0/7 Gaspedal
+> - CAN/25 CAN_H
+> - CAN/13 CAN_L 
 
 ## Protocoll CAN remote relay
 # ID: 0x999
