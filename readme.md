@@ -107,7 +107,7 @@ discharge
 
 ## Pinout Input
 
-> - P1/9 NLG_HW_Wakeup
+> - P1/9 RELAY U2
 > - P2/22 IGNITION
 > - P3/10 UNLCKCON
 > - P4/23
