@@ -113,7 +113,9 @@ discharge
 > - P4/23
 > - A0/7 Gaspedal
 > - CAN/25 CAN_H
-> - CAN/13 CAN_L 
+> - CAN/13 CAN_L
+<img width="1178" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/243d2aa3-9d14-4fc7-80ee-63a8fcbc4fa6">
+
 
 ## Protocoll CAN remote relay
 # ID: 0x999
