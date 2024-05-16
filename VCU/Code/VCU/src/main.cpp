@@ -18,6 +18,8 @@
 void CAN_COM (void * pvParameters);
 void BACKBONE (void * pvParameters);
 
+SPIClass *customSPI = NULL;
+
 //Task Handles
 TaskHandle_t Task1;
 TaskHandle_t Task2;
@@ -53,7 +55,7 @@ int16_t calculateTorque5S(bool reverseSig); //Calculate Torque from Pedal Positi
 #define MISO 5
 //CAN
 const int SPI_CS_PIN = 36;
-const int CAN_INT_PIN = 11;
+const int CAN_INT_PIN = 45; //AKKA BLANK
 
 #define MAX_DATA_SIZE 8
 
@@ -151,7 +153,6 @@ int16_t sampleSetPedal[5] = {0,0,0,0,0};
 bool reversSig = 1; //reverse from direction selector
 
 mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
-
 uint8_t VehicleMode = Standby;  // Set default vehicle Mode to standby
 uint8_t WakeupReason = 0;       // Set default Wakeup reason to 0
 //*********************************************************************//
@@ -409,7 +410,7 @@ void setup() {
   pinMode(15, OUTPUT);
   digitalWrite(15, HIGH);
   pinMode(18, INPUT);
-  SPI.begin(SCK, MISO, MOSI, SPI_CS_PIN);
+  
   
   
 
@@ -439,14 +440,17 @@ void setup() {
 
 //Can Com on Core 0
 void CAN_COM( void * pvParameters ){
-  
-  
+customSPI = new SPIClass(HSPI);
+customSPI -> begin(SCK, MISO, MOSI, SPI_CS_PIN);
+CAN.setSPI(customSPI);
+//SPI.begin(SCK, MISO, MOSI, SPI_CS_PIN);
+
 while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrate = 500k
         Serial.println("CAN BUS Shield init fail");
         delay(100);
     }
   CanError = false;
-  
+
  //CAN.begin(CAN_500KBPS);
   Wire.begin(1,2);
   //CAN.begin(CAN_500KBPS);
@@ -541,6 +545,7 @@ void BACKBONE( void * pvParameters ){
     case NLG_HW_Wakeup:
       //NLG demands wakeup because type 2 charger detected
       VehicleMode = Charging;
+      digitalWrite(RELAIS4, HIGH);
     break;
     case IGNITION:
       //KL15 detected vehicle is in run mode
@@ -678,6 +683,7 @@ void chargeManage(){
   }
   else {
     armBattery(0);
+    digitalWrite(RELAIS4, LOW);
 
     }
   

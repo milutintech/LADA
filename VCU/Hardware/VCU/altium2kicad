@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+if [ -z "$(ls *.[Pp][Cc][Bb][Dd][Oo][Cc])" -a -z "$(ls *.[Ss][Cc][Hh][Dd][Oo][Cc])" ]; then
+	echo "No altium pcb or schematic files in current working directory!" >&2
+	exit 1
+fi
+
+# Get real directory of this script
+MYPATH=$(dirname $(realpath $0))
+export PERL5LIB=$PERL5LIB:$MYPATH/../lib/perl
+# Ensure access to other scripts
+export PATH=$MYPATH:$PATH
+
+a2k-unpack
+a2k-convertschema
+a2k-convertpcb
+
