@@ -103,7 +103,7 @@ discharge
 > - Relais 4 NLG KL15
 > - Relais 5 Rückfahrlicht
 > - Relais 6 DMC KL15
-> - Relais 4 BSC KL15
+> - Relais 7 BSC KL15
 
 ## Pinout Input
 
