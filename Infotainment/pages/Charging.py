@@ -27,6 +27,7 @@ MBlue   = "#005ca8"
 
 # --- Constants ---
 
+
 st.set_page_config(page_title="LADAsys", page_icon=":blue_car:", layout="wide")
 
 # --- Variables ---
@@ -107,20 +108,21 @@ col0, col1, col2, col3, col4 = st.columns([1, 1,3,1, 1])
 with col1:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
     # Place your content here; for demonstration, a button is used
-    if st.button("CAR"):
-        st.switch_page("pages/CAR.py")
+    if st.button("Home"):
+        st.switch_page('LADAsys.py')
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
     # Place your content here; for demonstration, a button is used
-    if st.button("Charging"):
-        st.switch_page("pages/Charging.py")
+    st.button("-1-")
+
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col3:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
     # Place your content here; for demonstration, a button is used
-    if st.button("Debug"):
-        st.switch_page("pages/Debug.py")
+    st.button("-2-")
+
     st.markdown('</div>', unsafe_allow_html=True)
+
