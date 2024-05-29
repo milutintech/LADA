@@ -68,7 +68,7 @@ div.stButton > button:first-child {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 25vh;
+    height: 15vh;
 }
 </style>
 """
@@ -99,7 +99,7 @@ st.markdown(vertical_center_css, unsafe_allow_html=True)
 
 
 # --- Title ---
-
+st.title("CAR")
 
 
 # Use a column layout with a flex container to center content vertically
@@ -111,18 +111,3 @@ with col1:
     if st.button("Home"):
         st.switch_page('LADAsys.py')
     st.markdown('</div>', unsafe_allow_html=True)
-
-with col2:
-    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
-    # Place your content here; for demonstration, a button is used
-    st.button("-1-")
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-with col3:
-    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
-    # Place your content here; for demonstration, a button is used
-    st.button("-2-")
-
-    st.markdown('</div>', unsafe_allow_html=True)
-

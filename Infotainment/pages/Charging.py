@@ -68,14 +68,10 @@ div.stButton > button:first-child {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 25vh;
+    height: 15vh;
 }
 </style>
 """
-#height: 300px;
-
-
-
 
 st.markdown(
     """
@@ -94,16 +90,29 @@ button {
 
 st.markdown(vertical_center_css, unsafe_allow_html=True)
 
+st.markdown(
+    """
+    <style>
+        .stProgress > div > div > div > div {
+            background-color: green;
+        }
+    </style>""",
+    unsafe_allow_html=True,
+)
+
+
+
+
 # --- Main ---
 
 
 
 # --- Title ---
-
+st.title("Charging")
 
 
 # Use a column layout with a flex container to center content vertically
-col0, col1, col2, col3, col4 = st.columns([1, 1,3,1, 1])
+col0, col1, col2, col3, col4 = st.columns([1, 1,1,3, 1])
 
 with col1:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
@@ -112,17 +121,37 @@ with col1:
         st.switch_page('LADAsys.py')
     st.markdown('</div>', unsafe_allow_html=True)
 
-with col2:
-    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
-    # Place your content here; for demonstration, a button is used
-    st.button("-1-")
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
 with col3:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
-    # Place your content here; for demonstration, a button is used
-    st.button("-2-")
+    custom_css = """
+        <style>
+        .my-bg {
+            background-color: #f0f2f6;
+        }
+        </style>
+        """
+    BatNow      = 42
+    StromNow    = 20
+    TempNow     = 60
+    VoltNow     = 400
+
+    latest_iteration = st.empty()
+    latest_iteration.text(f'Ladezustand: {BatNow}%')
+    st.progress(BatNow)
+
+    st.text(f"Akteuller Ladestrom: {StromNow}A")
+    st.text(f"Akteulle Temperatur: {TempNow}°C")
+    st.text(f"Aktuelle Spannung:   {VoltNow}V")
+
+    BatMax = st.slider(
+        "Maximaler Ladezustand: [%]",
+        50.0, 100.0, (80.0))
+    #st.write("Values:", BatMax)
+
+    SromMax = st.slider(
+        "Maximaler Ladestrom: [A]",
+        0.0, 32.0, (20.0))
+    #st.write("Values:", SromMax)
 
     st.markdown('</div>', unsafe_allow_html=True)
 

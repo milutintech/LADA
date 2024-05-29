@@ -68,7 +68,7 @@ div.stButton > button:first-child {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 25vh;
+    height: 15vh;
 }
 </style>
 """
@@ -99,11 +99,11 @@ st.markdown(vertical_center_css, unsafe_allow_html=True)
 
 
 # --- Title ---
-
+st.title("Debug")
 
 
 # Use a column layout with a flex container to center content vertically
-col0, col1, col2, col3, col4 = st.columns([1, 1,3,1, 1])
+col0, col1, col2, col3 = st.columns([1, 1, 4, 1])
 
 with col1:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
@@ -114,15 +114,6 @@ with col1:
 
 with col2:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
-    # Place your content here; for demonstration, a button is used
-    st.button("-1-")
-
+    if st.button("test error"):
+        st.error('This is an error', icon="🚨")
     st.markdown('</div>', unsafe_allow_html=True)
-
-with col3:
-    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
-    # Place your content here; for demonstration, a button is used
-    st.button("-2-")
-
-    st.markdown('</div>', unsafe_allow_html=True)
-

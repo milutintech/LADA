@@ -67,7 +67,7 @@ div.stButton > button:first-child {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 25vh;
+    height: 15vh;
 }
 </style>
 """
@@ -98,7 +98,7 @@ st.markdown(vertical_center_css, unsafe_allow_html=True)
 
 
 # --- Title ---
-
+st.title("HOME")
 
 
 # Use a column layout with a flex container to center content vertically
