@@ -115,10 +115,10 @@ with col1:
 with col3:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
     # Place your content here; for demonstration, a button is used
-    if st.toggle("Activate High Tork (800Nm)"):
-        st.write("High Tork activated! (800Nm)")
+    if st.toggle("Activate High Tork (1100Nm)"):
+        st.write("High Tork activated! (1100Nm)")
     else:
-        st.write("Low Tork Mode! (600Nm)")
+        st.write("Low Tork Mode! (800Nm)")
 
     if st.toggle("Activate Offroad Mode"):
         st.write("Offroad Mode activated!")
@@ -128,6 +128,8 @@ with col3:
     TorkNow = 420
     latest_iteration = st.empty()
     latest_iteration.text(f'Current Tork: {TorkNow}Nm')
-
-    
     st.markdown('</div>', unsafe_allow_html=True)
+
+    st.button("Valet Mode")
+    
+    
