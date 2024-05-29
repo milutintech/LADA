@@ -35,7 +35,7 @@ void sendDMC();               //Send DMC CAN Messages
 void reciveBSC();             //Recive BSC CAN Messages
 void reciveDMC();             //Recive DMC CAN Messages
 void reciveNLG();             //Recive NLG CAN Messages
-
+void reciveBMS();              //Recive BMS CAN Messages
 
 void armColingSys(bool arm);  //Arm Cooling System
 void armBattery(bool arm);    //Arm HV-Battery
@@ -65,8 +65,8 @@ const int CAN_INT_PIN = 45; //AKKA BLANK
 #define RELAIS3 13  //Cooling Fan
 #define RELAIS4 14  //Charger KL15
 #define RELAIS5 17  //Reverse Signal
-#define RELAIS6 18  //Not Used
-#define RELAIS7 21  //Not Used
+#define RELAIS6 18  //DMC KL15
+#define RELAIS7 21  //BSC KL15
 #define RELAIS8 33  //Not Used
 
 //set ADC set adress
@@ -150,7 +150,7 @@ bool CanError = false;
 uint8_t sampleSetCounter = 0;
 int16_t sampleSetPedal[5] = {0,0,0,0,0};
 
-bool reversSig = 1; //reverse from direction selector
+bool reversSig = 0; //reverse from direction selector
 
 mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
 uint8_t VehicleMode = Standby;  // Set default vehicle Mode to standby
@@ -160,11 +160,11 @@ uint8_t WakeupReason = 0;       // Set default Wakeup reason to 0
 //BMS
 //*********************************************************************//
 //Should be set by BMS
-int BMS_SOC = 0;
-int BMS_U_BAT = 0;
-int BMS_I_BAT = 0;  
-int BMS_MAX_Discharge = 0;
-int BMS_MAX_Charge = 0;
+uint8_t  BMS_SOC = 0;
+uint16_t BMS_U_BAT = 0;
+int16_t  BMS_I_BAT = 0;  
+uint16_t BMS_MAX_Discharge = 0;
+uint8_t  BMS_MAX_Charge = 0;
 
 
 //*********************************************************************//
@@ -380,7 +380,8 @@ uint8_t  type; // bit0: ext, bit1: rtr
 uint8_t  len;
 
 byte readDataBSC[MAX_DATA_SIZE] = {0}; //Storage for recived data BSC
-byte readDataNLG[MAX_DATA_SIZE] = {0}; //Storage for recived data NLg
+byte readDataNLG[MAX_DATA_SIZE] = {0}; //Storage for recived data NLG
+byte readDataBMS[MAX_DATA_SIZE] = {0}; //Storage for recived data NLG
 unsigned char controllBufferDMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllBuffer2DMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char limitBufferDMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -438,7 +439,10 @@ void setup() {
   delay(100); 
 }
 
-//Can Com on Core 0
+//*********************************************************************//
+//Core Lock 0
+//CAN COM
+//*********************************************************************//
 void CAN_COM( void * pvParameters ){
 customSPI = new SPIClass(HSPI);
 customSPI -> begin(SCK, MISO, MOSI, SPI_CS_PIN);
@@ -460,24 +464,25 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
   setADCpin(0);
   for(;;){
     esp_task_wdt_init(5, true);
-    
+    reciveBMS();
     switch(VehicleMode){
       case Standby:
 
       break;
       case Run:
         //BMS DMC max current
-        //Do Not add anythig here cycle limit is 5ms
         sampleSetPedal[0] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
-        sampleSetPedal[1] = ADS.readADC(GASPEDAL2);  //Read ADC into sampleSet
+        sampleSetPedal[1] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
         sampleSetPedal[2] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
-        sampleSetPedal[3] = ADS.readADC(GASPEDAL2);  //Read ADC into sampleSet
+        sampleSetPedal[3] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
+        /*
         if(readADC(1)>100){
           reversSig = 1;
         }
         else{
           reversSig = 0;
         }
+        */
         if((DMC_SpdAct < 100) && sampleSetPedal[1] < 200){
           DMC_DcCLimMot = 10;
         }
@@ -491,7 +496,17 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
         }
         
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
-        Serial.println( sampleSetPedal[3]);
+        Serial.println(ADS.readADC(GASPEDAL1));
+        Serial.print("SOC");
+        Serial.println(BMS_SOC);
+        Serial.print("U_BAT");
+        Serial.println(BMS_U_BAT);
+        Serial.print("I_BAT");
+        Serial.println(BMS_I_BAT);
+        Serial.print("MAX_Discharge");
+        Serial.println(BMS_MAX_Discharge);
+        Serial.print("MAX_Charge");
+        Serial.println(BMS_MAX_Charge);
         relayControll();
         sendBSC();
         sendDMC();
@@ -520,7 +535,10 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
 
   } 
 }
-//Backbone on Core 1
+//*********************************************************************//
+//Core Lock 1
+//BACK BONE
+//*********************************************************************//
 void BACKBONE( void * pvParameters ){
 
   attachInterrupt(digitalPinToInterrupt(UNLCKCON), unlockCON, RISING);  //Interrupt for connector unlock
@@ -573,6 +591,9 @@ void BACKBONE( void * pvParameters ){
     switch(VehicleMode){
       case Standby:
         //No input detectet from ext sources
+        digitalWrite(RELAIS6, LOW);  //DMC KL15
+        digitalWrite(RELAIS7, LOW);  //BSC KL15
+        digitalWrite(RELAIS4, LOW);  //NLG KL15
         Serial.println("Standby");
         NLG_Charged = 0;
         enableBSC = 0;
@@ -589,12 +610,14 @@ void BACKBONE( void * pvParameters ){
       break;
       
       case Run:
-        Serial.println("Run");
+        //Serial.println("Run");
         NLG_Charged = 0;
         if(!digitalRead(IGNITION)){VehicleMode = Standby;}
 
         armColingSys(1);
         armBattery(1);
+        digitalWrite(RELAIS6, HIGH);  //DMC KL15
+        digitalWrite(RELAIS7, HIGH);  //BSC KL15
 
         if(reversSig){digitalWrite(RELAIS5, HIGH);}
         else{digitalWrite(RELAIS5, LOW);}
@@ -633,7 +656,7 @@ void BACKBONE( void * pvParameters ){
           }
         }
         else{
-        Serial.println("Charging");
+        //Serial.println("Charging");
         digitalWrite(RELAIS4, HIGH);
         armColingSys(1);
         enableBSC = 1;
@@ -696,7 +719,7 @@ void armColingSys(bool arm){
   //switch relais2 on VCU for pump
   //switch relais3 on VCU for FAN
   digitalWrite(RELAIS2, arm);
-  
+  //Serial.println("Cooling armed");
   if(arm  && ((DMC_TempInv > 60)|(DMC_TempMot > 80)|(NLG_TempCoolPlate > 60 ))){
     digitalWrite(RELAIS3, 1);
   }
@@ -730,13 +753,39 @@ void armBattery(bool arm){
   }
 }
 
+void reciveBMS(){
+      Serial.println("blabal");
 
+  if (CAN_MSGAVAIL != CAN.checkReceive()) {
+        return;
+    }
+
+
+    // read data, len: data length, buf: data buf
+    CAN.readMsgBuf(&len, readDataBMS);
+    Serial.println("reading");
+    id = CAN.getCanId();
+    type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
+    
+    if(id == 0x555){
+      BMS_SOC = readDataBMS[7];
+      BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
+      BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
+      BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
+      BMS_MAX_Charge = readDataBMS[0];
+    } 
+    
+}
 void reciveBSC(){
  //Reciveing Can
     // check if data coming
-    if (CAN_MSGAVAIL == CAN.checkReceive()) {
-    
-    
+    if (CAN_MSGAVAIL != CAN.checkReceive()) {
+        return;
+    }
+
+
+        Serial.println("reading");
+
     // read data, len: data length, buf: data buf
     CAN.readMsgBuf(&len, readDataBSC);
 
@@ -765,7 +814,7 @@ void reciveBSC(){
       BSC6_MODE = readDataBSC[7] >> 4;
 
     } 
-    }
+    
 }
 void sendBSC(){
   //Sending Can
@@ -836,7 +885,11 @@ void sendDMC(){
   CAN.sendMsgBuf(DMCLIM, 0, 8, limitBufferDMC);
 }
 void reciveDMC(){
-  if (CAN_MSGAVAIL == CAN.checkReceive()) {
+  if (CAN_MSGAVAIL != CAN.checkReceive()) {
+        return;
+    }
+
+
     CAN.readMsgBuf(&len, readDataBSC);
 
     id = CAN.getCanId();
@@ -889,7 +942,7 @@ void reciveDMC(){
       break;
     }
   }
-}
+
 
 void sendNLG(){
     NLG_DcHvVoltLimMax_Scale = NLG_DcHvVoltLimMax * 10;
@@ -983,8 +1036,8 @@ int16_t calculateTorque5S(bool reverseSig){
     SampeldPotiValue = SampeldPotiValue + sampleSetPedal[i];
   }
   SampeldPotiValue = SampeldPotiValue / 4;
-  DMCpre = pow(SampeldPotiValue * 0.9857,1.2654);
-  DMC_TorqueCalc = map(DMCpre, 0, 36574, 0, 32767);
+  DMC_TorqueCalc = SampeldPotiValue;
+  
   if(reverseSig){
     DMC_TorqueCalc = 0 - DMC_TorqueCalc;
   }
