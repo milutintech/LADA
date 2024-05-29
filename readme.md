@@ -103,7 +103,7 @@ discharge
 > - Relais 4 NLG KL15
 > - Relais 5 Rückfahrlicht
 > - Relais 6 DMC KL15
-> - Relais 4 BSC KL15
+> - Relais 7 BSC KL15
 
 ## Pinout Input
 
@@ -116,31 +116,11 @@ discharge
 > - CAN/13 CAN_L
 <img width="1178" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/243d2aa3-9d14-4fc7-80ee-63a8fcbc4fa6">
 
-
-## Protocoll CAN remote relay
-# ID: 0x999
-# FirstByte = (0,0,Relay1,Relay2,Relay3,Relay4,Relay5,Relay6)
-## Relay 1 io42
-
-## Relay 2 io41
-
-## Relay 3 io40
-
-## Relay 4 io39
-
-## Relay 5 io38
-
-## Relay 6 io37
-
-## CS      io7
-
-## RST     io4
-
-## MOSI    io5
-
-## MISO    io4
-
-## CSK     io6
-
-## INIT    io17
-
+## BMS Messages
+ID 0x555 MSB 00 00 00 00 00 00 00 00 LSB 
+> - BMS_SOC 0%-100% byte 0
+> - BMS_U_BAT 0V-450V byte 1,2
+> - BMS_I_BAT 0A-650A byte 3,4
+> - BMS_MAX_Discharge 0A-650A 5,6
+> - BMS_MAX_Charge 0A-250A 7
+ 
