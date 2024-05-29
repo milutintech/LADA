@@ -103,11 +103,31 @@ st.title("CAR")
 
 
 # Use a column layout with a flex container to center content vertically
-col0, col1, col2, col3, col4 = st.columns([1, 1,3,1, 1])
+col0, col1, col2, col3, col4 = st.columns([1, 1,1,3, 1])
 
 with col1:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
     # Place your content here; for demonstration, a button is used
     if st.button("Home"):
         st.switch_page('LADAsys.py')
+    st.markdown('</div>', unsafe_allow_html=True)
+
+with col3:
+    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
+    # Place your content here; for demonstration, a button is used
+    if st.toggle("Activate High Tork (800Nm)"):
+        st.write("High Tork activated! (800Nm)")
+    else:
+        st.write("Low Tork Mode! (600Nm)")
+
+    if st.toggle("Activate Offroad Mode"):
+        st.write("Offroad Mode activated!")
+    else:
+        st.write("Onroad Mode!")
+
+    TorkNow = 420
+    latest_iteration = st.empty()
+    latest_iteration.text(f'Current Tork: {TorkNow}Nm')
+
+    
     st.markdown('</div>', unsafe_allow_html=True)
