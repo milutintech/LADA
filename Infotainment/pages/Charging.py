@@ -112,7 +112,7 @@ st.title("Charging")
 
 
 # Use a column layout with a flex container to center content vertically
-col0, col1, col2, col3, col4 = st.columns([1, 1,1,3, 1])
+col0, col1, col2, col3, col4 = st.columns([1, 1,1,3.5, 1])
 
 with col1:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
@@ -123,13 +123,6 @@ with col1:
 
 with col3:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
-    custom_css = """
-        <style>
-        .my-bg {
-            background-color: #f0f2f6;
-        }
-        </style>
-        """
     BatNow      = 42
     StromNow    = 20
     TempNow     = 60

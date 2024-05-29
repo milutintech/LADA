@@ -103,7 +103,7 @@ st.title("Debug")
 
 
 # Use a column layout with a flex container to center content vertically
-col0, col1, col2, col3 = st.columns([1, 1, 4, 1])
+col0, col1, col2, col3, col4, col5 = st.columns([1, 2,1, 4,1, 1])
 
 with col1:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
@@ -112,7 +112,7 @@ with col1:
         st.switch_page('LADAsys.py')
     st.markdown('</div>', unsafe_allow_html=True)
 
-with col2:
+with col3:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
     if st.button("test error"):
         st.error('This is an error', icon="🚨")

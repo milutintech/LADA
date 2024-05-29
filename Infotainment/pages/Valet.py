@@ -27,6 +27,7 @@ MBlue   = "#005ca8"
 
 # --- Constants ---
 
+
 st.set_page_config(page_title="LADAsys", page_icon=":blue_car:", layout="wide")
 
 # --- Variables ---
@@ -98,36 +99,41 @@ st.markdown(vertical_center_css, unsafe_allow_html=True)
 
 
 # --- Title ---
-st.title("HOME")
+st.title("Valet Mode")
 
+st.markdown(
+    """
+    <style>
+        .stProgress > div > div > div > div {
+            background-color: green;
+        }
+    </style>""",
+    unsafe_allow_html=True,
+)
 
 # Use a column layout with a flex container to center content vertically
-col0, col1, col2, col3, col4, col5 = st.columns([1, 2,2, 2,2, 1])
+col0, col1, col2, col3, col4 = st.columns([1, 5, 1, 2, 1])
 
 with col1:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
-    # Place your content here; for demonstration, a button is used
-    if st.button("CAR"):
-        st.switch_page("pages/CAR.py")
-    st.markdown('</div>', unsafe_allow_html=True)
+    BatNow      = 42
+    StromNow    = 20
+    TempNow     = 60
+    VoltNow     = 400
 
-with col2:
-    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
-    # Place your content here; for demonstration, a button is used
-    if st.button("Charging"):
-        st.switch_page("pages/Charging.py")
+    latest_iteration = st.empty()
+    latest_iteration.text(f'Ladezustand: {BatNow}%')
+    st.progress(BatNow)
+
+    st.text(f"Akteuller Ladestrom: {StromNow}A")
+    st.text(f"Akteulle Temperatur: {TempNow}°C")
+    st.text(f"Aktuelle Spannung:   {VoltNow}V")
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col3:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
     # Place your content here; for demonstration, a button is used
-    if st.button("Debug"):
-        st.switch_page("pages/Debug.py")
+    if st.button("Exit Valet Mode"):
+        st.switch_page('LADAsys.py')
     st.markdown('</div>', unsafe_allow_html=True)
 
-with col4:
-    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
-    # Place your content here; for demonstration, a button is used
-    if st.button("Valet Mode"):
-        st.switch_page("pages/Valet.py")
-    st.markdown('</div>', unsafe_allow_html=True)
