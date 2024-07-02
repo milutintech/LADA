@@ -117,10 +117,25 @@ discharge
 <img width="1178" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/243d2aa3-9d14-4fc7-80ee-63a8fcbc4fa6">
 
 ## BMS Messages
+Source: VCU
 ID 0x555 MSB 00 00 00 00 00 00 00 00 LSB 
 > - BMS_SOC 0%-100% byte 0
 > - BMS_U_BAT 0V-450V byte 1,2
 > - BMS_I_BAT 0A-650A byte 3,4
 > - BMS_MAX_Discharge 0A-650A 5,6
 > - BMS_MAX_Charge 0A-250A 7
- 
+
+## INFO Messages
+Source: VCU
+ID 0x554 MSB 00 00 00 00 00 00 00 00 LSB 
+> - BMS_SOC 0%-100% byte 0
+> - BMS_U_BAT 0V-450V byte 1,2
+> - BMS_I_BAT 0A-650A byte 3,4
+> - STATE 0-5 byte 5
+
+Source: INFO
+ID 0x553 MSB 00 00 00 00 00 00 00 00 LSB 
+> - TRQ 0Nm-1100Nm byte 0,1
+> - NLG_AC_CURR 0A-32A byte 2
+> - MAX_CHG_SOC 0%-100% byte 3
+> - OFFROAD_MODE 0-1 byte 4
