@@ -35,8 +35,8 @@ void sendDMC();               //Send DMC CAN Messages
 void reciveBSC();             //Recive BSC CAN Messages
 void reciveDMC();             //Recive DMC CAN Messages
 void reciveNLG();             //Recive NLG CAN Messages
-void reciveBMS();              //Recive BMS CAN Messages
-
+void reciveBMS();             //Recive BMS CAN Messages
+void reciveINFO();            //Data from DAU(LUCA)
 void armColingSys(bool arm);  //Arm Cooling System
 void armBattery(bool arm);    //Arm HV-Battery
 
@@ -753,6 +753,28 @@ void armBattery(bool arm){
   }
 }
 
+void reciveINFO(){
+  Serial.println("NotDone");
+  if (CAN_MSGAVAIL != CAN.checkReceive()) {
+        return;
+    }
+
+
+    // read data, len: data length, buf: data buf
+    CAN.readMsgBuf(&len, readDataBMS);
+    Serial.println("reading");
+    id = CAN.getCanId();
+    type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
+    
+    if(id == 0x553){
+      BMS_SOC = readDataBMS[7];
+      BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
+      BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
+      BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
+      BMS_MAX_Charge = readDataBMS[0];
+    } 
+    
+}
 void reciveBMS(){
       Serial.println("blabal");
 
@@ -782,10 +804,6 @@ void reciveBSC(){
     if (CAN_MSGAVAIL != CAN.checkReceive()) {
         return;
     }
-
-
-        Serial.println("reading");
-
     // read data, len: data length, buf: data buf
     CAN.readMsgBuf(&len, readDataBSC);
 
