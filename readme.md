@@ -135,7 +135,7 @@ ID 0x554 MSB 00 00 00 00 00 00 00 00 LSB
 
 Source: INFO
 ID 0x553 MSB 00 00 00 00 00 00 00 00 LSB 
-> - TRQ 0Nm-1100Nm byte 0,1
-> - NLG_AC_CURR 0A-32A byte 2
+> - DMC_TrqRq 0Nm-1100Nm byte 0,1
+> - NLG_AcCurrLimMax 0A-32A byte 2
 > - MAX_CHG_SOC 0%-100% byte 3
 > - OFFROAD_MODE 0-1 byte 4
