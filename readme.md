@@ -117,7 +117,7 @@ discharge
 <img width="1178" alt="image" src="https://github.com/milutintech/LADA/assets/102026699/243d2aa3-9d14-4fc7-80ee-63a8fcbc4fa6">
 
 ## BMS Messages
-Source: VCU
+Source: BMS
 ID 0x555 MSB 00 00 00 00 00 00 00 00 LSB 
 > - BMS_SOC 0%-100% byte 0
 > - BMS_U_BAT 0V-450V byte 1,2
