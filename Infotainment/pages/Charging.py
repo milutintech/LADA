@@ -76,13 +76,20 @@ div.stButton > button:first-child {
 st.markdown(
     """
 <style>
-button {
-    height: auto;
-    padding-top: 200px !important;
-    padding-bottom: 200px !important;
-    padding-left: 50px !important;
-    padding-right: 50px !important;
-}
+    button {
+        height: auto;
+        padding-top: 200px !important;
+        padding-bottom: 200px !important;
+        padding-left: 50px !important;
+        padding-right: 50px !important;
+    }
+    .reportview-container {
+            margin-top: -2em;
+        }
+        #MainMenu {visibility: hidden;}
+        .stDeployButton {display:none;}
+        footer {visibility: hidden;}
+        #stDecoration {display:none;}
 </style>
 """,
     unsafe_allow_html=True,

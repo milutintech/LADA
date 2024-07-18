@@ -9,6 +9,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import base64
+import time
 
 # --- Colors ---
 Grey100 = "#F5F5F5"
@@ -32,7 +33,7 @@ st.set_page_config(page_title="LADAsys", page_icon=":blue_car:", layout="wide")
 # --- Variables ---
 
 
-# --- Functions ---
+# --- Functions --$
 def get_base64(bin_file):
     with open(bin_file, 'rb') as f:
         data = f.read()
@@ -71,25 +72,29 @@ div.stButton > button:first-child {
 }
 </style>
 """
-#height: 300px;
-
-
-
 
 st.markdown(
     """
 <style>
-button {
-    height: auto;
-    padding-top: 200px !important;
-    padding-bottom: 200px !important;
-    padding-left: 50px !important;
-    padding-right: 50px !important;
-}
+    button {
+        height: auto;
+        padding-top: 200px !important;
+        padding-bottom: 200px !important;
+        padding-left: 50px !important;
+        padding-right: 50px !important;
+    }
+    .reportview-container {
+            margin-top: -2em;
+        }
+        #MainMenu {visibility: hidden;}
+        .stDeployButton {display:none;}
+        footer {visibility: hidden;}
+        #stDecoration {display:none;}
 </style>
 """,
     unsafe_allow_html=True,
 )
+
 
 st.markdown(vertical_center_css, unsafe_allow_html=True)
 
@@ -131,3 +136,6 @@ with col4:
     if st.button("Valet Mode"):
         st.switch_page("pages/Valet.py")
     st.markdown('</div>', unsafe_allow_html=True)
+
+#time.sleep(1)
+#st.rerun()
