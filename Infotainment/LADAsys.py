@@ -10,6 +10,8 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import base64
 import time
+from Packages.LADA_Infotainment_CAN.LADA_Infotainment_CAN import CANCommunication as can
+from Packages.LADA_Infotainment_CARD.LADA_Infotainment_CARD import CarControlRFID as rfid
 
 # --- Colors ---
 Grey100 = "#F5F5F5"
