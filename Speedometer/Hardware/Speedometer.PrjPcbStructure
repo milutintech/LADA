@@ -1,1 +1,2 @@
-Record=TopLevelDocument|FileName=Overview.SchDoc|SheetNumber=1
+Record=TopLevelDocument|FileName=00_Overview.SchDoc|SheetNumber=1
+Record=SheetSymbol|SourceDocument=00_Overview.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=10_Speed.SchDoc|SheetNumber=2|SymbolType=Normal|RawFileName=10_Speed.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
