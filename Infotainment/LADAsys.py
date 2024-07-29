@@ -1,0 +1,168 @@
+# --- Sources ---
+# https://streamlit-emoji-shortcodes-streamlit-app-gwckff.streamlit.app/
+
+# --- Setup ---
+# pip install Streamlit
+# pip install streamlit-option-menu
+
+# --- Libs ---
+import streamlit as st
+from streamlit_option_menu import option_menu
+import base64
+import time
+#from Packages.LADA_Infotainment_CAN.LADA_Infotainment_CAN import CANCommunication as can
+#from Packages.LADA_Infotainment_CARD.LADA_Infotainment_CARD import CarControlRFID as rfid
+
+# --- Colors ---
+Grey100 = "#F5F5F5"
+Grey200 = "#EEEEEE"
+Grey300 = "#E0E0E0"
+Grey400 = "#BDBDBD"
+Grey500 = "#9E9E9E"
+Grey600 = "#757575"
+Grey700 = "#616161"
+Grey800 = "#424242"
+Grey900 = "#212121"
+
+MGrey   = "#373b3e"
+MAnthrazit =  "#46525a"
+MBlue   = "#005ca8"
+
+# --- Constants ---
+
+st.set_page_config(page_title="LADAsys", page_icon=":blue_car:", layout="wide")
+
+# --- Variables ---
+
+if 'BatSoc' not in st.session_state:
+    st.session_state.BatSoc = 69
+
+if 'BatU' not in st.session_state:
+    st.session_state.BatU = 0
+
+if 'BatI' not in st.session_state:
+    st.session_state.BatI = 0
+
+if 'BatTemp' not in st.session_state:           # currently missing in CAN message
+    st.session_state.BatTemp = 0
+
+if 'DriveState' not in st.session_state:
+    st.session_state.DriveState = 0
+
+if 'DmcTrqMax' not in st.session_state:
+    st.session_state.DmcTrqMax = 0
+
+if 'NlgAcCurrMax' not in st.session_state:
+    st.session_state.NlgAcCurrMax = 0
+
+if 'NlgSocMax' not in st.session_state:
+    st.session_state.NlgSocMax = 0
+
+
+
+# --- Functions --$
+def get_base64(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+
+def set_background(png_file):
+    bin_str = get_base64(png_file)
+    page_bg_img = '''
+    <style>
+    .stApp {
+    background-image: url("data:image/png;base64,%s");
+    background-size: cover;
+    }
+    </style>
+    ''' % bin_str
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+
+set_background('Images/Background.png')
+
+# --- Custom CSS ---
+# Custom CSS to center content vertically in Streamlit
+vertical_center_css = """
+<style>
+div.stButton > button:first-child {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+}
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+}
+</style>
+"""
+
+st.markdown(
+    """
+<style>
+    button {
+        height: auto;
+        padding-top: 200px !important;
+        padding-bottom: 200px !important;
+        padding-left: 50px !important;
+        padding-right: 50px !important;
+    }
+    .reportview-container {
+            margin-top: -2em;
+        }
+        #MainMenu {visibility: hidden;}
+        .stDeployButton {display:none;}
+        footer {visibility: hidden;}
+        #stDecoration {display:none;}
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
+
+st.markdown(vertical_center_css, unsafe_allow_html=True)
+
+# --- Main ---
+
+
+
+# --- Title ---
+st.title("HOME")
+
+
+# Use a column layout with a flex container to center content vertically
+col0, col1, col2, col3, col4, col5 = st.columns([1, 2,2, 2,2, 1])
+
+with col1:
+    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
+    # Place your content here; for demonstration, a button is used
+    if st.button("CAR"):
+        st.switch_page("pages/CAR.py")
+    st.markdown('</div>', unsafe_allow_html=True)
+
+with col2:
+    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
+    # Place your content here; for demonstration, a button is used
+    if st.button("Charging"):
+        st.switch_page("pages/Charging.py")
+    st.markdown('</div>', unsafe_allow_html=True)
+
+with col3:
+    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
+    # Place your content here; for demonstration, a button is used
+    if st.button("Debug"):
+        st.switch_page("pages/Debug.py")
+    st.markdown('</div>', unsafe_allow_html=True)
+
+with col4:
+    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
+    # Place your content here; for demonstration, a button is used
+    if st.button("Valet Mode"):
+        st.switch_page("pages/Valet.py")
+    st.markdown('</div>', unsafe_allow_html=True)
+
+#time.sleep(1)
+#st.rerun()
