@@ -307,7 +307,7 @@ GenerateClassCluster=0
 DocumentUniqueId=
 
 [Document16]
-DocumentPath=Speedometer.PcbDoc
+DocumentPath=Speedometer_Tech.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -321,7 +321,7 @@ ClassGenCCAutoRoomEnabled=0
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=NQIIKLQB
+DocumentUniqueId=
 
 [Configuration1]
 Name=Sources
