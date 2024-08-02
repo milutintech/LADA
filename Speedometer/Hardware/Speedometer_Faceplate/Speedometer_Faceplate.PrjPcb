@@ -222,7 +222,7 @@ GenerateClassCluster=0
 DocumentUniqueId=HPJRJCNB
 
 [Document11]
-DocumentPath=Speedometer_Tech.PcbDoc
+DocumentPath=Speedometer_Faceplate.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
