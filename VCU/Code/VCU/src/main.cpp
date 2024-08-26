@@ -646,8 +646,8 @@ void BACKBONE( void * pvParameters ){
         //Check if Con  unlock interrupt is set
         if(conUlockInterrupt){
           if(NLG_S_ConLocked){
-            NLG_StateDem = NLG_DEM_STANDBY;
             NLG_C_UnlockConRq = 1;
+            NLG_StateDem = NLG_DEM_STANDBY;
             NLG_Charged = 1;
           }
           else{
