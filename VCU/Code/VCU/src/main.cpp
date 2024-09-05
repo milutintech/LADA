@@ -106,6 +106,9 @@ ADS1115 ADS(0x48);
 #define GASPEDAL1 0
 #define GASPEDAL2 1
 
+#define MinValPot 100
+#define MaxValPot 2400
+
 //Pin for reverse signal 0 = forward, 1 = reverse pin 0 on AD
 #define REVERSE 0
 //Battery Voltage values
@@ -244,6 +247,8 @@ bool conUlockInterrupt = 0; //Interrupt for connector unlock
 //Deffining Variables for Can transmission
 //DMC
 //*********************************************************************//
+
+#define DMC_MAXTRQ 372
 
 //**********************//
 //Sending Variables
@@ -1054,6 +1059,7 @@ int16_t calculateTorque5S(bool reverseSig){
     SampeldPotiValue = SampeldPotiValue + sampleSetPedal[i];
   }
   SampeldPotiValue = SampeldPotiValue / 4;
+  SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
   DMC_TorqueCalc = SampeldPotiValue;
   
   if(reverseSig){
