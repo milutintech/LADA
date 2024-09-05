@@ -1,0 +1,476 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+ <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ 
+ <title>DMC5_CAN_Spec_3.9</title>
+ 
+
+<style type="text/css">
+<!--
+
+table{
+	color: #000000; 
+	cellspacing: 0px;
+	border-width: 0.1mm; 
+	border-color: rgb(0,0,0);
+	border-style:solid;
+	//~ border-collapse:collapse;
+	border-spacing: 0;
+	font-size: 10pt;
+}
+
+td, th { 
+	border-width: 0.1mm; 
+	border-color: rgb(0,0,0);
+	border-style: solid;
+	padding : 1px 5px;
+	vertical-align:top;
+
+}
+
+tr {
+	page-break-inside: avoid;
+}
+
+thead {
+	display:table-header-group;
+}
+
+tbody {
+	display:table-row-group;
+}
+
+h2 {
+	padding-top: 30px;
+}
+
+.numbertable{
+	text-align: center;
+}
+
+.msg {
+	background-color: #ccffff;
+}
+
+.bit {
+	background-color: #ffff99;
+}
+
+.sig {
+	background-color: #ccffcc;
+}
+
+.span {
+	background-color: #ffcccc;
+	height: 10px;
+}
+
+-->
+</style>
+</head>
+<body>
+<h1>CAN Matrix - DMC5_CAN_Spec_3.9</h1>
+
+<table>
+<thead>
+<tr class="msg">
+<th>Msg</th><th>Message Name</th><th>Node Name</th><th>ID</th><th>DLC</th><th>Cycle Time </th><th>Message Loss Time</th><th>-----</th><th>-----</th><th>-----</th><th>-----</th><th>-----</th><th>-----</th><th>Comment</th>
+</tr>
+<tr class="sig">
+<th>Sig</th><th>Signal Name</th><th>Used in Message</th><th>Bit Pos</th><th>Bit Size</th><th>min. Value</th><th>max. Value</th><th>Factor</th><th>Offset</th><th>Unit</th><th>Type</th><th>Inactive Value</th><th>Byteorder</th><th>Comment</th>
+</tr>
+<tr class="bit">
+<th>Bit</th><th>Signal Name</th><th>Used in Message</th><th>Bit Pos</th><th>Bit Size</th><th colspan="6">Value Descripion</th><th>Inactive Value</th><th>Byteorder</th><th>Comment</th>
+</tr>
+<tr class="span">
+<td colspan="14"></tr>
+</thead>
+<tbody>
+<tr class="msg">
+<td>Msg</td><td>DMC_CTRL</td><td>Control</td><td>0x210</td><td>8</td><td>10 </td><td>100</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_EnableRq</td><td>DMC_CTRL</td><td>0</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>enable power stage (if possibel)</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_ModeRq</td><td>DMC_CTRL</td><td>1</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>0 = torque mode, 1 = speed mode<br></td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_OscLimEnableRq</td><td>DMC_CTRL</td><td>2</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>Setting this signal will enable the OscLim (only if enabled by parameter)</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_ClrError</td><td>DMC_CTRL</td><td>4</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>0->1 = Clear error latch, Enable Request must be 0</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_NegTrqSpd</td><td>DMC_CTRL</td><td>6</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>if torque mode enabled: 0= negative speed is disabled, 1= negative speed is enabled<br>if speed mode enabled: 0= negative torque is disabled, 1= negative torque is enabled  </td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_PosTrqSpd</td><td>DMC_CTRL</td><td>7</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>if torque mode enabled: 0= positive speed is disabled, 1= positive speed is enabled<br>if speed mode enabled: 0= positive torque is disabled, 1= positive torque is enabled  </td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_SpdRq</td><td>DMC_CTRL</td><td>16</td><td>16</td><td>-32768rpm</td><td>32767rpm</td><td>1rpm/bit</td><td>0rpm</td><td>rpm</td><td>Signed</td><td>0</td><td>Motorola</td><td>in speed mode: command value<br>in torque mode: positive value is a speed limit command, which is automatically valid for both speed directions  </td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_TrqRq</td><td>DMC_CTRL</td><td>32</td><td>16</td><td>-327.68Nm</td><td>327.67Nm</td><td>0.01Nm/bit</td><td>0Nm</td><td>Nm</td><td>Signed</td><td>0</td><td>Motorola</td><td>in torque mode: command value<br>in speed mode: positive value is a torque limit command, which is automatically valid for both torque directions  </td>
+</tr>
+<tr class="msg">
+<td>Msg</td><td>DMC_LIM</td><td>Control</td><td>0x211</td><td>8</td><td>100 </td><td>1000</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_DcVLimMot</td><td>DMC_LIM</td><td>0</td><td>16</td><td>0V</td><td>6553.5V</td><td>0.1V/bit</td><td>0V</td><td>V</td><td>Unsigned</td><td>0</td><td>Motorola</td><td>min dc voltage limit</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_DcVLimGen</td><td>DMC_LIM</td><td>16</td><td>16</td><td>0V</td><td>6553.5V</td><td>0.1V/bit</td><td>0V</td><td>V</td><td>Unsigned</td><td>0</td><td>Motorola</td><td>max dc voltage limit</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_DcCLimMot</td><td>DMC_LIM</td><td>32</td><td>16</td><td>0A</td><td>6553.5A</td><td>0.1A/bit</td><td>0A</td><td>A</td><td>Unsigned</td><td>0</td><td>Motorola</td><td>motoring dc cureent limit</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_DcCLimGen</td><td>DMC_LIM</td><td>48</td><td>16</td><td>0A</td><td>6553.5A</td><td>0.1A/bit</td><td>0A</td><td>A</td><td>Unsigned</td><td>0</td><td>Motorola</td><td>regenerating dc current limit</td>
+</tr>
+<tr class="msg">
+<td>Msg</td><td>DMC_DBG_RX</td><td>Control</td><td>0x400</td><td>8</td><td>0 </td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td><td>Message used for Parameter communication with PARAM Tool.  </td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_DBG_RQ</td><td>DMC_DBG_RX</td><td>0</td><td>64</td><td>0</td><td>1.8446744074e+019</td><td>1/bit</td><td>0</td><td></td><td>Unsigned</td><td>0</td><td>Motorola</td><td></td>
+</tr>
+<tr class="msg">
+<td>Msg</td><td>DMC_CTRL2</td><td>Control</td><td>0x212</td><td>8</td><td>10 </td><td>100</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_TrqSlewrate</td><td>DMC_CTRL2</td><td>0</td><td>16</td><td>0Nm/s</td><td>655.35Nm/s</td><td>0.01Nm/s/bit</td><td>0Nm/s</td><td>Nm/s</td><td>Unsigned</td><td>0</td><td>Motorola</td><td>A value of 0 will disable the slewrate. Only Valid for Torqe Command (Speed regulator and Limiter are allowed to have hihger slewrate)</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_SpdSlewrate</td><td>DMC_CTRL2</td><td>16</td><td>16</td><td>0rpm/s</td><td>65535rpm/s</td><td>1rpm/s/bit</td><td>0rpm/s</td><td>rpm/s</td><td>Unsigned</td><td>0</td><td>Motorola</td><td>A value of 0 will disable the Slewrate. Only Valid fpr Spd Command Value<br></td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_MechPwrMaxMot</td><td>DMC_CTRL2</td><td>32</td><td>16</td><td>0W</td><td>262140W</td><td>4W/bit</td><td>0W</td><td>W</td><td>Unsigned</td><td>0</td><td>Motorola</td><td>mox motoring mechanical power limit</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_MechPwrMaxGen</td><td>DMC_CTRL2</td><td>48</td><td>16</td><td>0W</td><td>262140W</td><td>4W/bit</td><td>0W</td><td>W</td><td>Unsigned</td><td>0</td><td>Motorola</td><td>max regenarating mechanical power limit</td>
+</tr>
+<tr class="msg">
+<td>Msg</td><td>DMC_TRQS</td><td>DMC</td><td>0x258</td><td>8</td><td>10 </td><td>100</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_Ready</td><td>DMC_TRQS</td><td>0</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>dmc is ready for operation</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_Running</td><td>DMC_TRQS</td><td>1</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>dmc is running</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_TempMotorLim</td><td>DMC_TRQS</td><td>2</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>torque limitation by motor temperature</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_SlewrateLim</td><td>DMC_TRQS</td><td>3</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>torque limitation by max slewrate (torque or speed)</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_SensorWarning</td><td>DMC_TRQS</td><td>5</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>a warning is set in the warning bitmap (DMC_ERR msg)</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_GenErr</td><td>DMC_TRQS</td><td>6</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>an error bit is set in the error bitmap (DMC_ERR msg)</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_TrqLimitation</td><td>DMC_TRQS</td><td>7</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>torque limitation is active</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_CLim</td><td>DMC_TRQS</td><td>8</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>trq limited by dc current</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_VLim</td><td>DMC_TRQS</td><td>9</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>torque limitation by dc voltage</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_SpdLim</td><td>DMC_TRQS</td><td>10</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>torque limitation by speed</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_TempDmcLim</td><td>DMC_TRQS</td><td>11</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>torque limit by dmc temperature</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_IacLim</td><td>DMC_TRQS</td><td>12</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>torque limit by ac current</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_TrqLim</td><td>DMC_TRQS</td><td>13</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>torque limitation by max torque</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_PowLim</td><td>DMC_TRQS</td><td>14</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>torque limitation by mechanical power</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_ModelLim</td><td>DMC_TRQS</td><td>15</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>torque limit by motor model</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_TrqAvl</td><td>DMC_TRQS</td><td>16</td><td>16</td><td>-327.68Nm</td><td>327.67Nm</td><td>0.01Nm/bit</td><td>0Nm</td><td>Nm</td><td>Signed</td><td>0</td><td>Motorola</td><td>max available torque</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_TrqAct</td><td>DMC_TRQS</td><td>32</td><td>16</td><td>-327.68Nm</td><td>327.67Nm</td><td>0.01Nm/bit</td><td>0Nm</td><td>Nm</td><td>Signed</td><td>0</td><td>Motorola</td><td>actual torque</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_SpdAct</td><td>DMC_TRQS</td><td>48</td><td>16</td><td>-32768rpm</td><td>23767rpm</td><td>1rpm/bit</td><td>0rpm</td><td>rpm</td><td>Signed</td><td>0</td><td>Motorola</td><td>actual motor speed</td>
+</tr>
+<tr class="msg">
+<td>Msg</td><td>DMC_ACTV</td><td>DMC</td><td>0x259</td><td>8</td><td>10 </td><td>100</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_DcVltAct</td><td>DMC_ACTV</td><td>0</td><td>16</td><td>0V</td><td>6553.5V</td><td>0.1V/bit</td><td>0V</td><td>V</td><td>Unsigned</td><td>0</td><td>Motorola</td><td>actual dc voltage</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_DcCurrAct</td><td>DMC_ACTV</td><td>16</td><td>16</td><td>-3276.8A</td><td>3276.7A</td><td>0.1A/bit</td><td>0A</td><td>A</td><td>Signed</td><td>0</td><td>Motorola</td><td>actual dc current</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_AcCurrAct</td><td>DMC_ACTV</td><td>32</td><td>16</td><td>0A</td><td>16383.75A</td><td>0.25A/bit</td><td>0A</td><td>A</td><td>Unsigned</td><td>0</td><td>Motorola</td><td>actual AC current peak value</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_MechPwr</td><td>DMC_ACTV</td><td>48</td><td>16</td><td>-524288W</td><td>524272W</td><td>16W/bit</td><td>0W</td><td>W</td><td>Signed</td><td>0</td><td>Motorola</td><td>DMC_MechPwr has new scaling compared to older DMC5 SW Versions!</td>
+</tr>
+<tr class="msg">
+<td>Msg</td><td>DMC_TEMP</td><td>DMC</td><td>0x458</td><td>8</td><td>100 </td><td>1000</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_TempInv</td><td>DMC_TEMP</td><td>0</td><td>16</td><td>-16384°C</td><td>16383.5°C</td><td>0.5°C/bit</td><td>0°C</td><td>°C</td><td>Signed</td><td>0</td><td>Motorola</td><td>temperature dmc (inverter)</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_TempMot</td><td>DMC_TEMP</td><td>16</td><td>16</td><td>-16384°C</td><td>16383.5°C</td><td>0.5°C/bit</td><td>0°C</td><td>°C</td><td>Signed</td><td>0</td><td>Motorola</td><td>temperature motor</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_TempSys</td><td>DMC_TEMP</td><td>32</td><td>8</td><td>-50°C</td><td>205°C</td><td>1°C/bit</td><td>-50°C</td><td>°C</td><td>Unsigned</td><td>0</td><td>Motorola</td><td>temperature dmc (inverter)</td>
+</tr>
+<tr class="msg">
+<td>Msg</td><td>DMC_ERR</td><td>DMC</td><td>0x25A</td><td>8</td><td>100 </td><td>1000</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_Init</td><td>DMC_ERR</td><td>0</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_DcCurr</td><td>DMC_ERR</td><td>1</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_OV</td><td>DMC_ERR</td><td>2</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_UV</td><td>DMC_ERR</td><td>3</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_Speed</td><td>DMC_ERR</td><td>4</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_TempMot</td><td>DMC_ERR</td><td>5</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_TempDmc</td><td>DMC_ERR</td><td>6</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_CanCtrlMsgLost</td><td>DMC_ERR</td><td>7</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_ShortCircuit</td><td>DMC_ERR</td><td>8</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_VltMeas</td><td>DMC_ERR</td><td>9</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_SkyVlt</td><td>DMC_ERR</td><td>10</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_CanLimMsgLost</td><td>DMC_ERR</td><td>11</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_CanCtrlMsgInvalid</td><td>DMC_ERR</td><td>12</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_CanLimMsgInvalid</td><td>DMC_ERR</td><td>13</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_SpeedSensor</td><td>DMC_ERR</td><td>14</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_SpdSensSupply</td><td>DMC_ERR</td><td>15</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_CompatibilityWarnings</td><td>DMC_ERR</td><td>16</td><td>16</td><td>0</td><td>0</td><td>1/bit</td><td>0</td><td></td><td>Unsigned</td><td>0</td><td>Motorola</td><td>Warning Bitmap CAN Matrix <= 3.6 is sent at this Position</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_OS_Trap</td><td>DMC_ERR</td><td>32</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_AC_Overcurr</td><td>DMC_ERR</td><td>33</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_IntSupply</td><td>DMC_ERR</td><td>34</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_CanComStartup</td><td>DMC_ERR</td><td>35</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_KL15Lost</td><td>DMC_ERR</td><td>36</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_Storage</td><td>DMC_ERR</td><td>37</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_MotEEPROM</td><td>DMC_ERR</td><td>38</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_CanCtrl2MsgLost</td><td>DMC_ERR</td><td>39</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_PowerMismatch</td><td>DMC_ERR</td><td>40</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_DriverSD</td><td>DMC_ERR</td><td>41</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_E_AN_IN</td><td>DMC_ERR</td><td>47</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_W_TempSensor</td><td>DMC_ERR</td><td>48</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>warnings are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_W_ModMaxLim</td><td>DMC_ERR</td><td>49</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>warnings are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_W_HvUndervoltage</td><td>DMC_ERR</td><td>50</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>warnings are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_W_SpeedSensor</td><td>DMC_ERR</td><td>51</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>warnings are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_W_PowerMismatch</td><td>DMC_ERR</td><td>52</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>warnings are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_W_DriverSD</td><td>DMC_ERR</td><td>53</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>errors are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_I_OscLim_Active</td><td>DMC_ERR</td><td>60</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>warnings are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_I_ExtAw1</td><td>DMC_ERR</td><td>61</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>warnings are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_I_ExtAw2</td><td>DMC_ERR</td><td>62</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>warnings are described in seperate document</td>
+</tr>
+<tr class="bit">
+<td>Bit</td><td>DMC_I_SystemCheck</td><td>DMC_ERR</td><td>63</td><td>1</td><td colspan="6"></td><td>0</td><td>Motorola</td><td>warnings are described in seperate document</td>
+</tr>
+<tr class="msg">
+<td>Msg</td><td>DMC_DBG_TX</td><td>DMC</td><td>0x401</td><td>8</td><td>0 </td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td><td>Message used for Parameter communication with PARAM Tool. The only traffic, that will be seen without tester is a signle HELLO Message during startup. The second case where a sponatuous message is sent is on a OSEK system trap.</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_DBG_RP</td><td>DMC_DBG_TX</td><td>0</td><td>64</td><td>0</td><td>1.8446744074e+019</td><td>1/bit</td><td>0</td><td></td><td>Unsigned</td><td>0</td><td>Motorola</td><td></td>
+</tr>
+<tr class="msg">
+<td>Msg</td><td>DMC_TRQS2</td><td>DMC</td><td>0x268</td><td>8</td><td>10 </td><td>100</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_TrqMax</td><td>DMC_TRQS2</td><td>0</td><td>16</td><td>-327.68Nm</td><td>327.67Nm</td><td>0.01Nm/bit</td><td>0Nm</td><td>Nm</td><td>Signed</td><td>0</td><td>Motorola</td><td>max positive available torque</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_TrqMin</td><td>DMC_TRQS2</td><td>16</td><td>16</td><td>-327.68Nm</td><td>327.67Nm</td><td>0.01Nm/bit</td><td>0Nm</td><td>Nm</td><td>Signed</td><td>0</td><td>Motorola</td><td>min negative available torque</td>
+</tr>
+<tr class="sig">
+<td>Sig</td><td>DMC_ActiveLimit</td><td>DMC_TRQS2</td><td>32</td><td>8</td><td>0</td><td>255</td><td>1/bit</td><td>0</td><td></td><td>Unsigned</td><td>0</td><td>Motorola</td><td>state number of active limiter</td>
+</tr>
+</tbody>
+</table>
+<h2 style="page-break-before:always"> Some CAN Bus information</h2>
+<p>All Messages are listed as transmit messages. The column 'node name' describes the
+sender of the message.</p>
+<p>The bus Speed is 500k.</p>
+<h2>Bit and Byte positions for MOTOROLA formated fields</h2>
+<p>
+The table below shows the bit numbering for motorola formated bit fields. Each row represents
+one byte (from Byte 0 to Byte 7) The Byte index is on the right side.<br>
+The green signal would be markes with startbit=12 and a bit size of 12. The most significant bit
+is on bit 12 and the least significant bit on bit position 23.
+</p>
+<table class="numbertable"><tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th></th>
+</tr><tr>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<th>0</th>
+</tr><tr>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td class="sig">12</td>
+<td class="sig">13</td>
+<td class="sig">14</td>
+<td class="sig">15</td>
+<th>1</th>
+</tr><tr>
+<td class="sig">16</td>
+<td class="sig">17</td>
+<td class="sig">18</td>
+<td class="sig">19</td>
+<td class="sig">20</td>
+<td class="sig">21</td>
+<td class="sig">22</td>
+<td class="sig">23</td>
+<th>2</th>
+</tr><tr>
+<td>24</td>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>29</td>
+<td>30</td>
+<td>31</td>
+<th>3</th>
+</tr><tr>
+<td>32</td>
+<td>33</td>
+<td>34</td>
+<td>35</td>
+<td>36</td>
+<td>37</td>
+<td>38</td>
+<td>39</td>
+<th>4</th>
+</tr><tr>
+<td>40</td>
+<td>41</td>
+<td>42</td>
+<td>43</td>
+<td>44</td>
+<td>45</td>
+<td>46</td>
+<td>47</td>
+<th>5</th>
+</tr><tr>
+<td>48</td>
+<td>49</td>
+<td>50</td>
+<td>51</td>
+<td>52</td>
+<td>53</td>
+<td>54</td>
+<td>55</td>
+<th>6</th>
+</tr><tr>
+<td>56</td>
+<td>57</td>
+<td>58</td>
+<td>59</td>
+<td>60</td>
+<td>61</td>
+<td>62</td>
+<td>63</td>
+<th>7</th>
+</tr></table>
+
+</body>

@@ -1,0 +1,284 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: DMC Control
+
+
+BO_ 616 DMC_TRQS2: 8 DMC
+ SG_ DMC_ActiveLimit : 39|8@0+ (1,0) [0|255] ""  Control
+ SG_ DMC_TrqMin : 23|16@0- (0.01,0) [-327.68|327.67] "Nm"  Control
+ SG_ DMC_TrqMax : 7|16@0- (0.01,0) [-327.68|327.67] "Nm"  Control
+
+BO_ 530 DMC_CTRL2: 8 Control
+ SG_ DMC_TrqSlewrate : 7|16@0+ (0.01,0) [0|655.35] "Nm/s"  DMC
+ SG_ DMC_SpdSlewrate : 23|16@0+ (1,0) [0|65535] "rpm/s"  DMC
+ SG_ DMC_MechPwrMaxMot : 39|16@0+ (4,0) [0|262140] "W"  DMC
+ SG_ DMC_MechPwrMaxGen : 55|16@0+ (4,0) [0|262140] "W"  DMC
+
+BO_ 1024 DMC_DBG_RX: 8 Control
+ SG_ DMC_DBG_RQ : 7|64@0+ (1,0) [0|1.8446744074E+019] ""  DMC
+
+BO_ 1025 DMC_DBG_TX: 8 DMC
+ SG_ DMC_DBG_RP : 7|64@0+ (1,0) [0|1.8446744074E+019] ""  Control
+
+BO_ 602 DMC_ERR: 8 DMC
+ SG_ DMC_I_OscLim_Active : 59|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_W_DriverSD : 50|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_DriverSD : 46|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_I_ExtAw2 : 57|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_I_ExtAw1 : 58|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_I_SystemCheck : 56|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_PowerMismatch : 47|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_W_PowerMismatch : 51|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_CompatibilityWarnings : 23|16@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_W_ModMaxLim : 54|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_CanComStartup : 36|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_W_SpeedSensor : 52|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_W_HvUndervoltage : 53|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_W_TempSensor : 55|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_Storage : 34|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_KL15Lost : 35|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_AN_IN : 40|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_IntSupply : 37|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_MotEEPROM : 33|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_AC_Overcurr : 38|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_OS_Trap : 39|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_CanCtrl2MsgLost : 32|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_SpdSensSupply : 8|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_E_SpeedSensor : 9|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_CanLimMsgInvalid : 10|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_CanCtrlMsgInvalid : 11|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_CanLimMsgLost : 12|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_E_UV : 4|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_E_VltMeas : 14|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_E_OV : 5|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_E_TempMot : 2|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_E_TempDmc : 1|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_E_Speed : 3|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_E_SkyVlt : 13|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_E_ShortCircuit : 15|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_E_Init : 7|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_E_DcCurr : 6|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_E_CanCtrlMsgLost : 0|1@0+ (1,0) [0|0] ""  Control
+
+BO_ 1112 DMC_TEMP: 8 DMC
+ SG_ DMC_TempSys : 39|8@0+ (1,-50) [-50|205] "°C" Vector__XXX
+ SG_ DMC_TempMot : 23|16@0- (0.5,0) [-16384|16383.5] "°C"  Control
+ SG_ DMC_TempInv : 7|16@0- (0.5,0) [-16384|16383.5] "°C"  Control
+
+BO_ 601 DMC_ACTV: 8 DMC
+ SG_ DMC_MechPwr : 55|16@0- (16,0) [-524288|524272] "W"  Control
+ SG_ DMC_DcVltAct : 7|16@0+ (0.1,0) [0|6553.5] "V"  Control
+ SG_ DMC_DcCurrAct : 23|16@0- (0.1,0) [-3276.8|3276.7] "A"  Control
+ SG_ DMC_AcCurrAct : 39|16@0+ (0.25,0) [0|16383.75] "A"  Control
+
+BO_ 600 DMC_TRQS: 8 DMC
+ SG_ DMC_SensorWarning : 2|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_SlewrateLim : 4|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_TempMotorLim : 5|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_TempDmcLim : 12|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_Running : 6|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_Ready : 7|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_ModelLim : 8|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_PowLim : 9|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_TrqLim : 10|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ DMC_VLim : 14|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_TrqAvl : 23|16@0- (0.01,0) [-327.68|327.67] "Nm"  Control
+ SG_ DMC_TrqAct : 39|16@0- (0.01,0) [-327.68|327.67] "Nm"  Control
+ SG_ DMC_SpdLim : 13|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_SpdAct : 55|16@0- (1,0) [-32768|23767] "rpm"  Control
+ SG_ DMC_IacLim : 11|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_TrqLimitation : 0|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_GenErr : 1|1@0+ (1,0) [0|0] ""  Control
+ SG_ DMC_CLim : 15|1@0+ (1,0) [0|0] ""  Control
+
+BO_ 529 DMC_LIM: 8 Control
+ SG_ DMC_DcVLimMot : 7|16@0+ (0.1,0) [0|6553.5] "V"  DMC
+ SG_ DMC_DcVLimGen : 23|16@0+ (0.1,0) [0|6553.5] "V"  DMC
+ SG_ DMC_DcCLimMot : 39|16@0+ (0.1,0) [0|6553.5] "A"  DMC
+ SG_ DMC_DcCLimGen : 55|16@0+ (0.1,0) [0|6553.5] "A"  DMC
+
+BO_ 528 DMC_CTRL: 8 Control
+ SG_ DMC_OscLimEnableRq : 5|1@0+ (1,0) [0|0] ""  DMC
+ SG_ DMC_ClrError : 3|1@0+ (1,0) [0|0] ""  DMC
+ SG_ DMC_TrqRq : 39|16@0- (0.01,0) [-327.68|327.67] "Nm"  DMC
+ SG_ DMC_SpdRq : 23|16@0- (1,0) [-32768|32767] "rpm"  DMC
+ SG_ DMC_PosTrqSpd : 0|1@0+ (1,0) [0|0] ""  DMC
+ SG_ DMC_NegTrqSpd : 1|1@0+ (1,0) [0|0] ""  DMC
+ SG_ DMC_ModeRq : 6|1@0+ (1,0) [0|0] ""  DMC
+ SG_ DMC_EnableRq : 7|1@0+ (1,0) [0|0] ""  DMC
+
+
+
+CM_ SG_ 616 DMC_ActiveLimit "state number of active limiter";
+CM_ SG_ 616 DMC_TrqMin "min negative available torque";
+CM_ SG_ 616 DMC_TrqMax "max positive available torque";
+CM_ SG_ 530 DMC_TrqSlewrate "A value of 0 will disable the slewrate. Only Valid for Torqe Command (Speed regulator and Limiter are allowed to have hihger slewrate)";
+CM_ SG_ 530 DMC_SpdSlewrate "A value of 0 will disable the Slewrate. Only Valid fpr Spd Command Value
+";
+CM_ SG_ 530 DMC_MechPwrMaxMot "mox motoring mechanical power limit";
+CM_ SG_ 530 DMC_MechPwrMaxGen "max regenarating mechanical power limit";
+CM_ BO_ 1024 "Message used for Parameter communication with PARAM Tool.
+";
+CM_ BO_ 1025 "Message used for Parameter communication with PARAM Tool. The only traffic, that will be seen without tester is a signle HELLO Message during startup. The second case where a sponatuous message is sent is on a OSEK system trap.";
+CM_ SG_ 602 DMC_I_OscLim_Active "warnings are described in seperate document";
+CM_ SG_ 602 DMC_W_DriverSD "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_DriverSD "errors are described in seperate document";
+CM_ SG_ 602 DMC_I_ExtAw2 "warnings are described in seperate document";
+CM_ SG_ 602 DMC_I_ExtAw1 "warnings are described in seperate document";
+CM_ SG_ 602 DMC_I_SystemCheck "warnings are described in seperate document";
+CM_ SG_ 602 DMC_E_PowerMismatch "errors are described in seperate document";
+CM_ SG_ 602 DMC_W_PowerMismatch "warnings are described in seperate document";
+CM_ SG_ 602 DMC_CompatibilityWarnings "Warning Bitmap CAN Matrix <= 3.6 is sent at this Position";
+CM_ SG_ 602 DMC_W_ModMaxLim "warnings are described in seperate document";
+CM_ SG_ 602 DMC_E_CanComStartup "errors are described in seperate document";
+CM_ SG_ 602 DMC_W_SpeedSensor "warnings are described in seperate document";
+CM_ SG_ 602 DMC_W_HvUndervoltage "warnings are described in seperate document";
+CM_ SG_ 602 DMC_W_TempSensor "warnings are described in seperate document";
+CM_ SG_ 602 DMC_E_Storage "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_KL15Lost "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_AN_IN "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_IntSupply "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_MotEEPROM "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_AC_Overcurr "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_OS_Trap "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_CanCtrl2MsgLost "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_SpdSensSupply "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_SpeedSensor "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_CanLimMsgInvalid "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_CanCtrlMsgInvalid "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_CanLimMsgLost "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_UV "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_VltMeas "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_OV "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_TempMot "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_TempDmc "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_Speed "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_SkyVlt "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_ShortCircuit "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_Init "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_DcCurr "errors are described in seperate document";
+CM_ SG_ 602 DMC_E_CanCtrlMsgLost "errors are described in seperate document";
+CM_ SG_ 1112 DMC_TempSys "temperature dmc (inverter)";
+CM_ SG_ 1112 DMC_TempMot "temperature motor";
+CM_ SG_ 1112 DMC_TempInv "temperature dmc (inverter)";
+CM_ SG_ 601 DMC_MechPwr "DMC_MechPwr has new scaling compared to older DMC5 SW Versions!";
+CM_ SG_ 601 DMC_DcVltAct "actual dc voltage";
+CM_ SG_ 601 DMC_DcCurrAct "actual dc current";
+CM_ SG_ 601 DMC_AcCurrAct "actual AC current peak value";
+CM_ SG_ 600 DMC_SensorWarning "a warning is set in the warning bitmap (DMC_ERR msg)";
+CM_ SG_ 600 DMC_SlewrateLim "torque limitation by max slewrate (torque or speed)";
+CM_ SG_ 600 DMC_TempMotorLim "torque limitation by motor temperature";
+CM_ SG_ 600 DMC_TempDmcLim "torque limit by dmc temperature";
+CM_ SG_ 600 DMC_Running "dmc is running";
+CM_ SG_ 600 DMC_Ready "dmc is ready for operation";
+CM_ SG_ 600 DMC_ModelLim "torque limit by motor model";
+CM_ SG_ 600 DMC_PowLim "torque limitation by mechanical power";
+CM_ SG_ 600 DMC_TrqLim "torque limitation by max torque";
+CM_ SG_ 600 DMC_VLim "torque limitation by dc voltage";
+CM_ SG_ 600 DMC_TrqAvl "max available torque";
+CM_ SG_ 600 DMC_TrqAct "actual torque";
+CM_ SG_ 600 DMC_SpdLim "torque limitation by speed";
+CM_ SG_ 600 DMC_SpdAct "actual motor speed";
+CM_ SG_ 600 DMC_IacLim "torque limit by ac current";
+CM_ SG_ 600 DMC_TrqLimitation "torque limitation is active";
+CM_ SG_ 600 DMC_GenErr "an error bit is set in the error bitmap (DMC_ERR msg)";
+CM_ SG_ 600 DMC_CLim "trq limited by dc current";
+CM_ SG_ 529 DMC_DcVLimMot "min dc voltage limit";
+CM_ SG_ 529 DMC_DcVLimGen "max dc voltage limit";
+CM_ SG_ 529 DMC_DcCLimMot "motoring dc cureent limit";
+CM_ SG_ 529 DMC_DcCLimGen "regenerating dc current limit";
+CM_ SG_ 528 DMC_OscLimEnableRq "Setting this signal will enable the OscLim (only if enabled by parameter)";
+CM_ SG_ 528 DMC_ClrError "0->1 = Clear error latch, Enable Request must be 0";
+CM_ SG_ 528 DMC_TrqRq "in torque mode: command value
+in speed mode: positive value is a torque limit command, which is automatically valid for both torque directions
+";
+CM_ SG_ 528 DMC_SpdRq "in speed mode: command value
+in torque mode: positive value is a speed limit command, which is automatically valid for both speed directions
+";
+CM_ SG_ 528 DMC_PosTrqSpd "if torque mode enabled: 0= positive speed is disabled, 1= positive speed is enabled
+if speed mode enabled: 0= positive torque is disabled, 1= positive torque is enabled
+";
+CM_ SG_ 528 DMC_NegTrqSpd "if torque mode enabled: 0= negative speed is disabled, 1= negative speed is enabled
+if speed mode enabled: 0= negative torque is disabled, 1= negative torque is enabled
+";
+CM_ SG_ 528 DMC_ModeRq "0 = torque mode, 1 = speed mode
+";
+CM_ SG_ 528 DMC_EnableRq "enable power stage (if possibel)";
+BA_DEF_ BO_  "GenMsgTimeoutTime" INT 0 0;
+BA_DEF_  "Bus Speed" STRING ;
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType";
+BA_DEF_ SG_  "GenSigInactiveValue" INT 0 0;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 0;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","not_used","not_used","not_used","not_used","Cyclic","not_used","IfActive","NoMsgSendType";
+BA_DEF_ BU_  "NmStationAddress" HEX 0 0;
+BA_DEF_  "DBName" STRING ;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "GenMsgTimeoutTime" 0;
+BA_DEF_DEF_  "Bus Speed" "500k";
+BA_DEF_DEF_  "GenSigSendType" "Cyclic";
+BA_DEF_DEF_  "GenSigInactiveValue" 0;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "GenMsgSendType" "NoMsgSendType";
+BA_DEF_DEF_  "NmStationAddress" 0;
+BA_DEF_DEF_  "DBName" "";
+BA_DEF_DEF_  "BusType" "CAN";
+BA_ "DBName" "CANTemplate";
+BA_ "GenMsgTimeoutTime" BO_ 616 100;
+BA_ "GenMsgSendType" BO_ 616 0;
+BA_ "GenMsgCycleTime" BO_ 616 10;
+BA_ "GenMsgSendType" BO_ 530 0;
+BA_ "GenMsgTimeoutTime" BO_ 530 100;
+BA_ "GenMsgCycleTime" BO_ 530 10;
+BA_ "GenMsgSendType" BO_ 1024 7;
+BA_ "GenMsgSendType" BO_ 1025 7;
+BA_ "GenMsgTimeoutTime" BO_ 602 1000;
+BA_ "GenMsgSendType" BO_ 602 0;
+BA_ "GenMsgCycleTime" BO_ 602 100;
+BA_ "GenMsgTimeoutTime" BO_ 1112 1000;
+BA_ "GenMsgSendType" BO_ 1112 0;
+BA_ "GenMsgCycleTime" BO_ 1112 100;
+BA_ "GenMsgSendType" BO_ 601 0;
+BA_ "GenMsgTimeoutTime" BO_ 601 100;
+BA_ "GenMsgCycleTime" BO_ 601 10;
+BA_ "GenMsgTimeoutTime" BO_ 600 100;
+BA_ "GenMsgSendType" BO_ 600 0;
+BA_ "GenMsgCycleTime" BO_ 600 10;
+BA_ "GenMsgSendType" BO_ 529 0;
+BA_ "GenMsgTimeoutTime" BO_ 529 1000;
+BA_ "GenMsgCycleTime" BO_ 529 100;
+BA_ "GenMsgSendType" BO_ 528 0;
+BA_ "GenMsgTimeoutTime" BO_ 528 100;
+BA_ "GenMsgCycleTime" BO_ 528 10;
