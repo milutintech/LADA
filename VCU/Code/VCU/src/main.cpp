@@ -679,7 +679,7 @@ void chargeManage(){
   if(VehicleMode == Charging){
     switch (NLG_StateAct){
       case  NLG_ACT_SLEEP :
-        NLG_StateDem = NLG_DEM_SLEEP;   //Demand Standby
+        NLG_StateDem = NLG_DEM_STANDBY   //Demand Standby
         NLG_LedDem = 9;                 //LED purple
       break;
       case NLG_ACT_STANDBY:
