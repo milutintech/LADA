@@ -475,7 +475,7 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
 
       break;
       case Run:
-        delay(2);
+        delay(10);
         //BMS DMC max current
         sampleSetPedal[0] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
         sampleSetPedal[1] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
