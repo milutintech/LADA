@@ -720,24 +720,30 @@ void chargeManage(){
   if(VehicleMode == Charging){
     switch (NLG_StateAct){
       case  NLG_ACT_SLEEP :
+        NLG_LedDem = 0;                    //LED OFF
         NLG_StateDem = NLG_DEM_STANDBY;   //Demand Standby
-        NLG_LedDem = 9;                 //LED purple
       break;
       case NLG_ACT_STANDBY:
+        NLG_LedDem = 1;                 //LED red pulsing
         if(NLG_Charged){
           VehicleMode = Standby;
           NLG_C_UnlockConRq = 1;
+          NLG_LedDem = 0;               //LED OFF
           }
         else{
-          NLG_LedDem = 9;                 //LED purple
+          
           armBattery(1);
         
         }
       break;
       case NLG_ACT_READY2CHARGE:
         NLG_LedDem = 3;                 //LED pulsating green
-        NLG_StateDem = NLG_DEM_CHARGE;  //Demand Charge
-        enableBSC = 1;
+        if(NLG_C_UnlockConRq){
+          NLG_StateDem = NLG_DEM_STANDBY;
+        }
+        else{
+          NLG_StateDem = NLG_DEM_CHARGE;  //Demand Charge
+        }
       break;
       case NLG_ACT_CHARGE:
         NLG_LedDem = 4;                 //LED green
