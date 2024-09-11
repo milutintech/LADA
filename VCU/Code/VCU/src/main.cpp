@@ -5,6 +5,7 @@
 
 //Libraries
 #include <Arduino.h>              //For Arduino syntax
+#include <cstdint>
 #include <esp_task_wdt.h>         //Multicore tasking
 #include <Wire.h>                 //I2C bus driver
 #include <SPI.h>                  //SPI bus driver
@@ -395,6 +396,17 @@ unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Stroage for lim
 unsigned char controllBufferNLG1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllRelayBuffer[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
 
+//*********************************************************************//
+//Timing Variables
+//CAN
+//*********************************************************************//
+
+unsigned long time10mscycle = 0;
+unsigned long time50mscycle = 0;
+unsigned long time100mscycle = 0;
+uint16_t delay10ms = 10;
+uint16_t delay50ms = 50;
+uint16_t delay100ms = 100;
 //Interrupt rutine for connector unlock
 void IRAM_ATTR unlockCON() {
   if(NLG_S_ConLocked){
@@ -454,6 +466,9 @@ customSPI -> begin(SCK, MISO, MOSI, SPI_CS_PIN);
 CAN.setSPI(customSPI);
 //SPI.begin(SCK, MISO, MOSI, SPI_CS_PIN);
 
+time10mscycle = millis();
+time50mscycle = millis();
+time100mscycle = millis();
 while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrate = 500k
         Serial.println("CAN BUS Shield init fail");
         delay(100);
@@ -499,6 +514,25 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
             DMC_DcCLimMot = MAX_DMC_CURRENT;
           }
         }
+
+        //polling CAN msgs
+        reciveBSC();
+        reciveDMC(); 
+
+        //Low latency cycle
+        if(millis()>(time10mscycle + delay10ms)){
+          time10mscycle = millis();
+          sendDMC();
+        }
+        //Mid latency cycle
+        if(millis()>(time50mscycle + delay50ms)){
+          time50mscycle = millis()
+          sendBSC();
+        }
+        if(millis()>(time100mscycle + delay100ms)){
+          time100mscycle = millis()
+         
+        }
         
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
         Serial.println(ADS.readADC(GASPEDAL1));
@@ -512,11 +546,7 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
         Serial.println(BMS_MAX_Discharge);
         Serial.print("MAX_Charge");
         Serial.println(BMS_MAX_Charge);
-        relayControll();
-        sendBSC();
-        sendDMC();
-        reciveBSC();
-        reciveDMC();  
+        
         
       break;
 
@@ -528,8 +558,18 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
         else{
           NLG_DcHvCurrLimMax = MAX_NLG_CURRENT;
         }
-        sendBSC();
-        sendNLG();
+     
+        if(millis()>(time10mscycle + delay10ms)){
+          time10mscycle = millis();
+          sendNLG();
+        }
+        //Mid latency cycle
+        if(millis()>(time50mscycle + delay50ms)){
+          time50mscycle = millis()
+          sendBSC();
+        }
+        
+        //polling CAN msgs
         reciveBSC();
         reciveNLG();
       break;
