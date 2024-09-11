@@ -490,6 +490,7 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
 
       break;
       case Run:
+        delay(10);
         //BMS DMC max current
         sampleSetPedal[0] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
         sampleSetPedal[1] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
@@ -535,7 +536,7 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
         }
         
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
-        Serial.println(ADS.readADC(GASPEDAL1));
+        /*Serial.println(ADS.readADC(GASPEDAL1));
         Serial.print("SOC");
         Serial.println(BMS_SOC);
         Serial.print("U_BAT");
@@ -719,7 +720,7 @@ void chargeManage(){
   if(VehicleMode == Charging){
     switch (NLG_StateAct){
       case  NLG_ACT_SLEEP :
-        NLG_StateDem = NLG_DEM_STANDBY   //Demand Standby
+        NLG_StateDem = NLG_DEM_STANDBY;   //Demand Standby
         NLG_LedDem = 9;                 //LED purple
       break;
       case NLG_ACT_STANDBY:
@@ -756,20 +757,18 @@ void chargeManage(){
     }
   
 }
-void relayControll(){
-  CAN.sendMsgBuf(0x999, 0, 8, controllRelayBuffer);
-}
+
 
 void armColingSys(bool arm){
   //switch relais2 on VCU for pump
   //switch relais3 on VCU for FAN
-  digitalWrite(RELAIS2, arm);
+ 
   //Serial.println("Cooling armed");
   if(arm  && ((DMC_TempInv > 60)|(DMC_TempMot > 80)|(NLG_TempCoolPlate > 60 ))){
-    digitalWrite(RELAIS3, 1);
+    digitalWrite(RELAIS2, 1);
   }
   else{
-    digitalWrite(RELAIS3, 0);
+    digitalWrite(RELAIS2, 0);
   }
 }
 
@@ -821,7 +820,7 @@ void reciveINFO(){
     
 }
 void reciveBMS(){
-      Serial.println("blabal");
+      //Serial.println("blabal");
 
   if (CAN_MSGAVAIL != CAN.checkReceive()) {
         return;
@@ -1099,7 +1098,8 @@ int16_t calculateTorque5S(bool reverseSig){
     SampeldPotiValue = SampeldPotiValue + sampleSetPedal[i];
   }
   SampeldPotiValue = SampeldPotiValue / 4;
-  SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
+  Serial.println(SampeldPotiValue);
+  SampeldPotiValue = map(SampeldPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
   DMC_TorqueCalc = SampeldPotiValue;
   
   if(reverseSig){
