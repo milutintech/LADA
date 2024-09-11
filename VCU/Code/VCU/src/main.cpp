@@ -527,11 +527,11 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
         }
         //Mid latency cycle
         if(millis()>(time50mscycle + delay50ms)){
-          time50mscycle = millis()
+          time50mscycle = millis();
           sendBSC();
         }
         if(millis()>(time100mscycle + delay100ms)){
-          time100mscycle = millis()
+          time100mscycle = millis();
          
         }
         
@@ -547,7 +547,7 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
         Serial.println(BMS_MAX_Discharge);
         Serial.print("MAX_Charge");
         Serial.println(BMS_MAX_Charge);
-        
+        */
         
       break;
 
@@ -566,7 +566,7 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
         }
         //Mid latency cycle
         if(millis()>(time50mscycle + delay50ms)){
-          time50mscycle = millis()
+          time50mscycle = millis();
           sendBSC();
         }
         
@@ -754,7 +754,7 @@ void chargeManage(){
     armBattery(0);
     digitalWrite(RELAIS4, LOW);
 
-    }
+  }
   
 }
 
@@ -800,83 +800,82 @@ void armBattery(bool arm){
 void reciveINFO(){
   Serial.println("NotDone");
   if (CAN_MSGAVAIL != CAN.checkReceive()) {
-        return;
-    }
+      return;
+  }
 
 
-    // read data, len: data length, buf: data buf
-    CAN.readMsgBuf(&len, readDataBMS);
-    Serial.println("reading");
-    id = CAN.getCanId();
-    type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
-    
-    if(id == 0x553){
-      BMS_SOC = readDataBMS[7];
-      BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
-      BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
-      BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
-      BMS_MAX_Charge = readDataBMS[0];
-    } 
-    
+  // read data, len: data length, buf: data buf
+  CAN.readMsgBuf(&len, readDataBMS);
+  Serial.println("reading");
+  id = CAN.getCanId();
+  type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
+  
+  if(id == 0x553){
+    BMS_SOC = readDataBMS[7];
+    BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
+    BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
+    BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
+    BMS_MAX_Charge = readDataBMS[0];
+  } 
+  
 }
 void reciveBMS(){
       //Serial.println("blabal");
 
   if (CAN_MSGAVAIL != CAN.checkReceive()) {
-        return;
-    }
+      return;
+  }
 
 
-    // read data, len: data length, buf: data buf
-    CAN.readMsgBuf(&len, readDataBMS);
-    Serial.println("reading");
-    id = CAN.getCanId();
-    type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
-    
-    if(id == 0x555){
-      BMS_SOC = readDataBMS[7];
-      BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
-      BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
-      BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
-      BMS_MAX_Charge = readDataBMS[0];
-    } 
+  // read data, len: data length, buf: data buf
+  CAN.readMsgBuf(&len, readDataBMS);
+  Serial.println("reading");
+  id = CAN.getCanId();
+  type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
+  
+  if(id == 0x555){
+    BMS_SOC = readDataBMS[7];
+    BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
+    BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
+    BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
+    BMS_MAX_Charge = readDataBMS[0];
+  } 
     
 }
 void reciveBSC(){
  //Reciveing Can
     // check if data coming
-    if (CAN_MSGAVAIL != CAN.checkReceive()) {
-        return;
-    }
-    // read data, len: data length, buf: data buf
-    CAN.readMsgBuf(&len, readDataBSC);
+  if (CAN_MSGAVAIL != CAN.checkReceive()) {
+      return;
+  }
+  // read data, len: data length, buf: data buf
+  CAN.readMsgBuf(&len, readDataBSC);
 
-    id = CAN.getCanId();
-    type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
-    /*
-     * MCP2515(or this driver) could not handle properly
-     * the data carried by remote frame
-     */
+  id = CAN.getCanId();
+  type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
+  /*
+    * MCP2515(or this driver) could not handle properly
+    * the data carried by remote frame
+    */
 
-    
-    if(id == 0x26A){
-      BSC6_HVVOL_ACT = readDataBSC[0] | (readDataBSC[1] << 8);
-      BSC6_HVVOL_ACT = BSC6_HVVOL_ACT / 10;
+  
+  if(id == 0x26A){
+    BSC6_HVVOL_ACT = readDataBSC[0] | (readDataBSC[1] << 8);
+    BSC6_HVVOL_ACT = BSC6_HVVOL_ACT / 10;
 
-      BSC6_LVVOLT_ACT = readDataBSC[2];
-      BSC6_LVVOLT_ACT = BSC6_LVVOLT_ACT / 10;
+    BSC6_LVVOLT_ACT = readDataBSC[2];
+    BSC6_LVVOLT_ACT = BSC6_LVVOLT_ACT / 10;
 
-      BSC6_HVCUR_ACT = readDataBSC[3];
-      BSC6_HVCUR_ACT = BSC6_HVCUR_ACT / 10;
-      BSC6_HVCUR_ACT = BSC6_HVCUR_ACT - 25;
+    BSC6_HVCUR_ACT = readDataBSC[3];
+    BSC6_HVCUR_ACT = BSC6_HVCUR_ACT / 10;
+    BSC6_HVCUR_ACT = BSC6_HVCUR_ACT - 25;
 
-      BSC6_LVCUR_ACT = readDataBSC[4] | (readDataBSC[5] << 8);
-      BSC6_LVCUR_ACT = BSC6_LVCUR_ACT - 280;
+    BSC6_LVCUR_ACT = readDataBSC[4] | (readDataBSC[5] << 8);
+    BSC6_LVCUR_ACT = BSC6_LVCUR_ACT - 280;
 
-      BSC6_MODE = readDataBSC[7] >> 4;
+    BSC6_MODE = readDataBSC[7] >> 4;
 
-    } 
-    
+  }  
 }
 void sendBSC(){
   //Sending Can
@@ -949,62 +948,60 @@ void sendDMC(){
 void reciveDMC(){
   if (CAN_MSGAVAIL != CAN.checkReceive()) {
         return;
-    }
-
-
-    CAN.readMsgBuf(&len, readDataBSC);
-
-    id = CAN.getCanId();
-    type = (CAN.isExtendedFrame() << 0) |
-           (CAN.isRemoteRequest() << 1);
-    
-    
-    
-    switch (id){
-      case 0x259:
-        DMC_DcVltAct = readDataBSC[1] | (readDataBSC[0] << 8);
-        DMC_DcVltAct = DMC_DcVltAct / 10;
-
-        DMC_DcCurrAct = readDataBSC[3] | (readDataBSC[2] << 8);
-        DMC_DcCurrAct = DMC_DcCurrAct / 10;
-
-        DMC_AcCurrAct = readDataBSC[5] | (readDataBSC[4] << 8);
-        DMC_AcCurrAct = DMC_AcCurrAct / 4;
-
-        DMC_MechPwr = readDataBSC[7] | (readDataBSC[6] << 8);
-        DMC_MechPwr = DMC_MechPwr * 16;
-
-      break;
-      case 0x258:
-        DMC_Ready = readDataBSC[0] & 0x80;
-        DMC_Running = readDataBSC[0] & 0x40;
-        DMC_SensorWarning = readDataBSC[0] & 0x04;
-        DMC_GenErr = readDataBSC[0] & 0x02;
-        DMC_TrqLimitation = readDataBSC[0] & 0x01;
-
-        DMC_TrqAvl = readDataBSC[3] | (readDataBSC[2] << 8);
-        DMC_TrqAvl = DMC_TrqAvl / 100;
-
-        DMC_TrqAct = readDataBSC[5] | (readDataBSC[4] << 8);
-        DMC_TrqAct = DMC_TrqAct / 100;
-
-        DMC_SpdAct = readDataBSC[7] | (readDataBSC[6] << 8);
-        
-      break;
-      case 0x458:
-        DMC_TempInv = readDataBSC[1] | (readDataBSC[0] << 8);
-        DMC_TempInv = DMC_TempInv / 2;
-
-        DMC_TempMot = readDataBSC[3] | (readDataBSC[2] << 8);
-        DMC_TempMot = DMC_TempMot / 2;
-
-        DMC_TempSys = readDataBSC[4];
-        DMC_TempSys = DMC_TempSys -50;
-        
-      break;
-    }
   }
+  CAN.readMsgBuf(&len, readDataBSC);
 
+  id = CAN.getCanId();
+  type = (CAN.isExtendedFrame() << 0) |
+          (CAN.isRemoteRequest() << 1);
+  
+  
+  
+  switch (id){
+    case 0x259:
+      DMC_DcVltAct = readDataBSC[1] | (readDataBSC[0] << 8);
+      DMC_DcVltAct = DMC_DcVltAct / 10;
+
+      DMC_DcCurrAct = readDataBSC[3] | (readDataBSC[2] << 8);
+      DMC_DcCurrAct = DMC_DcCurrAct / 10;
+
+      DMC_AcCurrAct = readDataBSC[5] | (readDataBSC[4] << 8);
+      DMC_AcCurrAct = DMC_AcCurrAct / 4;
+
+      DMC_MechPwr = readDataBSC[7] | (readDataBSC[6] << 8);
+      DMC_MechPwr = DMC_MechPwr * 16;
+
+    break;
+    case 0x258:
+      DMC_Ready = readDataBSC[0] & 0x80;
+      DMC_Running = readDataBSC[0] & 0x40;
+      DMC_SensorWarning = readDataBSC[0] & 0x04;
+      DMC_GenErr = readDataBSC[0] & 0x02;
+      DMC_TrqLimitation = readDataBSC[0] & 0x01;
+
+      DMC_TrqAvl = readDataBSC[3] | (readDataBSC[2] << 8);
+      DMC_TrqAvl = DMC_TrqAvl / 100;
+
+      DMC_TrqAct = readDataBSC[5] | (readDataBSC[4] << 8);
+      DMC_TrqAct = DMC_TrqAct / 100;
+
+      DMC_SpdAct = readDataBSC[7] | (readDataBSC[6] << 8);
+      
+    break;
+    case 0x458:
+      DMC_TempInv = readDataBSC[1] | (readDataBSC[0] << 8);
+      DMC_TempInv = DMC_TempInv / 2;
+
+      DMC_TempMot = readDataBSC[3] | (readDataBSC[2] << 8);
+      DMC_TempMot = DMC_TempMot / 2;
+
+      DMC_TempSys = readDataBSC[4];
+      DMC_TempSys = DMC_TempSys -50;
+      
+    break;
+  }
+  
+}
 
 void sendNLG(){
     NLG_DcHvVoltLimMax_Scale = NLG_DcHvVoltLimMax * 10;
