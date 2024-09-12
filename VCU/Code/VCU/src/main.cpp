@@ -461,21 +461,23 @@ void setup() {
 //CAN COM
 //*********************************************************************//
 void CAN_COM( void * pvParameters ){
-customSPI = new SPIClass(HSPI);
-customSPI -> begin(SCK, MISO, MOSI, SPI_CS_PIN);
-CAN.setSPI(customSPI);
-//SPI.begin(SCK, MISO, MOSI, SPI_CS_PIN);
+  customSPI = new SPIClass(HSPI);
+  customSPI -> begin(SCK, MISO, MOSI, SPI_CS_PIN);
+  CAN.setSPI(customSPI);
+  //SPI.begin(SCK, MISO, MOSI, SPI_CS_PIN);
 
-time10mscycle = millis();
-time50mscycle = millis();
-time100mscycle = millis();
-while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrate = 500k
-        Serial.println("CAN BUS Shield init fail");
-        delay(100);
-    }
+  time10mscycle = millis();
+  time50mscycle = millis();
+  time100mscycle = millis();
+
+  while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrate = 500k
+      Serial.println("CAN BUS Shield init fail");
+      delay(100);
+  }
   CanError = false;
 
- //CAN.begin(CAN_500KBPS);
+  //CAN.begin(CAN_500KBPS);
+  //Init the i2c bus
   Wire.begin(1,2);
   //CAN.begin(CAN_500KBPS);
   ADS.begin();
@@ -530,6 +532,7 @@ while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrat
           time50mscycle = millis();
           sendBSC();
         }
+        //slow cycle for LUGA
         if(millis()>(time100mscycle + delay100ms)){
           time100mscycle = millis();
          
@@ -598,8 +601,6 @@ void BACKBONE( void * pvParameters ){
   pinMode(RELAIS7, OUTPUT);
   pinMode(RELAIS8, OUTPUT);
 
-  //Init the i2c bus
-  Wire.begin(1,2);
   
   Serial.begin(115200);
   //Read out the wake up reason
@@ -676,7 +677,7 @@ void BACKBONE( void * pvParameters ){
         else{
           enableDMC = 0;
         }
-        enableDMC = 1;
+        //What was the plan?
         if(errorCnt < 40 && DMC_SensorWarning | DMC_GenErr){
           enableDMC = 0;
           errorCnt ++;
@@ -715,6 +716,17 @@ void BACKBONE( void * pvParameters ){
     } 
   }
 }
+
+
+//*********************************************************************//
+//Functions for gen Operation
+//Generic
+//*********************************************************************//
+
+
+//**********************//
+//Charging management
+//**********************//
 
 void chargeManage(){
   if(VehicleMode == Charging){
@@ -764,6 +776,9 @@ void chargeManage(){
   
 }
 
+//**********************//
+//Cooling sys manager
+//**********************//
 
 void armColingSys(bool arm){
   //switch relais2 on VCU for pump
@@ -777,6 +792,11 @@ void armColingSys(bool arm){
     digitalWrite(RELAIS2, 0);
   }
 }
+
+
+//**********************//
+//Battery sys manager
+//**********************//
 
 void armBattery(bool arm){
   //switch relais2 on VCU
@@ -803,86 +823,41 @@ void armBattery(bool arm){
   }
 }
 
-void reciveINFO(){
-  Serial.println("NotDone");
-  if (CAN_MSGAVAIL != CAN.checkReceive()) {
-      return;
+//**********************//
+//Throttle managment
+//**********************//
+
+int16_t calculateTorque5S(bool reverseSig){
+  int16_t SampeldPotiValue = 0;
+  int16_t DMC_TorqueCalc = 0;
+  int16_t DMCpre = 0;
+  for(int i = 0; i < 4; i++){
+    SampeldPotiValue = SampeldPotiValue + sampleSetPedal[i];
   }
-
-
-  // read data, len: data length, buf: data buf
-  CAN.readMsgBuf(&len, readDataBMS);
-  Serial.println("reading");
-  id = CAN.getCanId();
-  type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
+  SampeldPotiValue = SampeldPotiValue / 4;
+  Serial.println(SampeldPotiValue);
+  SampeldPotiValue = map(SampeldPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
+  DMC_TorqueCalc = SampeldPotiValue;
   
-  if(id == 0x553){
-    BMS_SOC = readDataBMS[7];
-    BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
-    BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
-    BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
-    BMS_MAX_Charge = readDataBMS[0];
-  } 
-  
-}
-void reciveBMS(){
-      //Serial.println("blabal");
-
-  if (CAN_MSGAVAIL != CAN.checkReceive()) {
-      return;
+  if(reverseSig){
+    DMC_TorqueCalc = 0 - DMC_TorqueCalc;
   }
-
-
-  // read data, len: data length, buf: data buf
-  CAN.readMsgBuf(&len, readDataBMS);
-  Serial.println("reading");
-  id = CAN.getCanId();
-  type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
-  
-  if(id == 0x555){
-    BMS_SOC = readDataBMS[7];
-    BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
-    BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
-    BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
-    BMS_MAX_Charge = readDataBMS[0];
-  } 
-    
+  return DMC_TorqueCalc;
 }
-void reciveBSC(){
- //Reciveing Can
-    // check if data coming
-  if (CAN_MSGAVAIL != CAN.checkReceive()) {
-      return;
-  }
-  // read data, len: data length, buf: data buf
-  CAN.readMsgBuf(&len, readDataBSC);
-
-  id = CAN.getCanId();
-  type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
-  /*
-    * MCP2515(or this driver) could not handle properly
-    * the data carried by remote frame
-    */
-
-  
-  if(id == 0x26A){
-    BSC6_HVVOL_ACT = readDataBSC[0] | (readDataBSC[1] << 8);
-    BSC6_HVVOL_ACT = BSC6_HVVOL_ACT / 10;
-
-    BSC6_LVVOLT_ACT = readDataBSC[2];
-    BSC6_LVVOLT_ACT = BSC6_LVVOLT_ACT / 10;
-
-    BSC6_HVCUR_ACT = readDataBSC[3];
-    BSC6_HVCUR_ACT = BSC6_HVCUR_ACT / 10;
-    BSC6_HVCUR_ACT = BSC6_HVCUR_ACT - 25;
-
-    BSC6_LVCUR_ACT = readDataBSC[4] | (readDataBSC[5] << 8);
-    BSC6_LVCUR_ACT = BSC6_LVCUR_ACT - 280;
-
-    BSC6_MODE = readDataBSC[7] >> 4;
-
-  }  
+uint8_t print_GPIO_wake_up(){
+  uint64_t GPIO_reason = esp_sleep_get_ext1_wakeup_status();
+  return (log(GPIO_reason))/log(2);
 }
+
+//*********************************************************************//
+//CAN send functions
+//Generic
+//*********************************************************************//
+
+//**********************//
+//BSC
+//**********************//
+
 void sendBSC(){
   //Sending Can
   LvoltageScale = Lvoltage * 10;
@@ -907,8 +882,13 @@ void sendBSC(){
   CAN.sendMsgBuf(BSC_COMM, 0, 3, controllBufferBSC);
   CAN.sendMsgBuf(BSC_LIM, 0, 6, limitBufferBSC);
 }
-void sendDMC(){
 
+
+//**********************//
+//DMC
+//**********************//
+
+void sendDMC(){
   DMC_TrqSlewrate_Scale = DMC_TrqSlewrate * 50;
   DMC_MechPwrMaxMot_Scale = DMC_MechPwrMaxMot / 4;
   DMC_MechPwrMaxGen_Scale = DMC_MechPwrMaxGen / 4;
@@ -951,6 +931,131 @@ void sendDMC(){
   CAN.sendMsgBuf(DMCCTRL, 0, 8, controllBufferDMC);
   CAN.sendMsgBuf(DMCLIM, 0, 8, limitBufferDMC);
 }
+
+
+//**********************//
+//NLG
+//**********************//
+
+void sendNLG(){
+  NLG_DcHvVoltLimMax_Scale = NLG_DcHvVoltLimMax * 10;
+  NLG_DcHvCurrLimMax_Scale = NLG_DcHvCurrLimMax * 10;
+  NLG_DcHvCurrLimMax_Scale -= 1024;
+  NLG_AcCurrLimMax_Scale = NLG_AcCurrLimMax * 10;
+  NLG_AcCurrLimMax_Scale -= 1024;
+  NLG_AcPhaseShift_Scale = NLG_AcPhaseShift * 10;
+  controllBufferNLG1[0] = NLG_C_ClrError << 8 | NLG_C_UnlockConRq << 7 | NLG_C_VentiRq << 6 | (NLG_DcHvVoltLimMax_Scale >> 8) & 0x1F;
+  controllBufferNLG1[1] = NLG_DcHvVoltLimMax_Scale & 0x00FF;
+  controllBufferNLG1[2] = (NLG_StateDem << 5)  | (NLG_DcHvCurrLimMax_Scale >> 8)& 0x07;
+  controllBufferNLG1[3] = NLG_DcHvCurrLimMax_Scale & 0x00FF;
+  controllBufferNLG1[4] = NLG_LedDem << 4 | (NLG_AcCurrLimMax_Scale << 8) & 0x07;
+  controllBufferNLG1[5] = NLG_AcCurrLimMax_Scale & 0x00FF;
+  controllBufferNLG1[6] = NLG_C_EnPhaseShift << 4 | (NLG_AcPhaseShift_Scale >> 8) & 0x07;
+  controllBufferNLG1[7] = NLG_AcPhaseShift_Scale & 0x00FF;
+  CAN.sendMsgBuf(NLG_DEM_LIM, 0, 8, controllBufferNLG1);   
+}
+
+//*********************************************************************//
+//CAN recive functions
+//Generic
+//*********************************************************************//
+
+//**********************//
+//INFO
+//**********************//
+
+void reciveINFO(){
+  Serial.println("NotDone");
+  if (CAN_MSGAVAIL != CAN.checkReceive()) {
+      return;
+  }
+
+
+  // read data, len: data length, buf: data buf
+  CAN.readMsgBuf(&len, readDataBMS);
+  Serial.println("reading");
+  id = CAN.getCanId();
+  type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
+  
+  if(id == 0x553){
+    BMS_SOC = readDataBMS[7];
+    BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
+    BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
+    BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
+    BMS_MAX_Charge = readDataBMS[0];
+  } 
+  
+}
+
+
+//**********************//
+//BMS
+//**********************//
+
+void reciveBMS(){
+  if (CAN_MSGAVAIL != CAN.checkReceive()) {
+      return;
+  }
+  // read data, len: data length, buf: data buf
+  CAN.readMsgBuf(&len, readDataBMS);
+  id = CAN.getCanId();
+  type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
+  
+  if(id == 0x555){
+    BMS_SOC = readDataBMS[7];
+    BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
+    BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
+    BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
+    BMS_MAX_Charge = readDataBMS[0];
+  }   
+}
+
+
+//**********************//
+//BSC
+//**********************//
+
+void reciveBSC(){
+ //Reciveing Can
+    // check if data coming
+  if (CAN_MSGAVAIL != CAN.checkReceive()) {
+      return;
+  }
+  // read data, len: data length, buf: data buf
+  CAN.readMsgBuf(&len, readDataBSC);
+
+  id = CAN.getCanId();
+  type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
+  /*
+    * MCP2515(or this driver) could not handle properly
+    * the data carried by remote frame
+    */
+
+  
+  if(id == 0x26A){
+    BSC6_HVVOL_ACT = readDataBSC[0] | (readDataBSC[1] << 8);
+    BSC6_HVVOL_ACT = BSC6_HVVOL_ACT / 10;
+
+    BSC6_LVVOLT_ACT = readDataBSC[2];
+    BSC6_LVVOLT_ACT = BSC6_LVVOLT_ACT / 10;
+
+    BSC6_HVCUR_ACT = readDataBSC[3];
+    BSC6_HVCUR_ACT = BSC6_HVCUR_ACT / 10;
+    BSC6_HVCUR_ACT = BSC6_HVCUR_ACT - 25;
+
+    BSC6_LVCUR_ACT = readDataBSC[4] | (readDataBSC[5] << 8);
+    BSC6_LVCUR_ACT = BSC6_LVCUR_ACT - 280;
+
+    BSC6_MODE = readDataBSC[7] >> 4;
+
+  }  
+}
+
+
+//**********************//
+//DMC
+//**********************//
+
 void reciveDMC(){
   if (CAN_MSGAVAIL != CAN.checkReceive()) {
         return;
@@ -1009,23 +1114,11 @@ void reciveDMC(){
   
 }
 
-void sendNLG(){
-    NLG_DcHvVoltLimMax_Scale = NLG_DcHvVoltLimMax * 10;
-    NLG_DcHvCurrLimMax_Scale = NLG_DcHvCurrLimMax * 10;
-    NLG_DcHvCurrLimMax_Scale -= 1024;
-    NLG_AcCurrLimMax_Scale = NLG_AcCurrLimMax * 10;
-    NLG_AcCurrLimMax_Scale -= 1024;
-    NLG_AcPhaseShift_Scale = NLG_AcPhaseShift * 10;
-    controllBufferNLG1[0] = NLG_C_ClrError << 8 | NLG_C_UnlockConRq << 7 | NLG_C_VentiRq << 6 | (NLG_DcHvVoltLimMax_Scale >> 8) & 0x1F;
-    controllBufferNLG1[1] = NLG_DcHvVoltLimMax_Scale & 0x00FF;
-    controllBufferNLG1[2] = (NLG_StateDem << 5)  | (NLG_DcHvCurrLimMax_Scale >> 8)& 0x07;
-    controllBufferNLG1[3] = NLG_DcHvCurrLimMax_Scale & 0x00FF;
-    controllBufferNLG1[4] = NLG_LedDem << 4 | (NLG_AcCurrLimMax_Scale << 8) & 0x07;
-    controllBufferNLG1[5] = NLG_AcCurrLimMax_Scale & 0x00FF;
-    controllBufferNLG1[6] = NLG_C_EnPhaseShift << 4 | (NLG_AcPhaseShift_Scale >> 8) & 0x07;
-    controllBufferNLG1[7] = NLG_AcPhaseShift_Scale & 0x00FF;
-    CAN.sendMsgBuf(NLG_DEM_LIM, 0, 8, controllBufferNLG1);   
-}
+
+//**********************//
+//NLG
+//**********************//
+
 void reciveNLG(){
 
     if (CAN_MSGAVAIL != CAN.checkReceive()) {
@@ -1092,26 +1185,5 @@ void reciveNLG(){
     }
 }
 
-//sampel the throttle pedal
-int16_t calculateTorque5S(bool reverseSig){
-  int16_t SampeldPotiValue = 0;
-  int16_t DMC_TorqueCalc = 0;
-  int16_t DMCpre = 0;
-  for(int i = 0; i < 4; i++){
-    SampeldPotiValue = SampeldPotiValue + sampleSetPedal[i];
-  }
-  SampeldPotiValue = SampeldPotiValue / 4;
-  Serial.println(SampeldPotiValue);
-  SampeldPotiValue = map(SampeldPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
-  DMC_TorqueCalc = SampeldPotiValue;
-  
-  if(reverseSig){
-    DMC_TorqueCalc = 0 - DMC_TorqueCalc;
-  }
-  return DMC_TorqueCalc;
-}
-uint8_t print_GPIO_wake_up(){
-  uint64_t GPIO_reason = esp_sleep_get_ext1_wakeup_status();
-  return (log(GPIO_reason))/log(2);
-}
+//MIMIMIMIMIMIMIMI
 void loop() {}
