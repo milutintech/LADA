@@ -5,6 +5,7 @@
 
 //Libraries
 #include <Arduino.h>              //For Arduino syntax
+#include <cstddef>
 #include <cstdint>
 #include <esp_task_wdt.h>         //Multicore tasking
 #include <Wire.h>                 //I2C bus driver
@@ -33,6 +34,7 @@ void relayControll();
 void sendNLG();               //Send NLG CAN Messages
 void sendBSC();               //Send BSC CAN Messages
 void sendDMC();               //Send DMC CAN Messages
+void sendINFO();              //Sending to Infotainment
 void reciveBSC();             //Recive BSC CAN Messages
 void reciveDMC();             //Recive DMC CAN Messages
 void reciveNLG();             //Recive NLG CAN Messages
@@ -40,8 +42,8 @@ void reciveBMS();             //Recive BMS CAN Messages
 void reciveINFO();            //Data from DAU(LUCA)
 void armColingSys(bool arm);  //Arm Cooling System
 void armBattery(bool arm);    //Arm HV-Battery
-
 void chargeManage();          //Manage Charging Process
+
 
 uint8_t print_GPIO_wake_up();
 
@@ -258,7 +260,7 @@ bool conUlockInterrupt = 0; //Interrupt for connector unlock
 //DMC
 //*********************************************************************//
 
-uint16_t DMC_MAXTRQ = 372
+uint16_t DMC_MAXTRQ = 372;
 
 //**********************//
 //Sending Variables
@@ -404,8 +406,8 @@ unsigned char limitBufferDMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0}; //Storage for controll mesages
 unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Stroage for limit Values
 unsigned char controllBufferNLG1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-unsigned char controllRelayBuffer[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
-
+unsigned char controllINFO[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
+unsigned char controllTACH[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
 //*********************************************************************//
 //Timing Variables
 //CAN
@@ -529,6 +531,7 @@ void CAN_COM( void * pvParameters ){
         }
 
         //polling CAN msgs
+        reciveINFO(); 
         reciveBSC();
         reciveDMC(); 
 
@@ -545,7 +548,7 @@ void CAN_COM( void * pvParameters ){
         //slow cycle for LUGA
         if(millis()>(time100mscycle + delay100ms)){
           time100mscycle = millis();
-         
+          sendINFO();
         }
         
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
@@ -582,8 +585,13 @@ void CAN_COM( void * pvParameters ){
           time50mscycle = millis();
           sendBSC();
         }
-        
+        //LUGA CYcLE
+        if(millis()>(time100mscycle + delay100ms)){
+          time100mscycle = millis();
+          sendINFO();
+        }
         //polling CAN msgs
+        reciveINFO(); 
         reciveBSC();
         reciveNLG();
       break;
@@ -865,14 +873,19 @@ uint8_t print_GPIO_wake_up(){
 //Generic
 //*********************************************************************//
 
+//**********************//
+//INFO
+//**********************//
 
-
-Source: VCU ID 0x554 MSB 00 00 00 00 00 00 00 00 LSB
-
-BMS_SOC 0%-100% byte 0
-BMS_U_BAT 0V-450V byte 1,2
-BMS_I_BAT 0A-650A byte 3,4
-STATE 0-5 byte 5
+void sendINFO(){
+  controllINFO[0] = BMS_SOC;
+  controllINFO[1] = BMS_U_BAT & 0x00FF;
+  controllINFO[2] = BMS_U_BAT >> 8;
+  controllINFO[3] = BMS_I_BAT & 0x00FF;
+  controllINFO[4] = BMS_I_BAT >> 8;
+  controllINFO[5] = VehicleMode;
+  CAN.sendMsgBuf(SEND_INFO, 0, 5, controllINFO);
+}
 
 
 //**********************//
@@ -998,7 +1011,7 @@ void reciveINFO(){
   
   if(id == RECIVE_INFO){
     DMC_MAXTRQ = readDataINFO[0] | (readDataINFO[1] << 1);
-    NLG_AcCurrLimMax = readDataINFO[2]
+    NLG_AcCurrLimMax = readDataINFO[2];
     MAX_CHG_SOC = readDataBMS[3];
     OFFROAD_MODE = readDataBMS[4];
   }  
