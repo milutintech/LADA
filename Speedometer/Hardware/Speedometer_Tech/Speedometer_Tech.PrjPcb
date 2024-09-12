@@ -270,7 +270,7 @@ ClassGenCCAutoRoomEnabled=0
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=
+DocumentUniqueId=QQQPNMLB
 
 [Document14]
 DocumentPath=..\..\..\..\ProjectUtility\03_Libraries_Altium\Integrated_Library - 02.01.24 - 03.52\AltiumLib_MILUTIN.SchLib
@@ -290,23 +290,6 @@ GenerateClassCluster=0
 DocumentUniqueId=
 
 [Document15]
-DocumentPath=Schematics\110_ESP32s3.Harness
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=0
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=
-
-[Document16]
 DocumentPath=Speedometer_Tech.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
