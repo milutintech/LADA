@@ -827,6 +827,7 @@ void armBattery(bool arm){
 //Throttle managment
 //**********************//
 
+
 int16_t calculateTorque5S(bool reverseSig){
   int16_t SampeldPotiValue = 0;
   int16_t DMC_TorqueCalc = 0;
