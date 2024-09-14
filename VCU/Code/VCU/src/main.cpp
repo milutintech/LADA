@@ -5,6 +5,7 @@
 
 //Libraries
 #include <Arduino.h>              //For Arduino syntax
+#include <cstddef>
 #include <cstdint>
 #include <esp_task_wdt.h>         //Multicore tasking
 #include <Wire.h>                 //I2C bus driver
@@ -33,6 +34,7 @@ void relayControll();
 void sendNLG();               //Send NLG CAN Messages
 void sendBSC();               //Send BSC CAN Messages
 void sendDMC();               //Send DMC CAN Messages
+void sendINFO();              //Sending to Infotainment
 void reciveBSC();             //Recive BSC CAN Messages
 void reciveDMC();             //Recive DMC CAN Messages
 void reciveNLG();             //Recive NLG CAN Messages
@@ -40,14 +42,15 @@ void reciveBMS();             //Recive BMS CAN Messages
 void reciveINFO();            //Data from DAU(LUCA)
 void armColingSys(bool arm);  //Arm Cooling System
 void armBattery(bool arm);    //Arm HV-Battery
-
 void chargeManage();          //Manage Charging Process
+
 
 uint8_t print_GPIO_wake_up();
 
 
 int16_t calculateTorque5S(bool reverseSig); //Calculate Torque from Pedal Position
 
+int8_t MAX_CHG_SOC = 100;
 
 //Pinout
 //SPI
@@ -89,6 +92,13 @@ ADS1115 ADS(0x48);
 #define NLG_ACT_ERR 0x799
 #define NLG_ACT_LIM 0x728
 #define NLG_ACT_PLUG 0x739
+
+//INFO Index
+#define SEND_INFO 0x554
+#define RECIVE_INFO 0x553
+
+//BMS Recive 
+#define RECIVE_BMS 0x555
 
 //*********************************************************************//
 //Deffining Variables for Operation
@@ -149,6 +159,7 @@ bool NLG_Charged = 0; //Safe when vehicle has carged
 
 bool CanError = false;
 
+bool OFFROAD_MODE = false;
 //driving variables
 //Storage for Pedal Position
 uint8_t sampleSetCounter = 0;
@@ -249,7 +260,7 @@ bool conUlockInterrupt = 0; //Interrupt for connector unlock
 //DMC
 //*********************************************************************//
 
-#define DMC_MAXTRQ 372
+uint16_t DMC_MAXTRQ = 372;
 
 //**********************//
 //Sending Variables
@@ -387,15 +398,16 @@ uint8_t  len;
 
 byte readDataBSC[MAX_DATA_SIZE] = {0}; //Storage for recived data BSC
 byte readDataNLG[MAX_DATA_SIZE] = {0}; //Storage for recived data NLG
-byte readDataBMS[MAX_DATA_SIZE] = {0}; //Storage for recived data NLG
+byte readDataBMS[MAX_DATA_SIZE] = {0}; //Storage for recived data BMS
+byte readDataINFO[MAX_DATA_SIZE] = {0}; //Storage for recived data INFO
 unsigned char controllBufferDMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllBuffer2DMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char limitBufferDMC[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char controllBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0}; //Storage for controll mesages
 unsigned char limitBufferBSC[8] = {0, 0, 0, 0, 0, 0, 0, 0};    //Stroage for limit Values
 unsigned char controllBufferNLG1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-unsigned char controllRelayBuffer[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
-
+unsigned char controllINFO[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
+unsigned char controllTACH[8] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
 //*********************************************************************//
 //Timing Variables
 //CAN
@@ -519,6 +531,7 @@ void CAN_COM( void * pvParameters ){
         }
 
         //polling CAN msgs
+        reciveINFO(); 
         reciveBSC();
         reciveDMC(); 
 
@@ -535,7 +548,7 @@ void CAN_COM( void * pvParameters ){
         //slow cycle for LUGA
         if(millis()>(time100mscycle + delay100ms)){
           time100mscycle = millis();
-         
+          sendINFO();
         }
         
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
@@ -572,8 +585,13 @@ void CAN_COM( void * pvParameters ){
           time50mscycle = millis();
           sendBSC();
         }
-        
+        //LUGA CYcLE
+        if(millis()>(time100mscycle + delay100ms)){
+          time100mscycle = millis();
+          sendINFO();
+        }
         //polling CAN msgs
+        reciveINFO(); 
         reciveBSC();
         reciveNLG();
       break;
@@ -823,6 +841,7 @@ void armBattery(bool arm){
   }
 }
 
+
 //**********************//
 //Throttle managment
 //**********************//
@@ -853,6 +872,21 @@ uint8_t print_GPIO_wake_up(){
 //CAN send functions
 //Generic
 //*********************************************************************//
+
+//**********************//
+//INFO
+//**********************//
+
+void sendINFO(){
+  controllINFO[0] = BMS_SOC;
+  controllINFO[1] = BMS_U_BAT & 0x00FF;
+  controllINFO[2] = BMS_U_BAT >> 8;
+  controllINFO[3] = BMS_I_BAT & 0x00FF;
+  controllINFO[4] = BMS_I_BAT >> 8;
+  controllINFO[5] = VehicleMode;
+  CAN.sendMsgBuf(SEND_INFO, 0, 5, controllINFO);
+}
+
 
 //**********************//
 //BSC
@@ -960,31 +994,27 @@ void sendNLG(){
 //Generic
 //*********************************************************************//
 
+
 //**********************//
 //INFO
 //**********************//
 
 void reciveINFO(){
-  Serial.println("NotDone");
+
   if (CAN_MSGAVAIL != CAN.checkReceive()) {
       return;
   }
-
-
   // read data, len: data length, buf: data buf
-  CAN.readMsgBuf(&len, readDataBMS);
-  Serial.println("reading");
+  CAN.readMsgBuf(&len, readDataINFO);
   id = CAN.getCanId();
   type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
   
-  if(id == 0x553){
-    BMS_SOC = readDataBMS[7];
-    BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
-    BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
-    BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
-    BMS_MAX_Charge = readDataBMS[0];
-  } 
-  
+  if(id == RECIVE_INFO){
+    DMC_MAXTRQ = readDataINFO[0] | (readDataINFO[1] << 1);
+    NLG_AcCurrLimMax = readDataINFO[2];
+    MAX_CHG_SOC = readDataBMS[3];
+    OFFROAD_MODE = readDataBMS[4];
+  }  
 }
 
 
@@ -1001,7 +1031,7 @@ void reciveBMS(){
   id = CAN.getCanId();
   type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
   
-  if(id == 0x555){
+  if(id == RECIVE_BMS){
     BMS_SOC = readDataBMS[7];
     BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
     BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
