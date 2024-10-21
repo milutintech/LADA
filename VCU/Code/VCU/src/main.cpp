@@ -179,7 +179,7 @@ uint8_t  BMS_MAX_Charge = 0;
 //Sending Variables
 //Variables for 0x711
 bool NLG_C_ClrError = 0;         //Clear error latch
-bool NLG_C_UnlockConRq = 0;      //Unlock connector request
+bool NLG_C_UnlockConRq = 1;      //Unlock connector request
 bool NLG_C_VentiRq = 0;
 int  NLG_DcHvVoltLimMax = MAX_U_BAT;   //Maximum HV voltage
 
@@ -610,6 +610,8 @@ void BACKBONE( void * pvParameters ){
     case NLG_HW_Wakeup:
       //NLG demands wakeup because type 2 charger detected
       VehicleMode = Charging;
+      delay(1000);
+      NLG_C_UnlockConRq = 0;
       digitalWrite(RELAIS4, HIGH);
     break;
     case IGNITION:
@@ -694,11 +696,11 @@ void BACKBONE( void * pvParameters ){
         if(conUlockInterrupt){
           if(NLG_S_ConLocked){
             NLG_C_UnlockConRq = 1;
-            NLG_StateDem = NLG_DEM_STANDBY;
             NLG_Charged = 1;
           }
           else{
             conUlockInterrupt = 0;
+            NLG_StateDem = NLG_DEM_STANDBY;
             VehicleMode = Standby;
           }
         }
