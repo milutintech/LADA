@@ -787,10 +787,10 @@ void armColingSys(bool arm){
   //switch relais3 on VCU for FAN
  
   //Serial.println("Cooling armed");
-  if(arm  && ((DMC_TempInv > 60)|(DMC_TempMot > 80)|(NLG_TempCoolPlate > 60 ))){
+  if(arm  && ((DMC_TempInv > 50)|(DMC_TempMot > 80)|(NLG_TempCoolPlate > 50 ))){
     digitalWrite(RELAIS2, 1);
   }
-  else{
+  else if(((DMC_TempInv < 40)&&(DMC_TempMot < 50)&&(NLG_TempCoolPlate < 40 ))){
     digitalWrite(RELAIS2, 0);
   }
 }
