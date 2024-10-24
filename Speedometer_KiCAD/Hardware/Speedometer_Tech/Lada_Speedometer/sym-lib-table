@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 0)
+  (lib (name "Lada_Speedometer-altium-import")(type "KiCad")(uri "${KIPRJMOD}/Lada_Speedometer-altium-import.kicad_sym")(options "")(descr ""))
+)

@@ -1,0 +1,2636 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "318a07aa-2e95-4f45-ad6b-3eff70fe5804")
+	(paper "A3")
+	(lib_symbols
+		(symbol "Lada_Speedometer-altium-import:GND_BAR"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name 'GND'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GND_BAR_0_0"
+				(polyline
+					(pts
+						(xy -1.27 -2.54) (xy 1.27 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Lada_Speedometer-altium-import:KL30_ARROW"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "KL30"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name 'KL30'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "KL30_ARROW_0_0"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0) hide
+					(name "KL30"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Lada_Speedometer-altium-import:KL30i_ARROW"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "KL30i"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name 'KL30i'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "KL30i_ARROW_0_0"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0) hide
+					(name "KL30i"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Lada_Speedometer-altium-import:KL31_BAR"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "KL31"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name 'KL31'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "KL31_BAR_0_0"
+				(polyline
+					(pts
+						(xy -1.27 -2.54) (xy 1.27 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0) hide
+					(name "KL31"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Lada_Speedometer-altium-import:root_0_RES-2"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*RESC1608X55X25ML10T15*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "root_0_RES-2_1_0"
+				(polyline
+					(pts
+						(xy 5.08 0) (xy 4.064 0) (xy 3.81 -0.508) (xy 3.302 0.508) (xy 2.794 -0.508) (xy 2.286 0.508)
+						(xy 1.778 -0.508) (xy 1.27 0.508) (xy 1.016 0) (xy 0 0)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -2.54 0 0)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "2"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+	(junction
+		(at 205.74 205.5622)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6ba6a75c-4909-479f-9d46-bcd41ea36747")
+	)
+	(junction
+		(at 200.66 208.1022)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "731d93d2-697a-4f55-a438-57bd4209d2a6")
+	)
+	(junction
+		(at 200.66 83.6422)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "976f4079-9032-4de2-856a-1dfa55b88b9b")
+	)
+	(junction
+		(at 205.74 78.5622)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "eb9fe1eb-9d6e-4b63-869f-7e642f6051f4")
+	)
+	(no_connect
+		(at 66.04 63.3222)
+		(uuid "1592ae7a-6105-4cbf-8313-9913238a53ff")
+	)
+	(wire
+		(pts
+			(xy 279.4 55.7022) (xy 304.8 55.7022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0bc030bb-ac14-4503-8a8f-d59e2df12b55")
+	)
+	(wire
+		(pts
+			(xy 101.6 91.2622) (xy 106.68 91.2622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1eddcf99-4df4-4465-b995-70c5d826770b")
+	)
+	(wire
+		(pts
+			(xy 200.66 83.6422) (xy 200.66 208.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1eea018d-d64d-40c2-b6c6-9936a6ec27c1")
+	)
+	(wire
+		(pts
+			(xy 25.4 271.6022) (xy 30.48 271.6022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ff2b24d-6055-487e-93f3-c7dfa3f895c5")
+	)
+	(wire
+		(pts
+			(xy 177.8 205.5622) (xy 205.74 205.5622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a532708-4926-4d03-a85a-a0f6d692f969")
+	)
+	(wire
+		(pts
+			(xy 195.58 55.7022) (xy 203.2 55.7022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3053f7cb-ec34-4595-ba95-4a5609fa6e49")
+	)
+	(wire
+		(pts
+			(xy 205.74 78.5622) (xy 228.6 78.5622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32ae941a-05c4-462c-a580-45a5c19f6c25")
+	)
+	(wire
+		(pts
+			(xy 205.74 205.5622) (xy 205.74 78.5622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "51453468-f7e9-428b-9857-061c24a2dd43")
+	)
+	(wire
+		(pts
+			(xy 177.8 83.6422) (xy 200.66 83.6422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ad17259-bbe1-4e46-b4c3-9a055f7e7435")
+	)
+	(wire
+		(pts
+			(xy 200.66 208.1022) (xy 228.6 208.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f744fe2-4918-4997-85b7-8a4b91fa273c")
+	)
+	(wire
+		(pts
+			(xy 177.8 208.1022) (xy 200.66 208.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7fae0e8f-934c-4f76-a072-927fbac347ab")
+	)
+	(wire
+		(pts
+			(xy 106.68 91.2622) (xy 106.68 101.4222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "97ffb4a3-c6ba-4279-bb7c-b7240b600b98")
+	)
+	(wire
+		(pts
+			(xy 317.5 93.8022) (xy 317.5 101.4222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a30d9ca-0542-4383-80fb-daafb8a50e48")
+	)
+	(wire
+		(pts
+			(xy 40.64 271.6022) (xy 45.72 271.6022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9d7e741e-4dbf-4cae-b8e6-e03fddd3e3f4")
+	)
+	(wire
+		(pts
+			(xy 25.4 281.7622) (xy 30.48 281.7622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a1256754-a58e-41d1-8d86-b6d581b7a938")
+	)
+	(wire
+		(pts
+			(xy 200.66 83.6422) (xy 228.6 83.6422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2f94c0c-274c-4cff-8b8f-eaac9b9b5918")
+	)
+	(wire
+		(pts
+			(xy 177.8 152.2222) (xy 228.6 152.2222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a7d47cfd-7645-4d11-8331-21f55078d9cc")
+	)
+	(wire
+		(pts
+			(xy 177.8 154.7622) (xy 228.6 154.7622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b7cfe311-e3ee-4eef-9bf2-28cadceb2420")
+	)
+	(wire
+		(pts
+			(xy 228.6 210.6422) (xy 177.8 210.6422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b8671d2a-9bf1-447f-8f39-e8f6b7574d55")
+	)
+	(wire
+		(pts
+			(xy 205.74 205.5622) (xy 228.6 205.5622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bcfe970a-31c8-4ce4-a2ed-36efd5f673cf")
+	)
+	(wire
+		(pts
+			(xy 177.8 162.3822) (xy 228.6 162.3822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d43dc874-8ddf-4e78-8fca-1d6275c80bd5")
+	)
+	(wire
+		(pts
+			(xy 177.8 78.5622) (xy 205.74 78.5622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dcd209af-cd0d-4dce-93e2-8b1344355b95")
+	)
+	(wire
+		(pts
+			(xy 40.64 281.7622) (xy 45.72 281.7622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dfe5323e-e179-450d-ac73-d2f8dac015cd")
+	)
+	(wire
+		(pts
+			(xy 228.6 182.7022) (xy 195.58 182.7022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1917470-c164-48c5-b3d7-b47e2fd922b8")
+	)
+	(wire
+		(pts
+			(xy 76.2 63.3222) (xy 66.04 63.3222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e9ac2e0c-d701-4a99-b2d0-396a6db9b551")
+	)
+	(wire
+		(pts
+			(xy 195.58 182.7022) (xy 195.58 55.7022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f855a43d-9ef0-47d5-9542-af665c8b4c79")
+	)
+	(wire
+		(pts
+			(xy 228.6 157.3022) (xy 177.8 157.3022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff4d3f89-f6f6-4057-bd62-9ea3cbc6a6a4")
+	)
+	(rectangle
+		(start 335.28 35.3822)
+		(end 71.12 119.2022)
+		(stroke
+			(width 0.254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(fill
+			(type color)
+			(color 255 255 176 1)
+		)
+		(uuid d689f895-ae74-42c6-91c8-b4ccd1382029)
+	)
+	(text "4x4 Electric"
+		(exclude_from_sim no)
+		(at 152.4 58.2422 0)
+		(effects
+			(font
+				(size 3.048 3.048)
+			)
+			(justify left bottom)
+		)
+		(uuid "0910d931-70b9-4668-a5f3-7e081412a892")
+	)
+	(text "Zündungsplus"
+		(exclude_from_sim no)
+		(at 33.02 279.2222 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "515d75d1-efe5-4b57-a1f9-915476ae9dbe")
+	)
+	(text "Masse"
+		(exclude_from_sim no)
+		(at 33.02 286.8422 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "59039824-b67e-4379-bbc3-dc8182d19212")
+	)
+	(text "LADA Niva"
+		(exclude_from_sim no)
+		(at 127 50.6222 0)
+		(effects
+			(font
+				(size 4.572 4.572)
+			)
+			(justify left bottom)
+		)
+		(uuid "af26cb85-28e4-4e74-af6b-755f577d3fdc")
+	)
+	(text "Dauerplus"
+		(exclude_from_sim no)
+		(at 33.02 269.0622 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e392a355-d6be-4a60-9120-0eca80de5325")
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:KL31_BAR")
+		(at 25.4 281.7622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "17c807f8-cb98-4f4f-9f05-fc19aa7f4d54")
+		(property "Reference" "#PWR?"
+			(at 25.4 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "KL31"
+			(at 25.4 285.5722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 25.4 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 25.4 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 25.4 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "7fd70e85-fe22-45ec-b73e-8bc46e4f4d69")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:KL30i_ARROW")
+		(at 45.72 271.6022 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a4243105-d332-4fc4-a08c-658b01ec728a")
+		(property "Reference" "#PWR?"
+			(at 45.72 271.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "KL30i"
+			(at 45.72 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 271.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 271.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 45.72 271.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "b9bcc245-124b-4335-992f-aa3c1241a426")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:root_0_RES-2")
+		(at 33.02 271.6022 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b2120b2b-20f6-4dca-b759-637b5951d451")
+		(property "Reference" "R001"
+			(at 32.766 270.8402 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "RC0603JR-070RL"
+			(at 32.766 274.9042 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RESC1608X55X25ML10T15"
+			(at 33.02 271.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 271.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
+			(at 33.02 271.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "WIDTH" "0.8mm"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" "155degC"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TOLERANCE" "5%"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE REFERENCE" "0603"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "HEIGHT" "0.45mm"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DEPTH" "0.8mm"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING" "50V"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TERMINATION" "SMD/SMT"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE QUANTITY" "5000"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" "0603"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (IMPERIAL)" "0603"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RADIATION HARDENING" "No"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "NUMBER OF PINS" "2"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LENGTH" "1.6mm"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LEAD FREE" "LeadFree"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING (DC)" "50V"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MILITARY STANDARD" "Not"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "POWER RATING" "100mW"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RESISTANCE" "0mOhm"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER URL" "http://www.yageo.com/"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGING" "TapeandReel"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (METRIC)" "1608"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" "-55degC"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "COMPOSITION" "ThickFilm"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Yageo"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHSCOMPLIANT" "true"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CONTACT PLATING" "Tin"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "REACH SVHC" "NoSVHC"
+			(at 29.972 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "109de713-f4c4-43ac-8ab7-f5c4917ffd47")
+		)
+		(pin "1"
+			(uuid "5e30e206-4a79-4c72-9be0-ec6b33667607")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(reference "R001")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:KL30_ARROW")
+		(at 25.4 271.6022 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c1ef82fb-769c-47b2-95c2-cb07c263e0c3")
+		(property "Reference" "#PWR?"
+			(at 25.4 271.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "KL30"
+			(at 25.4 267.7922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 25.4 271.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 25.4 271.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 25.4 271.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "f701bd33-6dbb-4ca9-a5a4-52373d59193f")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:root_0_RES-2")
+		(at 33.02 281.7622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e2f17c84-0335-48fb-a56e-d2f31647f31f")
+		(property "Reference" "R000"
+			(at 32.766 281.0002 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "RC0603JR-070RL"
+			(at 32.766 285.0642 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RESC1608X55X25ML10T15"
+			(at 33.02 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
+			(at 33.02 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "WIDTH" "0.8mm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" "155degC"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TOLERANCE" "5%"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE REFERENCE" "0603"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "HEIGHT" "0.45mm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DEPTH" "0.8mm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING" "50V"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TERMINATION" "SMD/SMT"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE QUANTITY" "5000"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" "0603"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (IMPERIAL)" "0603"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RADIATION HARDENING" "No"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "NUMBER OF PINS" "2"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LENGTH" "1.6mm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LEAD FREE" "LeadFree"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING (DC)" "50V"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MILITARY STANDARD" "Not"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "POWER RATING" "100mW"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RESISTANCE" "0mOhm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER URL" "http://www.yageo.com/"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGING" "TapeandReel"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (METRIC)" "1608"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" "-55degC"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "COMPOSITION" "ThickFilm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Yageo"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHSCOMPLIANT" "true"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CONTACT PLATING" "Tin"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "REACH SVHC" "NoSVHC"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "1f361fa2-3398-4f40-8da3-134aec6af256")
+		)
+		(pin "1"
+			(uuid "e314498d-a18b-4a6a-bdd8-d9f9b64a8c75")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(reference "R000")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:GND_BAR")
+		(at 45.72 281.7622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f9837eb0-1b02-4914-87eb-39f533e59650")
+		(property "Reference" "#PWR?"
+			(at 45.72 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 45.72 285.5722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 45.72 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "e0b2810d-b5cc-4374-bef5-68c75a00bee6")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 127 68.4022)
+		(size 50.8 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "002acce6-fc6b-4ceb-adbe-add7650e1e1b")
+		(property "Sheetname" "Designator"
+			(at 127 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "50_Distance.kicad_sch"
+			(at 127 68.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "SCL" passive
+			(at 177.8 78.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "830613d7-56e8-4c55-afe3-c686f051ecbb")
+		)
+		(pin "SDA" passive
+			(at 177.8 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "95134847-d295-4924-ab85-c47cb32a8b42")
+		)
+		(instances
+			(project "Lada_Speedometer"
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(page "Inkremental")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 88.9 76.0222)
+		(size 12.7 12.7)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "093a87d4-1a1e-4e2d-888f-f1e170d58269")
+		(property "Sheetname" "Designator"
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "60_Inkremental.kicad_sch"
+			(at 88.9 76.0222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(instances
+			(project "Lada_Speedometer"
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(page "")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 203.2 43.0022)
+		(size 76.2 50.8)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "0a93a96b-3cc2-4728-a5e3-a32d6f8aad5b")
+		(property "Sheetname" "Designator"
+			(at 203.2 40.4622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "20_Torq.kicad_sch"
+			(at 203.2 43.0022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "TorqIn" input
+			(at 203.2 55.7022 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "c509bb65-7628-4d29-8d47-968451ce0460")
+		)
+		(pin "TorqOut" output
+			(at 279.4 55.7022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "416979ce-8f73-4e18-bc2e-2a9a9ee9494e")
+		)
+		(instances
+			(project "Lada_Speedometer"
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(page "Torq")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 304.8 43.0022)
+		(size 25.4 50.8)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "2a60a2de-01e7-42ae-b903-fa87d025d396")
+		(property "Sheetname" "Designator"
+			(at 304.8 40.4622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "30_SOC.kicad_sch"
+			(at 304.8 43.0022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "SocIn" input
+			(at 304.8 55.7022 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "14f1cea8-f539-41f7-a15f-e86140bb67a1")
+		)
+		(pin "SocOut" output
+			(at 317.5 93.8022 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "222bc095-470c-4128-9170-f9716c2fba05")
+		)
+		(instances
+			(project "Lada_Speedometer"
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(page "SOC")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 76.2 43.0022)
+		(size 25.4 50.8)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "2aeb0ac3-f38f-4e06-9ef6-3667f2f8b826")
+		(property "Sheetname" "Designator"
+			(at 76.2 40.4622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "40_Temp.kicad_sch"
+			(at 76.2 43.0022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "TempOut" output
+			(at 76.2 63.3222 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "65eaf8f2-15e7-4a90-9216-3fe7aaafba9f")
+		)
+		(pin "TempIn" input
+			(at 101.6 91.2622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "dc8fed9b-43a5-454d-a983-d9e6cd5f6452")
+		)
+		(instances
+			(project "Lada_Speedometer"
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(page "Distance")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 228.6 144.6022)
+		(size 50.8 127)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "32861030-6f69-409d-8598-c83bce118b9f")
+		(property "Sheetname" "Designator"
+			(at 228.6 142.0622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "110_ESP32s3.kicad_sch"
+			(at 228.6 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "CS" output
+			(at 228.6 152.2222 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "2fd88b07-2b29-4768-978f-65753e082c59")
+		)
+		(pin "INTR" passive
+			(at 228.6 162.3822 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "d9b98880-b136-4237-88ce-6dfa65dd87c4")
+		)
+		(pin "MOSI" passive
+			(at 228.6 154.7622 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "cded014c-e180-4064-8528-3f30256181ef")
+		)
+		(pin "MISO" passive
+			(at 228.6 157.3022 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "e98d4f52-a8c4-4700-ada4-4071cca14165")
+		)
+		(pin "SCL" passive
+			(at 228.6 205.5622 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "4503123b-01b5-4692-9c1b-dda1b5c9de2b")
+		)
+		(pin "SDA" passive
+			(at 228.6 208.1022 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "15eb7bc2-5244-4f77-9574-766a82a50d8b")
+		)
+		(pin "~{RESET}" passive
+			(at 228.6 210.6422 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "2625c8b6-eb66-49e0-b9ce-cc77db7d475e")
+		)
+		(pin "NeoPixelData" output
+			(at 228.6 182.7022 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "12e88241-f56b-401a-bb25-76d1d64c349f")
+		)
+		(instances
+			(project "Lada_Speedometer"
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(page "ESP32s3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 144.6022)
+		(size 25.4 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "686d5bf7-0ea6-40da-af53-b4536f7dec7d")
+		(property "Sheetname" "Designator"
+			(at 152.4 142.0622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "90_CAN.kicad_sch"
+			(at 152.4 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "CS" input
+			(at 177.8 152.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "792c823f-9b4c-44c0-98a4-595ac9662178")
+		)
+		(pin "INTR" passive
+			(at 177.8 162.3822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "44e30688-52d3-4d7f-8b53-9a787d79ca9b")
+		)
+		(pin "MOSI" passive
+			(at 177.8 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "7d01c76b-3b7b-4918-a194-6ebd2b552c7b")
+		)
+		(pin "MISO" passive
+			(at 177.8 157.3022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "17762d39-c355-4283-a912-fe8b4b1863e1")
+		)
+		(instances
+			(project "Lada_Speedometer"
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(page "CAN")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 228.6 68.4022)
+		(size 50.8 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "8e3338c4-75f2-454d-b78b-8d2ab018c334")
+		(property "Sheetname" "Designator"
+			(at 228.6 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "10_Speed.kicad_sch"
+			(at 228.6 68.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "SCL" passive
+			(at 228.6 78.5622 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "9ed3692d-e2e6-47c1-a707-3f2ef8cbc7a0")
+		)
+		(pin "SDA" passive
+			(at 228.6 83.6422 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "186cc1c7-8cef-4253-bddc-a4387e67a0cc")
+		)
+		(instances
+			(project "Lada_Speedometer"
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(page "Speed")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 76.2 101.4222)
+		(size 254 12.7)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "970b6edd-79a9-4b36-8a07-74a7be2ff1b4")
+		(property "Sheetname" "Designator"
+			(at 76.2 98.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "70_Signalleuchten.kicad_sch"
+			(at 76.2 101.4222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "SigIn" input
+			(at 317.5 101.4222 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "5e8ca68b-7a94-4736-9646-c2859b5938fa")
+		)
+		(pin "SigOut" output
+			(at 106.68 101.4222 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "22fe4c0e-f497-4209-8174-217ff281a4b1")
+		)
+		(instances
+			(project "Lada_Speedometer"
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(page "Signalleuchten")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 182.7022)
+		(size 25.4 50.8)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "d86b7437-8294-4df4-bcae-7e69ed931132")
+		(property "Sheetname" "Designator"
+			(at 152.4 180.1622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "80_SignalInput.kicad_sch"
+			(at 152.4 182.7022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "SCL" passive
+			(at 177.8 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "fc189cab-3dc3-4e97-960d-1b79b1ad7505")
+		)
+		(pin "SDA" passive
+			(at 177.8 208.1022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "bc7c2885-e725-4437-9a6d-83f0210be6eb")
+		)
+		(pin "~{RESET}" passive
+			(at 177.8 210.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "f0ae3a8e-40a8-4051-8106-9bf01cbdbb1e")
+		)
+		(instances
+			(project "Lada_Speedometer"
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(page "SignalInput")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 246.2022)
+		(size 25.4 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "f802e702-9f16-4082-8e70-0d708deb71d7")
+		(property "Sheetname" "Designator"
+			(at 152.4 243.6622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "100_PowerSupply.kicad_sch"
+			(at 152.4 246.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(instances
+			(project "Lada_Speedometer"
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804"
+					(page "PowerSupply")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "Overview")
+		)
+	)
+)

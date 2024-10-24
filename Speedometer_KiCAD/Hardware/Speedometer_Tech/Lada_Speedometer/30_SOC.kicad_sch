@@ -1,0 +1,4827 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "c417d8bd-cb22-4564-9eba-237641196feb")
+	(paper "A3")
+	(lib_symbols
+		(symbol "Lada_Speedometer-altium-import:5V_ARROW"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "5V"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name '5V'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "5V_ARROW_0_0"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0) hide
+					(name "5V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*LED_WS2812B-4020*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Designator_0_WS2812B-4020_2_1_0"
+				(rectangle
+					(start 7.62 5.08)
+					(end -7.62 -5.08)
+					(stroke
+						(width 0.254)
+						(type solid)
+						(color 128 0 0 1)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -12.7 -2.54 0)
+					(length 5.08)
+					(name "DIN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 12.7 2.54 180)
+					(length 5.08)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at -12.7 2.54 0)
+					(length 5.08)
+					(name "DOUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 12.7 -2.54 180)
+					(length 5.08)
+					(name "VSS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Lada_Speedometer-altium-import:GND_BAR"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name 'GND'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GND_BAR_0_0"
+				(polyline
+					(pts
+						(xy -1.27 -2.54) (xy 1.27 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+	(junction
+		(at 205.74 167.4622)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "08468b2c-a41a-42ad-b3ad-9a03a4db2883")
+	)
+	(junction
+		(at 205.74 106.5022)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0d88590d-e4e7-4d5a-86e8-eb0f03a5c538")
+	)
+	(junction
+		(at 160.02 152.2222)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "14bb6017-c37f-4deb-b977-53aad0f60afa")
+	)
+	(junction
+		(at 154.94 241.1222)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "17748dcc-e077-4114-9d90-ac80487129ef")
+	)
+	(junction
+		(at 104.14 241.1222)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "238aa987-47c0-4fd8-914b-8fc7de12225c")
+	)
+	(junction
+		(at 160.02 70.9422)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "240c87a0-5639-4309-9d22-fbbbc0e8ac00")
+	)
+	(junction
+		(at 205.74 147.1422)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "364efafb-e09c-434c-abca-158629762e3f")
+	)
+	(junction
+		(at 210.82 162.3822)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3b1241a6-e22a-4cfd-be09-1a64dfe86f3d")
+	)
+	(junction
+		(at 154.94 157.3022)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4d73263e-f7c3-4c7b-8c33-63a3027f5425")
+	)
+	(junction
+		(at 104.14 157.3022)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5915232d-70e2-463f-b2fb-79746e148b4e")
+	)
+	(junction
+		(at 210.82 182.7022)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6205dd6c-4959-4a62-a617-3f767d2b45b0")
+	)
+	(junction
+		(at 205.74 126.8222)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "64e445ba-1924-4057-a411-584f24c5a6e3")
+	)
+	(junction
+		(at 210.82 121.7422)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "657008b0-32a6-4608-bc1f-01ded9d9d9d2")
+	)
+	(junction
+		(at 210.82 142.0622)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6814d68e-8c53-4247-8ed6-c5c2752c9027")
+	)
+	(junction
+		(at 210.82 81.1022)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "68cf7f7c-ada5-4980-8694-e9e8248fa80b")
+	)
+	(junction
+		(at 160.02 192.8622)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7ad3a20b-e4c6-4d41-a0b1-a7eeb7206395")
+	)
+	(junction
+		(at 104.14 197.9422)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7ba0bdc8-4163-47a1-9203-7f054f3c9b87")
+	)
+	(junction
+		(at 205.74 208.1022)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "83b9e93d-ae13-40c2-916c-fd2cd4178168")
+	)
+	(junction
+		(at 210.82 101.4222)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "83e349db-0e10-4320-b644-f8007db099a1")
+	)
+	(junction
+		(at 210.82 203.0222)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "84c948e8-0b23-4b9c-a9fd-31e0b7b56639")
+	)
+	(junction
+		(at 154.94 116.6622)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "917e44f4-dd8e-4c05-9256-4f9ee96228e9")
+	)
+	(junction
+		(at 154.94 197.9422)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "92a03efe-d8c5-479c-ada6-6b90e15b1c07")
+	)
+	(junction
+		(at 109.22 152.2222)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a25890c8-8dd6-4489-bb4a-4b151b441a73")
+	)
+	(junction
+		(at 205.74 228.4222)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "be242cd8-c8db-4d65-bdef-f17835e55e23")
+	)
+	(junction
+		(at 109.22 70.9422)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c8537ebc-9c0d-4e3d-8d00-3d8b005cc521")
+	)
+	(junction
+		(at 205.74 187.7822)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e41d4449-7681-49d9-8e6a-0a11278fec87")
+	)
+	(junction
+		(at 109.22 192.8622)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f48e52bc-e116-473a-a838-24db49474556")
+	)
+	(junction
+		(at 160.02 111.5822)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fc827f27-9504-4ab8-9894-3f8e5b2cf4e7")
+	)
+	(wire
+		(pts
+			(xy 73.66 185.2422) (xy 73.66 197.9422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00f7e538-0fcb-461e-8075-c9e6caf88d2c")
+	)
+	(wire
+		(pts
+			(xy 127 192.8622) (xy 119.38 192.8622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "019b544e-cc72-4019-8728-5f30cc2bb620")
+	)
+	(wire
+		(pts
+			(xy 124.46 81.1022) (xy 124.46 76.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "025a82ca-233a-4385-8e3f-dbb9957728b3")
+	)
+	(wire
+		(pts
+			(xy 76.2 236.0422) (xy 68.58 236.0422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "02ca2a4a-f078-4055-ab05-a660241638a5")
+	)
+	(wire
+		(pts
+			(xy 177.8 203.0222) (xy 177.8 187.7822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "034a0e02-31bf-4a54-b538-2b027d4e3f72")
+	)
+	(wire
+		(pts
+			(xy 203.2 126.8222) (xy 205.74 126.8222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "05ef99a8-2c11-4585-80e8-c5cdda99a7f4")
+	)
+	(wire
+		(pts
+			(xy 205.74 233.5022) (xy 205.74 228.4222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "069b0202-5e08-48bc-9598-a2448a921936")
+	)
+	(wire
+		(pts
+			(xy 71.12 205.5622) (xy 124.46 205.5622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08c0f186-9312-4e54-badb-c04e5e34ff5b")
+	)
+	(wire
+		(pts
+			(xy 101.6 192.8622) (xy 109.22 192.8622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0ef638dd-5aea-48d7-b2b0-86d1bc664102")
+	)
+	(wire
+		(pts
+			(xy 177.8 106.5022) (xy 177.8 121.7422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "12ceda72-674f-4f31-be3b-2b91c5cca919")
+	)
+	(wire
+		(pts
+			(xy 104.14 241.1222) (xy 104.14 246.2022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "17ef953d-9c3b-415e-b753-b881005fad85")
+	)
+	(wire
+		(pts
+			(xy 119.38 192.8622) (xy 119.38 185.2422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1c58ec6c-7bfc-4565-bdfa-4363e275a1ff")
+	)
+	(wire
+		(pts
+			(xy 203.2 162.3822) (xy 210.82 162.3822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f6a652a-1a00-44e3-9072-7b4c14eaec29")
+	)
+	(wire
+		(pts
+			(xy 160.02 236.0422) (xy 152.4 236.0422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20e69323-c468-4385-a1b3-73f63118d4fb")
+	)
+	(wire
+		(pts
+			(xy 152.4 116.6622) (xy 154.94 116.6622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25cd2967-3415-4b27-9749-4bc714500994")
+	)
+	(wire
+		(pts
+			(xy 101.6 76.0222) (xy 104.14 76.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26db7cdd-0345-4ed2-816e-9d6a09d4b799")
+	)
+	(wire
+		(pts
+			(xy 205.74 147.1422) (xy 205.74 126.8222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a514220-864f-4290-90a8-f2d1f36243ff")
+	)
+	(wire
+		(pts
+			(xy 210.82 162.3822) (xy 210.82 142.0622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2aaab505-713c-4bb4-aaac-5527b71b37d2")
+	)
+	(wire
+		(pts
+			(xy 124.46 116.6622) (xy 127 116.6622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2c879e69-09f4-483f-b352-6ed62828fd92")
+	)
+	(wire
+		(pts
+			(xy 203.2 228.4222) (xy 205.74 228.4222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2cf881a5-c80f-40e7-bbcc-11508a1a46e9")
+	)
+	(wire
+		(pts
+			(xy 154.94 76.0222) (xy 154.94 116.6622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "33144c30-f616-4d12-9766-15fcdafe8e7b")
+	)
+	(wire
+		(pts
+			(xy 76.2 70.9422) (xy 71.12 70.9422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "33fb5cf5-9bf5-49f6-bdeb-1b19a2a48c1a")
+	)
+	(wire
+		(pts
+			(xy 203.2 208.1022) (xy 205.74 208.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "34c6def9-7b47-4ee9-8033-4cc4b843d167")
+	)
+	(wire
+		(pts
+			(xy 73.66 241.1222) (xy 76.2 241.1222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "36bd7953-331b-41c9-816b-e82d596fe49d")
+	)
+	(wire
+		(pts
+			(xy 124.46 65.8622) (xy 73.66 65.8622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3970912e-ba3e-4449-8dac-e4577e8f5574")
+	)
+	(wire
+		(pts
+			(xy 210.82 142.0622) (xy 210.82 121.7422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "399d8329-e36c-4fe7-94f5-c77994ed0fb1")
+	)
+	(wire
+		(pts
+			(xy 124.46 70.9422) (xy 124.46 65.8622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a551875-3434-4e0d-9736-eb6b4cfd9b45")
+	)
+	(wire
+		(pts
+			(xy 152.4 152.2222) (xy 160.02 152.2222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3da167ac-8b6d-4608-a0ec-d5c480c59ca0")
+	)
+	(wire
+		(pts
+			(xy 160.02 70.9422) (xy 160.02 111.5822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3f6a2ce3-b7ea-498a-b1b8-6f83fb108c96")
+	)
+	(wire
+		(pts
+			(xy 76.2 152.2222) (xy 71.12 152.2222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "44f64790-ce7f-4f57-b869-14445ee2b366")
+	)
+	(wire
+		(pts
+			(xy 68.58 236.0422) (xy 68.58 263.9822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "45edf9be-8dec-47a2-a1a5-da5bbab0e833")
+	)
+	(wire
+		(pts
+			(xy 154.94 116.6622) (xy 154.94 157.3022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4836f472-c796-4f92-a9df-476ed776b0e3")
+	)
+	(wire
+		(pts
+			(xy 210.82 101.4222) (xy 210.82 81.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a23ce43-36c9-420a-b512-d880f3ce120e")
+	)
+	(wire
+		(pts
+			(xy 71.12 70.9422) (xy 71.12 83.6422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4aa9d947-0620-4bd7-bc98-e75f061732b4")
+	)
+	(wire
+		(pts
+			(xy 203.2 106.5022) (xy 205.74 106.5022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "51f48804-88f6-477b-bf38-596d9bdc8942")
+	)
+	(wire
+		(pts
+			(xy 71.12 83.6422) (xy 124.46 83.6422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "52725816-045d-4f59-b3b6-ef404c2322cb")
+	)
+	(wire
+		(pts
+			(xy 203.2 101.4222) (xy 210.82 101.4222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "561a8d27-cc1c-4a1d-9175-ab5b89cf5ae2")
+	)
+	(wire
+		(pts
+			(xy 101.6 241.1222) (xy 104.14 241.1222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5b10523a-99fd-4a8d-a36a-908c5ee5b058")
+	)
+	(wire
+		(pts
+			(xy 205.74 228.4222) (xy 205.74 208.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ba70c63-fce3-4559-afc0-43c0d9feacc0")
+	)
+	(wire
+		(pts
+			(xy 154.94 241.1222) (xy 154.94 246.2022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5f8a2282-9b9c-4479-902d-5eb5763232c6")
+	)
+	(wire
+		(pts
+			(xy 101.6 70.9422) (xy 109.22 70.9422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6043c8e5-77d7-4c4f-a72c-2e6716b3a91d")
+	)
+	(wire
+		(pts
+			(xy 205.74 208.1022) (xy 205.74 187.7822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6179e398-cc01-4c45-ba23-83714a878b12")
+	)
+	(wire
+		(pts
+			(xy 205.74 187.7822) (xy 205.74 167.4622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "65dec6cb-f9cf-45a4-8155-7b3da3b8c022")
+	)
+	(wire
+		(pts
+			(xy 124.46 147.1422) (xy 73.66 147.1422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6631f161-a94e-4e33-9df4-18690aba5ef3")
+	)
+	(wire
+		(pts
+			(xy 152.4 70.9422) (xy 160.02 70.9422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "67b7f4d3-f490-41c0-a91a-fec06d75ffcb")
+	)
+	(wire
+		(pts
+			(xy 152.4 241.1222) (xy 154.94 241.1222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6d47978a-ab15-4fc0-924a-f4cff161eb1f")
+	)
+	(wire
+		(pts
+			(xy 152.4 111.5822) (xy 160.02 111.5822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6ef588b7-e24f-4f86-9b98-28bc603bb968")
+	)
+	(wire
+		(pts
+			(xy 124.46 205.5622) (xy 124.46 241.1222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6f760104-6516-41f6-9f05-4aafcfbcb986")
+	)
+	(wire
+		(pts
+			(xy 119.38 185.2422) (xy 73.66 185.2422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7680a4e7-2a37-4128-9388-10e486cff92c")
+	)
+	(wire
+		(pts
+			(xy 68.58 263.9822) (xy 50.8 263.9822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "771016c1-35e0-4ddf-afe1-2c805b4dc157")
+	)
+	(wire
+		(pts
+			(xy 73.66 147.1422) (xy 73.66 157.3022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "774e0b6f-4fef-4dab-8791-8fd47f662009")
+	)
+	(wire
+		(pts
+			(xy 177.8 208.1022) (xy 177.8 223.3422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7782ae9d-4ada-4f8d-a5e4-9bf3c32671c6")
+	)
+	(wire
+		(pts
+			(xy 101.6 197.9422) (xy 104.14 197.9422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "783a8dd9-ef0d-4838-b90b-500eaa167a3c")
+	)
+	(wire
+		(pts
+			(xy 124.46 76.0222) (xy 127 76.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78a580ef-2193-4557-bc79-9a0938b57cbb")
+	)
+	(wire
+		(pts
+			(xy 205.74 106.5022) (xy 205.74 86.1822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78c54498-2ddf-429d-abb7-a5024e6ef782")
+	)
+	(wire
+		(pts
+			(xy 152.4 197.9422) (xy 154.94 197.9422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7ab795e7-150e-454a-a168-d0034535c1ae")
+	)
+	(wire
+		(pts
+			(xy 205.74 126.8222) (xy 205.74 106.5022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c13192c-8d60-492c-9ca5-fcc4c4c2ccdc")
+	)
+	(wire
+		(pts
+			(xy 104.14 76.0222) (xy 104.14 157.3022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7cccb1b7-3f7a-4fa7-aa35-2ab6c2921d5e")
+	)
+	(wire
+		(pts
+			(xy 71.12 164.9222) (xy 124.46 164.9222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7ee0d733-756a-429a-9ba5-15ae6a0a37b1")
+	)
+	(wire
+		(pts
+			(xy 109.22 70.9422) (xy 109.22 63.3222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f113913-9ff8-410f-9be8-3e5964cb64f1")
+	)
+	(wire
+		(pts
+			(xy 101.6 152.2222) (xy 109.22 152.2222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8087106d-6741-4150-9259-44dd70f37390")
+	)
+	(wire
+		(pts
+			(xy 109.22 192.8622) (xy 109.22 236.0422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "85dac7c4-252d-4fb4-94ba-5c23b81a9466")
+	)
+	(wire
+		(pts
+			(xy 160.02 192.8622) (xy 160.02 236.0422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "86a4c8fa-3d26-42f2-b210-ad1f68220194")
+	)
+	(wire
+		(pts
+			(xy 203.2 182.7022) (xy 210.82 182.7022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8ef40560-1597-4292-b552-833d693bd463")
+	)
+	(wire
+		(pts
+			(xy 177.8 101.4222) (xy 177.8 86.1822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "918918fa-ba51-4837-b376-ba64b1c3b0bc")
+	)
+	(wire
+		(pts
+			(xy 177.8 126.8222) (xy 177.8 142.0622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92d84179-b58c-4065-8be5-d7f9c3229a11")
+	)
+	(wire
+		(pts
+			(xy 203.2 147.1422) (xy 205.74 147.1422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "94681856-07ec-4928-ac04-6f0d2fdc3b2f")
+	)
+	(wire
+		(pts
+			(xy 109.22 70.9422) (xy 109.22 152.2222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "956c48e1-6a3a-4dbc-ab50-f4fb836066a1")
+	)
+	(wire
+		(pts
+			(xy 203.2 187.7822) (xy 205.74 187.7822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "96cd0801-615a-44e5-8355-24a2f91a2003")
+	)
+	(wire
+		(pts
+			(xy 109.22 152.2222) (xy 109.22 192.8622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "96ed9403-cecd-4ff2-aa40-f0f76bca2f36")
+	)
+	(wire
+		(pts
+			(xy 76.2 192.8622) (xy 71.12 192.8622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9978940c-d2b5-4a07-b33d-e4f449b0629a")
+	)
+	(wire
+		(pts
+			(xy 203.2 142.0622) (xy 210.82 142.0622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a3713ca-90b8-4254-b2c2-8c0c8e12e3cb")
+	)
+	(wire
+		(pts
+			(xy 177.8 147.1422) (xy 177.8 162.3822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9ab55067-a535-4b79-9702-e30638b476ae")
+	)
+	(wire
+		(pts
+			(xy 127 111.5822) (xy 119.38 111.5822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b9fa05c-2555-4720-98c7-e933c103f332")
+	)
+	(wire
+		(pts
+			(xy 203.2 167.4622) (xy 205.74 167.4622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9ba574d8-1a90-41d8-a1c4-1a13587bb9db")
+	)
+	(wire
+		(pts
+			(xy 152.4 157.3022) (xy 154.94 157.3022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9cefb5c9-c33d-467a-81e9-ec40c882188d")
+	)
+	(wire
+		(pts
+			(xy 152.4 192.8622) (xy 160.02 192.8622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2d9a9ae-ca53-478b-9b59-2223fb6ca73c")
+	)
+	(wire
+		(pts
+			(xy 203.2 223.3422) (xy 210.82 223.3422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a36a314d-4f57-4cd3-bdb8-bc766f7092e8")
+	)
+	(wire
+		(pts
+			(xy 104.14 157.3022) (xy 104.14 197.9422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a3b8e124-9b7e-43af-9cc1-dc78e58f9286")
+	)
+	(wire
+		(pts
+			(xy 124.46 241.1222) (xy 127 241.1222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5520d6d-c644-4142-b408-e91edde7d287")
+	)
+	(wire
+		(pts
+			(xy 73.66 228.4222) (xy 73.66 241.1222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a7336ced-ccd5-4533-aa8f-1e9fb911afb5")
+	)
+	(wire
+		(pts
+			(xy 127 152.2222) (xy 124.46 152.2222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a91287f1-3c55-4100-b14b-6a7c41586c75")
+	)
+	(wire
+		(pts
+			(xy 119.38 236.0422) (xy 119.38 228.4222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a94b95f2-502f-4ebd-9154-e688c5eda59e")
+	)
+	(wire
+		(pts
+			(xy 101.6 157.3022) (xy 104.14 157.3022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a9c02e72-6a0b-4295-b5eb-bb2fa1681e98")
+	)
+	(wire
+		(pts
+			(xy 203.2 121.7422) (xy 210.82 121.7422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ac03a84f-1bba-41e8-9e9d-48d8b6c8b27d")
+	)
+	(wire
+		(pts
+			(xy 177.8 81.1022) (xy 124.46 81.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "acbd5437-3b76-41e1-9d37-5da8bc4a8c79")
+	)
+	(wire
+		(pts
+			(xy 205.74 86.1822) (xy 203.2 86.1822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af5a0db5-ca6c-4418-af29-30eed177b91d")
+	)
+	(wire
+		(pts
+			(xy 124.46 164.9222) (xy 124.46 197.9422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b028e136-13d3-4abf-8b71-e1bca1e1ba98")
+	)
+	(wire
+		(pts
+			(xy 177.8 167.4622) (xy 177.8 182.7022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b536770b-f416-42b1-af09-1a04376d23c1")
+	)
+	(wire
+		(pts
+			(xy 119.38 157.3022) (xy 127 157.3022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b59e9a4a-b13b-4aa0-b598-30bc448ded86")
+	)
+	(wire
+		(pts
+			(xy 124.46 152.2222) (xy 124.46 147.1422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b7bc8e7c-dabd-4131-be36-29d9b4b6b596")
+	)
+	(wire
+		(pts
+			(xy 210.82 121.7422) (xy 210.82 101.4222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ba6194ab-4d2d-4bb6-a7c7-587c1f41f066")
+	)
+	(wire
+		(pts
+			(xy 160.02 111.5822) (xy 160.02 152.2222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bb08a668-68c7-478a-b268-69823406541e")
+	)
+	(wire
+		(pts
+			(xy 124.46 197.9422) (xy 127 197.9422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bb3e2ff7-cbcd-4d31-90dd-b5b29466af9e")
+	)
+	(wire
+		(pts
+			(xy 73.66 197.9422) (xy 76.2 197.9422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bffcc60f-0ce1-474a-8f7c-43a8d7583e1c")
+	)
+	(wire
+		(pts
+			(xy 160.02 152.2222) (xy 160.02 192.8622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c2e2cc75-9974-4fcc-9076-97635f66f563")
+	)
+	(wire
+		(pts
+			(xy 109.22 236.0422) (xy 101.6 236.0422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c3433e33-c480-433d-91cd-5fa1e9970b1e")
+	)
+	(wire
+		(pts
+			(xy 73.66 76.0222) (xy 76.2 76.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c68d3f69-5ce2-499e-bd1c-4a31059eee23")
+	)
+	(wire
+		(pts
+			(xy 154.94 157.3022) (xy 154.94 197.9422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6a29697-9665-42c4-9b38-06d5a7a37d52")
+	)
+	(wire
+		(pts
+			(xy 124.46 83.6422) (xy 124.46 116.6622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cf3c2d6a-2241-40d8-8610-8749acece5d4")
+	)
+	(wire
+		(pts
+			(xy 205.74 167.4622) (xy 205.74 147.1422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cfb82e08-7dc4-4fe0-8474-aa792800dab6")
+	)
+	(wire
+		(pts
+			(xy 73.66 65.8622) (xy 73.66 76.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d01958f3-0a0d-4dab-9ebd-0394a95155cb")
+	)
+	(wire
+		(pts
+			(xy 203.2 81.1022) (xy 210.82 81.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d5f2a905-0e60-4aae-8867-974bce6783e9")
+	)
+	(wire
+		(pts
+			(xy 73.66 157.3022) (xy 76.2 157.3022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d621812c-a7bc-4bbe-be24-52807c29a0c3")
+	)
+	(wire
+		(pts
+			(xy 210.82 81.1022) (xy 210.82 76.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d8f75b80-d9d5-4895-b2ee-e0dc05c09cd4")
+	)
+	(wire
+		(pts
+			(xy 104.14 197.9422) (xy 104.14 241.1222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "daba5845-e585-4439-a137-8b607e07b06e")
+	)
+	(wire
+		(pts
+			(xy 127 236.0422) (xy 119.38 236.0422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e22b18a0-1367-4a96-9953-78bcb416d6cb")
+	)
+	(wire
+		(pts
+			(xy 210.82 182.7022) (xy 210.82 162.3822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e7dd56f4-e488-47e1-b61f-b2ef1ef6b295")
+	)
+	(wire
+		(pts
+			(xy 177.8 271.6022) (xy 50.8 271.6022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e8bdf9fa-8742-4265-a45e-7aa782479ae8")
+	)
+	(wire
+		(pts
+			(xy 71.12 192.8622) (xy 71.12 205.5622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ebe1985b-08b5-4be7-b91b-24944926655e")
+	)
+	(wire
+		(pts
+			(xy 152.4 76.0222) (xy 154.94 76.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f265de30-1950-4f11-b62a-3d80ce4c621f")
+	)
+	(wire
+		(pts
+			(xy 119.38 111.5822) (xy 119.38 157.3022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f2f8a414-900d-4dca-8c0b-82a8e40b1c97")
+	)
+	(wire
+		(pts
+			(xy 210.82 203.0222) (xy 210.82 182.7022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f359c4ab-ab23-47fb-bba8-a985c131ba46")
+	)
+	(wire
+		(pts
+			(xy 119.38 228.4222) (xy 73.66 228.4222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f3bb7c4c-ded0-4b07-baf9-ee78cadb4eca")
+	)
+	(wire
+		(pts
+			(xy 203.2 203.0222) (xy 210.82 203.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5f226fa-653f-47ab-9336-88ab1ed8f285")
+	)
+	(wire
+		(pts
+			(xy 71.12 152.2222) (xy 71.12 164.9222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f6036f51-4a1d-4b2f-992e-35cc3f0b0ff0")
+	)
+	(wire
+		(pts
+			(xy 177.8 228.4222) (xy 177.8 271.6022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f7ba29ab-74f2-4ab2-99aa-965dfc306c33")
+	)
+	(wire
+		(pts
+			(xy 210.82 223.3422) (xy 210.82 203.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f908275b-bb96-49c4-b0e1-82c6b304a8c1")
+	)
+	(wire
+		(pts
+			(xy 127 70.9422) (xy 124.46 70.9422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f9758c9c-3479-4095-8444-f53159eda7a6")
+	)
+	(wire
+		(pts
+			(xy 154.94 197.9422) (xy 154.94 241.1222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa608d12-ae22-48fe-9e71-2d3d4ce812c8")
+	)
+	(wire
+		(pts
+			(xy 160.02 70.9422) (xy 160.02 65.8622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fbfbe6ca-f0af-48f4-8d97-e737e518a282")
+	)
+	(text "Ladesymbol Symbol"
+		(exclude_from_sim no)
+		(at 63.5 195.4022 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify bottom)
+		)
+		(uuid "366840b5-8fa0-4130-8076-6b12bbd8a16c")
+	)
+	(text "1/1"
+		(exclude_from_sim no)
+		(at 63.5 73.4822 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify bottom)
+		)
+		(uuid "c8c5cbf4-bcc3-42d3-aadf-1774ade2dd60")
+	)
+	(text "R"
+		(exclude_from_sim no)
+		(at 63.5 238.5822 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify bottom)
+		)
+		(uuid "dba148ec-a4d9-4534-b719-de298ee5356b")
+	)
+	(text "1/2"
+		(exclude_from_sim no)
+		(at 63.5 154.7622 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify bottom)
+		)
+		(uuid "e8236db5-1e75-44be-9e0e-77ea86d5bde5")
+	)
+	(hierarchical_label "SocOut"
+		(shape output)
+		(at 50.8 263.9822 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "41b723e9-aeb7-4d47-810e-aa189220609e")
+	)
+	(hierarchical_label "SocIn"
+		(shape input)
+		(at 50.8 271.6022 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c686d135-0485-4992-a24d-c8b7b1bb3de0")
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 139.7 195.4022 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "35bee4e5-0fba-4893-9498-62f59821b9e2")
+		(property "Reference" "U311"
+			(at 132.08 190.3222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 132.08 203.0222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 139.7 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 139.7 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 139.7 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 139.7 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 139.7 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 139.7 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 139.7 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 139.7 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 139.7 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 139.7 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3871aee9-2921-4d19-914f-e5f6b82f2255")
+		)
+		(pin "2"
+			(uuid "b0df9139-8956-4cdb-90f1-648f2cfe9d17")
+		)
+		(pin "3"
+			(uuid "93ff53fa-8115-4264-be64-b0b9cef79104")
+		)
+		(pin "4"
+			(uuid "344de0fb-8e27-4841-9422-26216e5bd6df")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U311")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:5V_ARROW")
+		(at 210.82 76.0222 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "45205827-dbac-4420-a669-dfffcd77cd32")
+		(property "Reference" "#PWR?"
+			(at 210.82 76.0222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "5V"
+			(at 210.82 72.2122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 210.82 76.0222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 210.82 76.0222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 210.82 76.0222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "63553806-a4c8-4b17-aaf7-aaf4aeac8ab6")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 190.5 185.2422 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "498ea8aa-336c-4948-8f08-9600541524fa")
+		(property "Reference" "U302"
+			(at 182.88 180.1622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 182.88 192.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 190.5 185.2422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 185.2422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 190.5 185.2422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 190.5 185.2422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 190.5 185.2422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 190.5 185.2422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 190.5 185.2422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 190.5 185.2422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 190.5 185.2422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 190.5 185.2422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 190.5 185.2422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "06948f63-9562-49fe-8d05-e8c80cd7859f")
+		)
+		(pin "2"
+			(uuid "5ffbaf62-6a94-47c8-9646-37e3024471e2")
+		)
+		(pin "3"
+			(uuid "461bff22-9445-4022-9018-acf2ff71fe03")
+		)
+		(pin "4"
+			(uuid "6a3067e6-7418-4afb-966a-f16fa524240e")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U302")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:5V_ARROW")
+		(at 160.02 65.8622 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "51a8585f-5a89-4066-81fe-2bd8e9239f4d")
+		(property "Reference" "#PWR?"
+			(at 160.02 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "5V"
+			(at 160.02 62.0522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 160.02 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 160.02 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 160.02 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "a35f2ace-76f2-44ae-9ef0-4e95bff3cab9")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 190.5 225.8822 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "691aa8ee-4c6e-4c7f-902e-9cb10b4a4f0c")
+		(property "Reference" "U300"
+			(at 182.88 220.8022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 182.88 233.5022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 190.5 225.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 225.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 190.5 225.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 190.5 225.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 190.5 225.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 190.5 225.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 190.5 225.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 190.5 225.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 190.5 225.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 190.5 225.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 190.5 225.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "1e4ef00e-74ac-4028-a539-3af2278cc1aa")
+		)
+		(pin "1"
+			(uuid "59cfe560-fecc-49dd-a151-ab2aadd5aefb")
+		)
+		(pin "4"
+			(uuid "5d83febd-8491-49f7-a6bf-311c45a49d48")
+		)
+		(pin "3"
+			(uuid "12f19034-9b6c-48fb-ac6f-c2981406d746")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U300")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:GND_BAR")
+		(at 205.74 233.5022 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "69f8ab78-40b1-42d5-852a-d783081802b1")
+		(property "Reference" "#PWR?"
+			(at 205.74 233.5022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 205.74 237.3122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 205.74 233.5022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 205.74 233.5022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 205.74 233.5022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "78b416b3-4e42-4db9-bf91-39b2048f85ef")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 190.5 164.9222 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "86953458-5001-4b46-9d87-3485d2fad5cb")
+		(property "Reference" "U303"
+			(at 182.88 159.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 182.88 172.5422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 190.5 164.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 164.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 190.5 164.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 190.5 164.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 190.5 164.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 190.5 164.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 190.5 164.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 190.5 164.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 190.5 164.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 190.5 164.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 190.5 164.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7f8c5dfe-f6b4-46a3-a5bc-f9f578e5da40")
+		)
+		(pin "2"
+			(uuid "d44009b2-72f0-4ad4-9583-5cd413585703")
+		)
+		(pin "3"
+			(uuid "2891c67b-3e48-4014-897f-8c5e06fc46d0")
+		)
+		(pin "4"
+			(uuid "fd81b456-3f4a-48b7-9d53-9193a3f8f807")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U303")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 190.5 144.6022 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8c287a55-35a3-4be6-8152-db5e1acdb058")
+		(property "Reference" "U304"
+			(at 182.88 139.5222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 182.88 152.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 190.5 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 190.5 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 190.5 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 190.5 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 190.5 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 190.5 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 190.5 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 190.5 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 190.5 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 190.5 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "78c4c118-581d-4608-9167-617004aee74b")
+		)
+		(pin "2"
+			(uuid "06e1bdc8-9c56-4269-a510-f3b074c3c788")
+		)
+		(pin "3"
+			(uuid "3c04779e-6515-46bd-b65f-1ca3096011c0")
+		)
+		(pin "4"
+			(uuid "27936014-5c3e-4ad1-ab3b-119d11a8d5b8")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U304")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:GND_BAR")
+		(at 104.14 246.2022 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9161e753-a6ff-4859-a2a5-ff8d18f7d3a0")
+		(property "Reference" "#PWR?"
+			(at 104.14 246.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 104.14 250.0122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 104.14 246.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 104.14 246.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 104.14 246.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "cdcca32f-d5d2-4878-92fe-ec19507272c8")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 190.5 103.9622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "99027c4d-3061-479f-bef9-27a98f83b80a")
+		(property "Reference" "U306"
+			(at 182.88 98.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 182.88 111.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 190.5 103.9622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 103.9622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 190.5 103.9622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 190.5 103.9622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 190.5 103.9622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 190.5 103.9622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 190.5 103.9622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 190.5 103.9622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 190.5 103.9622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 190.5 103.9622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 190.5 103.9622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f4abf463-63fb-4db8-8137-3086ab0d6305")
+		)
+		(pin "2"
+			(uuid "d75bcd38-f50a-49ed-9031-10c1c5a3d360")
+		)
+		(pin "3"
+			(uuid "73a92ee3-2489-4296-a9d4-6692af92902e")
+		)
+		(pin "4"
+			(uuid "8366514a-21f3-4158-9ccf-c534d1fd9ca1")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U306")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 88.9 238.5822 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "99db06ad-13e5-48c6-9721-d0109baff50f")
+		(property "Reference" "U320"
+			(at 81.28 233.5022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 81.28 246.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 88.9 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 88.9 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 88.9 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 88.9 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 88.9 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 88.9 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 88.9 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 88.9 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 88.9 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 88.9 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 88.9 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "df81d3ff-8784-4eca-b2ae-742acf28d33f")
+		)
+		(pin "2"
+			(uuid "c2f410b0-cc1e-4d4f-8973-804815fe1d28")
+		)
+		(pin "3"
+			(uuid "b1d2ed0c-a283-404f-a6b6-177182ca9ffe")
+		)
+		(pin "4"
+			(uuid "3cc8b43a-9433-4fd2-8d0c-bcb8b266dfc0")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U320")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 88.9 73.4822 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9d3b9434-42af-4bf3-a956-d9dae8b5cb88")
+		(property "Reference" "U323"
+			(at 81.28 68.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 81.28 81.1022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f99f302c-488a-41dc-b884-fea8719258c8")
+		)
+		(pin "2"
+			(uuid "d61e0861-e610-4392-ad4c-ffeb0fd2d3fa")
+		)
+		(pin "3"
+			(uuid "e23ac4f6-5f94-48dc-8477-80c7920fd03d")
+		)
+		(pin "4"
+			(uuid "250cd7af-1622-43a1-b8b7-faef7e526f87")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U323")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 88.9 154.7622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a0bc22d0-fe89-4488-9e87-6f4bd2e30a47")
+		(property "Reference" "U322"
+			(at 81.28 149.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 81.28 162.3822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 88.9 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 88.9 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 88.9 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 88.9 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 88.9 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 88.9 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 88.9 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 88.9 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 88.9 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 88.9 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 88.9 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6953fd28-8e05-43b2-84ba-0f93c6026a46")
+		)
+		(pin "2"
+			(uuid "28f127f8-9629-4213-9ccc-489a4d096184")
+		)
+		(pin "3"
+			(uuid "2c47a3a8-3911-4848-8634-1318362e1b8c")
+		)
+		(pin "4"
+			(uuid "6109791e-1844-4164-8907-2c7b6e5e6a66")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U322")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 190.5 124.2822 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a732893d-07d4-4eb9-a3e3-f24268f8f4d3")
+		(property "Reference" "U305"
+			(at 182.88 119.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 182.88 131.9022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 190.5 124.2822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 124.2822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 190.5 124.2822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 190.5 124.2822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 190.5 124.2822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 190.5 124.2822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 190.5 124.2822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 190.5 124.2822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 190.5 124.2822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 190.5 124.2822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 190.5 124.2822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7cc6c736-f6ee-45c1-9f69-5e941f5f4ff2")
+		)
+		(pin "2"
+			(uuid "d003ee86-415b-4d89-9477-b00ecab16171")
+		)
+		(pin "3"
+			(uuid "e41618b8-86ee-4536-a782-6b0ed197db77")
+		)
+		(pin "4"
+			(uuid "4121ead3-2721-4d01-94b3-cf592cd13ace")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U305")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 139.7 73.4822 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b9f9c149-4f3a-4b71-88db-6378de7bdfd9")
+		(property "Reference" "U314"
+			(at 132.08 68.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 132.08 81.1022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 139.7 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 139.7 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 139.7 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 139.7 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 139.7 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 139.7 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 139.7 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 139.7 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 139.7 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 139.7 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cbe57e8d-ca52-479d-8712-8fb8850fc2a9")
+		)
+		(pin "2"
+			(uuid "c24607b7-5064-4160-8bdb-a40dbb5989b2")
+		)
+		(pin "3"
+			(uuid "1513410d-d7fc-442c-916d-daee01a6968a")
+		)
+		(pin "4"
+			(uuid "a06932af-7685-410f-8ef6-5923b40b6792")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U314")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:GND_BAR")
+		(at 154.94 246.2022 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bd516e86-d402-46fb-abec-ff011c3cb2d0")
+		(property "Reference" "#PWR?"
+			(at 154.94 246.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 154.94 250.0122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 154.94 246.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 154.94 246.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 154.94 246.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "c1c43afb-5688-4b98-8768-c959b9cee0ec")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:5V_ARROW")
+		(at 109.22 63.3222 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c4cf2669-ae27-48c9-bf93-f89340d379ce")
+		(property "Reference" "#PWR?"
+			(at 109.22 63.3222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "5V"
+			(at 109.22 59.5122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 109.22 63.3222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 109.22 63.3222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 109.22 63.3222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "84fc5ae1-e3f0-486f-b678-f6cb877c29a4")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 139.7 154.7622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e02a44e2-cd22-4fe1-82b5-009b8b7c346d")
+		(property "Reference" "U312"
+			(at 132.08 149.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 132.08 162.3822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 139.7 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 139.7 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 139.7 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 139.7 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 139.7 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 139.7 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 139.7 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 139.7 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 139.7 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 139.7 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "23d59363-6941-4a38-9ec5-b62b6fdd9ddf")
+		)
+		(pin "2"
+			(uuid "2f7a9fd6-6a6a-4921-b43b-fd6e82246b38")
+		)
+		(pin "3"
+			(uuid "477e8a2d-7018-42d0-874f-c6ff7faade9f")
+		)
+		(pin "4"
+			(uuid "9aa5966b-f2d7-4b90-a9c0-c982b0d040f8")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U312")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 190.5 83.6422 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e557ee98-f46c-4bd7-b364-95a6bb559171")
+		(property "Reference" "U307"
+			(at 182.88 78.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 182.88 91.2622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 190.5 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 190.5 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 190.5 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 190.5 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 190.5 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 190.5 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 190.5 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 190.5 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 190.5 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 190.5 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "407c7465-c516-4afc-8d35-f8c127787bd8")
+		)
+		(pin "2"
+			(uuid "81e5659d-4de8-4ee8-a0dd-0118e04e56e8")
+		)
+		(pin "3"
+			(uuid "06be4951-a6fb-448e-89d4-455783848eb9")
+		)
+		(pin "4"
+			(uuid "8a82f20a-402e-41e6-8f98-c03826f9924b")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U307")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 190.5 205.5622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "eaaddcd9-d1dd-4d36-a850-8fb209542cb5")
+		(property "Reference" "U301"
+			(at 182.88 200.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 182.88 213.1822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 190.5 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 190.5 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 190.5 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 190.5 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 190.5 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 190.5 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 190.5 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 190.5 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 190.5 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 190.5 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "30ac32e8-691b-4f02-b5dd-bc4375f5f26d")
+		)
+		(pin "1"
+			(uuid "995430f1-1fd3-47c7-bc05-5f314c942dd2")
+		)
+		(pin "3"
+			(uuid "1249faad-8ad3-4a4a-885a-b15ba67fbbd7")
+		)
+		(pin "4"
+			(uuid "4d61d4b4-0f51-4b43-a350-012e390f1901")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U301")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 139.7 238.5822 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ec8f479c-3eb4-486c-a093-e0fe80a58365")
+		(property "Reference" "U310"
+			(at 132.08 233.5022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 132.08 246.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 139.7 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 139.7 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 139.7 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 139.7 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 139.7 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 139.7 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 139.7 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 139.7 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 139.7 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 139.7 238.5822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "da5c1aff-bcf0-430e-afe0-f936f4de05d0")
+		)
+		(pin "2"
+			(uuid "a2c67e68-1695-4690-8af8-ca8f5c12b422")
+		)
+		(pin "3"
+			(uuid "ddbeceb1-f619-41c9-9a16-c5195921b984")
+		)
+		(pin "4"
+			(uuid "54b83614-1ea1-400f-8e47-de5641e5171b")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U310")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 88.9 195.4022 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f4914948-bc5c-4dfc-b4d4-ca39da07d10d")
+		(property "Reference" "U321"
+			(at 81.28 190.3222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 81.28 203.0222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 88.9 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 88.9 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 88.9 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 88.9 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 88.9 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 88.9 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 88.9 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 88.9 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 88.9 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 88.9 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 88.9 195.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6dfb3f6e-93a1-45e3-b47a-563a388b02f0")
+		)
+		(pin "2"
+			(uuid "5492cc25-bac6-4f46-86a1-63883cb9565d")
+		)
+		(pin "3"
+			(uuid "6da65d1c-a783-434c-9501-1600f2b2d73c")
+		)
+		(pin "4"
+			(uuid "16b0fb01-bd43-470c-9145-ca3c2489aff5")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U321")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Lada_Speedometer-altium-import:Designator_0_WS2812B-4020_2")
+		(at 139.7 114.1222 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fd7bfab4-7208-485d-9bb4-1e8dc9900d51")
+		(property "Reference" "U313"
+			(at 132.08 109.0422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "WS2812B-4020_2"
+			(at 132.08 121.7422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "LED_WS2812B-4020"
+			(at 139.7 114.1222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 114.1222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "12mA RGB SMD,2x4mm Light Emitting Diodes"
+			(at 139.7 114.1222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 139.7 114.1222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2812B-4020"
+			(at 139.7 114.1222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Not in stock"
+			(at 139.7 114.1222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
+			(at 139.7 114.1222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
+			(at 139.7 114.1222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ALTIUM_VALUE" "*"
+			(at 139.7 114.1222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "Package"
+			(at 139.7 114.1222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Worldsemi"
+			(at 139.7 114.1222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1b827834-d6c4-4e19-8a1b-727a1bb9f509")
+		)
+		(pin "2"
+			(uuid "0108cde6-581f-498b-8adb-0dc192361233")
+		)
+		(pin "3"
+			(uuid "dfa9a065-0155-4f3b-9ce4-f992374b884b")
+		)
+		(pin "4"
+			(uuid "1aae1316-37db-4dc5-b736-65c282474b59")
+		)
+		(instances
+			(project ""
+				(path "/318a07aa-2e95-4f45-ad6b-3eff70fe5804/2a60a2de-01e7-42ae-b903-fa87d025d396"
+					(reference "U313")
+					(unit 1)
+				)
+			)
+		)
+	)
+)
