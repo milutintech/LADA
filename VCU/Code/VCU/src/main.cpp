@@ -808,7 +808,7 @@ void armBattery(bool arm){
       Hvoltage = BMS_U_BAT;
       enableBSC = 1;
       digitalWrite(RELAIS1, 0);
-      if((BSC6_HVVOL_ACT + 20) >= BMS_U_BAT){
+      if(((BSC6_HVVOL_ACT + 20) >= BMS_U_BAT)&& BSC6_HVVOL_ACT > 50) {
         HasPrecharged = 1;
         digitalWrite(RELAIS1, 1);
         enableBSC = 0;
@@ -1003,7 +1003,7 @@ void reciveBMS(){
   id = CAN.getCanId();
   type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
   
-  if(id == 0x555){
+  if(id == 0x001){
     BMS_SOC = readDataBMS[7];
     BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
     BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
