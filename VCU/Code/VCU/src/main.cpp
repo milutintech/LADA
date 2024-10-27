@@ -556,6 +556,7 @@ void CAN_COM( void * pvParameters ){
 
       case Charging:
         //BMS DMC max current 
+      
         if(BMS_MAX_Charge < MAX_NLG_CURRENT){
           NLG_DcHvCurrLimMax = BMS_MAX_Charge;
         }
@@ -623,6 +624,8 @@ void BACKBONE( void * pvParameters ){
       if(NLG_S_ConLocked){
         VehicleMode = Charging;
         conUlockInterrupt = 1;
+        NLG_Charged =1;
+        
       }
       else{
         VehicleMode = Standby;
@@ -692,6 +695,7 @@ void BACKBONE( void * pvParameters ){
       break;
 
       case Charging:
+        
         //Check if Con  unlock interrupt is set
         if(conUlockInterrupt){
           if(NLG_S_ConLocked){
@@ -740,6 +744,7 @@ void chargeManage(){
       case NLG_ACT_STANDBY:
         NLG_LedDem = 1;                 //LED red pulsing
         if(NLG_Charged){
+          NLG_StateDem = NLG_DEM_SLEEP;
           VehicleMode = Standby;
           NLG_C_UnlockConRq = 1;
           NLG_LedDem = 0;               //LED OFF
@@ -946,7 +951,7 @@ void sendNLG(){
   NLG_AcCurrLimMax_Scale = NLG_AcCurrLimMax * 10;
   NLG_AcCurrLimMax_Scale -= 1024;
   NLG_AcPhaseShift_Scale = NLG_AcPhaseShift * 10;
-  controllBufferNLG1[0] = NLG_C_ClrError << 8 | NLG_C_UnlockConRq << 7 | NLG_C_VentiRq << 6 | (NLG_DcHvVoltLimMax_Scale >> 8) & 0x1F;
+  controllBufferNLG1[0] = (NLG_C_ClrError << 7) |  NLG_C_UnlockConRq << 6 | (NLG_C_VentiRq << 5) | ((NLG_DcHvVoltLimMax_Scale >> 8)&0x1F);
   controllBufferNLG1[1] = NLG_DcHvVoltLimMax_Scale & 0x00FF;
   controllBufferNLG1[2] = (NLG_StateDem << 5)  | (NLG_DcHvCurrLimMax_Scale >> 8)& 0x07;
   controllBufferNLG1[3] = NLG_DcHvCurrLimMax_Scale & 0x00FF;
@@ -956,7 +961,7 @@ void sendNLG(){
   controllBufferNLG1[7] = NLG_AcPhaseShift_Scale & 0x00FF;
   CAN.sendMsgBuf(NLG_DEM_LIM, 0, 8, controllBufferNLG1);   
 }
-
+//NLG_C_UnlockConRq
 //*********************************************************************//
 //CAN recive functions
 //Generic
