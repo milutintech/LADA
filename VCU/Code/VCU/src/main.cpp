@@ -200,6 +200,7 @@ int NLG_DcHvVoltLimMax_Scale = 0;
 //Variables for 0x709
 uint16_t NLG_AcWhAct = 0; //Actual AC kWh
 uint16_t NLG_DcHvWhAct = 0; //Actual DC kWh
+bool unlockPersist = false;
 
 uint16_t NLG_MaxTempAct = 0;  //Maximum actual internal temperature
 int16_t NLG_TempCon = 0;  //Actual temperatur connector
@@ -733,54 +734,70 @@ void BACKBONE( void * pvParameters ){
 //**********************//
 //Charging management
 //**********************//
+void chargeManage() {
+    static unsigned long unlockTimeout = 0;  // Timeout for unlocking
+    const unsigned long unlockTimeoutDuration = 3000;  // 3 seconds timeout
 
-void chargeManage(){
-  if(VehicleMode == Charging){
-    switch (NLG_StateAct){
-      case  NLG_ACT_SLEEP :
-        NLG_LedDem = 0;                    //LED OFF
-        NLG_StateDem = NLG_DEM_STANDBY;   //Demand Standby
-      break;
-      case NLG_ACT_STANDBY:
-        NLG_LedDem = 1;                 //LED red pulsing
-        if(NLG_Charged){
-          NLG_StateDem = NLG_DEM_SLEEP;
-          VehicleMode = Standby;
-          NLG_C_UnlockConRq = 1;
-          NLG_LedDem = 0;               //LED OFF
-          }
-        else{
-          
-          armBattery(1);
-        
+    if (VehicleMode == Charging) {
+        switch (NLG_StateAct) {
+            case NLG_ACT_SLEEP:
+                NLG_LedDem = 0;  // LED OFF
+                NLG_StateDem = NLG_DEM_STANDBY;  // Demand Standby
+                break;
+
+            case NLG_ACT_STANDBY:
+                NLG_LedDem = 1;  // LED red pulsing
+                if (NLG_Charged) {
+                    NLG_StateDem = NLG_DEM_SLEEP;
+                    VehicleMode = Standby;
+                    NLG_C_UnlockConRq = 1;  // Initiate unlock request
+                    unlockPersist = true;   // Set persistent unlock
+                    unlockTimeout = millis();  // Start timeout timer
+                } else {
+                    armBattery(1);
+                }
+
+                // Transition to standby immediately if the connector is disconnected
+                if (!NLG_S_ConLocked) {
+                    VehicleMode = Standby;
+                    NLG_LedDem = 0;  // LED OFF
+                }
+                break;
+
+            case NLG_ACT_READY2CHARGE:
+                NLG_LedDem = 3;  // LED pulsating green
+                if (unlockPersist || NLG_C_UnlockConRq) {
+                    NLG_StateDem = NLG_DEM_STANDBY;
+                } else {
+                    NLG_StateDem = NLG_DEM_CHARGE;  // Demand Charge
+                }
+                break;
+
+            case NLG_ACT_CHARGE:
+                NLG_LedDem = 4;  // LED green
+                NLG_Charged = 1;
+                break;
+
+            default:
+                armBattery(0);
+                break;
         }
-      break;
-      case NLG_ACT_READY2CHARGE:
-        NLG_LedDem = 3;                 //LED pulsating green
-        if(NLG_C_UnlockConRq){
-          NLG_StateDem = NLG_DEM_STANDBY;
+
+        // Persistent Unlock Connector Logic
+        if (unlockPersist) {
+            NLG_C_UnlockConRq = 1;  // Keep unlock request active
+            if (!NLG_S_ConLocked) {  // If successfully unlocked
+                NLG_StateDem = NLG_DEM_STANDBY;  // Set Standby mode
+                VehicleMode = Standby;
+                NLG_LedDem = 0;  // LED OFF to ensure no blinking continues
+            } else if (millis() - unlockTimeout > unlockTimeoutDuration) {
+                unlockTimeout = millis();  // Refresh timeout to maintain unlock persistently
+            }
         }
-        else{
-          NLG_StateDem = NLG_DEM_CHARGE;  //Demand Charge
-        }
-      break;
-      case NLG_ACT_CHARGE:
-        NLG_LedDem = 4;                 //LED green
-        NLG_Charged = 1;
-        //Demand Standby by BMS has to be Implemented
-        break;
-      default:
+    } else {
         armBattery(0);
-        
-      break;
+        digitalWrite(RELAIS4, LOW);
     }
-  }
-  else {
-    armBattery(0);
-    digitalWrite(RELAIS4, LOW);
-
-  }
-  
 }
 
 //**********************//
@@ -1141,72 +1158,68 @@ void reciveDMC(){
 //**********************//
 //NLG
 //**********************//
-
-void reciveNLG(){
-
+void reciveNLG() {
     if (CAN_MSGAVAIL != CAN.checkReceive()) {
         return;
     }
 
-
-
-   
-    // read data, len: data length, buf: data buf
+    // Read data, len: data length, buf: data buf
     CAN.readMsgBuf(&len, readDataNLG);
 
     id = CAN.getCanId();
-    type = (CAN.isExtendedFrame() << 0) |
-           (CAN.isRemoteRequest() << 1);
-    
-    
-    
-    switch (id){
-      case NLG_ACT_LIM:
-        NLG_StateCtrlPilot = readDataNLG[0] >> 5;
-        NLG_DcHvVoltAct = (readDataNLG[0] << 8) & 0x1F00;
-        NLG_DcHvVoltAct = NLG_DcHvVoltAct | readDataNLG[1];
-        NLG_StateAct = readDataNLG[2] >> 5;
-        NLG_S_DcHvCurrLim = readDataNLG[2] >> 4 & 0x01;
-        NLG_S_DcHvVoltLim = readDataNLG[2] >> 3 & 0x01;
-        NLG_DcHvCurrAct = (readDataNLG[2] << 8) & 0x07;
-        NLG_DcHvCurrAct = NLG_DcHvCurrAct | readDataNLG[3];
-        NLG_S_ProximityLim = readDataNLG[4] >> 7;
-        NLG_S_CtrlPilotLim = (readDataNLG[4] >> 6) & 0x01;
-        NLG_S_ConTempLim = (readDataNLG[4] >> 5) & 0x01;
-        NLG_S_IntTempLim = (readDataNLG[4] >> 4) & 0x01;
-        NLG_S_AcCurrLim= (readDataNLG[4] >> 5) & 0x01;
-        NLG_AcCurrMaxAct = (readDataNLG[4] << 8) & 0x07;
-        NLG_AcCurrMaxAct = NLG_AcCurrMaxAct | readDataNLG[5];
-        NLG_AcCurrHwAvl = readDataNLG[6];
-        NLG_S_ProximityDet = readDataNLG[7] >> 7;
-        NLG_S_CtrlPilotDet = (readDataNLG[7] >> 6) & 0x01;
-        NLG_S_ConLocked = (readDataNLG[7] >> 5) & 0x01;
-        NLG_S_AcDet = (readDataNLG[7] >> 4) & 0x01;
-        NLG_S_HwWakeup = (readDataNLG[7] >> 3) & 0x01;
-        NLG_S_HwEnable = (readDataNLG[7] >> 2) & 0x01;
-        NLG_S_Err = (readDataNLG[7] >> 1) & 0x01;
-        NLG_S_War = readDataNLG[7]& 0x01;
-      break;
-      case NLG_ACT_PLUG:
-        NLG_StatusCP = (readDataNLG[0] >> 5) & 0x07;
-        NLG_S_CP_X1 = (readDataNLG[0] >> 4) & 0x01;
-        NLG_S_CP_SCC = (readDataNLG[0] >> 3) & 0x01;
-        NLG_AcCurrMaxCP = (readDataNLG[0] << 8) & 0x03;
-        NLG_AcCurrMaxCP = NLG_AcCurrMaxCP | readDataNLG[1];
-        NLG_StatusPP = (readDataNLG[2] >> 4) & 0x07;
-        NLG_AcCurrMaxPP = readDataNLG[2] & 0x0F;
-        NLG_S_AcVoltDerating = readDataNLG[3] >> 7;
-        NLG_S_AcDeratingNoisy = (readDataNLG[3] >> 6) & 0x01;
-        NLG_AcPhaseUsd = (readDataNLG[3] >> 5) & 0x01;
-        NLG_AcPhaseDet = (readDataNLG[3] >> 2) & 0x01;
-        NLG_CoolingRequest = (readDataNLG[4] >> 6) & 0x01;
-        NLG_ACT_PLUGCom = readDataNLG[4];
-      break;
-      case NLG_ACT_ERR:
+    type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
 
-      break;
+    // Switch for NLG message IDs
+    switch (id) {
+        case NLG_ACT_LIM:
+            NLG_StateCtrlPilot = readDataNLG[0] >> 5;
+            NLG_DcHvVoltAct = (readDataNLG[0] << 8) & 0x1F00;
+            NLG_DcHvVoltAct |= readDataNLG[1];
+            NLG_StateAct = readDataNLG[2] >> 5;
+            NLG_S_DcHvCurrLim = readDataNLG[2] >> 4 & 0x01;
+            NLG_S_DcHvVoltLim = readDataNLG[2] >> 3 & 0x01;
+            NLG_DcHvCurrAct = (readDataNLG[2] << 8) & 0x07;
+            NLG_DcHvCurrAct |= readDataNLG[3];
+            NLG_S_ProximityLim = readDataNLG[4] >> 7;
+            NLG_S_CtrlPilotLim = (readDataNLG[4] >> 6) & 0x01;
+            NLG_S_ConTempLim = (readDataNLG[4] >> 5) & 0x01;
+            NLG_S_IntTempLim = (readDataNLG[4] >> 4) & 0x01;
+            NLG_S_AcCurrLim= (readDataNLG[4] >> 5) & 0x01;
+            NLG_AcCurrMaxAct = (readDataNLG[4] << 8) & 0x07;
+            NLG_AcCurrMaxAct |= readDataNLG[5];
+            NLG_AcCurrHwAvl = readDataNLG[6];
+            NLG_S_ProximityDet = readDataNLG[7] >> 7;
+            NLG_S_CtrlPilotDet = (readDataNLG[7] >> 6) & 0x01;
+            NLG_S_ConLocked = (readDataNLG[7] >> 5) & 0x01;
+            NLG_S_AcDet = (readDataNLG[7] >> 4) & 0x01;
+            NLG_S_HwWakeup = (readDataNLG[7] >> 3) & 0x01;
+            NLG_S_HwEnable = (readDataNLG[7] >> 2) & 0x01;
+            NLG_S_Err = (readDataNLG[7] >> 1) & 0x01;
+            NLG_S_War = readDataNLG[7] & 0x01;
+            break;
+
+        case NLG_ACT_PLUG:
+            NLG_StatusCP = (readDataNLG[0] >> 5) & 0x07;
+            NLG_S_CP_X1 = (readDataNLG[0] >> 4) & 0x01;
+            NLG_S_CP_SCC = (readDataNLG[0] >> 3) & 0x01;
+            NLG_AcCurrMaxCP = (readDataNLG[0] << 8) & 0x03;
+            NLG_AcCurrMaxCP |= readDataNLG[1];
+            NLG_StatusPP = (readDataNLG[2] >> 4) & 0x07;
+            NLG_AcCurrMaxPP = readDataNLG[2] & 0x0F;
+            NLG_S_AcVoltDerating = readDataNLG[3] >> 7;
+            NLG_S_AcDeratingNoisy = (readDataNLG[3] >> 6) & 0x01;
+            NLG_AcPhaseUsd = (readDataNLG[3] >> 5) & 0x01;
+            NLG_AcPhaseDet = (readDataNLG[3] >> 2) & 0x01;
+            NLG_CoolingRequest = (readDataNLG[4] >> 6) & 0x01;
+            NLG_ACT_PLUGCom = readDataNLG[4];
+            break;
+
+        case NLG_ACT_ERR:
+            // Handle error conditions if needed
+            break;
     }
 }
+
 
 //MIMIMIMIMIMIMIMI
 void loop() {}
