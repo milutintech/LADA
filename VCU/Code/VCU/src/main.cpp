@@ -107,8 +107,8 @@ ADS1115 ADS(0x48);
 #define GASPEDAL1 0
 #define GASPEDAL2 1
 
-#define MinValPot 100
-#define MaxValPot 2400
+#define MinValPot 18410
+#define MaxValPot 13240
 
 //Pin for reverse signal 0 = forward, 1 = reverse pin 0 on AD
 #define REVERSE 0
@@ -539,8 +539,8 @@ void CAN_COM( void * pvParameters ){
         }
         
         DMC_TrqRq_Scale = calculateTorque5S(reversSig);
-        /*Serial.println(ADS.readADC(GASPEDAL1));
-        Serial.print("SOC");
+        //Serial.println(ADS.readADC(GASPEDAL1));
+        /*Serial.print("SOC");
         Serial.println(BMS_SOC);
         Serial.print("U_BAT");
         Serial.println(BMS_U_BAT);
@@ -834,23 +834,39 @@ void armBattery(bool arm){
 //Throttle managment
 //**********************//
 
-int16_t calculateTorque5S(bool reverseSig){
-  int16_t SampeldPotiValue = 0;
-  int16_t DMC_TorqueCalc = 0;
-  int16_t DMCpre = 0;
-  for(int i = 0; i < 4; i++){
-    SampeldPotiValue = SampeldPotiValue + sampleSetPedal[i];
-  }
-  SampeldPotiValue = SampeldPotiValue / 4;
-  Serial.println(SampeldPotiValue);
-  SampeldPotiValue = map(SampeldPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
-  DMC_TorqueCalc = SampeldPotiValue;
-  
-  if(reverseSig){
-    DMC_TorqueCalc = 0 - DMC_TorqueCalc;
-  }
-  return DMC_TorqueCalc;
+int16_t calculateTorque5S(bool reverseSig) {
+    int32_t SampledPotiValue = 0;  // Use int32_t to avoid potential overflow
+    int16_t DMC_TorqueCalc = 0;
+
+    // Sum values in sampleSetPedal (assuming sampleSetPedal[0-3] contains valid data)
+    for (int i = 0; i < 4; i++) {
+        SampledPotiValue += sampleSetPedal[i];
+    }
+
+    // Calculate average and map the result
+    SampledPotiValue /= 4;
+    SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
+
+    // Convert to int16_t after mapping
+    DMC_TorqueCalc = static_cast<int16_t>(SampledPotiValue);
+
+    // Apply deadband of ±10
+    if (DMC_TorqueCalc > -10 && DMC_TorqueCalc < 10) {
+        DMC_TorqueCalc = 0;
+    }
+
+    // Ensure positive torque if no reverse signal
+    if (!reverseSig) {
+        DMC_TorqueCalc = abs(DMC_TorqueCalc);
+    } else {
+        // Apply reverse signal
+        DMC_TorqueCalc = -DMC_TorqueCalc;
+    }
+    Serial.println(DMC_TorqueCalc);
+    return DMC_TorqueCalc;
 }
+
+
 uint8_t print_GPIO_wake_up(){
   uint64_t GPIO_reason = esp_sleep_get_ext1_wakeup_status();
   return (log(GPIO_reason))/log(2);
