@@ -972,81 +972,88 @@ uint8_t print_GPIO_wake_up(){
 //**********************//
 
 void sendBSC() {
-    // Scaling and offset adjustments as per DBC
-    LvoltageScale = static_cast<uint8_t>(Lvoltage * 10); // Ensure it fits in uint8_t
-    HvoltageScale = static_cast<uint8_t>(Hvoltage - 220);
+    // Scaling the signals as per DBC spec
+    LvoltageScale = static_cast<uint8_t>((Lvoltage - 8) * 10);  // Scale to match 0.1 V/bit with offset 8V
+    HvoltageScale = static_cast<uint8_t>((Hvoltage - 220));     // Scale to match 1 V/bit with offset 220V
 
-    // Construct control buffer
-    controllBufferBSC[0] = (modeBSC & 0x01) << 1 | (enableBSC & 0x01);
+    // Construct control buffer for BSC6COM (ID: 0x260)
+    controllBufferBSC[0] = (enableBSC << 7) | (modeBSC << 6);  // enableBSC and modeBSC control the run and mode states
     controllBufferBSC[1] = LvoltageScale;
     controllBufferBSC[2] = HvoltageScale;
 
-    // Scaling limit values
-    BSC6_HVVOL_LOWLIM_SCALED = static_cast<uint8_t>(BSC6_HVVOL_LOWLIM - 220);
-    BSC6_HVCUR_UPLIM_BUCK_SCALED = static_cast<uint8_t>(BSC6_HVCUR_UPLIM_BUCK * 10);
-    BSC6_LVVOL_LOWLIM_SCALED = static_cast<uint8_t>(BSC6_LVVOL_LOWLIM * 10);
-    BSC6_HVCUR_UPLIM_BOOST_SCALED = static_cast<uint8_t>(BSC6_HVCUR_UPLIM_BOOST * 10);
+    // Scaling limit signals for BSC6LIM (ID: 0x261)
+    BSC6_HVVOL_LOWLIM_SCALED = BSC6_HVVOL_LOWLIM - 220;  // Scale to match 1 V/bit with offset 220V
+    BSC6_HVCUR_UPLIM_BUCK_SCALED = static_cast<uint8_t>(BSC6_HVCUR_UPLIM_BUCK * 10);  // Scale to match 0.1 A/bit
+    BSC6_LVVOL_LOWLIM_SCALED = static_cast<uint8_t>(BSC6_LVVOL_LOWLIM * 10);  // Scale to match 0.1 V/bit
+    BSC6_HVCUR_UPLIM_BOOST_SCALED = static_cast<uint8_t>(BSC6_HVCUR_UPLIM_BOOST * 10);  // Scale to match 0.1 A/bit
 
-    // Construct limit buffer
+    // Construct limit buffer for BSC6LIM (ID: 0x261)
     limitBufferBSC[0] = BSC6_HVVOL_LOWLIM_SCALED;
-    limitBufferBSC[1] = static_cast<uint8_t>(BSC6_LVCUR_UPLIM_BUCK);
+    limitBufferBSC[1] = BSC6_LVCUR_UPLIM_BUCK;
     limitBufferBSC[2] = BSC6_HVCUR_UPLIM_BUCK_SCALED;
     limitBufferBSC[3] = BSC6_LVVOL_LOWLIM_SCALED;
-    limitBufferBSC[4] = static_cast<uint8_t>(BSC6_LVCUR_UPLIM_BOOST);
+    limitBufferBSC[4] = BSC6_LVCUR_UPLIM_BOOST;
     limitBufferBSC[5] = BSC6_HVCUR_UPLIM_BOOST_SCALED;
 
-    // Send CAN messages
-    CAN.sendMsgBuf(BSC_COMM, 0, 3, controllBufferBSC);
-    CAN.sendMsgBuf(BSC_LIM, 0, 6, limitBufferBSC);
+    // Sending the CAN messages
+    CAN.sendMsgBuf(0x260, 0, 3, controllBufferBSC);
+    CAN.sendMsgBuf(0x261, 0, 6, limitBufferBSC);
 }
+
 
 
 //**********************//
 //DMC
 //**********************//
 
-void sendDMC(){
-  DMC_TrqSlewrate_Scale = DMC_TrqSlewrate * 50;
-  DMC_MechPwrMaxMot_Scale = DMC_MechPwrMaxMot / 4;
-  DMC_MechPwrMaxGen_Scale = DMC_MechPwrMaxGen / 4;
+void sendDMC() {
+    // Scaling the signals as per DBC spec
+    DMC_TrqSlewrate_Scale = DMC_TrqSlewrate * 100;  // Scale to match 0.01 Nm/s/bit
+    DMC_MechPwrMaxMot_Scale = DMC_MechPwrMaxMot / 4;  // Scale to match 4 W/bit
+    DMC_MechPwrMaxGen_Scale = DMC_MechPwrMaxGen / 4;
 
-  controllBuffer2DMC[0] = DMC_TrqSlewrate_Scale >> 8;
-  controllBuffer2DMC[1] = DMC_TrqSlewrate_Scale & 0x00FF;
-  controllBuffer2DMC[2] = DMC_SpdSlewrate >> 8;
-  controllBuffer2DMC[3] = DMC_SpdSlewrate & 0x00FF;
-  controllBuffer2DMC[4] = DMC_MechPwrMaxMot_Scale >> 8;
-  controllBuffer2DMC[5] = DMC_MechPwrMaxMot_Scale & 0x00FF;
-  controllBuffer2DMC[6] = DMC_MechPwrMaxGen_Scale >> 8;
-  controllBuffer2DMC[7] = DMC_MechPwrMaxGen_Scale & 0x00FF;
+    // Construct control buffer for DMC_CTRL2 (ID: 0x212)
+    controllBuffer2DMC[0] = DMC_TrqSlewrate_Scale >> 8;
+    controllBuffer2DMC[1] = DMC_TrqSlewrate_Scale & 0xFF;
+    controllBuffer2DMC[2] = DMC_SpdSlewrate >> 8;
+    controllBuffer2DMC[3] = DMC_SpdSlewrate & 0xFF;
+    controllBuffer2DMC[4] = DMC_MechPwrMaxMot_Scale >> 8;
+    controllBuffer2DMC[5] = DMC_MechPwrMaxMot_Scale & 0xFF;
+    controllBuffer2DMC[6] = DMC_MechPwrMaxGen_Scale >> 8;
+    controllBuffer2DMC[7] = DMC_MechPwrMaxGen_Scale & 0xFF;
 
-  DMC_DcVLimMot_Scale = DMC_DcVLimMot * 10;
-  DMC_DcVLimGen_Scale = DMC_DcVLimGen * 10;
-  DMC_DcCLimMot_Scale = DMC_DcCLimMot * 10;
-  DMC_DcCLimGen_Scale = DMC_DcCLimGen * 10;
-  
-  limitBufferDMC[0] = DMC_DcVLimMot_Scale >> 8;
-  limitBufferDMC[1] = DMC_DcVLimMot_Scale & 0x00FF;
-  limitBufferDMC[2] = DMC_DcVLimGen_Scale >> 8;
-  limitBufferDMC[3] = DMC_DcVLimGen_Scale & 0x00FF;
-  limitBufferDMC[4] = DMC_DcCLimMot_Scale >> 8;
-  limitBufferDMC[5] = DMC_DcCLimMot_Scale & 0x00FF;
-  limitBufferDMC[6] = DMC_DcCLimGen_Scale >> 8;
-  limitBufferDMC[7] = DMC_DcCLimGen_Scale & 0x00FF;
+    // Scaling voltage and current limits for DMC_LIM (ID: 0x211)
+    DMC_DcVLimMot_Scale = DMC_DcVLimMot * 10;  // Scale to match 0.1 V/bit
+    DMC_DcVLimGen_Scale = DMC_DcVLimGen * 10;
+    DMC_DcCLimMot_Scale = DMC_DcCLimMot * 10;  // Scale to match 0.1 A/bit
+    DMC_DcCLimGen_Scale = DMC_DcCLimGen * 10;
 
+    // Construct limit buffer for DMC_LIM (ID: 0x211)
+    limitBufferDMC[0] = DMC_DcVLimMot_Scale >> 8;
+    limitBufferDMC[1] = DMC_DcVLimMot_Scale & 0xFF;
+    limitBufferDMC[2] = DMC_DcVLimGen_Scale >> 8;
+    limitBufferDMC[3] = DMC_DcVLimGen_Scale & 0xFF;
+    limitBufferDMC[4] = DMC_DcCLimMot_Scale >> 8;
+    limitBufferDMC[5] = DMC_DcCLimMot_Scale & 0xFF;
+    limitBufferDMC[6] = DMC_DcCLimGen_Scale >> 8;
+    limitBufferDMC[7] = DMC_DcCLimGen_Scale & 0xFF;
 
-  lowNibSpd = DMC_SpdRq	 & 0x00FF;
-  highNibSpd = DMC_SpdRq	 >> 8;
-  lowNibTrq = DMC_TrqRq_Scale & 0x00FF;
-  highNibTrq = DMC_TrqRq_Scale >> 8;
+    // Control buffer for DMC_CTRL (ID: 0x210)
+    lowNibSpd = DMC_SpdRq & 0xFF;
+    highNibSpd = DMC_SpdRq >> 8;
+    lowNibTrq = static_cast<int16_t>(DMC_TrqRq_Scale * 100) & 0xFF;  // Scale to match 0.01 Nm/bit
+    highNibTrq = static_cast<int16_t>(DMC_TrqRq_Scale * 100) >> 8;
 
-  controllBufferDMC[0] = enableDMC << 7 | modeDMC << 6 | oscLim << 5 | negTrqSpd << 1 | posTrqSpd;
-  controllBufferDMC[2] = highNibSpd;
-  controllBufferDMC[3] = lowNibSpd;
-  controllBufferDMC[4] = highNibTrq;
-  controllBufferDMC[5] = lowNibTrq;
+    controllBufferDMC[0] = (enableDMC << 7) | (modeDMC << 6) | (oscLim << 5) | (negTrqSpd << 1) | posTrqSpd;
+    controllBufferDMC[2] = highNibSpd;
+    controllBufferDMC[3] = lowNibSpd;
+    controllBufferDMC[4] = highNibTrq;
+    controllBufferDMC[5] = lowNibTrq;
 
-  CAN.sendMsgBuf(DMCCTRL, 0, 8, controllBufferDMC);
-  CAN.sendMsgBuf(DMCLIM, 0, 8, limitBufferDMC);
+    // Sending the CAN messages
+    CAN.sendMsgBuf(DMCCTRL, 0, 8, controllBufferDMC);
+    CAN.sendMsgBuf(DMCLIM, 0, 8, limitBufferDMC);
+    CAN.sendMsgBuf(0x212, 0, 8, controllBuffer2DMC);
 }
 
 
@@ -1134,21 +1141,22 @@ void reciveBMS(){
 
 
 void reciveBSC() {
-    // Check for received message
+    // Check if data is available
     if (CAN_MSGAVAIL != CAN.checkReceive()) {
         return;
     }
-    // Read message
+
+    // Read data, len: data length, buf: data buf
     CAN.readMsgBuf(&len, readDataBSC);
     id = CAN.getCanId();
+    type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
 
     if (id == 0x26A) {
-        // Extract and scale values
-        BSC6_HVVOL_ACT = ((uint16_t)readDataBSC[1] << 8 | readDataBSC[0]) / 10.0f;
-        BSC6_LVVOLT_ACT = readDataBSC[2] / 10.0f;
-        BSC6_HVCUR_ACT = (readDataBSC[3] / 10.0f) - 25.0f;
-        BSC6_LVCUR_ACT = ((uint16_t)readDataBSC[5] << 8 | readDataBSC[4]) - 280.0f;
-        BSC6_MODE = (readDataBSC[7] >> 4) & 0x0F;
+        BSC6_HVVOL_ACT = ((readDataBSC[0] << 8) | readDataBSC[1]) * 0.1; // Scale to match 0.1 V/bit
+        BSC6_LVVOLT_ACT = readDataBSC[2] * 0.1;                          // Scale to match 0.1 V/bit
+        BSC6_HVCUR_ACT = (((readDataBSC[3] << 8) | readDataBSC[4]) * 0.1) - 25; // Scale to match 0.1 A/bit with offset -25 A
+        BSC6_LVCUR_ACT = ((readDataBSC[5] << 8) | readDataBSC[6]) - 280;  // Scale to match 1 A/bit with offset -280 A
+        BSC6_MODE = readDataBSC[7] >> 4;                                  // Extract 4-bit mode information
     }
 }
 
@@ -1156,62 +1164,40 @@ void reciveBSC() {
 //DMC
 //**********************//
 
-void reciveDMC(){
-  if (CAN_MSGAVAIL != CAN.checkReceive()) {
+void reciveDMC() {
+    if (CAN_MSGAVAIL != CAN.checkReceive()) {
         return;
-  }
-  CAN.readMsgBuf(&len, readDataBSC);
+    }
 
-  id = CAN.getCanId();
-  type = (CAN.isExtendedFrame() << 0) |
-          (CAN.isRemoteRequest() << 1);
-  
-  
-  
-  switch (id){
-    case 0x259:
-      DMC_DcVltAct = readDataBSC[1] | (readDataBSC[0] << 8);
-      DMC_DcVltAct = DMC_DcVltAct / 10;
+    CAN.readMsgBuf(&len, readDataBSC);
+    id = CAN.getCanId();
+    type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
 
-      DMC_DcCurrAct = readDataBSC[3] | (readDataBSC[2] << 8);
-      DMC_DcCurrAct = DMC_DcCurrAct / 10;
+    switch (id) {
+        case 0x258:
+            DMC_Ready = readDataBSC[0] & 0x80;
+            DMC_Running = readDataBSC[0] & 0x40;
+            DMC_TrqAvl = ((readDataBSC[2] << 8) | readDataBSC[3]) * 0.01;
+            DMC_TrqAct = ((readDataBSC[4] << 8) | readDataBSC[5]) * 0.01;
+            DMC_SpdAct = (readDataBSC[6] << 8) | readDataBSC[7];
+            break;
 
-      DMC_AcCurrAct = readDataBSC[5] | (readDataBSC[4] << 8);
-      DMC_AcCurrAct = DMC_AcCurrAct / 4;
+        case 0x259:
+            DMC_DcVltAct = ((readDataBSC[0] << 8) | readDataBSC[1]) * 0.1;
+            DMC_DcCurrAct = ((readDataBSC[2] << 8) | readDataBSC[3]) * 0.1;
+            DMC_AcCurrAct = ((readDataBSC[4] << 8) | readDataBSC[5]) * 0.25;
+            DMC_MechPwr = ((readDataBSC[6] << 8) | readDataBSC[7]) * 16;
+            break;
 
-      DMC_MechPwr = readDataBSC[7] | (readDataBSC[6] << 8);
-      DMC_MechPwr = DMC_MechPwr * 16;
+        case 0x458:
+            DMC_TempInv = ((readDataBSC[0] << 8) | readDataBSC[1]) * 0.5;
+            DMC_TempMot = ((readDataBSC[2] << 8) | readDataBSC[3]) * 0.5;
+            DMC_TempSys = readDataBSC[4] - 50;
+            break;
 
-    break;
-    case 0x258:
-      DMC_Ready = readDataBSC[0] & 0x80;
-      DMC_Running = readDataBSC[0] & 0x40;
-      DMC_SensorWarning = readDataBSC[0] & 0x04;
-      DMC_GenErr = readDataBSC[0] & 0x02;
-      DMC_TrqLimitation = readDataBSC[0] & 0x01;
-
-      DMC_TrqAvl = readDataBSC[3] | (readDataBSC[2] << 8);
-      DMC_TrqAvl = DMC_TrqAvl / 100;
-
-      DMC_TrqAct = readDataBSC[5] | (readDataBSC[4] << 8);
-      DMC_TrqAct = DMC_TrqAct / 100;
-
-      DMC_SpdAct = readDataBSC[7] | (readDataBSC[6] << 8);
-      
-    break;
-    case 0x458:
-      DMC_TempInv = readDataBSC[1] | (readDataBSC[0] << 8);
-      DMC_TempInv = DMC_TempInv / 2;
-
-      DMC_TempMot = readDataBSC[3] | (readDataBSC[2] << 8);
-      DMC_TempMot = DMC_TempMot / 2;
-
-      DMC_TempSys = readDataBSC[4];
-      DMC_TempSys = DMC_TempSys -50;
-      
-    break;
-  }
-  
+        default:
+            break;
+    }
 }
 
 
