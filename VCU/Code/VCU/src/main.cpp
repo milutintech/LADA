@@ -827,32 +827,41 @@ void armColingSys(bool arm){
 //**********************//
 //Battery sys manager
 //**********************//
+void armBattery(bool arm) {
+    // Check if precharge process should run
+    if (arm && (BMS_U_BAT > MIN_U_BAT)) { 
+        if (!HasPrecharged) {
+            BSC6_MODE = BSC6_BOOST;    // Set BSC to Boost mode for precharging
+            Hvoltage = BMS_U_BAT;       // Set high voltage command to BMS voltage
+            enableBSC = 1;              // Enable BSC
 
-void armBattery(bool arm){
-  //switch relais2 on VCU
-  if(arm){
-    if(!HasPrecharged){
-      BSC6_MODE = BSC6_BOOST;
-      Hvoltage = BMS_U_BAT;
-      enableBSC = 1;
-      Serial.println("Precharging");
-      digitalWrite(RELAIS3, 0);
-      if(((BSC6_HVVOL_ACT + 20) >= BMS_U_BAT)&& BSC6_HVVOL_ACT > 50) {
-        HasPrecharged = 1;
-        digitalWrite(RELAIS3, 1);
+            Serial.println("Precharging initiated...");
+            Serial.print("BMS_U_BAT: "); Serial.println(BMS_U_BAT);
+            Serial.print("BSC6_HVVOL_ACT: "); Serial.println(BSC6_HVVOL_ACT);
+
+            // Check if actual HV voltage is within ±20V of target voltage
+            if ((BSC6_HVVOL_ACT >= (BMS_U_BAT - 20)) && (BSC6_HVVOL_ACT <= (BMS_U_BAT + 20)) && (BSC6_HVVOL_ACT > 50)) {
+                HasPrecharged = 1;           // Mark precharge as complete
+                digitalWrite(RELAIS3, 1);    // Connect HV system
+                enableBSC = 0;               // Disable BSC after precharging
+                Serial.println("Precharging complete. HV system connected.");
+            } else {
+                Serial.println("Precharging in progress...");
+            }
+        } else if (HasPrecharged) {
+            BSC6_MODE = BSC6_BUCK;           // Set to Buck mode for normal operation
+            enableBSC = 1;                   // Ensure BSC remains enabled
+            Serial.println("Normal operation in Buck mode.");
+        }
+    } else {
+        // Disable battery and reset precharge if arm is false or BMS voltage too low
         enableBSC = 0;
-      }
+        HasPrecharged = 0;
+        digitalWrite(RELAIS3, 0);            // Disconnect HV system
+        Serial.println("Battery disconnected or BMS voltage too low.");
     }
-    else if(HasPrecharged){
-      BSC6_MODE = BSC6_BUCK;
-      enableBSC = 1;
-    }
-  }
-  else{
-    enableBSC = 0;
-    digitalWrite(RELAIS3, 0);
-  }
 }
+
 
 //**********************//
 //Throttle managment
@@ -1062,22 +1071,26 @@ void sendDMC() {
 //**********************//
 
 void sendNLG(){
-  NLG_DcHvVoltLimMax_Scale = NLG_DcHvVoltLimMax * 10;
-  NLG_DcHvCurrLimMax_Scale = NLG_DcHvCurrLimMax * 10;
-  NLG_DcHvCurrLimMax_Scale -= 1024;
-  NLG_AcCurrLimMax_Scale = NLG_AcCurrLimMax * 10;
-  NLG_AcCurrLimMax_Scale -= 1024;
-  NLG_AcPhaseShift_Scale = NLG_AcPhaseShift * 10;
-  controllBufferNLG1[0] = (NLG_C_ClrError << 7) |  NLG_C_UnlockConRq << 6 | (NLG_C_VentiRq << 5) | ((NLG_DcHvVoltLimMax_Scale >> 8)&0x1F);
-  controllBufferNLG1[1] = NLG_DcHvVoltLimMax_Scale & 0x00FF;
-  controllBufferNLG1[2] = (NLG_StateDem << 5)  | (NLG_DcHvCurrLimMax_Scale >> 8)& 0x07;
-  controllBufferNLG1[3] = NLG_DcHvCurrLimMax_Scale & 0x00FF;
-  controllBufferNLG1[4] = NLG_LedDem << 4 | (NLG_AcCurrLimMax_Scale << 8) & 0x07;
-  controllBufferNLG1[5] = NLG_AcCurrLimMax_Scale & 0x00FF;
-  controllBufferNLG1[6] = NLG_C_EnPhaseShift << 4 | (NLG_AcPhaseShift_Scale >> 8) & 0x07;
-  controllBufferNLG1[7] = NLG_AcPhaseShift_Scale & 0x00FF;
-  CAN.sendMsgBuf(NLG_DEM_LIM, 0, 8, controllBufferNLG1);   
+    // Scaling values as per CAN specifications
+    NLG_DcHvVoltLimMax_Scale = static_cast<int>((NLG_DcHvVoltLimMax - 350) * 10); // Based on 0.1 V/bit factor, offset 350V
+    NLG_DcHvCurrLimMax_Scale = static_cast<int>((NLG_DcHvCurrLimMax + 102.4) * 10); // Based on 0.1 A/bit factor, offset -102.4A
+    NLG_AcCurrLimMax_Scale = static_cast<int>((NLG_AcCurrLimMax + 102.4) * 10); // Based on 0.1 A/bit factor, offset -102.4A
+    NLG_AcPhaseShift_Scale = static_cast<int>((NLG_AcPhaseShift) * 10); // Based on 0.1 degree/bit factor
+
+    // Constructing the buffer based on bit positioning from the specification
+    controllBufferNLG1[0] = (NLG_C_ClrError << 7) | (NLG_C_UnlockConRq << 6) | (NLG_C_VentiRq << 5) | ((NLG_DcHvVoltLimMax_Scale >> 8) & 0x1F);
+    controllBufferNLG1[1] = NLG_DcHvVoltLimMax_Scale & 0xFF;
+    controllBufferNLG1[2] = (NLG_StateDem << 5) | ((NLG_DcHvCurrLimMax_Scale >> 8) & 0x07);
+    controllBufferNLG1[3] = NLG_DcHvCurrLimMax_Scale & 0xFF;
+    controllBufferNLG1[4] = (NLG_LedDem << 4) | ((NLG_AcCurrLimMax_Scale >> 8) & 0x07);
+    controllBufferNLG1[5] = NLG_AcCurrLimMax_Scale & 0xFF;
+    controllBufferNLG1[6] = (NLG_C_EnPhaseShift << 4) | ((NLG_AcPhaseShift_Scale >> 8) & 0x07);
+    controllBufferNLG1[7] = NLG_AcPhaseShift_Scale & 0xFF;
+
+    // Sending the CAN message
+    CAN.sendMsgBuf(NLG_DEM_LIM, 0, 8, controllBufferNLG1);   
 }
+
 //NLG_C_UnlockConRq
 //*********************************************************************//
 //CAN recive functions
@@ -1218,53 +1231,33 @@ void reciveNLG() {
     // Switch for NLG message IDs
     switch (id) {
         case NLG_ACT_LIM:
-            NLG_StateCtrlPilot = readDataNLG[0] >> 5;
-            NLG_DcHvVoltAct = (readDataNLG[0] << 8) & 0x1F00;
-            NLG_DcHvVoltAct |= readDataNLG[1];
-            NLG_StateAct = readDataNLG[2] >> 5;
-            NLG_S_DcHvCurrLim = readDataNLG[2] >> 4 & 0x01;
-            NLG_S_DcHvVoltLim = readDataNLG[2] >> 3 & 0x01;
-            NLG_DcHvCurrAct = (readDataNLG[2] << 8) & 0x07;
-            NLG_DcHvCurrAct |= readDataNLG[3];
-            NLG_S_ProximityLim = readDataNLG[4] >> 7;
-            NLG_S_CtrlPilotLim = (readDataNLG[4] >> 6) & 0x01;
-            NLG_S_ConTempLim = (readDataNLG[4] >> 5) & 0x01;
-            NLG_S_IntTempLim = (readDataNLG[4] >> 4) & 0x01;
-            NLG_S_AcCurrLim= (readDataNLG[4] >> 5) & 0x01;
-            NLG_AcCurrMaxAct = (readDataNLG[4] << 8) & 0x07;
-            NLG_AcCurrMaxAct |= readDataNLG[5];
+            NLG_StateCtrlPilot = readDataNLG[0] >> 5; // 3 bits starting from bit 0
+            NLG_DcHvVoltAct = ((readDataNLG[0] & 0x1F) << 8) | readDataNLG[1]; // 13 bits starting from bit 3
+            NLG_StateAct = readDataNLG[2] >> 5; // 3 bits starting from bit 16
+            NLG_S_DcHvCurrLim = (readDataNLG[2] >> 4) & 0x01; // 1 bit at bit 19
+            NLG_S_DcHvVoltLim = (readDataNLG[2] >> 3) & 0x01; // 1 bit at bit 20
+            NLG_DcHvCurrAct = ((readDataNLG[2] & 0x07) << 8) | readDataNLG[3]; // 11 bits starting from bit 21
+            NLG_S_ProximityLim = readDataNLG[4] >> 7; // 1 bit at bit 32
+            NLG_S_CtrlPilotLim = (readDataNLG[4] >> 6) & 0x01; // 1 bit at bit 33
+            NLG_S_ConTempLim = (readDataNLG[4] >> 5) & 0x01; // 1 bit at bit 34
+            NLG_S_IntTempLim = (readDataNLG[4] >> 4) & 0x01; // 1 bit at bit 35
+            NLG_S_AcCurrLim = (readDataNLG[4] >> 3) & 0x01; // 1 bit at bit 36
+            NLG_AcCurrMaxAct = ((readDataNLG[4] & 0x07) << 8) | readDataNLG[5]; // 11 bits starting from bit 37
             NLG_AcCurrHwAvl = readDataNLG[6];
-            NLG_S_ProximityDet = readDataNLG[7] >> 7;
-            NLG_S_CtrlPilotDet = (readDataNLG[7] >> 6) & 0x01;
-            NLG_S_ConLocked = (readDataNLG[7] >> 5) & 0x01;
-            NLG_S_AcDet = (readDataNLG[7] >> 4) & 0x01;
-            NLG_S_HwWakeup = (readDataNLG[7] >> 3) & 0x01;
-            NLG_S_HwEnable = (readDataNLG[7] >> 2) & 0x01;
-            NLG_S_Err = (readDataNLG[7] >> 1) & 0x01;
-            NLG_S_War = readDataNLG[7] & 0x01;
+            NLG_S_ProximityDet = readDataNLG[7] >> 7; // 1 bit at bit 56
+            NLG_S_CtrlPilotDet = (readDataNLG[7] >> 6) & 0x01; // 1 bit at bit 57
+            NLG_S_ConLocked = (readDataNLG[7] >> 5) & 0x01; // 1 bit at bit 58
+            NLG_S_AcDet = (readDataNLG[7] >> 4) & 0x01; // 1 bit at bit 59
+            NLG_S_HwWakeup = (readDataNLG[7] >> 3) & 0x01; // 1 bit at bit 60
+            NLG_S_HwEnable = (readDataNLG[7] >> 2) & 0x01; // 1 bit at bit 61
+            NLG_S_Err = (readDataNLG[7] >> 1) & 0x01; // 1 bit at bit 62
+            NLG_S_War = readDataNLG[7] & 0x01; // 1 bit at bit 63
             break;
 
-        case NLG_ACT_PLUG:
-            NLG_StatusCP = (readDataNLG[0] >> 5) & 0x07;
-            NLG_S_CP_X1 = (readDataNLG[0] >> 4) & 0x01;
-            NLG_S_CP_SCC = (readDataNLG[0] >> 3) & 0x01;
-            NLG_AcCurrMaxCP = (readDataNLG[0] << 8) & 0x03;
-            NLG_AcCurrMaxCP |= readDataNLG[1];
-            NLG_StatusPP = (readDataNLG[2] >> 4) & 0x07;
-            NLG_AcCurrMaxPP = readDataNLG[2] & 0x0F;
-            NLG_S_AcVoltDerating = readDataNLG[3] >> 7;
-            NLG_S_AcDeratingNoisy = (readDataNLG[3] >> 6) & 0x01;
-            NLG_AcPhaseUsd = (readDataNLG[3] >> 5) & 0x01;
-            NLG_AcPhaseDet = (readDataNLG[3] >> 2) & 0x01;
-            NLG_CoolingRequest = (readDataNLG[4] >> 6) & 0x01;
-            NLG_ACT_PLUGCom = readDataNLG[4];
-            break;
-
-        case NLG_ACT_ERR:
-            // Handle error conditions if needed
-            break;
+        // Add other cases if needed
     }
 }
+
 
 
 //MIMIMIMIMIMIMIMI
