@@ -1,3 +1,4 @@
+i have a problem this doesnt work in the precharge stage so the bsc doesnt ron i will send you the dbc and manual
 // Author: Christian Obrecht
 // Date: 07.11.2023
 // Description: Communication with BSC and DMC over CAN and Controll of ADAC
@@ -40,13 +41,13 @@ void reciveBMS();             //Recive BMS CAN Messages
 void reciveINFO();            //Data from DAU(LUCA)
 void armColingSys(bool arm);  //Arm Cooling System
 void armBattery(bool arm);    //Arm HV-Battery
-
+void updateGearState();       //What do you think????
 void chargeManage();          //Manage Charging Process
 
 uint8_t print_GPIO_wake_up();
 
 
-int16_t calculateTorque5S(bool reverseSig); //Calculate Torque from Pedal Position
+int16_t calculateTorque5S(); //Calculate Torque from Pedal Position
 
 
 //Pinout
@@ -63,7 +64,7 @@ const int CAN_INT_PIN = 45; //AKKA BLANK
 //Relay pinout
 #define RELAIS1 11  //HV Battery
 #define RELAIS2 12  //Cooling Pump
-#define RELAIS3 13  //Cooling Fan
+#define RELAIS3 13  //HV Battery
 #define RELAIS4 14  //Charger KL15
 #define RELAIS5 17  //Reverse Signal
 #define RELAIS6 18  //DMC KL15
@@ -140,6 +141,11 @@ ADS1115 ADS(0x48);
 #define NLG_DEM_CHARGE 1
 #define NLG_DEM_SLEEP 6
 
+enum Gear { Neutral, Drive, Reverse };
+Gear currentGear = Neutral; // Default to Neutral
+bool shiftAttempted = false;
+
+
 //BSC run modes
 #define BSC6_BUCK 0
 #define BSC6_BOOST 1
@@ -154,7 +160,6 @@ bool CanError = false;
 uint8_t sampleSetCounter = 0;
 int16_t sampleSetPedal[5] = {0,0,0,0,0};
 
-bool reversSig = 0; //reverse from direction selector
 
 mcp2515_can CAN(SPI_CS_PIN); // Set CS pin
 uint8_t VehicleMode = Standby;  // Set default vehicle Mode to standby
@@ -250,8 +255,8 @@ bool conUlockInterrupt = 0; //Interrupt for connector unlock
 //DMC
 //*********************************************************************//
 
-#define DMC_MAXTRQ 372
-
+#define DMC_MAXTRQ 1000 //kinda should be372 but nice try
+#define MAX_REVERSE_TRQ 170
 //**********************//
 //Sending Variables
 //Variables for 0x210
@@ -362,10 +367,10 @@ int HvoltageScale = 0;
 
 int BSC6_HVVOL_LOWLIM = MIN_U_BAT;
 int BSC6_HVVOL_LOWLIM_SCALED = 0;
-int BSC6_LVCUR_UPLIM_BUCK = 15;
+int BSC6_LVCUR_UPLIM_BUCK = 100;
 int BSC6_HVCUR_UPLIM_BUCK = 20;
 int BSC6_HVCUR_UPLIM_BUCK_SCALED = 0;
-int BSC6_LVVOL_LOWLIM = 11;
+int BSC6_LVVOL_LOWLIM = 9;
 int BSC6_LVVOL_LOWLIM_SCALED = 0;
 int BSC6_LVCUR_UPLIM_BOOST = 100;
 int BSC6_HVCUR_UPLIM_BOOST = PRECHARGE_CURRENT;
@@ -499,14 +504,7 @@ void CAN_COM( void * pvParameters ){
         sampleSetPedal[1] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
         sampleSetPedal[2] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
         sampleSetPedal[3] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
-        /*
-        if(readADC(1)>100){
-          reversSig = 1;
-        }
-        else{
-          reversSig = 0;
-        }
-        */
+    
         if((DMC_SpdAct < 100) && sampleSetPedal[1] < 200){
           DMC_DcCLimMot = 10;
         }
@@ -532,6 +530,7 @@ void CAN_COM( void * pvParameters ){
         if(millis()>(time50mscycle + delay50ms)){
           time50mscycle = millis();
           sendBSC();
+          updateGearState(); // Add this line to call gear state update
         }
         //slow cycle for LUGA
         if(millis()>(time100mscycle + delay100ms)){
@@ -539,9 +538,9 @@ void CAN_COM( void * pvParameters ){
          
         }
         
-        DMC_TrqRq_Scale = calculateTorque5S(reversSig);
+        DMC_TrqRq_Scale = calculateTorque5S();
         //Serial.println(ADS.readADC(GASPEDAL1));
-        /*Serial.print("SOC");
+        Serial.print("SOC");
         Serial.println(BMS_SOC);
         Serial.print("U_BAT");
         Serial.println(BMS_U_BAT);
@@ -551,7 +550,7 @@ void CAN_COM( void * pvParameters ){
         Serial.println(BMS_MAX_Discharge);
         Serial.print("MAX_Charge");
         Serial.println(BMS_MAX_Charge);
-        */
+        
         
       break;
 
@@ -663,37 +662,44 @@ void BACKBONE( void * pvParameters ){
       break;
       
       case Run:
-        //Serial.println("Run");
-        NLG_Charged = 0;
-        if(!digitalRead(IGNITION)){VehicleMode = Standby;}
+    NLG_Charged = 0;
 
-        armColingSys(1);
-        armBattery(1);
-        digitalWrite(RELAIS6, HIGH);  //DMC KL15
-        digitalWrite(RELAIS7, HIGH);  //BSC KL15
+    if (!digitalRead(IGNITION)) {
+        VehicleMode = Standby;
+    }
 
-        if(reversSig){digitalWrite(RELAIS5, HIGH);}
-        else{digitalWrite(RELAIS5, LOW);}
+    armColingSys(1);
+    armBattery(1);
 
-        enableBSC = 1;
+    digitalWrite(RELAIS6, HIGH);  // DMC KL15
+    digitalWrite(RELAIS7, HIGH);  // BSC KL15
 
-        if(DMC_Ready){
-          enableDMC = 1;
-        }
-        else{
-          enableDMC = 0;
-        }
-        //What was the plan?
-        if(errorCnt < 40 && DMC_SensorWarning | DMC_GenErr){
-          enableDMC = 0;
-          errorCnt ++;
-          errLatch = 1;
-        }
-        else{
-          errorCnt = 0;
-          enableDMC = 1;
-        }
-      break;
+    // Reverse light control based on gear state
+    if (currentGear == Reverse) {
+        digitalWrite(RELAIS5, HIGH);  // Turn on reverse light
+    } else {
+        digitalWrite(RELAIS5, LOW);   // Turn off reverse light
+    }
+
+    enableBSC = 1;
+
+    if (DMC_Ready) {
+        enableDMC = 1;
+    } else {
+        enableDMC = 0;
+    }
+
+    // Error handling if required
+    if (errorCnt < 40 && (DMC_SensorWarning || DMC_GenErr)) {
+        enableDMC = 0;
+        errorCnt++;
+        errLatch = 1;
+    } else {
+        errorCnt = 0;
+        enableDMC = 1;
+    }
+    break;
+
 
       case Charging:
         
@@ -829,10 +835,11 @@ void armBattery(bool arm){
       BSC6_MODE = BSC6_BOOST;
       Hvoltage = BMS_U_BAT;
       enableBSC = 1;
-      digitalWrite(RELAIS1, 0);
+      Serial.println("Precharging");
+      digitalWrite(RELAIS3, 0);
       if(((BSC6_HVVOL_ACT + 20) >= BMS_U_BAT)&& BSC6_HVVOL_ACT > 50) {
         HasPrecharged = 1;
-        digitalWrite(RELAIS1, 1);
+        digitalWrite(RELAIS3, 1);
         enableBSC = 0;
       }
     }
@@ -843,7 +850,7 @@ void armBattery(bool arm){
   }
   else{
     enableBSC = 0;
-    digitalWrite(RELAIS1, 0);
+    digitalWrite(RELAIS3, 0);
   }
 }
 
@@ -851,9 +858,14 @@ void armBattery(bool arm){
 //Throttle managment
 //**********************//
 
-int16_t calculateTorque5S(bool reverseSig) {
-    int32_t SampledPotiValue = 0;  // Use int32_t to avoid potential overflow
+int16_t calculateTorque5S() {
+    int32_t SampledPotiValue = 0;
     int16_t DMC_TorqueCalc = 0;
+
+    // Zero torque demand if in Neutral
+    if (currentGear == Neutral) {
+        return 0;
+    }
 
     // Sum values in sampleSetPedal (assuming sampleSetPedal[0-3] contains valid data)
     for (int i = 0; i < 4; i++) {
@@ -862,26 +874,87 @@ int16_t calculateTorque5S(bool reverseSig) {
 
     // Calculate average and map the result
     SampledPotiValue /= 4;
-    SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
 
-    // Convert to int16_t after mapping
-    DMC_TorqueCalc = static_cast<int16_t>(SampledPotiValue);
+    // Apply different mapping and limit based on gear
+    if (currentGear == Drive) {
+        SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
+        DMC_TorqueCalc = static_cast<int16_t>(constrain(SampledPotiValue, 0, DMC_MAXTRQ));
+    } 
+    else if (currentGear == Reverse) {
+        SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, MAX_REVERSE_TRQ);
+        DMC_TorqueCalc = -static_cast<int16_t>(constrain(SampledPotiValue, 0, MAX_REVERSE_TRQ));
+    }
 
-    // Apply deadband of ±10
-    if (DMC_TorqueCalc > -10 && DMC_TorqueCalc < 10) {
+    // Apply deadband of ±14
+    if (DMC_TorqueCalc > -14 && DMC_TorqueCalc < 14) {
         DMC_TorqueCalc = 0;
     }
 
-    // Ensure positive torque if no reverse signal
-    if (!reverseSig) {
-        DMC_TorqueCalc = abs(DMC_TorqueCalc);
-    } else {
-        // Apply reverse signal
-        DMC_TorqueCalc = -DMC_TorqueCalc;
-    }
-    Serial.println(DMC_TorqueCalc);
+    //Serial.print("Torque Demand: ");
+    //Serial.println(DMC_TorqueCalc);
     return DMC_TorqueCalc;
 }
+
+
+void updateGearState() {
+    int forwardValue = ADS.readADC(2); // Drive switch on A2
+    int reverseValue = ADS.readADC(3); // Reverse switch on A3
+
+    bool isForwardHigh = forwardValue > 200;
+    bool isReverseHigh = reverseValue > 200;
+
+    // Shift only if RPM is below threshold
+    if (DMC_SpdAct < 100) {
+        if (isForwardHigh && !isReverseHigh) {
+            currentGear = Drive;
+            shiftAttempted = false;
+        } else if (!isForwardHigh && isReverseHigh) {
+            currentGear = Reverse;
+            shiftAttempted = false;
+        } else {
+            currentGear = Neutral;
+            shiftAttempted = false;
+        }
+    } else {
+        // If RPM > 100 and a shift is requested, go to Neutral
+        if ((isForwardHigh && currentGear == Reverse) || (isReverseHigh && currentGear == Drive)) {
+            currentGear = Neutral;
+            shiftAttempted = true;
+        }
+    }
+
+    // Reactivate gear if returning to the same selection
+    if (shiftAttempted && DMC_SpdAct < 100) {
+        if (isForwardHigh && !isReverseHigh) {
+            currentGear = Drive;
+            shiftAttempted = false;
+        } else if (!isForwardHigh && isReverseHigh) {
+            currentGear = Reverse;
+            shiftAttempted = false;
+        }
+    }
+
+    // Set torque to 0 in Neutral
+    if (currentGear == Neutral) {
+        DMC_TrqRq_Scale = 0;
+    }
+  /*
+    // Print the current gear
+    switch (currentGear) {
+        case Drive:
+            Serial.println("Current Gear: Drive");
+            break;
+        case Neutral:
+            Serial.println("Current Gear: Neutral");
+            break;
+        case Reverse:
+            Serial.println("Current Gear: Reverse");
+            break;
+    }
+    */
+}
+
+
 
 
 uint8_t print_GPIO_wake_up(){
@@ -1042,11 +1115,11 @@ void reciveBMS(){
   type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
   
   if(id == 0x001){
-    BMS_SOC = readDataBMS[7];
-    BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
-    BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
-    BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
-    BMS_MAX_Charge = readDataBMS[0];
+    BMS_SOC = readDataBMS[0];
+    BMS_U_BAT = readDataBMS[1] | (readDataBMS[2] << 8);
+    BMS_I_BAT = readDataBMS[3] | (readDataBMS[4] << 8);
+    BMS_MAX_Discharge = readDataBMS[5] | (readDataBMS[6] << 8);
+    BMS_MAX_Charge = readDataBMS[7];
   }   
 }
 
