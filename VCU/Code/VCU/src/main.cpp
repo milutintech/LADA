@@ -1,4 +1,4 @@
-i have a problem this doesnt work in the precharge stage so the bsc doesnt ron i will send you the dbc and manual
+
 // Author: Christian Obrecht
 // Date: 07.11.2023
 // Description: Communication with BSC and DMC over CAN and Controll of ADAC
@@ -971,29 +971,33 @@ uint8_t print_GPIO_wake_up(){
 //BSC
 //**********************//
 
-void sendBSC(){
-  //Sending Can
-  LvoltageScale = Lvoltage * 10;
-  HvoltageScale = Hvoltage - 220; 
+void sendBSC() {
+    // Scaling and offset adjustments as per DBC
+    LvoltageScale = static_cast<uint8_t>(Lvoltage * 10); // Ensure it fits in uint8_t
+    HvoltageScale = static_cast<uint8_t>(Hvoltage - 220);
 
-  controllBufferBSC[0] = modeBSC << 1 | enableBSC;
-  controllBufferBSC[1] = LvoltageScale;
-  controllBufferBSC[2] = HvoltageScale;
+    // Construct control buffer
+    controllBufferBSC[0] = (modeBSC & 0x01) << 1 | (enableBSC & 0x01);
+    controllBufferBSC[1] = LvoltageScale;
+    controllBufferBSC[2] = HvoltageScale;
 
-  BSC6_HVVOL_LOWLIM_SCALED = BSC6_HVVOL_LOWLIM - 220;
-  BSC6_HVCUR_UPLIM_BUCK_SCALED = BSC6_HVCUR_UPLIM_BUCK * 10;
-  BSC6_LVVOL_LOWLIM_SCALED = BSC6_LVVOL_LOWLIM * 10;
-  BSC6_HVCUR_UPLIM_BOOST_SCALED = BSC6_HVCUR_UPLIM_BOOST * 10;
+    // Scaling limit values
+    BSC6_HVVOL_LOWLIM_SCALED = static_cast<uint8_t>(BSC6_HVVOL_LOWLIM - 220);
+    BSC6_HVCUR_UPLIM_BUCK_SCALED = static_cast<uint8_t>(BSC6_HVCUR_UPLIM_BUCK * 10);
+    BSC6_LVVOL_LOWLIM_SCALED = static_cast<uint8_t>(BSC6_LVVOL_LOWLIM * 10);
+    BSC6_HVCUR_UPLIM_BOOST_SCALED = static_cast<uint8_t>(BSC6_HVCUR_UPLIM_BOOST * 10);
 
-  limitBufferBSC[0] = BSC6_HVVOL_LOWLIM_SCALED;
-  limitBufferBSC[1] = BSC6_LVCUR_UPLIM_BUCK;
-  limitBufferBSC[2] = BSC6_HVCUR_UPLIM_BUCK_SCALED;
-  limitBufferBSC[3] = BSC6_LVVOL_LOWLIM_SCALED;
-  limitBufferBSC[4] = BSC6_LVCUR_UPLIM_BOOST;
-  limitBufferBSC[5] = BSC6_HVCUR_UPLIM_BOOST_SCALED;
+    // Construct limit buffer
+    limitBufferBSC[0] = BSC6_HVVOL_LOWLIM_SCALED;
+    limitBufferBSC[1] = static_cast<uint8_t>(BSC6_LVCUR_UPLIM_BUCK);
+    limitBufferBSC[2] = BSC6_HVCUR_UPLIM_BUCK_SCALED;
+    limitBufferBSC[3] = BSC6_LVVOL_LOWLIM_SCALED;
+    limitBufferBSC[4] = static_cast<uint8_t>(BSC6_LVCUR_UPLIM_BOOST);
+    limitBufferBSC[5] = BSC6_HVCUR_UPLIM_BOOST_SCALED;
 
-  CAN.sendMsgBuf(BSC_COMM, 0, 3, controllBufferBSC);
-  CAN.sendMsgBuf(BSC_LIM, 0, 6, limitBufferBSC);
+    // Send CAN messages
+    CAN.sendMsgBuf(BSC_COMM, 0, 3, controllBufferBSC);
+    CAN.sendMsgBuf(BSC_LIM, 0, 6, limitBufferBSC);
 }
 
 
@@ -1128,42 +1132,25 @@ void reciveBMS(){
 //BSC
 //**********************//
 
-void reciveBSC(){
- //Reciveing Can
-    // check if data coming
-  if (CAN_MSGAVAIL != CAN.checkReceive()) {
-      return;
-  }
-  // read data, len: data length, buf: data buf
-  CAN.readMsgBuf(&len, readDataBSC);
 
-  id = CAN.getCanId();
-  type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
-  /*
-    * MCP2515(or this driver) could not handle properly
-    * the data carried by remote frame
-    */
+void reciveBSC() {
+    // Check for received message
+    if (CAN_MSGAVAIL != CAN.checkReceive()) {
+        return;
+    }
+    // Read message
+    CAN.readMsgBuf(&len, readDataBSC);
+    id = CAN.getCanId();
 
-  
-  if(id == 0x26A){
-    BSC6_HVVOL_ACT = readDataBSC[0] | (readDataBSC[1] << 8);
-    BSC6_HVVOL_ACT = BSC6_HVVOL_ACT / 10;
-
-    BSC6_LVVOLT_ACT = readDataBSC[2];
-    BSC6_LVVOLT_ACT = BSC6_LVVOLT_ACT / 10;
-
-    BSC6_HVCUR_ACT = readDataBSC[3];
-    BSC6_HVCUR_ACT = BSC6_HVCUR_ACT / 10;
-    BSC6_HVCUR_ACT = BSC6_HVCUR_ACT - 25;
-
-    BSC6_LVCUR_ACT = readDataBSC[4] | (readDataBSC[5] << 8);
-    BSC6_LVCUR_ACT = BSC6_LVCUR_ACT - 280;
-
-    BSC6_MODE = readDataBSC[7] >> 4;
-
-  }  
+    if (id == 0x26A) {
+        // Extract and scale values
+        BSC6_HVVOL_ACT = ((uint16_t)readDataBSC[1] << 8 | readDataBSC[0]) / 10.0f;
+        BSC6_LVVOLT_ACT = readDataBSC[2] / 10.0f;
+        BSC6_HVCUR_ACT = (readDataBSC[3] / 10.0f) - 25.0f;
+        BSC6_LVCUR_ACT = ((uint16_t)readDataBSC[5] << 8 | readDataBSC[4]) - 280.0f;
+        BSC6_MODE = (readDataBSC[7] >> 4) & 0x0F;
+    }
 }
-
 
 //**********************//
 //DMC
