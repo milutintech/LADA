@@ -108,7 +108,7 @@ ADS1115 ADS(0x48);
 #define GASPEDAL1 0
 #define GASPEDAL2 1
 
-#define MinValPot 18410
+#define MinValPot 18200
 #define MaxValPot 13240
 
 //Pin for reverse signal 0 = forward, 1 = reverse pin 0 on AD
@@ -263,7 +263,7 @@ bool conUlockInterrupt = 0; //Interrupt for connector unlock
 //**********************//
 
 bool enableDMC = 0;
-bool modeDMC = 1;
+bool modeDMC = 0;
 bool oscLim = 0;
 bool negTrqSpd = 1;
 bool posTrqSpd = 1;
@@ -540,6 +540,7 @@ void CAN_COM( void * pvParameters ){
         
         DMC_TrqRq_Scale = calculateTorque5S();
         //Serial.println(ADS.readADC(GASPEDAL1));
+        /*
         Serial.print("SOC");
         Serial.println(BMS_SOC);
         Serial.print("U_BAT");
@@ -550,7 +551,7 @@ void CAN_COM( void * pvParameters ){
         Serial.println(BMS_MAX_Discharge);
         Serial.print("MAX_Charge");
         Serial.println(BMS_MAX_Charge);
-        
+        */
         
       break;
 
@@ -661,9 +662,11 @@ void BACKBONE( void * pvParameters ){
 
       break;
       
-      case Run:
+  case Run:
     NLG_Charged = 0;
-
+    Serial.print("Torque Demand: ");
+    Serial.println(DMC_TrqRq_Scale);
+    Serial.println( ADS.readADC(GASPEDAL1));
     if (!digitalRead(IGNITION)) {
         VehicleMode = Standby;
     }
@@ -679,24 +682,6 @@ void BACKBONE( void * pvParameters ){
         digitalWrite(RELAIS5, HIGH);  // Turn on reverse light
     } else {
         digitalWrite(RELAIS5, LOW);   // Turn off reverse light
-    }
-
-    enableBSC = 1;
-
-    if (DMC_Ready) {
-        enableDMC = 1;
-    } else {
-        enableDMC = 0;
-    }
-
-    // Error handling if required
-    if (errorCnt < 40 && (DMC_SensorWarning || DMC_GenErr)) {
-        enableDMC = 0;
-        errorCnt++;
-        errLatch = 1;
-    } else {
-        errorCnt = 0;
-        enableDMC = 1;
     }
     break;
 
@@ -716,10 +701,10 @@ void BACKBONE( void * pvParameters ){
           }
         }
         else{
-        //Serial.println("Charging");
+        Serial.println("Charging");
         digitalWrite(RELAIS4, HIGH);
         armColingSys(1);
-        enableBSC = 1;
+        
         chargeManage();
         }
       break;
@@ -827,41 +812,65 @@ void armColingSys(bool arm){
 //**********************//
 //Battery sys manager
 //**********************//
+// Add this global variable to keep track of the last mode change time
+unsigned long lastModeChangeTime = 0;
+
 void armBattery(bool arm) {
     // Check if precharge process should run
     if (arm && (BMS_U_BAT > MIN_U_BAT)) { 
         if (!HasPrecharged) {
-            BSC6_MODE = BSC6_BOOST;    // Set BSC to Boost mode for precharging
-            Hvoltage = BMS_U_BAT;       // Set high voltage command to BMS voltage
-            enableBSC = 1;              // Enable BSC
+            // Change to Boost mode with a delay if switching from Buck
+            if (modeBSC != BSC6_BOOST) {
+                modeBSC = BSC6_BOOST;
+                lastModeChangeTime = millis();  // Record the time of mode change
+                enableBSC = 0;  // Temporarily disable BSC during delay
+                //Serial.println("Switching to Boost mode...");
+            }
 
-            Serial.println("Precharging initiated...");
-            Serial.print("BMS_U_BAT: "); Serial.println(BMS_U_BAT);
-            Serial.print("BSC6_HVVOL_ACT: "); Serial.println(BSC6_HVVOL_ACT);
+            // Wait 2 seconds after switching modes before enabling BSC
+            if (millis() - lastModeChangeTime >= 2000) {
+                Hvoltage = BMS_U_BAT;       // Set high voltage command to BMS voltage
+                enableBSC = 1;              // Enable BSC after delay
+                //Serial.println("Boost mode enabled after delay.");
+            }
 
             // Check if actual HV voltage is within ±20V of target voltage
             if ((BSC6_HVVOL_ACT >= (BMS_U_BAT - 20)) && (BSC6_HVVOL_ACT <= (BMS_U_BAT + 20)) && (BSC6_HVVOL_ACT > 50)) {
                 HasPrecharged = 1;           // Mark precharge as complete
                 digitalWrite(RELAIS3, 1);    // Connect HV system
                 enableBSC = 0;               // Disable BSC after precharging
-                Serial.println("Precharging complete. HV system connected.");
+                //Serial.println("Precharging complete. HV system connected.");
             } else {
-                Serial.println("Precharging in progress...");
+                //Serial.println("Precharging in progress...");
             }
         } else if (HasPrecharged) {
-            BSC6_MODE = BSC6_BUCK;           // Set to Buck mode for normal operation
-            enableBSC = 1;                   // Ensure BSC remains enabled
-            Serial.println("Normal operation in Buck mode.");
+            errLatch = 1;
+            delay(100);
+            errLatch = 0;
+
+            // Change to Buck mode with a delay if switching from Boost
+            if (modeBSC != BSC6_BUCK) {
+                modeBSC = BSC6_BUCK;
+                lastModeChangeTime = millis();  // Record the time of mode change
+                enableBSC = 0;  // Temporarily disable BSC during delay
+                //Serial.println("Switching to Buck mode...");
+            }
+
+            // Wait 2 seconds after switching modes before enabling BSC
+            if (millis() - lastModeChangeTime >= 1000) {
+                enableDMC = 1;          // Enable DMC for normal operation
+                enableBSC = 1;          // Enable BSC after delay
+                //Serial.println("Buck mode enabled after delay.");
+            }
         }
     } else {
         // Disable battery and reset precharge if arm is false or BMS voltage too low
         enableBSC = 0;
         HasPrecharged = 0;
         digitalWrite(RELAIS3, 0);            // Disconnect HV system
-        Serial.println("Battery disconnected or BMS voltage too low.");
+        //Serial.println("Battery disconnected or BMS voltage too low.");
     }
 }
-
 
 //**********************//
 //Throttle managment
@@ -887,11 +896,11 @@ int16_t calculateTorque5S() {
     // Apply different mapping and limit based on gear
     if (currentGear == Drive) {
         SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
-        DMC_TorqueCalc = static_cast<int16_t>(constrain(SampledPotiValue, 0, DMC_MAXTRQ));
+        DMC_TorqueCalc = -static_cast<int16_t>(constrain(SampledPotiValue, 0, DMC_MAXTRQ));
     } 
     else if (currentGear == Reverse) {
         SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, MAX_REVERSE_TRQ);
-        DMC_TorqueCalc = -static_cast<int16_t>(constrain(SampledPotiValue, 0, MAX_REVERSE_TRQ));
+        DMC_TorqueCalc = static_cast<int16_t>(constrain(SampledPotiValue, 0, MAX_REVERSE_TRQ));
     }
 
     // Apply deadband of ±14
@@ -899,8 +908,7 @@ int16_t calculateTorque5S() {
         DMC_TorqueCalc = 0;
     }
 
-    //Serial.print("Torque Demand: ");
-    //Serial.println(DMC_TorqueCalc);
+    
     return DMC_TorqueCalc;
 }
 
@@ -972,7 +980,7 @@ uint8_t print_GPIO_wake_up(){
 }
 
 //*********************************************************************//
-//CAN send functions
+//CAN  functions
 //Generic
 //*********************************************************************//
 
@@ -982,11 +990,11 @@ uint8_t print_GPIO_wake_up(){
 
 void sendBSC() {
     // Scaling the signals as per DBC spec
-    LvoltageScale = static_cast<uint8_t>((Lvoltage - 8) * 10);  // Scale to match 0.1 V/bit with offset 8V
+    LvoltageScale = static_cast<uint8_t>(Lvoltage * 10);  // Scale to match 0.1 V/bit with offset 8V
     HvoltageScale = static_cast<uint8_t>((Hvoltage - 220));     // Scale to match 1 V/bit with offset 220V
 
     // Construct control buffer for BSC6COM (ID: 0x260)
-    controllBufferBSC[0] = (enableBSC << 7) | (modeBSC << 6);  // enableBSC and modeBSC control the run and mode states
+    controllBufferBSC[0] = (enableBSC << 0) | (modeBSC << 1)|0x80;  // enableBSC and modeBSC control the run and mode states
     controllBufferBSC[1] = LvoltageScale;
     controllBufferBSC[2] = HvoltageScale;
 
