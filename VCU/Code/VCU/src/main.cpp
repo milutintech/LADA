@@ -119,7 +119,7 @@ ADS1115 ADS(0x48);
 #define MAX_U_BAT 436 //4.2V*104S
 
 #define MAX_DMC_CURRENT 600 //A 
-#define MAX_NLG_CURRENT 32 //A
+#define MAX_NLG_CURRENT 72 //A
 #define PRECHARGE_CURRENT 20 //A Curret of BSC in boost mode
 
 //Define Charger states
@@ -191,7 +191,7 @@ int  NLG_DcHvVoltLimMax = MAX_U_BAT;   //Maximum HV voltage
 int NLG_DcHvCurrLimMax = MAX_NLG_CURRENT;
 uint8_t NLG_StateDem = 0;       //Setting State demand: 0 = Standby, 1 = Charge, 6 = Sleep
 uint16_t NLG_LedDem = 0;        //Charge LED demanded See table 
-uint16_t NLG_AcCurrLimMax = 0;  //Maximum AC current
+uint16_t NLG_AcCurrLimMax = 32;  //Maximum AC current
 
 bool NLG_C_EnPhaseShift = 0;
 uint16_t NLG_AcPhaseShift = 0;
@@ -255,7 +255,7 @@ bool conUlockInterrupt = 0; //Interrupt for connector unlock
 //DMC
 //*********************************************************************//
 
-#define DMC_MAXTRQ 1000 //kinda should be372 but nice try
+#define DMC_MAXTRQ 372 //kinda should be372 but nice try
 #define MAX_REVERSE_TRQ 170
 //**********************//
 //Sending Variables
@@ -299,7 +299,7 @@ int DMC_DcCLimGen_Scale = 0;
 //Variables for 0x212
 //**********************//
 
-int DMC_TrqSlewrate = 1300;
+int DMC_TrqSlewrate = 150;
 int DMC_SpdSlewrate = 655;
 int DMC_MechPwrMaxMot = 20000;
 int DMC_MechPwrMaxGen = 20000;
@@ -420,6 +420,7 @@ void IRAM_ATTR unlockCON() {
     conUlockInterrupt = 1;
   }
   else{
+    Serial.println("Standby 423");
     VehicleMode = Standby;
   }
 }
@@ -505,17 +506,14 @@ void CAN_COM( void * pvParameters ){
         sampleSetPedal[2] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
         sampleSetPedal[3] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
     
-        if((DMC_SpdAct < 100) && sampleSetPedal[1] < 200){
-          DMC_DcCLimMot = 10;
+      
+        if(BMS_MAX_Discharge < MAX_DMC_CURRENT){
+          DMC_DcCLimMot = BMS_MAX_Discharge;
         }
         else{
-          if(BMS_MAX_Discharge < MAX_DMC_CURRENT){
-            DMC_DcCLimMot = BMS_MAX_Discharge;
-          }
-          else{
-            DMC_DcCLimMot = MAX_DMC_CURRENT;
-          }
+         DMC_DcCLimMot = MAX_DMC_CURRENT;
         }
+      
 
         //polling CAN msgs
         reciveBSC();
@@ -540,6 +538,23 @@ void CAN_COM( void * pvParameters ){
         
         DMC_TrqRq_Scale = calculateTorque5S();
         //Serial.println(ADS.readADC(GASPEDAL1));
+        
+        Serial.print("SOC");
+        Serial.println(BMS_SOC);
+        Serial.print("U_BAT");
+        Serial.println(BMS_U_BAT);
+        Serial.print("I_BAT");
+        Serial.println(BMS_I_BAT);
+        Serial.print("MAX_Discharge");
+        Serial.println(BMS_MAX_Discharge);
+        Serial.print("MAX_Charge");
+        Serial.println(BMS_MAX_Charge);
+        
+        
+      break;
+
+      case Charging:
+        //BMS DMC max current 
         /*
         Serial.print("SOC");
         Serial.println(BMS_SOC);
@@ -551,20 +566,15 @@ void CAN_COM( void * pvParameters ){
         Serial.println(BMS_MAX_Discharge);
         Serial.print("MAX_Charge");
         Serial.println(BMS_MAX_Charge);
-        */
         
-      break;
-
-      case Charging:
-        //BMS DMC max current 
-      
         if(BMS_MAX_Charge < MAX_NLG_CURRENT){
           NLG_DcHvCurrLimMax = BMS_MAX_Charge;
         }
         else{
           NLG_DcHvCurrLimMax = MAX_NLG_CURRENT;
         }
-     
+      */
+     NLG_DcHvCurrLimMax = MAX_NLG_CURRENT;
         if(millis()>(time10mscycle + delay10ms)){
           time10mscycle = millis();
           sendNLG();
@@ -580,6 +590,7 @@ void CAN_COM( void * pvParameters ){
         reciveNLG();
       break;
       default:
+        Serial.println("Standby 592");
         VehicleMode = Standby;
       break;
     }
@@ -633,6 +644,7 @@ void BACKBONE( void * pvParameters ){
       }
     break;
     default:
+      Serial.println("Standby 645");
       VehicleMode = Standby;
     break;
   }
@@ -664,10 +676,11 @@ void BACKBONE( void * pvParameters ){
       
   case Run:
     NLG_Charged = 0;
-    Serial.print("Torque Demand: ");
-    Serial.println(DMC_TrqRq_Scale);
-    Serial.println( ADS.readADC(GASPEDAL1));
+    //Serial.print("Torque Demand: ");
+    //Serial.println(DMC_TrqRq_Scale);
+    //Serial.println( ADS.readADC(GASPEDAL1));
     if (!digitalRead(IGNITION)) {
+        Serial.println("Standby 680");
         VehicleMode = Standby;
     }
 
@@ -686,8 +699,9 @@ void BACKBONE( void * pvParameters ){
     break;
 
 
-      case Charging:
-        
+    case Charging:
+      digitalWrite(RELAIS4, HIGH);  // NLG KL15
+      digitalWrite(RELAIS6, HIGH);  // BSC KL15
         //Check if Con  unlock interrupt is set
         if(conUlockInterrupt){
           if(NLG_S_ConLocked){
@@ -697,11 +711,12 @@ void BACKBONE( void * pvParameters ){
           else{
             conUlockInterrupt = 0;
             NLG_StateDem = NLG_DEM_STANDBY;
+            Serial.println("Standby 710");
             VehicleMode = Standby;
           }
         }
         else{
-        Serial.println("Charging");
+        //Serial.println("Charging");
         digitalWrite(RELAIS4, HIGH);
         armColingSys(1);
         
@@ -709,6 +724,7 @@ void BACKBONE( void * pvParameters ){
         }
       break;
       default:
+        Serial.println("Standby 722");
         VehicleMode = Standby;
       break;
     } 
@@ -740,16 +756,18 @@ void chargeManage() {
                 NLG_LedDem = 1;  // LED red pulsing
                 if (NLG_Charged) {
                     NLG_StateDem = NLG_DEM_SLEEP;
+                    Serial.println("Standby 753");
                     VehicleMode = Standby;
                     NLG_C_UnlockConRq = 1;  // Initiate unlock request
                     unlockPersist = true;   // Set persistent unlock
                     unlockTimeout = millis();  // Start timeout timer
                 } else {
-                    armBattery(1);
+                    
                 }
 
                 // Transition to standby immediately if the connector is disconnected
                 if (!NLG_S_ConLocked) {
+                    Serial.println("Standby 763");
                     VehicleMode = Standby;
                     NLG_LedDem = 0;  // LED OFF
                 }
@@ -760,13 +778,18 @@ void chargeManage() {
                 if (unlockPersist || NLG_C_UnlockConRq) {
                     NLG_StateDem = NLG_DEM_STANDBY;
                 } else {
+                    if(HasPrecharged){
                     NLG_StateDem = NLG_DEM_CHARGE;  // Demand Charge
+                    }
+                    Serial.println("Precharging");
+                    armBattery(1);
                 }
                 break;
 
             case NLG_ACT_CHARGE:
                 NLG_LedDem = 4;  // LED green
-                NLG_Charged = 1;
+                //NLG_Charged = 1;
+                armBattery(1);
                 break;
 
             default:
@@ -779,6 +802,7 @@ void chargeManage() {
             NLG_C_UnlockConRq = 1;  // Keep unlock request active
             if (!NLG_S_ConLocked) {  // If successfully unlocked
                 NLG_StateDem = NLG_DEM_STANDBY;  // Set Standby mode
+                Serial.println("Standby 797");
                 VehicleMode = Standby;
                 NLG_LedDem = 0;  // LED OFF to ensure no blinking continues
             } else if (millis() - unlockTimeout > unlockTimeoutDuration) {
@@ -817,7 +841,8 @@ unsigned long lastModeChangeTime = 0;
 
 void armBattery(bool arm) {
     // Check if precharge process should run
-    if (arm && (BMS_U_BAT > MIN_U_BAT)) { 
+    if (arm) { 
+      
         if (!HasPrecharged) {
             // Change to Boost mode with a delay if switching from Buck
             if (modeBSC != BSC6_BOOST) {
@@ -895,10 +920,14 @@ int16_t calculateTorque5S() {
 
     // Apply different mapping and limit based on gear
     if (currentGear == Drive) {
+        negTrqSpd = 1;
+        posTrqSpd = 0;
         SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
         DMC_TorqueCalc = -static_cast<int16_t>(constrain(SampledPotiValue, 0, DMC_MAXTRQ));
     } 
     else if (currentGear == Reverse) {
+        negTrqSpd = 0;
+        posTrqSpd = 1;
         SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, MAX_REVERSE_TRQ);
         DMC_TorqueCalc = static_cast<int16_t>(constrain(SampledPotiValue, 0, MAX_REVERSE_TRQ));
     }
@@ -1147,10 +1176,10 @@ void reciveBMS(){
   type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
   
   if(id == 0x001){
-    BMS_SOC = readDataBMS[0];
-    BMS_U_BAT = readDataBMS[1] | (readDataBMS[2] << 8);
-    BMS_I_BAT = readDataBMS[3] | (readDataBMS[4] << 8);
-    BMS_MAX_Discharge = readDataBMS[5] | (readDataBMS[6] << 8);
+    BMS_SOC = readDataBMS[0]/2;
+    BMS_U_BAT = (readDataBMS[1] | (readDataBMS[2] << 8))/100;
+    BMS_I_BAT = (readDataBMS[3] | (readDataBMS[4] << 8))/100;
+    BMS_MAX_Discharge = (readDataBMS[5] | (readDataBMS[6] << 8))/100;
     BMS_MAX_Charge = readDataBMS[7];
   }   
 }
