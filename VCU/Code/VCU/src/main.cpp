@@ -111,9 +111,11 @@ ADS1115 ADS(0x48);
 #define MinValPot 18200
 #define MaxValPot 13240
 
+
 //Pin for reverse signal 0 = forward, 1 = reverse pin 0 on AD
 #define REVERSE 0
 //Battery Voltage values
+bool batteryArmed = 0;
 #define MIN_U_BAT 360 //3.4V*104S
 #define NOM_U_BAT 382 //3.67V*104S
 #define MAX_U_BAT 436 //4.2V*104S
@@ -499,7 +501,7 @@ void CAN_COM( void * pvParameters ){
 
       break;
       case Run:
-        delay(10);
+        
         //BMS DMC max current
         sampleSetPedal[0] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
         sampleSetPedal[1] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
@@ -516,6 +518,7 @@ void CAN_COM( void * pvParameters ){
       
 
         //polling CAN msgs
+        reciveBMS();
         reciveBSC();
         reciveDMC(); 
 
@@ -574,7 +577,8 @@ void CAN_COM( void * pvParameters ){
           NLG_DcHvCurrLimMax = MAX_NLG_CURRENT;
         }
       */
-     NLG_DcHvCurrLimMax = MAX_NLG_CURRENT;
+     reciveBMS();
+     NLG_DcHvCurrLimMax = BMS_MAX_Charge;
         if(millis()>(time10mscycle + delay10ms)){
           time10mscycle = millis();
           sendNLG();
@@ -766,11 +770,14 @@ void chargeManage() {
                 }
 
                 // Transition to standby immediately if the connector is disconnected
+
+                /*
                 if (!NLG_S_ConLocked) {
                     Serial.println("Standby 763");
                     VehicleMode = Standby;
                     NLG_LedDem = 0;  // LED OFF
                 }
+                */
                 break;
 
             case NLG_ACT_READY2CHARGE:
@@ -824,12 +831,14 @@ void armColingSys(bool arm){
   //switch relais3 on VCU for FAN
  
   //Serial.println("Cooling armed");
-  if(arm  && ((DMC_TempInv > 50)|(DMC_TempMot > 80)|(NLG_TempCoolPlate > 50 ))){
-    digitalWrite(RELAIS2, 1);
-  }
-  else if(((DMC_TempInv < 40)&&(DMC_TempMot < 50)&&(NLG_TempCoolPlate < 40 ))){
-    digitalWrite(RELAIS2, 0);
-  }
+  if(batteryArmed){
+    if(arm  && ((DMC_TempInv > 50)|(DMC_TempMot > 80)|(NLG_TempCoolPlate > 50 ))){
+      digitalWrite(RELAIS2, 1);
+    }
+    else if(((DMC_TempInv < 40)&&(DMC_TempMot < 50)&&(NLG_TempCoolPlate < 40 ))){
+      digitalWrite(RELAIS2, 1);
+    }
+ }
 }
 
 
@@ -869,6 +878,7 @@ void armBattery(bool arm) {
                 //Serial.println("Precharging in progress...");
             }
         } else if (HasPrecharged) {
+          batteryArmed = 1;
             errLatch = 1;
             delay(100);
             errLatch = 0;
@@ -890,6 +900,7 @@ void armBattery(bool arm) {
         }
     } else {
         // Disable battery and reset precharge if arm is false or BMS voltage too low
+        batteryArmed = 0;
         enableBSC = 0;
         HasPrecharged = 0;
         digitalWrite(RELAIS3, 0);            // Disconnect HV system
@@ -1109,7 +1120,7 @@ void sendDMC() {
 
 void sendNLG(){
     // Scaling values as per CAN specifications
-    NLG_DcHvVoltLimMax_Scale = static_cast<int>((NLG_DcHvVoltLimMax - 350) * 10); // Based on 0.1 V/bit factor, offset 350V
+    NLG_DcHvVoltLimMax_Scale = static_cast<int>((NLG_DcHvVoltLimMax) * 10); // Based on 0.1 V/bit factor, offset 350V
     NLG_DcHvCurrLimMax_Scale = static_cast<int>((NLG_DcHvCurrLimMax + 102.4) * 10); // Based on 0.1 A/bit factor, offset -102.4A
     NLG_AcCurrLimMax_Scale = static_cast<int>((NLG_AcCurrLimMax + 102.4) * 10); // Based on 0.1 A/bit factor, offset -102.4A
     NLG_AcPhaseShift_Scale = static_cast<int>((NLG_AcPhaseShift) * 10); // Based on 0.1 degree/bit factor
@@ -1140,25 +1151,7 @@ void sendNLG(){
 
 void reciveINFO(){
   Serial.println("NotDone");
-  if (CAN_MSGAVAIL != CAN.checkReceive()) {
-      return;
-  }
 
-
-  // read data, len: data length, buf: data buf
-  CAN.readMsgBuf(&len, readDataBMS);
-  Serial.println("reading");
-  id = CAN.getCanId();
-  type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
-  
-  if(id == 0x553){
-    BMS_SOC = readDataBMS[7];
-    BMS_U_BAT = readDataBMS[6] | (readDataBMS[5] << 8);
-    BMS_I_BAT = readDataBMS[4] | (readDataBMS[3] << 8);
-    BMS_MAX_Discharge = readDataBMS[2] | (readDataBMS[1] << 8);
-    BMS_MAX_Charge = readDataBMS[0];
-  } 
-  
 }
 
 
@@ -1177,10 +1170,10 @@ void reciveBMS(){
   
   if(id == 0x001){
     BMS_SOC = readDataBMS[0]/2;
-    BMS_U_BAT = (readDataBMS[1] | (readDataBMS[2] << 8))/100;
+    BMS_U_BAT = 370;//(readDataBMS[1] | (readDataBMS[2] << 8))/100;
     BMS_I_BAT = (readDataBMS[3] | (readDataBMS[4] << 8))/100;
     BMS_MAX_Discharge = (readDataBMS[5] | (readDataBMS[6] << 8))/100;
-    BMS_MAX_Charge = readDataBMS[7];
+    BMS_MAX_Charge = readDataBMS[7]*2;
   }   
 }
 
