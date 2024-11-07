@@ -120,7 +120,7 @@ bool batteryArmed = 0;
 #define NOM_U_BAT 382 //3.67V*104S
 #define MAX_U_BAT 436 //4.2V*104S
 
-#define MAX_DMC_CURRENT 600 //A 
+#define MAX_DMC_CURRENT 300 //A 
 #define MAX_NLG_CURRENT 72 //A
 #define PRECHARGE_CURRENT 20 //A Curret of BSC in boost mode
 
@@ -257,8 +257,8 @@ bool conUlockInterrupt = 0; //Interrupt for connector unlock
 //DMC
 //*********************************************************************//
 
-#define DMC_MAXTRQ 372 //kinda should be372 but nice try
-#define MAX_REVERSE_TRQ 170
+#define DMC_MAXTRQ 850 //kinda should be372 but nice try
+#define MAX_REVERSE_TRQ 220
 //**********************//
 //Sending Variables
 //Variables for 0x210
@@ -266,7 +266,7 @@ bool conUlockInterrupt = 0; //Interrupt for connector unlock
 
 bool enableDMC = 0;
 bool modeDMC = 0;
-bool oscLim = 0;
+bool oscLim = 1;
 bool negTrqSpd = 1;
 bool posTrqSpd = 1;
 bool errLatch = 0;
@@ -541,7 +541,8 @@ void CAN_COM( void * pvParameters ){
         
         DMC_TrqRq_Scale = calculateTorque5S();
         //Serial.println(ADS.readADC(GASPEDAL1));
-        
+        Serial.println(DMC_TrqRq_Scale);
+        /*
         Serial.print("SOC");
         Serial.println(BMS_SOC);
         Serial.print("U_BAT");
@@ -552,7 +553,7 @@ void CAN_COM( void * pvParameters ){
         Serial.println(BMS_MAX_Discharge);
         Serial.print("MAX_Charge");
         Serial.println(BMS_MAX_Charge);
-        
+        */
         
       break;
 
@@ -832,11 +833,11 @@ void armColingSys(bool arm){
  
   //Serial.println("Cooling armed");
   if(batteryArmed){
-    if(arm  && ((DMC_TempInv > 50)|(DMC_TempMot > 80)|(NLG_TempCoolPlate > 50 ))){
+    if(arm  && ((DMC_TempInv > 65)|(DMC_TempMot > 80)|(NLG_CoolingRequest > 50 ))){
       digitalWrite(RELAIS2, 1);
     }
-    else if(((DMC_TempInv < 40)&&(DMC_TempMot < 50)&&(NLG_TempCoolPlate < 40 ))){
-      digitalWrite(RELAIS2, 1);
+    else if(((DMC_TempInv < 40)&&(DMC_TempMot < 50)&&(NLG_CoolingRequest < 0 ))){
+      digitalWrite(RELAIS2, 0);
     }
  }
 }
@@ -932,12 +933,12 @@ int16_t calculateTorque5S() {
     // Apply different mapping and limit based on gear
     if (currentGear == Drive) {
         negTrqSpd = 1;
-        posTrqSpd = 0;
+        posTrqSpd = 1;
         SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
         DMC_TorqueCalc = -static_cast<int16_t>(constrain(SampledPotiValue, 0, DMC_MAXTRQ));
     } 
     else if (currentGear == Reverse) {
-        negTrqSpd = 0;
+        negTrqSpd = 1;
         posTrqSpd = 1;
         SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, MAX_REVERSE_TRQ);
         DMC_TorqueCalc = static_cast<int16_t>(constrain(SampledPotiValue, 0, MAX_REVERSE_TRQ));
@@ -1098,8 +1099,8 @@ void sendDMC() {
     // Control buffer for DMC_CTRL (ID: 0x210)
     lowNibSpd = DMC_SpdRq & 0xFF;
     highNibSpd = DMC_SpdRq >> 8;
-    lowNibTrq = static_cast<int16_t>(DMC_TrqRq_Scale * 100) & 0xFF;  // Scale to match 0.01 Nm/bit
-    highNibTrq = static_cast<int16_t>(DMC_TrqRq_Scale * 100) >> 8;
+    lowNibTrq = static_cast<int16_t>(DMC_TrqRq_Scale * 10) & 0xFF;  // Scale to match 0.01 Nm/bit
+    highNibTrq = static_cast<int16_t>(DMC_TrqRq_Scale * 10) >> 8;
 
     controllBufferDMC[0] = (enableDMC << 7) | (modeDMC << 6) | (oscLim << 5) | (negTrqSpd << 1) | posTrqSpd;
     controllBufferDMC[2] = highNibSpd;
@@ -1283,7 +1284,9 @@ void reciveNLG() {
             NLG_S_Err = (readDataNLG[7] >> 1) & 0x01; // 1 bit at bit 62
             NLG_S_War = readDataNLG[7] & 0x01; // 1 bit at bit 63
             break;
-
+        case NLG_ACT_PLUG:
+            NLG_CoolingRequest = readDataNLG[4];
+          break;
         // Add other cases if needed
     }
 }
