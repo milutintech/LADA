@@ -116,7 +116,7 @@ ADS1115 ADS(0x48);
 #define REVERSE 0
 //Battery Voltage values
 bool batteryArmed = 0;
-#define MIN_U_BAT 360 //3.4V*104S
+#define MIN_U_BAT 360 //3.2V*104S
 #define NOM_U_BAT 382 //3.67V*104S
 #define MAX_U_BAT 436 //4.2V*104S
 

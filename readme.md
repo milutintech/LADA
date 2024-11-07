@@ -118,7 +118,7 @@ discharge
 
 ## BMS Messages
 Source: BMS
-ID 0x555 MSB 00 00 00 00 00 00 00 00 LSB 
+ID 0x1 MSB 00 00 00 00 00 00 00 00 LSB 
 > - BMS_SOC 0%-100% byte 0
 > - BMS_U_BAT 0V-450V byte 1,2
 > - BMS_I_BAT 0A-650A byte 3,4
@@ -126,16 +126,9 @@ ID 0x555 MSB 00 00 00 00 00 00 00 00 LSB
 > - BMS_MAX_Charge 0A-250A 7
 
 ## INFO Messages
-Source: VCU
-ID 0x554 MSB 00 00 00 00 00 00 00 00 LSB 
-> - BMS_SOC 0%-100% byte 0
-> - BMS_U_BAT 0V-450V byte 1,2
-> - BMS_I_BAT 0A-650A byte 3,4
-> - STATE 0-5 byte 5
-
 Source: INFO
-ID 0x553 MSB 00 00 00 00 00 00 00 00 LSB 
-> - DMC_TrqRq 0Nm-1100Nm byte 0,1
-> - NLG_AcCurrLimMax 0A-32A byte 2
-> - MAX_CHG_SOC 0%-100% byte 3
+ID 0x3 MSB 00 00 00 00 00 00 00 00 LSB 
+> - MAX_CHG_SOC 0%-100% byte 0
+> - DMC_TrqRq 0Nm-1100Nm byte 1,2
+> - NLG_AcCurrLimMax 0A-32A byte 3
 > - OFFROAD_MODE 0-1 byte 4
