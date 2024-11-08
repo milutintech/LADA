@@ -929,9 +929,9 @@ int16_t calculateTorque5S() {
 //Speed Calculations
 //**********************//
   if (LowRange) {
-       speed = DMC_SpdAct * 60 / REDUCED_RATIO / DIFF_RATIO * WHEEL_CIRC;
+       speed = DMC_SpdAct * 60 / REDUCED_RATIO / DIFF_RATIO * WHEEL_CIRC /1000;
    } else {
-       speed = DMC_SpdAct * 60 / NORMAL_RATIO / DIFF_RATIO * WHEEL_CIRC;
+       speed = DMC_SpdAct * 60 / NORMAL_RATIO / DIFF_RATIO * WHEEL_CIRC /1000;
    }
    // Zero torque demand if in Neutral
    if (currentGear == Neutral) {
