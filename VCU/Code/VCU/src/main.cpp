@@ -258,6 +258,7 @@ bool conUlockInterrupt = 0; //Interrupt for connector unlock
 //*********************************************************************//
 
 #define DMC_MAXTRQ 850 //kinda should be372 but nice try
+#define DMC_MAXREQTRQ 850
 #define MAX_REVERSE_TRQ 220
 // Variable to control OPD mode at runtime
 bool isOPDEnabled = true;  // Set to true for OPD, false for original formula
@@ -952,7 +953,7 @@ int16_t calculateTorque5S() {
        // OPD Logic: Implement regenerative braking and acceleration
        float throttlePosition = map(SampledPotiValue, MinValPot, MaxValPot, 0, 100);  // Normalize throttle position (0-100)
        float phi = 20.0, ch = 10.0, m = 2.0;
-       float tau_rm = -100.0, tau_am = 100.0, psi = 2.0, gamma = 1.5;
+       float tau_rm = -DMC_MAXTRQ, tau_am = DMC_MAXREQTRQ, psi = 2.0, gamma = 1.5;
        float p_cu = phi * pow((speed / 100.0), 1.0 / m);
        float p_cl = p_cu - ch * (speed / 100.0);
        if (currentGear == Drive) {
