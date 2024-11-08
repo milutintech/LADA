@@ -258,17 +258,7 @@ bool conUlockInterrupt = 0; //Interrupt for connector unlock
 //*********************************************************************//
 
 #define DMC_MAXTRQ 850 //kinda should be372 but nice try
-#define DMC_MAXREQTRQ 850
 #define MAX_REVERSE_TRQ 220
-// Variable to control OPD mode at runtime
-bool isOPDEnabled = true;  // Set to true for OPD, false for original formula
-
-uint16_t speed = 0;
-#define NORMAL_RATIO 1.2
-#define REDUCED_RATIO 2.1
-#define DIFF_RATIO 3.9
-#define WHEEL_CIRC 2.08
-#define LowRange 0
 //**********************//
 //Sending Variables
 //Variables for 0x210
@@ -518,16 +508,13 @@ void CAN_COM( void * pvParameters ){
         sampleSetPedal[2] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
         sampleSetPedal[3] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
     
-      /*
+      
         if(BMS_MAX_Discharge < MAX_DMC_CURRENT){
           DMC_DcCLimMot = BMS_MAX_Discharge;
         }
         else{
          DMC_DcCLimMot = MAX_DMC_CURRENT;
-
         }
-        */
-        DMC_DcCLimMot = MAX_DMC_CURRENT;
       
 
         //polling CAN msgs
@@ -925,78 +912,47 @@ void armBattery(bool arm) {
 //**********************//
 //Throttle managment
 //**********************//
+
 int16_t calculateTorque5S() {
     int32_t SampledPotiValue = 0;
     int16_t DMC_TorqueCalc = 0;
 
-    // Invert speed if in Drive, use raw speed in Reverse
-    float adjustedSpeed = currentGear == Drive ? -DMC_SpdAct : DMC_SpdAct;
-    adjustedSpeed = std::max(adjustedSpeed, 0.1f);  // Avoid zero issues
-
-    // Map the speed to kph
-    if (LowRange) {
-        speed = adjustedSpeed * 60 / REDUCED_RATIO / DIFF_RATIO * WHEEL_CIRC / 1000;
-    } else {
-        speed = adjustedSpeed * 60 / NORMAL_RATIO / DIFF_RATIO * WHEEL_CIRC / 1000;
-    }
-
-    // Neutral gear should result in zero torque
+    // Zero torque demand if in Neutral
     if (currentGear == Neutral) {
         return 0;
     }
 
-    // Throttle Sampling and Averaging
+    // Sum values in sampleSetPedal (assuming sampleSetPedal[0-3] contains valid data)
     for (int i = 0; i < 4; i++) {
         SampledPotiValue += sampleSetPedal[i];
     }
+
+    // Calculate average and map the result
     SampledPotiValue /= 4;
 
-    // Map throttle position to 0-100%
-    float throttlePosition = map(SampledPotiValue, MinValPot, MaxValPot, 0, 100);
-    throttlePosition = constrain(throttlePosition, 0.0f, 100.0f);
-
-    // One-Pedal Drive (OPD) Logic with positive direction calculations
-    if (isOPDEnabled) {
-        float phi = 20.0f, ch = 10.0f, m = 2.0f;
-        float tau_rm = DMC_MAXREQTRQ, tau_am = DMC_MAXTRQ;
-        float psi = 2.0f, gamma = 1.5f;
-        float p_cu = phi * pow((speed / 100.0f), 1.0f / m);
-        float p_cl = std::max(p_cu - ch * (speed / 100.0f), 0.1f);
-
-        if (throttlePosition <= p_cl) {
-            // Regenerative braking range
-            float a_r = tau_rm / std::max(pow(p_cl, psi), 0.1f);  // Avoid zero in denominator
-            DMC_TorqueCalc = a_r * pow(throttlePosition, psi);
-        } else if (throttlePosition >= p_cu) {
-            // Acceleration range
-            float p_m = 80.0f;  // Pedal position for max acceleration
-            float accelFactor = (throttlePosition - p_cu) / (p_m - p_cu);
-            DMC_TorqueCalc = pow(accelFactor, gamma) * tau_am;
-        } else {
-            // Coasting range, no torque
-            DMC_TorqueCalc = 0;
-        }
-    } else {
-        // Legacy Mode Calculation (positive torque values)
-        SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, 
-                               currentGear == Drive ? DMC_MAXTRQ : MAX_REVERSE_TRQ);
-        DMC_TorqueCalc = constrain(SampledPotiValue, 0, currentGear == Drive ? DMC_MAXTRQ : MAX_REVERSE_TRQ);
+    // Apply different mapping and limit based on gear
+    if (currentGear == Drive) {
+        negTrqSpd = 1;
+        posTrqSpd = 1;
+        SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
+        DMC_TorqueCalc = -static_cast<int16_t>(constrain(SampledPotiValue, 0, DMC_MAXTRQ));
+    } 
+    else if (currentGear == Reverse) {
+        negTrqSpd = 1;
+        posTrqSpd = 1;
+        SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, MAX_REVERSE_TRQ);
+        DMC_TorqueCalc = static_cast<int16_t>(constrain(SampledPotiValue, 0, MAX_REVERSE_TRQ));
     }
 
-    // Apply direction-specific inversion: Negative for Drive, Positive for Reverse
-    DMC_TorqueCalc = (currentGear == Drive) ? -DMC_TorqueCalc : DMC_TorqueCalc;
-
-    // Apply deadband
+    // Apply deadband of ±14
     if (DMC_TorqueCalc > -14 && DMC_TorqueCalc < 14) {
         DMC_TorqueCalc = 0;
-        enableDMC = 0;
-    } else {
-        enableDMC = 1;
     }
 
-    Serial.print("Calculated Torque: "); Serial.println(DMC_TorqueCalc);
+    
     return DMC_TorqueCalc;
 }
+
 
 void updateGearState() {
     int forwardValue = ADS.readADC(2); // Drive switch on A2
