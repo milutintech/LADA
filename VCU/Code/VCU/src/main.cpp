@@ -518,13 +518,16 @@ void CAN_COM( void * pvParameters ){
         sampleSetPedal[2] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
         sampleSetPedal[3] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
     
-      
+      /*
         if(BMS_MAX_Discharge < MAX_DMC_CURRENT){
           DMC_DcCLimMot = BMS_MAX_Discharge;
         }
         else{
          DMC_DcCLimMot = MAX_DMC_CURRENT;
+
         }
+        */
+        DMC_DcCLimMot = MAX_DMC_CURRENT;
       
 
         //polling CAN msgs
@@ -1010,6 +1013,7 @@ int16_t calculateTorque5S() {
    } else {
        enableDMC = 1;
    }
+   Serial.println(DMC_TorqueCalc);
    return DMC_TorqueCalc;
 }
 
