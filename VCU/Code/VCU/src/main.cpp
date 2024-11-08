@@ -925,95 +925,68 @@ void armBattery(bool arm) {
 //**********************//
 //Throttle managment
 //**********************//
-
 int16_t calculateTorque5S() {
     int32_t SampledPotiValue = 0;
     int16_t DMC_TorqueCalc = 0;
 
-    // Speed Calculations
-    float adjustedSpeed = std::max(DMC_SpdAct, 0.1f);  // Avoid zero issues by setting a minimum speed
+    // Invert speed if in Drive, use raw speed in Reverse
+    float adjustedSpeed = currentGear == Drive ? -DMC_SpdAct : DMC_SpdAct;
+    adjustedSpeed = std::max(adjustedSpeed, 0.1f);  // Avoid zero issues
+
+    // Map the speed to kph
     if (LowRange) {
         speed = adjustedSpeed * 60 / REDUCED_RATIO / DIFF_RATIO * WHEEL_CIRC / 1000;
     } else {
         speed = adjustedSpeed * 60 / NORMAL_RATIO / DIFF_RATIO * WHEEL_CIRC / 1000;
     }
 
-    // Zero torque demand if in Neutral
+    // Neutral gear should result in zero torque
     if (currentGear == Neutral) {
         return 0;
     }
 
-    // Throttle Sampling
+    // Throttle Sampling and Averaging
     for (int i = 0; i < 4; i++) {
         SampledPotiValue += sampleSetPedal[i];
     }
-    // Calculate average and map the result
     SampledPotiValue /= 4;
 
-    // Map throttle position to 0-100 and constrain it
+    // Map throttle position to 0-100%
     float throttlePosition = map(SampledPotiValue, MinValPot, MaxValPot, 0, 100);
-    throttlePosition = constrain(throttlePosition, 0.0f, 100.0f);  // Constrain to 0-100
+    throttlePosition = constrain(throttlePosition, 0.0f, 100.0f);
 
-    // One Pedal Drive (OPD) Logic
+    // One-Pedal Drive (OPD) Logic with positive direction calculations
     if (isOPDEnabled) {
         float phi = 20.0f, ch = 10.0f, m = 2.0f;
-        float tau_rm = -DMC_MAXREQTRQ, tau_am = DMC_MAXTRQ, psi = 2.0f, gamma = 1.5f;
+        float tau_rm = DMC_MAXREQTRQ, tau_am = DMC_MAXTRQ;
+        float psi = 2.0f, gamma = 1.5f;
         float p_cu = phi * pow((speed / 100.0f), 1.0f / m);
-        float p_cl = std::max(p_cu - ch * (speed / 100.0f), 0.1f);  // Ensure p_cl is not zero or negative
+        float p_cl = std::max(p_cu - ch * (speed / 100.0f), 0.1f);
 
-        Serial.print("Speed: "); Serial.println(speed);
-        Serial.print("p_cu: "); Serial.println(p_cu);
-        Serial.print("p_cl: "); Serial.println(p_cl);
-        Serial.print("Throttle Position: "); Serial.println(throttlePosition);
-
-        if (currentGear == Drive) {
-            // In Drive, positive torque means acceleration, negative means regen
-            if (throttlePosition <= p_cl) {
-                // Regenerative braking in Drive: positive torque
-                float denominator = pow(p_cl, psi);
-                float a_r = fabs(tau_rm) / std::max(denominator, 0.1f);  // Prevent division by zero
-                DMC_TorqueCalc = a_r * pow(throttlePosition, psi);
-            } else if (throttlePosition >= p_cu) {
-                // Acceleration in Drive: negative torque
-                float p_m = 80.0f;  // Pedal position where max acceleration is available
-                float accelFactor = (throttlePosition - p_cu) / (p_m - p_cu);
-                DMC_TorqueCalc = -pow(accelFactor, gamma) * fabs(tau_am);  // Negative for acceleration
-            } else {
-                // Coasting range in Drive (torque = 0)
-                DMC_TorqueCalc = 0;
-            }
-        } else if (currentGear == Reverse) {
-            // In Reverse, positive torque means regen, negative means acceleration
-            if (throttlePosition <= p_cl) {
-                // Regenerative braking in Reverse: negative torque
-                float a_r = tau_rm / std::max(pow(p_cl, psi), 0.1f);
-                DMC_TorqueCalc = a_r * pow(throttlePosition, psi);
-            } else if (throttlePosition >= p_cu) {
-                // Acceleration in Reverse: positive torque
-                float p_m = 80.0f;
-                float accelFactor = (throttlePosition - p_cu) / (p_m - p_cu);
-                DMC_TorqueCalc = pow(accelFactor, gamma) * tau_am;
-            } else {
-                // Coasting range in Reverse (torque = 0)
-                DMC_TorqueCalc = 0;
-            }
+        if (throttlePosition <= p_cl) {
+            // Regenerative braking range
+            float a_r = tau_rm / std::max(pow(p_cl, psi), 0.1f);  // Avoid zero in denominator
+            DMC_TorqueCalc = a_r * pow(throttlePosition, psi);
+        } else if (throttlePosition >= p_cu) {
+            // Acceleration range
+            float p_m = 80.0f;  // Pedal position for max acceleration
+            float accelFactor = (throttlePosition - p_cu) / (p_m - p_cu);
+            DMC_TorqueCalc = pow(accelFactor, gamma) * tau_am;
+        } else {
+            // Coasting range, no torque
+            DMC_TorqueCalc = 0;
         }
     } else {
-        // Legacy Drive Mode without OPD
-        if (currentGear == Drive) {
-            negTrqSpd = 1;
-            posTrqSpd = 1;
-            SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
-            DMC_TorqueCalc = -static_cast<int16_t>(constrain(SampledPotiValue, 0, DMC_MAXTRQ));  // Negative for Drive
-        } else if (currentGear == Reverse) {
-            negTrqSpd = 1;
-            posTrqSpd = 1;
-            SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, MAX_REVERSE_TRQ);
-            DMC_TorqueCalc = static_cast<int16_t>(constrain(SampledPotiValue, 0, MAX_REVERSE_TRQ));  // Positive for Reverse
-        }
+        // Legacy Mode Calculation (positive torque values)
+        SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, 
+                               currentGear == Drive ? DMC_MAXTRQ : MAX_REVERSE_TRQ);
+        DMC_TorqueCalc = constrain(SampledPotiValue, 0, currentGear == Drive ? DMC_MAXTRQ : MAX_REVERSE_TRQ);
     }
 
-    // Apply deadband of ±14
+    // Apply direction-specific inversion: Negative for Drive, Positive for Reverse
+    DMC_TorqueCalc = (currentGear == Drive) ? -DMC_TorqueCalc : DMC_TorqueCalc;
+
+    // Apply deadband
     if (DMC_TorqueCalc > -14 && DMC_TorqueCalc < 14) {
         DMC_TorqueCalc = 0;
         enableDMC = 0;
