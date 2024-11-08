@@ -259,6 +259,13 @@ bool conUlockInterrupt = 0; //Interrupt for connector unlock
 
 #define DMC_MAXTRQ 850 //kinda should be372 but nice try
 #define MAX_REVERSE_TRQ 220
+
+uint16_t speed = 0;
+#define NORMAL_RATIO 1.2
+#define REDUCED_RATIO 2.1
+#define DIFF_RATIO 3.9
+#define WHEEL_CIRC 2.08
+#define LowRange 0
 //**********************//
 //Sending Variables
 //Variables for 0x210
@@ -916,6 +923,13 @@ void armBattery(bool arm) {
 int16_t calculateTorque5S() {
     int32_t SampledPotiValue = 0;
     int16_t DMC_TorqueCalc = 0;
+    if(LowRange){
+      speed = DMC_SpdAct*60/REDUCED_RATIO/DIFF_RATIO*WHEEL_CIRC;
+    }
+    else{
+      speed = DMC_SpdAct*60/NORMAL_RATIO/DIFF_RATIO*WHEEL_CIRC;
+    }
+    
 
     // Zero torque demand if in Neutral
     if (currentGear == Neutral) {
@@ -947,6 +961,10 @@ int16_t calculateTorque5S() {
     // Apply deadband of ±14
     if (DMC_TorqueCalc > -14 && DMC_TorqueCalc < 14) {
         DMC_TorqueCalc = 0;
+        enableDMC  = 0;
+    }
+    else{
+      enableDMC = 1;
     }
 
     
