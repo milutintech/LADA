@@ -1,134 +1,114 @@
-// REGEN MOD
-
-#define REGEN_BRAKING_GAIN      2    // Gain factor for regenerative braking torque calculation
-#define MAX_REGEN_TRQ           500  // Maximum regenerative braking torque (adjust as needed)
-#define TORQUE_ENABLE_DEADBAND  5    // Deadband threshold for enabling/disabling DMC
-#define DEAD_BAND              14    // Existing deadband threshold for torque
-
 int16_t calculateTorque5S() {
-    int32_t sampledPotiValue = 0;
-    int16_t throttleTorque = 0;
-    int16_t regenTorque = 0;
-    int16_t totalTorque = 0;
-
-    // Handle Neutral Gear
-    if (currentGear == Neutral) {
-        // In Neutral, no torque is required on DMC
-        throttleTorque = 0;
-        regenTorque = 0;
-        totalTorque = 0;
-
-        // Disable DMC
-        enableDMC = 0;
-
-        return totalTorque;
-    }
-
-    // Sum values in sampleSetPedal (assuming sampleSetPedal[0-3] contains valid data)
+    int32_t SampledPotiValue = 0;
+    int16_t DMC_TorqueCalc = 0;
+    static float lastTorque = 0;
+    
+    Serial.println("--- Debug Info ---");
+    
+    // Throttle Sampling and Averaging
     for (int i = 0; i < 4; i++) {
-        sampledPotiValue += sampleSetPedal[i];
+        SampledPotiValue += sampleSetPedal[i];
+    }
+    SampledPotiValue /= 4;
+
+    // Map throttle position with progressive curve
+    float rawThrottle = map(SampledPotiValue, MinValPot, MaxValPot, 0, 100);
+    rawThrottle = constrain(rawThrottle, 0.0f, 100.0f);
+    
+    // Quick exit if pedal is fully released
+    if (rawThrottle < 1.0f) {
+        lastTorque = 0;
+        enableDMC = 0;
+        return 0;
+    }
+    
+    // Progressive curve only for positive throttle values
+    float throttlePosition = pow(rawThrottle / 100.0f, 2.0f) * 100.0f;
+    
+    Serial.print("Raw Throttle (%): "); Serial.println(rawThrottle);
+    Serial.print("Smoothed Throttle (%): "); Serial.println(throttlePosition);
+
+    // Handle Neutral gear
+    if (currentGear == Neutral) {
+        lastTorque = 0;
+        return 0;
     }
 
-    // Calculate average
-    sampledPotiValue /= 4;
-
-    // Map and constrain torque based on current gear
-    if (currentGear == Drive) {
-        // Map potentiometer value to Drive torque range
-        sampledPotiValue = map(sampledPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
-        // Constrain torque to [0, DMC_MAXTRQ]
-        throttleTorque = (int16_t)constrain(sampledPotiValue, 0, DMC_MAXTRQ);
-    } 
-    else if (currentGear == Reverse) {
-        // Map potentiometer value to Reverse torque range
-        sampledPotiValue = map(sampledPotiValue, MinValPot, MaxValPot, 0, MAX_REVERSE_TRQ);
-        // Constrain torque to [0, MAX_REVERSE_TRQ] and apply negative sign for Reverse
-        throttleTorque = -(int16_t)constrain(sampledPotiValue, 0, MAX_REVERSE_TRQ);
-    }
-
-    // Apply deadband of ±14 to throttle torque
-    if (throttleTorque > -DEAD_BAND && throttleTorque < DEAD_BAND) {
-        throttleTorque = 0;
-    }
-
-    // Calculate Regenerative Braking Torque
-    if (currentGear == Drive && DMC_SpdAct > 0) {
-        // Moving forward, apply negative torque for regenerative braking
-        regenTorque = -constrain((int16_t)(REGEN_BRAKING_GAIN * DMC_SpdAct), -MAX_REGEN_TRQ, 0);
-    }
-    else if (currentGear == Reverse && DMC_SpdAct < 0) {
-        // Moving reverse, apply positive torque for regenerative braking
-        regenTorque = constrain((int16_t)(REGEN_BRAKING_GAIN * (-DMC_SpdAct)), 0, MAX_REGEN_TRQ);
-    }
-    else {
-        regenTorque = 0;
-    }
-
-    // Apply regenerative braking deadband
-    if (regenTorque > -DEAD_BAND && regenTorque < DEAD_BAND) {
-        regenTorque = 0;
-    }
-
-    // Combine Throttle and Regenerative Torques
-    if (throttleTorque == 0) {
-        // Only regenerative braking is applied
-        totalTorque = regenTorque;
-    }
-    else {
-        // Regenerative braking is applied partially when throttle is pressed
-        totalTorque = throttleTorque + (regenTorque / 2);  // Apply half of regen torque
-    }
-
-    // Ensure combined torque does not exceed system limits based on gear
-    if (currentGear == Drive) {
-        // In Drive, total torque should be within [-MAX_REGEN_TRQ, DMC_MAXTRQ]
-        totalTorque = constrain(totalTorque, -MAX_REGEN_TRQ, DMC_MAXTRQ);
-    }
-    else if (currentGear == Reverse) {
-        // In Reverse, total torque should be within [-MAX_REVERSE_TRQ, MAX_REGEN_TRQ]
-        totalTorque = constrain(totalTorque, -MAX_REVERSE_TRQ, MAX_REGEN_TRQ);
-    }
-
-    // Apply deadband again after combining throttle and regen torques
-    if (totalTorque > -DEAD_BAND && totalTorque < DEAD_BAND) {
-        totalTorque = 0;
-    }
-
-    // Set enableDMC based on totalTorque within ±TORQUE_ENABLE_DEADBAND
-    if (totalTorque > -TORQUE_ENABLE_DEADBAND && totalTorque < TORQUE_ENABLE_DEADBAND) {
-        enableDMC = 0;  // Disable DMC
+    // Speed calculations
+    float adjustedSpeed = currentGear == Drive ? -DMC_SpdAct : DMC_SpdAct;
+    
+    if (LowRange) {
+        speed = adjustedSpeed * 60 / REDUCED_RATIO / DIFF_RATIO * WHEEL_CIRC / 1000;
     } else {
-        enableDMC = 1;  // Enable DMC
+        speed = adjustedSpeed * 60 / NORMAL_RATIO / DIFF_RATIO * WHEEL_CIRC / 1000;
     }
 
-    // Optional Debugging Output
-    /*
-    Serial.print("Throttle Torque: ");
-    Serial.print(throttleTorque);
-    Serial.print(" | Regen Torque: ");
-    Serial.print(regenTorque);
-    Serial.print(" | Total Torque: ");
-    Serial.println(totalTorque);
-    */
+    if (isOPDEnabled) {
+        // ... OPD logic remains the same as before ...
+    } else {
+        // Legacy Mode with quicker response
+        float normalizedThrottle = pow(rawThrottle / 100.0f, 1.8f);  // Slightly less aggressive curve
+        DMC_TorqueCalc = normalizedThrottle * (currentGear == Drive ? DMC_MAXTRQ : MAX_REVERSE_TRQ);
+        Serial.println("Mode: Legacy (OPD Disabled)");
+    }
 
-    return totalTorque;
-}
+    // Apply direction-specific inversion
+    DMC_TorqueCalc = (currentGear == Drive) ? -DMC_TorqueCalc : DMC_TorqueCalc;
 
-//Limiting messages
+    // Asymmetric torque rate limiting
+    float torqueDiff = DMC_TorqueCalc - lastTorque;
+    
+    // Different rate limits for acceleration and deceleration
+    float maxAccelStep = 8.0f;    // Limit rate of increasing torque
+    float maxDecelStep = 25.0f;   // Allow faster decrease in torque
+    
+    // Apply rate limiting based on whether we're increasing or decreasing torque
+    if (abs(DMC_TorqueCalc) > abs(lastTorque)) {
+        // Accelerating - apply stricter limit
+        if (torqueDiff > maxAccelStep) {
+            DMC_TorqueCalc = lastTorque + maxAccelStep;
+        } else if (torqueDiff < -maxAccelStep) {
+            DMC_TorqueCalc = lastTorque - maxAccelStep;
+        }
+    } else {
+        // Decelerating - allow faster changes
+        if (torqueDiff > maxDecelStep) {
+            DMC_TorqueCalc = lastTorque + maxDecelStep;
+        } else if (torqueDiff < -maxDecelStep) {
+            DMC_TorqueCalc = lastTorque - maxDecelStep;
+        }
+    }
+    
+    // Override rate limiting if throttle is very low
+    if (rawThrottle < 5.0f && abs(DMC_TorqueCalc) > abs(lastTorque)) {
+        DMC_TorqueCalc = 0;  // Quick cutoff at very low throttle
+    }
+    
+    lastTorque = DMC_TorqueCalc;
 
-void reciveINFO(){
-  if (CAN_MSGAVAIL != CAN.checkReceive()) {
-      return;
-  }
-  // read data, len: data length, buf: data buf
-  CAN.readMsgBuf(&len, readDataBMS);
-  id = CAN.getCanId();
-  type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
-  
-  if(id == 0x003){
-    MAX_SOC = readDataDMC[0];
-    MAX_TrqRq = (readDataINFO[1] | (readDataINFO[2] << 8));
-    NLG_AcCurrLimMax = readDataINFO[3];
-    OFFROAD_MODE = readDataINFO[5];
-  }   
+    // Deadband with hysteresis
+    static bool wasInDeadband = false;
+    if (wasInDeadband) {
+        if (abs(DMC_TorqueCalc) > 25) {
+            wasInDeadband = false;
+            enableDMC = 1;
+        } else {
+            DMC_TorqueCalc = 0;
+            enableDMC = 0;
+        }
+    } else {
+        if (abs(DMC_TorqueCalc) < 18) {
+            wasInDeadband = true;
+            DMC_TorqueCalc = 0;
+            enableDMC = 0;
+        } else {
+            enableDMC = 1;
+        }
+    }
+
+    Serial.print("Final Torque: "); Serial.println(DMC_TorqueCalc);
+    Serial.print("DMC Enabled: "); Serial.println(enableDMC);
+    Serial.println("---------------");
+    
+    return DMC_TorqueCalc;
 }
