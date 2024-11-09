@@ -942,7 +942,12 @@ int16_t calculateTorque5S() {
     static float lastTorque = 0;
     
     Serial.println("--- Debug Info ---");
-    
+    if(LowRange){
+      speed = DMC_SpdAct*60/REDUCED_RATIO/DIFF_RATIO*WHEEL_CIRC;
+    }
+    else{
+      speed = DMC_SpdAct*60/NORMAL_RATIO/DIFF_RATIO*WHEEL_CIRC;
+    }
     // Throttle Sampling and Averaging
     for (int i = 0; i < 4; i++) {
         SampledPotiValue += sampleSetPedal[i];
@@ -1167,11 +1172,118 @@ int16_t calculateTorque5S() {
         }
 
         case OPD: {
-            // TODO: Implement OPD mode logic
-            Serial.println("Mode: OPD (Not Implemented)");
-            DMC_TorqueCalc = 0;
-            break;
-        }
+          // Torque limits
+          const float tau_rm = DMC_MAXREQTRQ * 0.7f;  // Maximum regenerative torque
+          const float tau_am = DMC_MAXTRQ * 0.9f;     // Maximum acceleration torque
+          
+          // Control parameters
+          const float ZERO_SPEED_THRESHOLD = 0.5f;    // Speed threshold in kph
+          const float REGEN_FADE_START = 15.0f;       // Speed where regen starts fading (kph)
+          const float DIRECTION_PROTECT_SPEED = 0.1f;  // kph
+          const float gamma = 1.5f;                    // Pedal progression factor
+          const float MAX_SPEED = 120.0f;             // Maximum speed in kph
+
+          // Calculate speed-dependent coast position
+          // This creates the dynamic "zero acceleration line" shown in Figure 10
+          float speedPercent = constrain(speed / MAX_SPEED, 0.0f, 1.0f); 
+          float coastPosition = 20.0f + (speedPercent * 30.0f); // Coast position varies from 20% to 50% based on speed
+          
+          if (currentGear == Drive) {
+              if (abs(speed) < ZERO_SPEED_THRESHOLD) {
+                  // At standstill, simple progressive mapping
+                  float accelFactor = pow(throttlePosition / 100.0f, gamma);
+                  DMC_TorqueCalc = -accelFactor * tau_am * 0.5f;
+                  Serial.println("Mode: OPD Forward Start");
+              }
+              else if (speed < 0.0f) {  // Forward motion
+                  // Calculate normalized pedal position relative to coast position
+                  float normalizedPosition = (throttlePosition - coastPosition) / coastPosition;
+                  
+                  if (normalizedPosition > 0) {  // Acceleration zone
+                      float accelFactor = pow(normalizedPosition, gamma);
+                      // Reduce maximum torque at higher speeds for better control
+                      float speedBasedTorque = tau_am * (1.0f - (speedPercent * 0.3f));
+                      DMC_TorqueCalc = -accelFactor * speedBasedTorque;
+                      Serial.println("Mode: OPD Forward Drive");
+                  }
+                  else {  // Regenerative zone
+                      // Calculate regen factor, -1 at full release, 0 at coast position
+                      float regenFactor = -normalizedPosition;
+                      
+                      // Apply speed-based regen reduction for low speeds
+                      float speedFactor = 1.0f;
+                      if (abs(speed) < REGEN_FADE_START) {
+                          speedFactor = abs(speed) / REGEN_FADE_START;
+                          speedFactor = constrain(speedFactor, 0.0f, 1.0f);
+                      }
+                      
+                      // Adjust maximum regen based on speed
+                      float maxRegen = tau_rm;
+                      if (abs(speed) > 80.0f) {  // Reduce regen at higher speeds
+                          maxRegen *= map(abs(speed), 80.0f, MAX_SPEED, 1.0f, 0.7f);
+                      }
+                      
+                      DMC_TorqueCalc = regenFactor * maxRegen * speedFactor;
+                      Serial.println("Mode: OPD Forward Regen");
+                  }
+              }
+              else {  // Wrong direction protection
+                  if (speed > DIRECTION_PROTECT_SPEED) {
+                      float correctionFactor = min(speed / 5.0f, 1.0f);
+                      DMC_TorqueCalc = -tau_am * 0.3f * correctionFactor;
+                      Serial.println("Mode: OPD Forward Direction Correction");
+                  }
+              }
+          }
+          else if (currentGear == Reverse) {
+              if (abs(speed) < ZERO_SPEED_THRESHOLD) {
+                  // At standstill, simple progressive mapping
+                  float accelFactor = pow(throttlePosition / 100.0f, gamma);
+                  DMC_TorqueCalc = accelFactor * tau_am * 0.5f;
+                  Serial.println("Mode: OPD Reverse Start");
+              }
+              else if (speed > 0.0f) {  // Reverse motion
+                  // Calculate normalized pedal position relative to coast position
+                  float normalizedPosition = (throttlePosition - coastPosition) / coastPosition;
+                  
+                  if (normalizedPosition > 0) {  // Acceleration zone
+                      float accelFactor = pow(normalizedPosition, gamma);
+                      // Reduce maximum torque at higher speeds for better control
+                      float speedBasedTorque = tau_am * (1.0f - (speedPercent * 0.3f));
+                      DMC_TorqueCalc = accelFactor * speedBasedTorque;
+                      Serial.println("Mode: OPD Reverse Drive");
+                  }
+                  else {  // Regenerative zone
+                      // Calculate regen factor, -1 at full release, 0 at coast position
+                      float regenFactor = -normalizedPosition;
+                      
+                      // Apply speed-based regen reduction
+                      float speedFactor = 1.0f;
+                      if (abs(speed) < REGEN_FADE_START) {
+                          speedFactor = abs(speed) / REGEN_FADE_START;
+                          speedFactor = constrain(speedFactor, 0.0f, 1.0f);
+                      }
+                      
+                      // Adjust maximum regen based on speed
+                      float maxRegen = tau_rm;
+                      if (abs(speed) > 80.0f) {
+                          maxRegen *= map(abs(speed), 80.0f, MAX_SPEED, 1.0f, 0.7f);
+                      }
+                      
+                      DMC_TorqueCalc = -regenFactor * maxRegen * speedFactor;
+                      Serial.println("Mode: OPD Reverse Regen");
+                  }
+              }
+              else {  // Wrong direction protection
+                  if (speed < -DIRECTION_PROTECT_SPEED) {
+                      float correctionFactor = min(-speed / 5.0f, 1.0f);
+                      DMC_TorqueCalc = tau_am * 0.3f * correctionFactor;
+                      Serial.println("Mode: OPD Reverse Direction Correction");
+                  }
+              }
+          }
+    break;
+}
     }
 
     // Asymmetric torque rate limiting
