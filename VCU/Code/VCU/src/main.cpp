@@ -265,14 +265,14 @@ enum DrivingMode {
 };
 
 // Add this as a global variable
-DrivingMode currentDrivingMode = LEGACY; // Default to LEGACY mode
+DrivingMode currentDrivingMode = REGEN; // Default to LEGACY mode
 
 #define DMC_MAXTRQ 850 //kinda should be372 but nice try
 #define DMC_MAXREQTRQ 850
 #define MAX_REVERSE_TRQ 220
 // Variable to control OPD mode at runtime
-bool isOPDEnabled = true;  // Set to true for OPD, false for original formula
-bool isRegenEnabled = false; // Set true for newer regen(1/4 throttel strat)
+bool isOPDEnabled = false;  // Set to true for OPD, false for original formula
+bool isRegenEnabled = true; // Set true for newer regen(1/4 throttel strat)
 
 uint16_t speed = 0;
 #define NORMAL_RATIO 1.2
@@ -562,8 +562,9 @@ void CAN_COM( void * pvParameters ){
           time100mscycle = millis();
          
         }
-        
-       DMC_TrqRq_Scale = calculateTorque5S();
+        if(HasPrecharged){
+            DMC_TrqRq_Scale = calculateTorque5S();
+        }
         //Serial.println(ADS.readADC(GASPEDAL1));
         //Serial.println(DMC_TrqRq_Scale);
         /*
@@ -960,7 +961,7 @@ int16_t calculateTorque5S() {
     Serial.print("Raw Throttle (%): "); Serial.println(rawThrottle);
     
     // Quick exit for legacy mode
-    if (!isOPDEnabled && rawThrottle < 1.0f) {
+    if (!isOPDEnabled && !isRegenEnabled && rawThrottle < 1.0f) {
         lastTorque = 0;
         enableDMC = 0;
         Serial.println("Mode: Legacy Pedal Released");
@@ -993,8 +994,8 @@ int16_t calculateTorque5S() {
     };
 
     DrivingMode currentMode;
-    if (!isOPDEnabled) {
-        currentMode = LEGACY;
+    if (!isOPDEnabled && !isRegenEnabled) {
+        currentMode = REGEN;
     } else if (isRegenEnabled) {  // You'll need to add this flag
         currentMode = REGEN;
     } else {
@@ -1004,7 +1005,7 @@ int16_t calculateTorque5S() {
     // Common parameters
     float tau_rm = DMC_MAXREQTRQ * 0.7f;
     float tau_am = DMC_MAXTRQ * 0.9f;
-    float gamma = 1.5f;
+    float gamma = 1.2f;
     const float REGEN_FADE_START = 400.0f;
     const float DIRECTION_PROTECT_SPEED = 0.1f;
 
@@ -1016,161 +1017,73 @@ int16_t calculateTorque5S() {
             break;
         }
 
-        case REGEN: {
-          // Enhanced protection parameters
-          const float ZERO_SPEED_WINDOW = 0.5f;  // +/- 0.5 RPM considered as zero speed
-          const float HIGH_SPEED_THRESHOLD = 1000.0f;  // RPM threshold for high speed behavior
-          const float RELEASE_FADE_TIME = 0.1f;  // Seconds to fade torque to zero on release
-          static float lastThrottlePosition = 0.0f;
-          static unsigned long lastReleaseTime = 0;
-          
-          if (currentGear == Drive) {
-              if (abs(rawSpeed) < ZERO_SPEED_WINDOW) {  // Near zero speed - enhanced protection
-                  if (throttlePosition > 30.0f) {  // Only allow intended direction
-                      float startFactor = (throttlePosition - 30.0f) / 70.0f;
-                      startFactor = pow(startFactor, gamma);
-                      DMC_TorqueCalc = -startFactor * tau_am * 0.5f;  // Reduced torque for smoother starts
-                      Serial.println("Mode: Forward Start (Zero Speed)");
-                  } else {
-                      DMC_TorqueCalc = 0;  // No torque when near zero with low throttle
-                      Serial.println("Mode: Zero Speed Standstill");
-                  }
-              }
-              else if (rawSpeed < 0.0f) {  // Forward motion
-                  if (throttlePosition < 35.0f) {  // Regen zone
-                      float regenFactor = (35.0f - throttlePosition) / 35.0f;
-                      
-                      // Calculate speed-based regen reduction
-                      float speedFactor = 1.0f;
-                      if (rawSpeed > -REGEN_FADE_START) {  // In fade zone
-                          speedFactor = -rawSpeed / REGEN_FADE_START;
-                          speedFactor = constrain(speedFactor, 0.0f, 1.0f);
-                      }
-                      
-                      // Additional high-speed safety check
-                      if (abs(rawSpeed) > HIGH_SPEED_THRESHOLD) {
-                          regenFactor *= 0.7f;  // Reduce regen at high speeds
-                      }
-                      
-                      DMC_TorqueCalc = regenFactor * tau_rm * speedFactor;
-                      Serial.println("Mode: Forward Regen");
-                  } 
-                  else if (throttlePosition > 40.0f) {  // Drive zone
-                      float accelFactor = (throttlePosition - 40.0f) / 60.0f;
-                      accelFactor = pow(accelFactor, gamma);
-                      accelFactor = constrain(accelFactor, 0.0f, 1.0f);
-                      
-                      // Smooth torque reduction for throttle release at high speeds
-                      if (throttlePosition < lastThrottlePosition && abs(rawSpeed) > HIGH_SPEED_THRESHOLD) {
-                          unsigned long currentTime = millis();
-                          if (lastReleaseTime == 0) {
-                              lastReleaseTime = currentTime;
-                          }
-                          
-                          float releaseProgress = (float)(currentTime - lastReleaseTime) / (RELEASE_FADE_TIME * 1000.0f);
-                          if (releaseProgress < 1.0f) {
-                              accelFactor *= (1.0f - releaseProgress);
-                          }
-                      } else {
-                          lastReleaseTime = 0;
-                      }
-                      
-                      DMC_TorqueCalc = -accelFactor * tau_am;
-                      Serial.println("Mode: Forward Drive");
-                  } 
-                  else {
-                      DMC_TorqueCalc = 0;  // Coast zone
-                      Serial.println("Mode: Forward Coast");
-                  }
-              } 
-              else {  // Positive speed (wrong direction)
-                  // Enhanced wrong direction protection
-                  if (rawSpeed > DIRECTION_PROTECT_SPEED) {
-                      float correctionFactor = min(rawSpeed / 10.0f, 1.0f);  // Proportional to speed
-                      DMC_TorqueCalc = -tau_am * 0.3f * correctionFactor;  // Gradual correction
-                      Serial.println("Mode: Forward Direction Correction");
-                  } else {
-                      DMC_TorqueCalc = 0;
-                      Serial.println("Mode: Forward Standstill");
-                  }
-              }
-          }
-          else if (currentGear == Reverse) {
-              if (abs(rawSpeed) < ZERO_SPEED_WINDOW) {  // Near zero speed - enhanced protection
-                  if (throttlePosition > 30.0f) {  // Only allow intended direction
-                      float startFactor = (throttlePosition - 30.0f) / 70.0f;
-                      startFactor = pow(startFactor, gamma);
-                      DMC_TorqueCalc = startFactor * tau_am * 0.5f;  // Reduced torque for smoother starts
-                      Serial.println("Mode: Reverse Start (Zero Speed)");
-                  } else {
-                      DMC_TorqueCalc = 0;  // No torque when near zero with low throttle
-                      Serial.println("Mode: Zero Speed Standstill");
-                  }
-              }
-              else if (rawSpeed > 0.0f) {  // Reverse motion
-                  if (throttlePosition < 35.0f) {  // Regen zone
-                      float regenFactor = (35.0f - throttlePosition) / 35.0f;
-                      
-                      // Calculate speed-based regen reduction
-                      float speedFactor = 1.0f;
-                      if (rawSpeed < REGEN_FADE_START) {  // In fade zone
-                          speedFactor = rawSpeed / REGEN_FADE_START;
-                          speedFactor = constrain(speedFactor, 0.0f, 1.0f);
-                      }
-                      
-                      // Additional high-speed safety check
-                      if (abs(rawSpeed) > HIGH_SPEED_THRESHOLD) {
-                          regenFactor *= 0.7f;  // Reduce regen at high speeds
-                      }
-                      
-                      DMC_TorqueCalc = -regenFactor * tau_rm * speedFactor;
-                      Serial.println("Mode: Reverse Regen");
-                  } 
-                  else if (throttlePosition > 40.0f) {  // Drive zone
-                      float accelFactor = (throttlePosition - 40.0f) / 60.0f;
-                      accelFactor = pow(accelFactor, gamma);
-                      accelFactor = constrain(accelFactor, 0.0f, 1.0f);
-                      
-                      // Smooth torque reduction for throttle release at high speeds
-                      if (throttlePosition < lastThrottlePosition && abs(rawSpeed) > HIGH_SPEED_THRESHOLD) {
-                          unsigned long currentTime = millis();
-                          if (lastReleaseTime == 0) {
-                              lastReleaseTime = currentTime;
-                          }
-                          
-                          float releaseProgress = (float)(currentTime - lastReleaseTime) / (RELEASE_FADE_TIME * 1000.0f);
-                          if (releaseProgress < 1.0f) {
-                              accelFactor *= (1.0f - releaseProgress);
-                          }
-                      } else {
-                          lastReleaseTime = 0;
-                      }
-                      
-                      DMC_TorqueCalc = accelFactor * tau_am;
-                      Serial.println("Mode: Reverse Drive");
-                  } 
-                  else {
-                      DMC_TorqueCalc = 0;  // Coast zone
-                      Serial.println("Mode: Reverse Coast");
-                  }
-              } 
-              else {  // Negative speed (wrong direction)
-                  // Enhanced wrong direction protection
-                  if (rawSpeed < -DIRECTION_PROTECT_SPEED) {
-                      float correctionFactor = min(-rawSpeed / 10.0f, 1.0f);  // Proportional to speed
-                      DMC_TorqueCalc = tau_am * 0.3f * correctionFactor;  // Gradual correction
-                      Serial.println("Mode: Reverse Direction Correction");
-                  } else {
-                      DMC_TorqueCalc = 0;
-                      Serial.println("Mode: Reverse Standstill");
-                  }
-              }
-          }
-          
-          lastThrottlePosition = throttlePosition;
-        break;
+case REGEN: {
+    // Adjusted parameters
+    Serial.println("regening");
+    const float ZERO_SPEED_WINDOW = 0.5f;
+    const float MIN_SPEED_FOR_REGEN = 100.0f;    // Minimum speed for regen
+    const float HIGH_SPEED_THRESHOLD = 1000.0f;
+    const float REGEN_END_POINT = 35.0f;       // End regen at this point
+    const float COAST_END_POINT = 40.0f;       // End coast at this point
+    static float smoothedRegenTorque = 0.0f;
+    const float SMOOTHING_FACTOR = 0.1f;
+    
+    if (currentGear == Drive) {
+        if (abs(rawSpeed) < ZERO_SPEED_WINDOW) {
+            // At standstill, only respond to acceleration commands
+            if (throttlePosition > COAST_END_POINT) {
+                float accelFactor = (throttlePosition - COAST_END_POINT) / (100.0f - COAST_END_POINT);
+                accelFactor = pow(accelFactor, gamma);
+                DMC_TorqueCalc = -accelFactor * tau_am;
+            } else {
+                DMC_TorqueCalc = 0;
+            }
+            smoothedRegenTorque = 0.0f;
+            Serial.println("Mode: Standstill");
         }
-
+        else if (rawSpeed < -MIN_SPEED_FOR_REGEN) {  // Forward motion
+            // Corrected throttle mapping zones:
+            // 0-35%: Regen
+            // 35-40%: Coast
+            // 40-100%: Acceleration
+            if (throttlePosition < REGEN_END_POINT) {
+                // REGEN ZONE (0% to 35% throttle)
+                float regenFactor = 1.0f - (throttlePosition / REGEN_END_POINT);
+                regenFactor = pow(regenFactor, 1.8f);  // Gentle curve
+                
+                float speedFactor = 1.0f;
+                if (abs(rawSpeed) > HIGH_SPEED_THRESHOLD) {
+                    speedFactor = 1.2f;
+                }
+                
+                float targetRegen = regenFactor * tau_rm * speedFactor;
+                DMC_TorqueCalc = targetRegen;  // Positive for regen
+                Serial.println("Mode: Regen");
+            }
+            else if (throttlePosition < COAST_END_POINT) {
+                // COAST ZONE (35% to 40% throttle)
+                DMC_TorqueCalc = 0;
+                Serial.println("Mode: Coast");
+            }
+            else {
+                // ACCELERATION ZONE (40% to 100% throttle)
+                float accelFactor = (throttlePosition - COAST_END_POINT) / (100.0f - COAST_END_POINT);
+                accelFactor = pow(accelFactor, gamma);
+                DMC_TorqueCalc = -accelFactor * tau_am;  // Negative for forward acceleration
+                Serial.println("Mode: Acceleration");
+            }
+        }
+        else {  // Too slow or wrong direction
+            if (throttlePosition > COAST_END_POINT) {
+                DMC_TorqueCalc = -tau_am * 0.3f;
+                Serial.println("Mode: Direction Correction");
+            } else {
+                DMC_TorqueCalc = 0;
+            }
+        }
+    }
+    // ... rest of the function remains the same ...
+}
 case OPD: {
     // Torque limits
     const float tau_rm = DMC_MAXREQTRQ * 0.7f;  // Maximum regenerative torque
