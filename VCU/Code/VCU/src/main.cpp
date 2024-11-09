@@ -268,7 +268,17 @@ enum DrivingMode {
 DrivingMode currentDrivingMode = LEGACY; // Default to LEGACY mode
 
 #define DMC_MAXTRQ 850 //kinda should be372 but nice try
+#define DMC_MAXREQTRQ 850
 #define MAX_REVERSE_TRQ 220
+// Variable to control OPD mode at runtime
+bool isOPDEnabled = true;  // Set to true for OPD, false for original formula
+
+uint16_t speed = 0;
+#define NORMAL_RATIO 1.2
+#define REDUCED_RATIO 2.1
+#define DIFF_RATIO 3.9
+#define WHEEL_CIRC 2.08
+#define LowRange 0
 //**********************//
 //Sending Variables
 //Variables for 0x210
@@ -518,13 +528,16 @@ void CAN_COM( void * pvParameters ){
         sampleSetPedal[2] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
         sampleSetPedal[3] = ADS.readADC(GASPEDAL1);  //Read ADC into sampleSet
     
-      
+      /*
         if(BMS_MAX_Discharge < MAX_DMC_CURRENT){
           DMC_DcCLimMot = BMS_MAX_Discharge;
         }
         else{
          DMC_DcCLimMot = MAX_DMC_CURRENT;
+
         }
+        */
+        DMC_DcCLimMot = MAX_DMC_CURRENT;
       
 
         //polling CAN msgs
@@ -922,46 +935,19 @@ void armBattery(bool arm) {
 //**********************//
 //Throttle managment
 //**********************//
-
 int16_t calculateTorque5S() {
     int32_t SampledPotiValue = 0;
     int16_t DMC_TorqueCalc = 0;
-<<<<<<< Updated upstream
-
-    // Zero torque demand if in Neutral
-    if (currentGear == Neutral) {
-        return 0;
-    }
-
-    // Sum values in sampleSetPedal (assuming sampleSetPedal[0-3] contains valid data)
-=======
     static float lastTorque = 0;
     
     Serial.println("--- Debug Info ---");
     
     // Throttle Sampling and Averaging
->>>>>>> Stashed changes
     for (int i = 0; i < 4; i++) {
         SampledPotiValue += sampleSetPedal[i];
     }
-
-    // Calculate average and map the result
     SampledPotiValue /= 4;
 
-<<<<<<< Updated upstream
-    // Apply different mapping and limit based on gear
-    if (currentGear == Drive) {
-        negTrqSpd = 1;
-        posTrqSpd = 1;
-        SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, DMC_MAXTRQ);
-        DMC_TorqueCalc = -static_cast<int16_t>(constrain(SampledPotiValue, 0, DMC_MAXTRQ));
-    } 
-    else if (currentGear == Reverse) {
-        negTrqSpd = 1;
-        posTrqSpd = 1;
-        SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, MAX_REVERSE_TRQ);
-        DMC_TorqueCalc = static_cast<int16_t>(constrain(SampledPotiValue, 0, MAX_REVERSE_TRQ));
-=======
     float rawThrottle = map(SampledPotiValue, MinValPot, MaxValPot, 0, 100);
     rawThrottle = constrain(rawThrottle, 0.0f, 100.0f);
     
@@ -1177,7 +1163,7 @@ int16_t calculateTorque5S() {
           
           lastThrottlePosition = throttlePosition;
         break;
-      }
+        }
 
         case OPD: {
             // TODO: Implement OPD mode logic
@@ -1204,23 +1190,10 @@ int16_t calculateTorque5S() {
         } else if (torqueDiff < -maxDecelStep) {
             DMC_TorqueCalc = lastTorque - maxDecelStep;
         }
->>>>>>> Stashed changes
     }
     
     lastTorque = DMC_TorqueCalc;
 
-<<<<<<< Updated upstream
-    // Apply deadband of ±14
-    if (DMC_TorqueCalc > -14 && DMC_TorqueCalc < 14) {
-        DMC_TorqueCalc = 0;
-    }
-
-    
-    return DMC_TorqueCalc;
-}
-
-
-=======
     // Deadband with hysteresis
     static bool wasInDeadband = false;
     if (wasInDeadband) {
@@ -1247,7 +1220,6 @@ int16_t calculateTorque5S() {
     
     return DMC_TorqueCalc;
 }
->>>>>>> Stashed changes
 void updateGearState() {
     int forwardValue = ADS.readADC(2); // Drive switch on A2
     int reverseValue = ADS.readADC(3); // Reverse switch on A3
