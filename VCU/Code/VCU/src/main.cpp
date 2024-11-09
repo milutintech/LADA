@@ -257,6 +257,16 @@ bool conUlockInterrupt = 0; //Interrupt for connector unlock
 //DMC
 //*********************************************************************//
 
+// Add this at the global scope (outside any function)
+enum DrivingMode {
+    LEGACY,
+    REGEN,
+    OPD
+};
+
+// Add this as a global variable
+DrivingMode currentDrivingMode = LEGACY; // Default to LEGACY mode
+
 #define DMC_MAXTRQ 850 //kinda should be372 but nice try
 #define MAX_REVERSE_TRQ 220
 //**********************//
@@ -539,9 +549,9 @@ void CAN_COM( void * pvParameters ){
          
         }
         
-        DMC_TrqRq_Scale = calculateTorque5S();
+       DMC_TrqRq_Scale = calculateTorque5S();
         //Serial.println(ADS.readADC(GASPEDAL1));
-        Serial.println(DMC_TrqRq_Scale);
+        //Serial.println(DMC_TrqRq_Scale);
         /*
         Serial.print("SOC");
         Serial.println(BMS_SOC);
@@ -682,7 +692,7 @@ void BACKBONE( void * pvParameters ){
   case Run:
     NLG_Charged = 0;
     //Serial.print("Torque Demand: ");
-    //Serial.println(DMC_TrqRq_Scale);
+    Serial.println(DMC_SpdAct);
     //Serial.println( ADS.readADC(GASPEDAL1));
     if (!digitalRead(IGNITION)) {
         Serial.println("Standby 680");
@@ -894,7 +904,7 @@ void armBattery(bool arm) {
 
             // Wait 2 seconds after switching modes before enabling BSC
             if (millis() - lastModeChangeTime >= 1000) {
-                enableDMC = 1;          // Enable DMC for normal operation
+                //enableDMC = 1;          // Enable DMC for normal operation
                 enableBSC = 1;          // Enable BSC after delay
                 //Serial.println("Buck mode enabled after delay.");
             }
@@ -916,6 +926,7 @@ void armBattery(bool arm) {
 int16_t calculateTorque5S() {
     int32_t SampledPotiValue = 0;
     int16_t DMC_TorqueCalc = 0;
+<<<<<<< Updated upstream
 
     // Zero torque demand if in Neutral
     if (currentGear == Neutral) {
@@ -923,6 +934,13 @@ int16_t calculateTorque5S() {
     }
 
     // Sum values in sampleSetPedal (assuming sampleSetPedal[0-3] contains valid data)
+=======
+    static float lastTorque = 0;
+    
+    Serial.println("--- Debug Info ---");
+    
+    // Throttle Sampling and Averaging
+>>>>>>> Stashed changes
     for (int i = 0; i < 4; i++) {
         SampledPotiValue += sampleSetPedal[i];
     }
@@ -930,6 +948,7 @@ int16_t calculateTorque5S() {
     // Calculate average and map the result
     SampledPotiValue /= 4;
 
+<<<<<<< Updated upstream
     // Apply different mapping and limit based on gear
     if (currentGear == Drive) {
         negTrqSpd = 1;
@@ -942,8 +961,255 @@ int16_t calculateTorque5S() {
         posTrqSpd = 1;
         SampledPotiValue = map(SampledPotiValue, MinValPot, MaxValPot, 0, MAX_REVERSE_TRQ);
         DMC_TorqueCalc = static_cast<int16_t>(constrain(SampledPotiValue, 0, MAX_REVERSE_TRQ));
+=======
+    float rawThrottle = map(SampledPotiValue, MinValPot, MaxValPot, 0, 100);
+    rawThrottle = constrain(rawThrottle, 0.0f, 100.0f);
+    
+    Serial.print("Raw Throttle (%): "); Serial.println(rawThrottle);
+    
+    // Quick exit for legacy mode
+    if (!isOPDEnabled && rawThrottle < 1.0f) {
+        lastTorque = 0;
+        enableDMC = 0;
+        Serial.println("Mode: Legacy Pedal Released");
+        Serial.println("Final Torque: 0");
+        Serial.println("DMC Enabled: 0");
+        Serial.println("---------------");
+        return 0;
+    }
+    
+    float throttlePosition = pow(rawThrottle / 100.0f, 1.5f) * 100.0f;
+
+    if (currentGear == Neutral) {
+        lastTorque = 0;
+        Serial.println("Mode: Neutral");
+        Serial.println("Final Torque: 0");
+        Serial.println("---------------");
+        return 0;
     }
 
+    float rawSpeed = DMC_SpdAct;  // This is in RPM
+    
+    Serial.print("Raw Motor Speed (RPM): "); Serial.println(rawSpeed);
+    Serial.print("Throttle Position: "); Serial.println(throttlePosition);
+
+    // Determine driving mode
+    enum DrivingMode {
+        LEGACY,
+        REGEN,
+        OPD
+    };
+
+    DrivingMode currentMode;
+    if (!isOPDEnabled) {
+        currentMode = LEGACY;
+    } else if (isRegenEnabled) {  // You'll need to add this flag
+        currentMode = REGEN;
+    } else {
+        currentMode = OPD;
+    }
+
+    // Common parameters
+    float tau_rm = DMC_MAXREQTRQ * 0.7f;
+    float tau_am = DMC_MAXTRQ * 0.9f;
+    float gamma = 1.5f;
+    const float REGEN_FADE_START = 400.0f;
+    const float DIRECTION_PROTECT_SPEED = 0.1f;
+
+    switch (currentMode) {
+        case LEGACY: {
+            float normalizedThrottle = pow(rawThrottle / 100.0f, 1.5f);
+            DMC_TorqueCalc = normalizedThrottle * (currentGear == Drive ? -DMC_MAXTRQ : MAX_REVERSE_TRQ);
+            Serial.println("Mode: Legacy");
+            break;
+        }
+
+        case REGEN: {
+          // Enhanced protection parameters
+          const float ZERO_SPEED_WINDOW = 0.5f;  // +/- 0.5 RPM considered as zero speed
+          const float HIGH_SPEED_THRESHOLD = 1000.0f;  // RPM threshold for high speed behavior
+          const float RELEASE_FADE_TIME = 0.1f;  // Seconds to fade torque to zero on release
+          static float lastThrottlePosition = 0.0f;
+          static unsigned long lastReleaseTime = 0;
+          
+          if (currentGear == Drive) {
+              if (abs(rawSpeed) < ZERO_SPEED_WINDOW) {  // Near zero speed - enhanced protection
+                  if (throttlePosition > 30.0f) {  // Only allow intended direction
+                      float startFactor = (throttlePosition - 30.0f) / 70.0f;
+                      startFactor = pow(startFactor, gamma);
+                      DMC_TorqueCalc = -startFactor * tau_am * 0.5f;  // Reduced torque for smoother starts
+                      Serial.println("Mode: Forward Start (Zero Speed)");
+                  } else {
+                      DMC_TorqueCalc = 0;  // No torque when near zero with low throttle
+                      Serial.println("Mode: Zero Speed Standstill");
+                  }
+              }
+              else if (rawSpeed < 0.0f) {  // Forward motion
+                  if (throttlePosition < 35.0f) {  // Regen zone
+                      float regenFactor = (35.0f - throttlePosition) / 35.0f;
+                      
+                      // Calculate speed-based regen reduction
+                      float speedFactor = 1.0f;
+                      if (rawSpeed > -REGEN_FADE_START) {  // In fade zone
+                          speedFactor = -rawSpeed / REGEN_FADE_START;
+                          speedFactor = constrain(speedFactor, 0.0f, 1.0f);
+                      }
+                      
+                      // Additional high-speed safety check
+                      if (abs(rawSpeed) > HIGH_SPEED_THRESHOLD) {
+                          regenFactor *= 0.7f;  // Reduce regen at high speeds
+                      }
+                      
+                      DMC_TorqueCalc = regenFactor * tau_rm * speedFactor;
+                      Serial.println("Mode: Forward Regen");
+                  } 
+                  else if (throttlePosition > 40.0f) {  // Drive zone
+                      float accelFactor = (throttlePosition - 40.0f) / 60.0f;
+                      accelFactor = pow(accelFactor, gamma);
+                      accelFactor = constrain(accelFactor, 0.0f, 1.0f);
+                      
+                      // Smooth torque reduction for throttle release at high speeds
+                      if (throttlePosition < lastThrottlePosition && abs(rawSpeed) > HIGH_SPEED_THRESHOLD) {
+                          unsigned long currentTime = millis();
+                          if (lastReleaseTime == 0) {
+                              lastReleaseTime = currentTime;
+                          }
+                          
+                          float releaseProgress = (float)(currentTime - lastReleaseTime) / (RELEASE_FADE_TIME * 1000.0f);
+                          if (releaseProgress < 1.0f) {
+                              accelFactor *= (1.0f - releaseProgress);
+                          }
+                      } else {
+                          lastReleaseTime = 0;
+                      }
+                      
+                      DMC_TorqueCalc = -accelFactor * tau_am;
+                      Serial.println("Mode: Forward Drive");
+                  } 
+                  else {
+                      DMC_TorqueCalc = 0;  // Coast zone
+                      Serial.println("Mode: Forward Coast");
+                  }
+              } 
+              else {  // Positive speed (wrong direction)
+                  // Enhanced wrong direction protection
+                  if (rawSpeed > DIRECTION_PROTECT_SPEED) {
+                      float correctionFactor = min(rawSpeed / 10.0f, 1.0f);  // Proportional to speed
+                      DMC_TorqueCalc = -tau_am * 0.3f * correctionFactor;  // Gradual correction
+                      Serial.println("Mode: Forward Direction Correction");
+                  } else {
+                      DMC_TorqueCalc = 0;
+                      Serial.println("Mode: Forward Standstill");
+                  }
+              }
+          }
+          else if (currentGear == Reverse) {
+              if (abs(rawSpeed) < ZERO_SPEED_WINDOW) {  // Near zero speed - enhanced protection
+                  if (throttlePosition > 30.0f) {  // Only allow intended direction
+                      float startFactor = (throttlePosition - 30.0f) / 70.0f;
+                      startFactor = pow(startFactor, gamma);
+                      DMC_TorqueCalc = startFactor * tau_am * 0.5f;  // Reduced torque for smoother starts
+                      Serial.println("Mode: Reverse Start (Zero Speed)");
+                  } else {
+                      DMC_TorqueCalc = 0;  // No torque when near zero with low throttle
+                      Serial.println("Mode: Zero Speed Standstill");
+                  }
+              }
+              else if (rawSpeed > 0.0f) {  // Reverse motion
+                  if (throttlePosition < 35.0f) {  // Regen zone
+                      float regenFactor = (35.0f - throttlePosition) / 35.0f;
+                      
+                      // Calculate speed-based regen reduction
+                      float speedFactor = 1.0f;
+                      if (rawSpeed < REGEN_FADE_START) {  // In fade zone
+                          speedFactor = rawSpeed / REGEN_FADE_START;
+                          speedFactor = constrain(speedFactor, 0.0f, 1.0f);
+                      }
+                      
+                      // Additional high-speed safety check
+                      if (abs(rawSpeed) > HIGH_SPEED_THRESHOLD) {
+                          regenFactor *= 0.7f;  // Reduce regen at high speeds
+                      }
+                      
+                      DMC_TorqueCalc = -regenFactor * tau_rm * speedFactor;
+                      Serial.println("Mode: Reverse Regen");
+                  } 
+                  else if (throttlePosition > 40.0f) {  // Drive zone
+                      float accelFactor = (throttlePosition - 40.0f) / 60.0f;
+                      accelFactor = pow(accelFactor, gamma);
+                      accelFactor = constrain(accelFactor, 0.0f, 1.0f);
+                      
+                      // Smooth torque reduction for throttle release at high speeds
+                      if (throttlePosition < lastThrottlePosition && abs(rawSpeed) > HIGH_SPEED_THRESHOLD) {
+                          unsigned long currentTime = millis();
+                          if (lastReleaseTime == 0) {
+                              lastReleaseTime = currentTime;
+                          }
+                          
+                          float releaseProgress = (float)(currentTime - lastReleaseTime) / (RELEASE_FADE_TIME * 1000.0f);
+                          if (releaseProgress < 1.0f) {
+                              accelFactor *= (1.0f - releaseProgress);
+                          }
+                      } else {
+                          lastReleaseTime = 0;
+                      }
+                      
+                      DMC_TorqueCalc = accelFactor * tau_am;
+                      Serial.println("Mode: Reverse Drive");
+                  } 
+                  else {
+                      DMC_TorqueCalc = 0;  // Coast zone
+                      Serial.println("Mode: Reverse Coast");
+                  }
+              } 
+              else {  // Negative speed (wrong direction)
+                  // Enhanced wrong direction protection
+                  if (rawSpeed < -DIRECTION_PROTECT_SPEED) {
+                      float correctionFactor = min(-rawSpeed / 10.0f, 1.0f);  // Proportional to speed
+                      DMC_TorqueCalc = tau_am * 0.3f * correctionFactor;  // Gradual correction
+                      Serial.println("Mode: Reverse Direction Correction");
+                  } else {
+                      DMC_TorqueCalc = 0;
+                      Serial.println("Mode: Reverse Standstill");
+                  }
+              }
+          }
+          
+          lastThrottlePosition = throttlePosition;
+        break;
+      }
+
+        case OPD: {
+            // TODO: Implement OPD mode logic
+            Serial.println("Mode: OPD (Not Implemented)");
+            DMC_TorqueCalc = 0;
+            break;
+        }
+    }
+
+    // Asymmetric torque rate limiting
+    float torqueDiff = DMC_TorqueCalc - lastTorque;
+    float maxAccelStep = 8.0f;
+    float maxDecelStep = 25.0f;
+    
+    if (abs(DMC_TorqueCalc) > abs(lastTorque)) {
+        if (torqueDiff > maxAccelStep) {
+            DMC_TorqueCalc = lastTorque + maxAccelStep;
+        } else if (torqueDiff < -maxAccelStep) {
+            DMC_TorqueCalc = lastTorque - maxAccelStep;
+        }
+    } else {
+        if (torqueDiff > maxDecelStep) {
+            DMC_TorqueCalc = lastTorque + maxDecelStep;
+        } else if (torqueDiff < -maxDecelStep) {
+            DMC_TorqueCalc = lastTorque - maxDecelStep;
+        }
+>>>>>>> Stashed changes
+    }
+    
+    lastTorque = DMC_TorqueCalc;
+
+<<<<<<< Updated upstream
     // Apply deadband of ±14
     if (DMC_TorqueCalc > -14 && DMC_TorqueCalc < 14) {
         DMC_TorqueCalc = 0;
@@ -954,6 +1220,34 @@ int16_t calculateTorque5S() {
 }
 
 
+=======
+    // Deadband with hysteresis
+    static bool wasInDeadband = false;
+    if (wasInDeadband) {
+        if (abs(DMC_TorqueCalc) > 25) {
+            wasInDeadband = false;
+            enableDMC = 1;
+        } else {
+            DMC_TorqueCalc = 0;
+            enableDMC = 1;
+        }
+    } else {
+        if (abs(DMC_TorqueCalc) < 18) {
+            wasInDeadband = true;
+            DMC_TorqueCalc = 0;
+            enableDMC = 1;
+        } else {
+            enableDMC = 1;
+        }
+    }
+
+    Serial.print("Final Torque: "); Serial.println(DMC_TorqueCalc);
+    Serial.print("DMC Enabled: "); Serial.println(enableDMC);
+    Serial.println("---------------");
+    
+    return DMC_TorqueCalc;
+}
+>>>>>>> Stashed changes
 void updateGearState() {
     int forwardValue = ADS.readADC(2); // Drive switch on A2
     int reverseValue = ADS.readADC(3); // Reverse switch on A3
@@ -1216,6 +1510,9 @@ void reciveDMC() {
     CAN.readMsgBuf(&len, readDataBSC);
     id = CAN.getCanId();
     type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
+    
+    // Move variable declaration outside switch
+    int16_t rawSpeed = 0;
 
     switch (id) {
         case 0x258:
@@ -1223,7 +1520,9 @@ void reciveDMC() {
             DMC_Running = readDataBSC[0] & 0x40;
             DMC_TrqAvl = ((readDataBSC[2] << 8) | readDataBSC[3]) * 0.01;
             DMC_TrqAct = ((readDataBSC[4] << 8) | readDataBSC[5]) * 0.01;
-            DMC_SpdAct = (readDataBSC[6] << 8) | readDataBSC[7];
+            // Fix for signed speed interpretation
+            rawSpeed = (readDataBSC[6] << 8) | readDataBSC[7];
+            DMC_SpdAct = static_cast<float>(rawSpeed);
             break;
 
         case 0x259:
@@ -1243,7 +1542,6 @@ void reciveDMC() {
             break;
     }
 }
-
 
 //**********************//
 //NLG
