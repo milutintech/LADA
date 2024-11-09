@@ -272,6 +272,7 @@ DrivingMode currentDrivingMode = LEGACY; // Default to LEGACY mode
 #define MAX_REVERSE_TRQ 220
 // Variable to control OPD mode at runtime
 bool isOPDEnabled = true;  // Set to true for OPD, false for original formula
+bool isRegenEnabled = false; // Set true for newer regen(1/4 throttel strat)
 
 uint16_t speed = 0;
 #define NORMAL_RATIO 1.2
