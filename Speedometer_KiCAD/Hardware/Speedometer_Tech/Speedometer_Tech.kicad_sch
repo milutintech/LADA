@@ -1,0 +1,7551 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "7a911dfa-7957-409a-ad31-10c26a0bf949")
+	(paper "A3")
+	(lib_symbols
+		(symbol "Speedometer_Tech-altium-import:5V_ARROW"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "5V"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name '5V'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "5V_ARROW_0_0"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0) hide
+					(name "5V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Speedometer_Tech-altium-import:GND_BAR"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name 'GND'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GND_BAR_0_0"
+				(polyline
+					(pts
+						(xy -1.27 -2.54) (xy 1.27 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Speedometer_Tech-altium-import:KL30_ARROW"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "KL30"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name 'KL30'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "KL30_ARROW_0_0"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0) hide
+					(name "KL30"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Speedometer_Tech-altium-import:KL30i_ARROW"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "KL30i"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name 'KL30i'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "KL30i_ARROW_0_0"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0) hide
+					(name "KL30i"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Speedometer_Tech-altium-import:KL31_BAR"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "KL31"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name 'KL31'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "KL31_BAR_0_0"
+				(polyline
+					(pts
+						(xy -1.27 -2.54) (xy 1.27 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0) hide
+					(name "KL31"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Mounting hole M4"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*PTH-M4D7X7-Footprint-1*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "root_0_PTH-M4D7X7-Symbol-1_1_0"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 0)
+					(radius 2.54)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 0 -7.62 90)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*Passermarke-Footprint-1*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "root_0_Passermarke-Symbol-1_1_0"
+				(circle
+					(center 0 0)
+					(radius 1)
+					(stroke
+						(width -0.0001)
+						(type solid)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 0 0)
+					(radius 2)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 2.54 2.54)
+					(end -2.54 -2.54)
+					(stroke
+						(width 0.254)
+						(type solid)
+						(color 128 0 0 1)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+		)
+		(symbol "Speedometer_Tech-altium-import:root_0_RES-2"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*RESC1608X55X25ML10T15*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "root_0_RES-2_1_0"
+				(polyline
+					(pts
+						(xy 5.08 0) (xy 4.064 0) (xy 3.81 -0.508) (xy 3.302 0.508) (xy 2.794 -0.508) (xy 2.286 0.508)
+						(xy 1.778 -0.508) (xy 1.27 0.508) (xy 1.016 0) (xy 0 0)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -2.54 0 0)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "2"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Speedometer_Tech-altium-import:root_2_3P-SMD/THT"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*3P-SMD/THT*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "root_2_3P-SMD/THT_1_0"
+				(circle
+					(center -7.62 2.54)
+					(radius 0.762)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center -7.62 5.08)
+					(radius 0.762)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start -6.858 0.762)
+					(end -8.382 -0.762)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start -5.08 7.62)
+					(end -12.7 -2.54)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.08 0) (xy -6.858 0)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.08 2.54) (xy -6.858 2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy -6.858 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 0 0 180)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 2.54 180)
+					(length 5.08)
+					(name "2"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 5.08 180)
+					(length 5.08)
+					(name "3"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+	(junction
+		(at 205.74 76.0222)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "02f0a429-948d-4464-8766-9f5ff23b7bfb")
+	)
+	(junction
+		(at 25.4 258.9022)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0da445a2-dc2d-4379-a163-ce663c3ca2dc")
+	)
+	(junction
+		(at 200.66 81.1022)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1c6c05d1-0fc4-42a0-a9b3-ba405c56f7ae")
+	)
+	(junction
+		(at 210.82 86.1822)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "215e19bf-20ad-47be-993a-aaeb0bb0d722")
+	)
+	(junction
+		(at 45.72 261.4422)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "231e3cac-d9e1-49ad-930f-2c6c1d2b5ae8")
+	)
+	(junction
+		(at 45.72 276.6822)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2c4d16cc-d26b-4bbf-ae34-538c42034645")
+	)
+	(junction
+		(at 25.4 263.9822)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3d0c7c11-6b3b-415d-b163-4f5a4310a529")
+	)
+	(junction
+		(at 45.72 279.2222)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3e27cc2b-ebc7-41d8-a6f8-75bf58ecdaeb")
+	)
+	(junction
+		(at 45.72 263.9822)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5730b129-ab83-4567-88bb-9039f9097d64")
+	)
+	(junction
+		(at 25.4 276.6822)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5acea223-56d3-4444-a7f3-569691eb6d5b")
+	)
+	(junction
+		(at 25.4 261.4422)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "621b0a5b-8331-4b12-8692-01b711d57212")
+	)
+	(junction
+		(at 45.72 258.9022)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7fd8c3d8-78d9-4186-9e1c-16efe261ccd8")
+	)
+	(junction
+		(at 25.4 279.2222)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "84660f60-7610-429d-b219-c196ae58257a")
+	)
+	(junction
+		(at 205.74 205.5622)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8b22c99a-c0e6-45bd-8954-fac79d5ef3f1")
+	)
+	(junction
+		(at 25.4 281.7622)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9235c4a7-3382-49da-a555-6d525f7ca00d")
+	)
+	(junction
+		(at 200.66 208.1022)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b19c87e0-7faf-4158-9f8f-871ea5e9ff29")
+	)
+	(junction
+		(at 45.72 281.7622)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b74e526e-9e5c-43bc-9827-c9ad36163ae5")
+	)
+	(no_connect
+		(at 220.98 286.8422)
+		(uuid "40284944-3f2b-4e36-b80b-843affe5990c")
+	)
+	(no_connect
+		(at 266.7 286.8422)
+		(uuid "7db32d28-847f-4c4a-aed3-424bbf325532")
+	)
+	(no_connect
+		(at 251.46 286.8422)
+		(uuid "b660446e-9f98-4f09-8393-d9c4e331b759")
+	)
+	(no_connect
+		(at 236.22 286.8422)
+		(uuid "c35067df-b4ea-45f2-aec2-b607f0dd7162")
+	)
+	(no_connect
+		(at 274.32 286.8422)
+		(uuid "d820b312-529a-4db3-b92a-f52dcd07ae96")
+	)
+	(no_connect
+		(at 243.84 286.8422)
+		(uuid "e4b77989-4241-420a-8108-70bcd0ad78c8")
+	)
+	(no_connect
+		(at 259.08 286.8422)
+		(uuid "f22b5f6d-536b-466e-93d3-0211daeb964c")
+	)
+	(no_connect
+		(at 228.6 286.8422)
+		(uuid "f8a25df7-9609-4354-9485-ee8ecf9b3b0f")
+	)
+	(wire
+		(pts
+			(xy 177.8 205.5622) (xy 205.74 205.5622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0566716e-6e7a-491d-8186-3b6b7ed7a02e")
+	)
+	(wire
+		(pts
+			(xy 195.58 182.7022) (xy 195.58 55.7022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0943bfdb-7fa7-444e-b574-7cd35b7eb069")
+	)
+	(wire
+		(pts
+			(xy 228.6 182.7022) (xy 195.58 182.7022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0984b0ab-0745-4694-a4f1-174ad685c9e4")
+	)
+	(wire
+		(pts
+			(xy 30.48 263.9822) (xy 25.4 263.9822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "09f07a48-484f-4f05-a5fd-e8ba48e08bde")
+	)
+	(wire
+		(pts
+			(xy 177.8 154.7622) (xy 228.6 154.7622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a98da35-1615-45d9-850d-99ce0acccfe8")
+	)
+	(wire
+		(pts
+			(xy 205.74 205.5622) (xy 228.6 205.5622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0c5a9eca-3eb4-48d2-9b3e-97f7f0c41eea")
+	)
+	(wire
+		(pts
+			(xy 45.72 274.1422) (xy 45.72 276.6822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "11ae5a5e-1c98-40c7-b710-099f4273a8f6")
+	)
+	(wire
+		(pts
+			(xy 25.4 281.7622) (xy 30.48 281.7622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1217d9b7-a524-4cc1-99bf-eeb69a46688f")
+	)
+	(wire
+		(pts
+			(xy 116.84 83.6422) (xy 116.84 96.3422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "17590cba-2e1a-4146-a62d-cb693a234ee2")
+	)
+	(wire
+		(pts
+			(xy 25.4 266.5222) (xy 25.4 263.9822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ba45b2f-30f6-4f96-93e9-7b79e3066ef8")
+	)
+	(wire
+		(pts
+			(xy 195.58 55.7022) (xy 203.2 55.7022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f9eafb7-c061-4796-8c4e-ee01608778be")
+	)
+	(wire
+		(pts
+			(xy 177.8 86.1822) (xy 210.82 86.1822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22e7e3a4-75c2-4df0-b085-9c21eed9cac8")
+	)
+	(wire
+		(pts
+			(xy 30.48 279.2222) (xy 25.4 279.2222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "27339943-6a17-47c5-bcbb-627f68a02e56")
+	)
+	(wire
+		(pts
+			(xy 215.9 96.3422) (xy 215.9 147.1422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a9b840b-dd0a-4e29-972a-513707da3fcc")
+	)
+	(wire
+		(pts
+			(xy 101.6 83.6422) (xy 116.84 83.6422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e6e370a-1a3c-4988-995c-b1e202f42a90")
+	)
+	(wire
+		(pts
+			(xy 200.66 208.1022) (xy 228.6 208.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3429a4f8-38b0-4136-811a-0400302e0650")
+	)
+	(wire
+		(pts
+			(xy 45.72 279.2222) (xy 45.72 281.7622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3835d02f-1882-4f4b-8ad8-1e09c5b4624b")
+	)
+	(wire
+		(pts
+			(xy 200.66 81.1022) (xy 228.6 81.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39080a01-3d06-4342-a364-1540f864468d")
+	)
+	(wire
+		(pts
+			(xy 177.8 152.2222) (xy 228.6 152.2222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d38b515-b434-4688-a651-93d758dc40ff")
+	)
+	(wire
+		(pts
+			(xy 101.6 91.2622) (xy 106.68 91.2622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ca12688-4b5f-4d42-a2de-4fb3983ae056")
+	)
+	(wire
+		(pts
+			(xy 40.64 274.1422) (xy 45.72 274.1422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4e80d070-fff5-42f4-9622-07a7f40661c8")
+	)
+	(wire
+		(pts
+			(xy 210.82 203.0222) (xy 210.82 86.1822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4f342536-bd32-4ee1-a493-92a71fa2d228")
+	)
+	(wire
+		(pts
+			(xy 228.6 203.0222) (xy 210.82 203.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50b1c630-1163-41ff-82f2-2955e9b515fd")
+	)
+	(wire
+		(pts
+			(xy 106.68 91.2622) (xy 106.68 101.4222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "524e87ba-3d1a-42a1-9ac6-2afbe6cee548")
+	)
+	(wire
+		(pts
+			(xy 40.64 276.6822) (xy 45.72 276.6822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5a89f3ac-f7c6-466f-9a5a-7b51a9e9e1ef")
+	)
+	(wire
+		(pts
+			(xy 45.72 276.6822) (xy 45.72 279.2222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5d3d14ce-fba7-4166-af21-68b40adf1efa")
+	)
+	(wire
+		(pts
+			(xy 279.4 55.7022) (xy 304.8 55.7022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6007a486-667c-4a05-b610-6634a23db1b5")
+	)
+	(wire
+		(pts
+			(xy 76.2 63.3222) (xy 66.04 63.3222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6609c3d5-0407-4adf-847c-7efd94b63c59")
+	)
+	(wire
+		(pts
+			(xy 200.66 81.1022) (xy 200.66 208.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "68088117-7c85-4a2c-bc4e-8a7f851051f7")
+	)
+	(wire
+		(pts
+			(xy 30.48 274.1422) (xy 25.4 274.1422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "698ed4d1-6e3b-481d-a0d7-f57a2194adf7")
+	)
+	(wire
+		(pts
+			(xy 45.72 263.9822) (xy 45.72 261.4422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75d1018b-b54a-4789-bc07-f32302856c4a")
+	)
+	(wire
+		(pts
+			(xy 40.64 266.5222) (xy 45.72 266.5222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7979fd49-8a34-4286-bdbb-b63cb7c7d7d1")
+	)
+	(wire
+		(pts
+			(xy 25.4 279.2222) (xy 25.4 281.7622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "79d09c08-b435-420b-a697-aec5e4d52773")
+	)
+	(wire
+		(pts
+			(xy 177.8 208.1022) (xy 200.66 208.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "815a49c4-f798-4c78-8369-9da18cbdd863")
+	)
+	(wire
+		(pts
+			(xy 30.48 266.5222) (xy 25.4 266.5222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8215e1b4-cf23-4c6e-9c74-5da1f3b1e9ef")
+	)
+	(wire
+		(pts
+			(xy 215.9 147.1422) (xy 228.6 147.1422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "872a4ee7-618b-45ad-9034-80085199d7bf")
+	)
+	(wire
+		(pts
+			(xy 317.5 93.8022) (xy 317.5 101.4222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8bcaa028-428a-45fd-9b26-bd78fb451642")
+	)
+	(wire
+		(pts
+			(xy 40.64 281.7622) (xy 45.72 281.7622)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8bfdded0-94e2-4171-98af-e668c8d8feee")
+	)
+	(wire
+		(pts
+			(xy 25.4 274.1422) (xy 25.4 276.6822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "94efad61-df22-4a66-b3de-1d3bdb80873e")
+	)
+	(wire
+		(pts
+			(xy 116.84 96.3422) (xy 215.9 96.3422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "999c3d8c-b199-4643-a79b-6b9a9626f97c")
+	)
+	(wire
+		(pts
+			(xy 40.64 258.9022) (xy 45.72 258.9022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b0fdfe8-e195-4908-94a0-750c790e6776")
+	)
+	(wire
+		(pts
+			(xy 25.4 261.4422) (xy 25.4 258.9022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9bb24e20-962a-41ef-baac-f029c775bf3d")
+	)
+	(wire
+		(pts
+			(xy 40.64 279.2222) (xy 45.72 279.2222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "afbdf6f2-f95b-4099-bce8-e26eba1679a9")
+	)
+	(wire
+		(pts
+			(xy 177.8 81.1022) (xy 200.66 81.1022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b9c69c36-95d9-4b43-88ec-bb2da22f5cca")
+	)
+	(wire
+		(pts
+			(xy 25.4 258.9022) (xy 30.48 258.9022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c3c3ad3a-e43f-4472-ab90-166ff062017a")
+	)
+	(wire
+		(pts
+			(xy 228.6 157.3022) (xy 177.8 157.3022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c4717240-0ad7-4988-a840-64b07cef099f")
+	)
+	(wire
+		(pts
+			(xy 40.64 261.4422) (xy 45.72 261.4422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c90ce320-f7d2-424c-934f-17efe1fc83cf")
+	)
+	(wire
+		(pts
+			(xy 30.48 261.4422) (xy 25.4 261.4422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d15c37ca-d313-4a74-9dbe-3940ceda56c2")
+	)
+	(wire
+		(pts
+			(xy 25.4 263.9822) (xy 25.4 261.4422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d76021bb-5488-4761-96e2-b6b3c6fbaa52")
+	)
+	(wire
+		(pts
+			(xy 30.48 276.6822) (xy 25.4 276.6822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dad45fde-6d9a-4c32-a4ea-43decdc60ecf")
+	)
+	(wire
+		(pts
+			(xy 25.4 276.6822) (xy 25.4 279.2222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de8fb83c-4972-4d34-ab72-aa26f2fcf972")
+	)
+	(wire
+		(pts
+			(xy 210.82 86.1822) (xy 228.6 86.1822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "df4453da-b08c-41d8-9922-ccd710edc98a")
+	)
+	(wire
+		(pts
+			(xy 205.74 76.0222) (xy 228.6 76.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dff3b410-89b6-443b-baaa-048b105883ee")
+	)
+	(wire
+		(pts
+			(xy 177.8 162.3822) (xy 228.6 162.3822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e5ea0a81-fdf6-49cf-804c-8b0861f15cd0")
+	)
+	(wire
+		(pts
+			(xy 205.74 205.5622) (xy 205.74 76.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e7e85666-3ee6-4524-88a8-4ff0e2dafac1")
+	)
+	(wire
+		(pts
+			(xy 45.72 266.5222) (xy 45.72 263.9822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea23d510-e96d-4976-bf74-98b0fad86425")
+	)
+	(wire
+		(pts
+			(xy 228.6 210.6422) (xy 177.8 210.6422)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "edc76d16-bf52-4f48-978b-53f2dcd03314")
+	)
+	(wire
+		(pts
+			(xy 40.64 263.9822) (xy 45.72 263.9822)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eeafdf8d-19d1-4143-8295-14bc6e833976")
+	)
+	(wire
+		(pts
+			(xy 45.72 261.4422) (xy 45.72 258.9022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f7eb87b6-9e48-4a8f-a17a-d56510be6237")
+	)
+	(wire
+		(pts
+			(xy 177.8 76.0222) (xy 205.74 76.0222)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fe843dc4-4b6c-46e9-adc6-e54d6362612e")
+	)
+	(rectangle
+		(start 335.28 35.3822)
+		(end 71.12 119.2022)
+		(stroke
+			(width 0.254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(fill
+			(type color)
+			(color 255 255 176 1)
+		)
+		(uuid e7bb35b6-694a-4a75-922b-07a970633211)
+	)
+	(text "LADA Niva"
+		(exclude_from_sim no)
+		(at 127 50.6222 0)
+		(effects
+			(font
+				(size 4.572 4.572)
+			)
+			(justify left bottom)
+		)
+		(uuid "17cc8293-4d34-41de-80b6-ee17f46dd387")
+	)
+	(text "Masse"
+		(exclude_from_sim no)
+		(at 33.02 286.8422 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2ed20efb-0a1e-4be1-9766-eedd3b74f4af")
+	)
+	(text "4x4 Electric"
+		(exclude_from_sim no)
+		(at 152.4 58.2422 0)
+		(effects
+			(font
+				(size 3.048 3.048)
+			)
+			(justify left bottom)
+		)
+		(uuid "4eec1f22-da89-44a7-89c9-37a9bd048a48")
+	)
+	(text "Dauerplus"
+		(exclude_from_sim no)
+		(at 33.02 256.3622 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "748e2d1a-1f14-4d14-aea0-bb27166f2653")
+	)
+	(text "Zahrzeug-GND"
+		(exclude_from_sim no)
+		(at 33.02 271.6022 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c7e528ba-8db8-4775-9acf-e1d971597241")
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
+		(at 259.08 279.2222 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "06b47d60-ebbd-4e3e-af24-0ac1d818bdd2")
+		(property "Reference" "PTH6"
+			(at 256.54 276.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "PTH-M4D7X7"
+			(at 256.54 289.8902 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "PTH-M4D7X7-Footprint-1"
+			(at 259.08 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 259.08 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting hole M4"
+			(at 259.08 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNTING TECHNOLOGY" ""
+			(at 256.54 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" ""
+			(at 256.54 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHS COMPLIANT" ""
+			(at 256.54 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PINS" ""
+			(at 256.54 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" ""
+			(at 256.54 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" ""
+			(at 256.54 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bccc5f4a-6c8e-4a31-8409-83cecc8f7486")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "PTH6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_2_3P-SMD/THT")
+		(at 66.04 65.8622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0b0b767e-f075-42f0-b993-45e20fa769e3")
+		(property "Reference" "P001"
+			(at 53.34 58.2422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "3P-SMD/THT"
+			(at 53.34 70.9422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "3P-SMD/THT"
+			(at 66.04 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 66.04 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 66.04 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cc1b7824-43cb-4d82-a7c4-f95f6a84e89f")
+		)
+		(pin "2"
+			(uuid "c363e189-5ffa-42b5-a3dd-97645561a015")
+		)
+		(pin "3"
+			(uuid "64fe619f-a7cd-4ca9-bdf8-1800ead97524")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "P001")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
+		(at 220.98 279.2222 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0e08b8eb-6e0e-4d3b-8c81-c70988929d40")
+		(property "Reference" "PTH1"
+			(at 218.44 276.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "PTH-M4D7X7"
+			(at 218.44 289.8902 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "PTH-M4D7X7-Footprint-1"
+			(at 220.98 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 220.98 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting hole M4"
+			(at 220.98 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNTING TECHNOLOGY" ""
+			(at 218.44 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" ""
+			(at 218.44 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHS COMPLIANT" ""
+			(at 218.44 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PINS" ""
+			(at 218.44 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" ""
+			(at 218.44 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" ""
+			(at 218.44 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1b09f5c4-3494-4232-8517-ffa914b34fe1")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "PTH1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1")
+		(at 284.48 286.8422 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "166072f3-9a90-4282-b635-beb3ba884cb0")
+		(property "Reference" "M*"
+			(at 281.94 284.3022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "Passermarke"
+			(at 281.94 291.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Passermarke-Footprint-1"
+			(at 284.48 286.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 284.48 286.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 284.48 286.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "M*")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:KL30_ARROW")
+		(at 25.4 258.9022 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "16aebccf-74d3-44d5-98f7-d109c5d539b7")
+		(property "Reference" "#PWR?"
+			(at 25.4 258.9022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "KL30"
+			(at 25.4 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 25.4 258.9022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 25.4 258.9022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 25.4 258.9022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "bc8cfe74-b8a0-48b1-86f2-e666b2caba54")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:GND_BAR")
+		(at 66.04 65.8622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "239287fd-c54c-4741-9a88-e99b7263797e")
+		(property "Reference" "#PWR?"
+			(at 66.04 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 66.04 69.6722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 66.04 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 66.04 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 66.04 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "751e8d32-fd3f-4376-a5d3-c971ecde0ba6")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
+		(at 33.02 281.7622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2461928a-6cbb-4a19-868c-9fc623cdf8b5")
+		(property "Reference" "R000"
+			(at 32.766 281.0002 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "RC0603JR-070RL"
+			(at 32.766 285.0642 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RESC1608X55X25ML10T15"
+			(at 33.02 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
+			(at 33.02 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "WIDTH" "0.8mm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" "155degC"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TOLERANCE" "5%"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE REFERENCE" "0603"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "HEIGHT" "0.45mm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DEPTH" "0.8mm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING" "50V"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TERMINATION" "SMD/SMT"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE QUANTITY" "5000"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" "0603"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (IMPERIAL)" "0603"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RADIATION HARDENING" "No"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "NUMBER OF PINS" "2"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LENGTH" "1.6mm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LEAD FREE" "LeadFree"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING (DC)" "50V"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MILITARY STANDARD" "Not"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "POWER RATING" "100mW"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RESISTANCE" "0mOhm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER URL" "http://www.yageo.com/"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGING" "TapeandReel"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (METRIC)" "1608"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" "-55degC"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "COMPOSITION" "ThickFilm"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Yageo"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHSCOMPLIANT" "true"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CONTACT PLATING" "Tin"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "REACH SVHC" "NoSVHC"
+			(at 29.972 277.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "4396beed-112b-4a33-aa2b-12459ded79a5")
+		)
+		(pin "1"
+			(uuid "43221eaf-411a-4344-9524-27c9173d914c")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "R000")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:KL31_BAR")
+		(at 25.4 281.7622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "30a56ad1-132d-4e57-813a-05661d71e7e7")
+		(property "Reference" "#PWR?"
+			(at 25.4 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "KL31"
+			(at 25.4 285.5722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 25.4 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 25.4 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 25.4 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "77f4bb12-b9d0-4fd9-a4e2-c3fb244e85c4")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
+		(at 33.02 266.5222 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3201835c-6620-48b8-85ff-d8aa87f8fd64")
+		(property "Reference" "R004"
+			(at 32.766 265.7602 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "RC0603JR-070RL"
+			(at 32.766 269.8242 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RESC1608X55X25ML10T15"
+			(at 33.02 266.5222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 266.5222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
+			(at 33.02 266.5222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "WIDTH" "0.8mm"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" "155degC"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TOLERANCE" "5%"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE REFERENCE" "0603"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "HEIGHT" "0.45mm"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DEPTH" "0.8mm"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING" "50V"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TERMINATION" "SMD/SMT"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE QUANTITY" "5000"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" "0603"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (IMPERIAL)" "0603"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RADIATION HARDENING" "No"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "NUMBER OF PINS" "2"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LENGTH" "1.6mm"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LEAD FREE" "LeadFree"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING (DC)" "50V"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MILITARY STANDARD" "Not"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "POWER RATING" "100mW"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RESISTANCE" "0mOhm"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER URL" "http://www.yageo.com/"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGING" "TapeandReel"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (METRIC)" "1608"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" "-55degC"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "COMPOSITION" "ThickFilm"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Yageo"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHSCOMPLIANT" "true"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CONTACT PLATING" "Tin"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "REACH SVHC" "NoSVHC"
+			(at 29.972 262.7122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fed21373-ddc6-4999-b027-5e47bccbaa49")
+		)
+		(pin "2"
+			(uuid "888634d4-debd-4d30-b595-87ec9dc1e42a")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "R004")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
+		(at 243.84 279.2222 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "325627ae-7545-4f02-aac8-7a5c8f4c17d9")
+		(property "Reference" "PTH4"
+			(at 241.3 276.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "PTH-M4D7X7"
+			(at 241.3 289.8902 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "PTH-M4D7X7-Footprint-1"
+			(at 243.84 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 243.84 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting hole M4"
+			(at 243.84 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNTING TECHNOLOGY" ""
+			(at 241.3 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" ""
+			(at 241.3 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHS COMPLIANT" ""
+			(at 241.3 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PINS" ""
+			(at 241.3 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" ""
+			(at 241.3 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" ""
+			(at 241.3 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3b4a9564-3dec-405b-97ad-474c4067a66a")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "PTH4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
+		(at 251.46 279.2222 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3b69c50a-e195-4d2d-a352-6dc16d73bc88")
+		(property "Reference" "PTH5"
+			(at 248.92 276.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "PTH-M4D7X7"
+			(at 248.92 289.8902 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "PTH-M4D7X7-Footprint-1"
+			(at 251.46 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 251.46 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting hole M4"
+			(at 251.46 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNTING TECHNOLOGY" ""
+			(at 248.92 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" ""
+			(at 248.92 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHS COMPLIANT" ""
+			(at 248.92 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PINS" ""
+			(at 248.92 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" ""
+			(at 248.92 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" ""
+			(at 248.92 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "552773e5-cc20-4ddf-8fd6-85ce107f255b")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "PTH5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
+		(at 274.32 279.2222 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4927da24-0e8e-4fc3-8d01-ab250a812673")
+		(property "Reference" "PTH8"
+			(at 271.78 276.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "PTH-M4D7X7"
+			(at 271.78 289.8902 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "PTH-M4D7X7-Footprint-1"
+			(at 274.32 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 274.32 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting hole M4"
+			(at 274.32 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNTING TECHNOLOGY" ""
+			(at 271.78 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" ""
+			(at 271.78 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHS COMPLIANT" ""
+			(at 271.78 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PINS" ""
+			(at 271.78 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" ""
+			(at 271.78 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" ""
+			(at 271.78 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ef92e61a-51f1-4971-9820-52f12dbd5aa7")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "PTH8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:GND_BAR")
+		(at 45.72 281.7622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4b3d046b-e920-4f1d-b793-5200b189371e")
+		(property "Reference" "#PWR?"
+			(at 45.72 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 45.72 285.5722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 45.72 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "05cfc2bc-b965-4b36-bb76-ae52faaa8982")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
+		(at 33.02 279.2222 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "552fd694-ab40-4b50-85c7-24419e455779")
+		(property "Reference" "R001"
+			(at 32.766 278.4602 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "RC0603JR-070RL"
+			(at 32.766 282.5242 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RESC1608X55X25ML10T15"
+			(at 33.02 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
+			(at 33.02 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "WIDTH" "0.8mm"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" "155degC"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TOLERANCE" "5%"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE REFERENCE" "0603"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "HEIGHT" "0.45mm"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DEPTH" "0.8mm"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING" "50V"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TERMINATION" "SMD/SMT"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE QUANTITY" "5000"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" "0603"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (IMPERIAL)" "0603"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RADIATION HARDENING" "No"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "NUMBER OF PINS" "2"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LENGTH" "1.6mm"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LEAD FREE" "LeadFree"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING (DC)" "50V"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MILITARY STANDARD" "Not"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "POWER RATING" "100mW"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RESISTANCE" "0mOhm"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER URL" "http://www.yageo.com/"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGING" "TapeandReel"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (METRIC)" "1608"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" "-55degC"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "COMPOSITION" "ThickFilm"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Yageo"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHSCOMPLIANT" "true"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CONTACT PLATING" "Tin"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "REACH SVHC" "NoSVHC"
+			(at 29.972 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "28a291b6-dccf-42e6-872f-9a37a43b3717")
+		)
+		(pin "1"
+			(uuid "8bb851cb-c2f1-45e5-b8ac-65e32d8057da")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "R001")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
+		(at 228.6 279.2222 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5760490f-c59c-4135-a9ed-4bb7978e6189")
+		(property "Reference" "PTH2"
+			(at 226.06 276.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "PTH-M4D7X7"
+			(at 226.06 289.8902 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "PTH-M4D7X7-Footprint-1"
+			(at 228.6 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 228.6 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting hole M4"
+			(at 228.6 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNTING TECHNOLOGY" ""
+			(at 226.06 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" ""
+			(at 226.06 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHS COMPLIANT" ""
+			(at 226.06 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PINS" ""
+			(at 226.06 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" ""
+			(at 226.06 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" ""
+			(at 226.06 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6e8d9764-d581-4e58-8fc7-b4af12f1d075")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "PTH2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1")
+		(at 289.56 286.8422 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "72faa2d7-5585-42af-974c-af925ebf7781")
+		(property "Reference" "M*"
+			(at 287.02 284.3022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "Passermarke"
+			(at 287.02 291.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Passermarke-Footprint-1"
+			(at 289.56 286.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 289.56 286.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 289.56 286.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "M*")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
+		(at 266.7 279.2222 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "74890777-a24d-4259-855a-ea138f5a23fb")
+		(property "Reference" "PTH7"
+			(at 264.16 276.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "PTH-M4D7X7"
+			(at 264.16 289.8902 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "PTH-M4D7X7-Footprint-1"
+			(at 266.7 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 266.7 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting hole M4"
+			(at 266.7 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNTING TECHNOLOGY" ""
+			(at 264.16 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" ""
+			(at 264.16 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHS COMPLIANT" ""
+			(at 264.16 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PINS" ""
+			(at 264.16 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" ""
+			(at 264.16 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" ""
+			(at 264.16 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "46ddc975-53f3-4852-912f-a368b8c9333e")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "PTH7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
+		(at 33.02 261.4422 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7e165675-14b1-410b-9dc9-e89d62b4bd6e")
+		(property "Reference" "R006"
+			(at 32.766 260.6802 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "RC0603JR-070RL"
+			(at 32.766 264.7442 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RESC1608X55X25ML10T15"
+			(at 33.02 261.4422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 261.4422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
+			(at 33.02 261.4422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "WIDTH" "0.8mm"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" "155degC"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TOLERANCE" "5%"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE REFERENCE" "0603"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "HEIGHT" "0.45mm"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DEPTH" "0.8mm"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING" "50V"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TERMINATION" "SMD/SMT"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE QUANTITY" "5000"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" "0603"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (IMPERIAL)" "0603"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RADIATION HARDENING" "No"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "NUMBER OF PINS" "2"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LENGTH" "1.6mm"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LEAD FREE" "LeadFree"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING (DC)" "50V"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MILITARY STANDARD" "Not"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "POWER RATING" "100mW"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RESISTANCE" "0mOhm"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER URL" "http://www.yageo.com/"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGING" "TapeandReel"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (METRIC)" "1608"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" "-55degC"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "COMPOSITION" "ThickFilm"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Yageo"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHSCOMPLIANT" "true"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CONTACT PLATING" "Tin"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "REACH SVHC" "NoSVHC"
+			(at 29.972 257.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0d14116b-1d5c-4d35-85a2-59cb343e3a9a")
+		)
+		(pin "2"
+			(uuid "4e2d0196-0cfe-421b-97be-3f2d2a4a1b78")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "R006")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1")
+		(at 294.64 281.7622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8017dd9a-aecf-4112-8721-c77918dd9fdb")
+		(property "Reference" "M*"
+			(at 292.1 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "Passermarke"
+			(at 292.1 286.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Passermarke-Footprint-1"
+			(at 294.64 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 294.64 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 294.64 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "M*")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
+		(at 236.22 279.2222 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9049a86c-7752-4b92-91c4-6533ac231e4c")
+		(property "Reference" "PTH3"
+			(at 233.68 276.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "PTH-M4D7X7"
+			(at 233.68 289.8902 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "PTH-M4D7X7-Footprint-1"
+			(at 236.22 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 236.22 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting hole M4"
+			(at 236.22 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNTING TECHNOLOGY" ""
+			(at 233.68 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" ""
+			(at 233.68 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHS COMPLIANT" ""
+			(at 233.68 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PINS" ""
+			(at 233.68 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" ""
+			(at 233.68 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" ""
+			(at 233.68 275.4122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "813b298a-5691-4d0c-ad46-13fd849c2152")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "PTH3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
+		(at 33.02 263.9822 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9a312c61-79fe-4991-b90d-e0d077f7e452")
+		(property "Reference" "R005"
+			(at 32.766 263.2202 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "RC0603JR-070RL"
+			(at 32.766 267.2842 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RESC1608X55X25ML10T15"
+			(at 33.02 263.9822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 263.9822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
+			(at 33.02 263.9822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "WIDTH" "0.8mm"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" "155degC"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TOLERANCE" "5%"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE REFERENCE" "0603"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "HEIGHT" "0.45mm"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DEPTH" "0.8mm"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING" "50V"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TERMINATION" "SMD/SMT"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE QUANTITY" "5000"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" "0603"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (IMPERIAL)" "0603"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RADIATION HARDENING" "No"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "NUMBER OF PINS" "2"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LENGTH" "1.6mm"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LEAD FREE" "LeadFree"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING (DC)" "50V"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MILITARY STANDARD" "Not"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "POWER RATING" "100mW"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RESISTANCE" "0mOhm"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER URL" "http://www.yageo.com/"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGING" "TapeandReel"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (METRIC)" "1608"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" "-55degC"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "COMPOSITION" "ThickFilm"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Yageo"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHSCOMPLIANT" "true"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CONTACT PLATING" "Tin"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "REACH SVHC" "NoSVHC"
+			(at 29.972 260.1722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "e2b4793f-dc59-4821-bae1-e3ef60137e62")
+		)
+		(pin "1"
+			(uuid "0ae052b4-1f91-4e2a-b69a-d67eb4eaab5e")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "R005")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
+		(at 33.02 276.6822 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bda72c27-1664-4024-af4e-a5853dcf67ce")
+		(property "Reference" "R002"
+			(at 33.02 276.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "RC0603JR-070RL"
+			(at 32.766 279.9842 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RESC1608X55X25ML10T15"
+			(at 33.02 276.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 276.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
+			(at 33.02 276.6822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "WIDTH" "0.8mm"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" "155degC"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TOLERANCE" "5%"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE REFERENCE" "0603"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "HEIGHT" "0.45mm"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DEPTH" "0.8mm"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING" "50V"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TERMINATION" "SMD/SMT"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE QUANTITY" "5000"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" "0603"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (IMPERIAL)" "0603"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RADIATION HARDENING" "No"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "NUMBER OF PINS" "2"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LENGTH" "1.6mm"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LEAD FREE" "LeadFree"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING (DC)" "50V"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MILITARY STANDARD" "Not"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "POWER RATING" "100mW"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RESISTANCE" "0mOhm"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER URL" "http://www.yageo.com/"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGING" "TapeandReel"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (METRIC)" "1608"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" "-55degC"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "COMPOSITION" "ThickFilm"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Yageo"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHSCOMPLIANT" "true"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CONTACT PLATING" "Tin"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "REACH SVHC" "NoSVHC"
+			(at 29.972 272.8722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "bf87fe06-c308-4870-80f2-f283e93570ab")
+		)
+		(pin "1"
+			(uuid "92166d6b-772c-4b22-b063-aa3159db9c8e")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "R002")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1")
+		(at 289.56 281.7622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d0f7a09b-1a15-4569-b25c-b2b20b8fbeb0")
+		(property "Reference" "M*"
+			(at 287.02 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "Passermarke"
+			(at 287.02 286.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Passermarke-Footprint-1"
+			(at 289.56 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 289.56 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 289.56 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "M*")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
+		(at 33.02 274.1422 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d12b4f9a-3d7d-4cbb-bb8e-79033800c859")
+		(property "Reference" "R003"
+			(at 32.766 273.3802 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "RC0603JR-070RL"
+			(at 32.766 277.4442 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RESC1608X55X25ML10T15"
+			(at 33.02 274.1422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 274.1422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
+			(at 33.02 274.1422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "WIDTH" "0.8mm"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" "155degC"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TOLERANCE" "5%"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE REFERENCE" "0603"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "HEIGHT" "0.45mm"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DEPTH" "0.8mm"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING" "50V"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TERMINATION" "SMD/SMT"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE QUANTITY" "5000"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" "0603"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (IMPERIAL)" "0603"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RADIATION HARDENING" "No"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "NUMBER OF PINS" "2"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LENGTH" "1.6mm"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LEAD FREE" "LeadFree"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING (DC)" "50V"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MILITARY STANDARD" "Not"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "POWER RATING" "100mW"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RESISTANCE" "0mOhm"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER URL" "http://www.yageo.com/"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGING" "TapeandReel"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (METRIC)" "1608"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" "-55degC"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "COMPOSITION" "ThickFilm"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Yageo"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHSCOMPLIANT" "true"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CONTACT PLATING" "Tin"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "REACH SVHC" "NoSVHC"
+			(at 29.972 270.3322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "58ef821d-9dc4-41ca-8ca6-8f30830fc072")
+		)
+		(pin "1"
+			(uuid "5006d59c-a4d0-4c5a-8b7f-18fc3aef23c5")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "R003")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1")
+		(at 284.48 281.7622 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "da2e354f-46c3-43a7-8dae-270201445ed3")
+		(property "Reference" "M*"
+			(at 281.94 279.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "Passermarke"
+			(at 281.94 286.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Passermarke-Footprint-1"
+			(at 284.48 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 284.48 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 284.48 281.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "M*")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1")
+		(at 294.64 286.8422 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e0f39458-e5c1-4ebd-8aa0-e29ae95854ad")
+		(property "Reference" "M*"
+			(at 292.1 284.3022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "Passermarke"
+			(at 292.1 291.9222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Passermarke-Footprint-1"
+			(at 294.64 286.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 294.64 286.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 294.64 286.8422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "M*")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
+		(at 33.02 258.9022 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "eb1ec9d2-95a0-49f8-9f0e-93ad6b1afb89")
+		(property "Reference" "R007"
+			(at 32.766 258.1402 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "RC0603JR-070RL"
+			(at 32.766 262.2042 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RESC1608X55X25ML10T15"
+			(at 33.02 258.9022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 258.9022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
+			(at 33.02 258.9022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "WIDTH" "0.8mm"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MAX OPERATING TEMPERATURE" "155degC"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TOLERANCE" "5%"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE REFERENCE" "0603"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "HEIGHT" "0.45mm"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DEPTH" "0.8mm"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING" "50V"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "TERMINATION" "SMD/SMT"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE QUANTITY" "5000"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE/PACKAGE" "0603"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (IMPERIAL)" "0603"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RADIATION HARDENING" "No"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "NUMBER OF PINS" "2"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LENGTH" "1.6mm"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "LEAD FREE" "LeadFree"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "VOLTAGE RATING (DC)" "50V"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MILITARY STANDARD" "Not"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "POWER RATING" "100mW"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "RESISTANCE" "0mOhm"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER URL" "http://www.yageo.com/"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGING" "TapeandReel"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CASE CODE (METRIC)" "1608"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MIN OPERATING TEMPERATURE" "-55degC"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "COMPOSITION" "ThickFilm"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Yageo"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "ROHSCOMPLIANT" "true"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "CONTACT PLATING" "Tin"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "REACH SVHC" "NoSVHC"
+			(at 29.972 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3fe02a9a-03b6-49aa-a7cb-e999b4bdaa44")
+		)
+		(pin "2"
+			(uuid "cdd6249a-467d-4ab8-bd45-93f90125fe5f")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "R007")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:KL30i_ARROW")
+		(at 45.72 258.9022 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ec7c8e2d-7eff-4fb0-a35d-78427cc6364f")
+		(property "Reference" "#PWR?"
+			(at 45.72 258.9022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "KL30i"
+			(at 45.72 255.0922 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 258.9022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 258.9022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 45.72 258.9022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "86a15da6-9c26-486d-9cdb-781f55e39b4a")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:5V_ARROW")
+		(at 66.04 60.7822 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f9fee2d5-bc9b-47f4-96b4-62385578f73d")
+		(property "Reference" "#PWR?"
+			(at 66.04 60.7822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "5V"
+			(at 66.04 56.9722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 66.04 60.7822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 66.04 60.7822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 66.04 60.7822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "60b119c0-b5c8-416b-93e9-57847aae65f4")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 182.7022)
+		(size 25.4 50.8)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "14c68b90-3114-4578-b394-c022dfe8aa51")
+		(property "Sheetname" "Designator"
+			(at 152.4 180.1622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "80_SignalInput.kicad_sch"
+			(at 152.4 182.7022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "SCL" passive
+			(at 177.8 205.5622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "382afa09-b625-4320-b5fd-f7a06813de5a")
+		)
+		(pin "SDA" passive
+			(at 177.8 208.1022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "e37b66c3-5fdd-4d54-b3f4-4ee62649bbff")
+		)
+		(pin "~{RESET}" passive
+			(at 177.8 210.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9bff1558-a9b2-4d8d-bd2d-6d5a631c4ea3")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(page "9")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 304.8 43.0022)
+		(size 25.4 50.8)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "319b260d-4b4a-4549-a756-1056bfcc362f")
+		(property "Sheetname" "Designator"
+			(at 304.8 40.4622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "30_SOC.kicad_sch"
+			(at 304.8 43.0022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "SocIn" input
+			(at 304.8 55.7022 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "ee2d37a0-0ba0-4d9e-aeaa-8b1b7edc658c")
+		)
+		(pin "SocOut" output
+			(at 317.5 93.8022 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "56da9697-7100-449b-aa2a-572d51614205")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 88.9 76.0222)
+		(size 12.7 12.7)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "61ba4488-526a-42d1-832c-2c412551b9ed")
+		(property "Sheetname" "Designator"
+			(at 88.9 73.4822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "60_Inkremental.kicad_sch"
+			(at 88.9 76.0222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "BTN" input
+			(at 101.6 83.6422 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "5e6b4691-eaba-4e05-8356-f9a1d213b3d3")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 228.6 68.4022)
+		(size 50.8 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "7f25a167-5e25-4142-beba-23f2a558c57e")
+		(property "Sheetname" "Designator"
+			(at 228.6 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "10_Speed.kicad_sch"
+			(at 228.6 68.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "SCL" passive
+			(at 228.6 76.0222 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "9e5757a0-d1be-48e1-9f69-423af72cf7ad")
+		)
+		(pin "SDA" passive
+			(at 228.6 81.1022 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "06393e75-db3a-4e44-a8ed-c8f0c269a059")
+		)
+		(pin "~{DIG-RST}" passive
+			(at 228.6 86.1822 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "533bba13-2498-4c82-a6dd-ed7c25339720")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 76.2 101.4222)
+		(size 254 12.7)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "885dc56c-2be8-4b1b-9aa3-a3c4adf2e602")
+		(property "Sheetname" "Designator"
+			(at 76.2 98.8822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "70_Signalleuchten.kicad_sch"
+			(at 76.2 101.4222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "SigIn" input
+			(at 317.5 101.4222 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "e8f12628-4da8-4a8c-b81e-136f5f209c8f")
+		)
+		(pin "SigOut" output
+			(at 106.68 101.4222 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "8d3bea9e-882a-43e0-8c37-e5c5b0781d24")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(page "8")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 228.6 144.6022)
+		(size 50.8 127)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "92d531c1-28be-4e94-a9f0-c6f899ed80c5")
+		(property "Sheetname" "Designator"
+			(at 228.6 142.0622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "110_ESP32s3.kicad_sch"
+			(at 228.6 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "CS" output
+			(at 228.6 152.2222 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "5dca6bc6-c3af-47c0-89ed-f3c52433be8c")
+		)
+		(pin "INTR" passive
+			(at 228.6 162.3822 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "92012445-fff6-49b9-9862-fd82182c8bfb")
+		)
+		(pin "MOSI" passive
+			(at 228.6 154.7622 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "1afbfade-6817-46be-b0c8-f531fb8a54d7")
+		)
+		(pin "MISO" passive
+			(at 228.6 157.3022 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "bd2f107c-dcce-45ce-9e46-63245765b25f")
+		)
+		(pin "SCL" passive
+			(at 228.6 205.5622 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "4f1c67fe-76f9-410c-9f11-276b2031fdff")
+		)
+		(pin "SDA" passive
+			(at 228.6 208.1022 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "e4164564-44a0-4c16-81e8-28f44bc33ea4")
+		)
+		(pin "~{RESET}" passive
+			(at 228.6 210.6422 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "af97abe3-dd1c-4bd0-96f7-a9bd8bba7051")
+		)
+		(pin "NeoPixelData" output
+			(at 228.6 182.7022 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "67da3284-56bf-4e63-bd61-c95694e83d1f")
+		)
+		(pin "~{DIG-RST}" passive
+			(at 228.6 203.0222 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "aa35e7df-496e-4a69-8fa5-2e88519c51c4")
+		)
+		(pin "BTN" input
+			(at 228.6 147.1422 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "b54f0d33-7632-4836-ad6f-ed4aba12044d")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(page "12")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 144.6022)
+		(size 25.4 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "b38a2589-c423-411c-a19f-0b86ec6c154c")
+		(property "Sheetname" "Designator"
+			(at 152.4 142.0622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "90_CAN.kicad_sch"
+			(at 152.4 144.6022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "CS" input
+			(at 177.8 152.2222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "09a8cbd3-c408-4ee7-b810-5f0b9861df06")
+		)
+		(pin "INTR" passive
+			(at 177.8 162.3822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "96ef18b1-5a4c-44a7-93e1-c408fca7d6d5")
+		)
+		(pin "MOSI" passive
+			(at 177.8 154.7622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "35535cfb-d472-4efd-ae26-198e890e3a4f")
+		)
+		(pin "MISO" passive
+			(at 177.8 157.3022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "705c44cd-16cf-4c1d-80a5-1cffdb691487")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(page "10")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 127 68.4022)
+		(size 50.8 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "cc625872-66aa-4d7c-a056-bf228c047f21")
+		(property "Sheetname" "Designator"
+			(at 127 65.8622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "50_Distance.kicad_sch"
+			(at 127 68.4022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "SCL" passive
+			(at 177.8 76.0222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "1e8c7f8e-df9c-4e27-9841-1c4f3000315c")
+		)
+		(pin "SDA" passive
+			(at 177.8 81.1022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9da84733-5e57-4069-ae1d-5b018b6c21da")
+		)
+		(pin "~{DIG-RST}" passive
+			(at 177.8 86.1822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "dd0a411d-2a63-420e-8e86-c727070f4677")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 203.2 43.0022)
+		(size 76.2 50.8)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "de88d757-f807-4a53-8f0b-a2d0f7ee584a")
+		(property "Sheetname" "Designator"
+			(at 203.2 40.4622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "20_Torq.kicad_sch"
+			(at 203.2 43.0022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "TorqIn" input
+			(at 203.2 55.7022 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "1c773ea5-ed35-4109-96a9-5aabcff6cd60")
+		)
+		(pin "TorqOut" output
+			(at 279.4 55.7022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "62a0e206-9ce1-4cb8-93a9-aaa43ef9d136")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 246.2022)
+		(size 25.4 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "f138c796-e146-4c77-bc56-ffb525c33bbf")
+		(property "Sheetname" "Designator"
+			(at 152.4 243.6622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "100_PowerSupply.kicad_sch"
+			(at 152.4 246.2022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(page "11")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 76.2 43.0022)
+		(size 25.4 50.8)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 128 0 0 1)
+		)
+		(fill
+			(color 128 255 128 1.0000)
+		)
+		(uuid "fac9d2fd-8f56-4aa0-a061-7ec6e5122621")
+		(property "Sheetname" "Designator"
+			(at 76.2 40.4622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "40_Temp.kicad_sch"
+			(at 76.2 43.0022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(pin "TempOut" output
+			(at 76.2 63.3222 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "650ff50a-f57a-41da-b37c-fd824de0727e")
+		)
+		(pin "TempIn" input
+			(at 101.6 91.2622 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9c07f440-0496-4b72-b9e9-0bd706e16e7f")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
