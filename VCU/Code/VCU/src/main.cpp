@@ -905,7 +905,7 @@ void armBattery(bool arm) {
                 modeBSC = BSC6_BOOST;
                 lastModeChangeTime = millis();  // Record the time of mode change
                 enableBSC = 0;  // Temporarily disable BSC during delay
-                //Serial.println("Switching to Boost mode...");
+                Serial.println("Switching to Boost mode...");
             }
 
             // Wait 2 seconds after switching modes before enabling BSC
@@ -913,6 +913,7 @@ void armBattery(bool arm) {
                 Hvoltage = BMS_U_BAT;       // Set high voltage command to BMS voltage
                 enableBSC = 1;              // Enable BSC after delay
                 //Serial.println("Boost mode enabled after delay.");
+                
             }
 
             // Check if actual HV voltage is within ±20V of target voltage
@@ -920,8 +921,10 @@ void armBattery(bool arm) {
                 HasPrecharged = 1;           // Mark precharge as complete
                 digitalWrite(CONTACTOR, 1);    // Connect HV system
                 enableBSC = 0;               // Disable BSC after precharging
-                //Serial.println("Precharging complete. HV system connected.");
+                Serial.println("Precharging complete. HV system connected.");
             } else {
+                Serial.println(BSC6_HVVOL_ACT);
+                Serial.println(BMS_U_BAT);
                 //Serial.println("Precharging in progress...");
             }
         } else if (HasPrecharged) {
@@ -1486,7 +1489,7 @@ void reciveBMS(){
   CAN.readMsgBuf(&len, readDataBMS);
   id = CAN.getCanId();
   type = (CAN.isExtendedFrame() << 0) | (CAN.isRemoteRequest() << 1);
-  
+  BMS_U_BAT = 370;
   if(id == 0x001){
     BMS_SOC = readDataBMS[0]/2;
     BMS_U_BAT = 370;//(readDataBMS[1] | (readDataBMS[2] << 8))/100;
