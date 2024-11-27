@@ -123,8 +123,8 @@ ADS1115 ADS(0x48);
 #define GASPEDAL1 0
 #define GASPEDAL2 1
 
-#define MinValPot 18200
-#define MaxValPot 13240
+#define MinValPot 15568
+#define MaxValPot 11200
 
 
 //Pin for reverse signal 0 = forward, 1 = reverse pin 0 on AD
