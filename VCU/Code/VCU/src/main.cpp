@@ -61,7 +61,8 @@ const int CAN_INT_PIN = 45; //AKKA BLANK
 
 #define MAX_DATA_SIZE 8
 
-//Relay pinout
+//Relay pinout VCU1.0
+/*
 #define RELAIS1 11  //HV Battery
 #define RELAIS2 12  //Cooling Pump
 #define RELAIS3 13  //HV Battery
@@ -70,6 +71,20 @@ const int CAN_INT_PIN = 45; //AKKA BLANK
 #define RELAIS6 18  //DMC KL15
 #define RELAIS7 21  //BSC KL15
 #define RELAIS8 33  //Not Used
+*/
+
+#define PUMP 38  //Cooling Pump PW0
+#define PW1 39
+#define CONTACTOR 11  //HV Battery LPW0
+#define NLGKL15 12 //NLG KL15 LPW1
+#define DMCKL15 13  //DMC KL15 LWP2
+#define BSCKL15 14  //BSC KL15 LWP3
+#define BCKLIGHT 17  //Reverse Signal LWP4
+#define LWP5 18
+#define LWP6 21
+#define LWP7 16
+
+
 
 //set ADC set adress
 ADS1115 ADS(0x48);
@@ -491,6 +506,8 @@ void setup() {
 //CAN COM
 //*********************************************************************//
 void CAN_COM( void * pvParameters ){
+      Serial.begin(115200);
+
   customSPI = new SPIClass(HSPI);
   customSPI -> begin(SCK, MISO, MOSI, SPI_CS_PIN);
   CAN.setSPI(customSPI);
@@ -499,11 +516,12 @@ void CAN_COM( void * pvParameters ){
   time10mscycle = millis();
   time50mscycle = millis();
   time100mscycle = millis();
-
+  Serial.println("HelloVCU");
   while (CAN_OK != CAN.begin(CAN_500KBPS)) {             // init can bus : baudrate = 500k
       Serial.println("CAN BUS Shield init fail");
       delay(100);
   }
+  Serial.println("Can init OK");
   CanError = false;
 
   //CAN.begin(CAN_500KBPS);
@@ -514,6 +532,7 @@ void CAN_COM( void * pvParameters ){
   ADS.setGain(2);
   initADAC(0b1001000, 1, 1);
   setADCpin(0);
+
   for(;;){
     esp_task_wdt_init(5, true);
     reciveBMS();
@@ -635,17 +654,18 @@ void BACKBONE( void * pvParameters ){
 
   attachInterrupt(digitalPinToInterrupt(UNLCKCON), unlockCON, RISING);  //Interrupt for connector unlock
   //Set up Relais pins as output
-  pinMode(RELAIS1, OUTPUT);
-  pinMode(RELAIS2, OUTPUT); 
-  pinMode(RELAIS3, OUTPUT);
-  pinMode(RELAIS4, OUTPUT);
-  pinMode(RELAIS5, OUTPUT);
-  pinMode(RELAIS6, OUTPUT);
-  pinMode(RELAIS7, OUTPUT);
-  pinMode(RELAIS8, OUTPUT);
+  pinMode(CONTACTOR, OUTPUT);
+  pinMode(PUMP, OUTPUT); 
+  pinMode(PW1, OUTPUT);
+  pinMode(NLGKL15, OUTPUT);
+  pinMode(BCKLIGHT, OUTPUT);
+  pinMode(DMCKL15, OUTPUT);
+  pinMode(BSCKL15, OUTPUT);
+  pinMode(LWP5, OUTPUT);
+  pinMode(LWP6, OUTPUT);
+  pinMode(LWP7, OUTPUT);
 
-  
-  Serial.begin(115200);
+
   //Read out the wake up reason
   WakeupReason = print_GPIO_wake_up();
 
@@ -655,7 +675,7 @@ void BACKBONE( void * pvParameters ){
       VehicleMode = Charging;
       delay(1000);
       NLG_C_UnlockConRq = 0;
-      digitalWrite(RELAIS4, HIGH);
+      digitalWrite(NLGKL15, HIGH);
     break;
     case IGNITION:
       //KL15 detected vehicle is in run mode
@@ -686,9 +706,9 @@ void BACKBONE( void * pvParameters ){
     switch(VehicleMode){
       case Standby:
         //No input detectet from ext sources
-        digitalWrite(RELAIS6, LOW);  //DMC KL15
-        digitalWrite(RELAIS7, LOW);  //BSC KL15
-        digitalWrite(RELAIS4, LOW);  //NLG KL15
+        digitalWrite(DMCKL15, LOW);  //DMC KL15
+        digitalWrite(BSCKL15, LOW);  //BSC KL15
+        digitalWrite(NLGKL15, LOW);  //NLG KL15
         Serial.println("Standby");
         NLG_Charged = 0;
         enableBSC = 0;
@@ -705,9 +725,10 @@ void BACKBONE( void * pvParameters ){
       break;
       
   case Run:
+  //Serial.println("Running");
     NLG_Charged = 0;
     //Serial.print("Torque Demand: ");
-    Serial.println(DMC_SpdAct);
+    //Serial.println(DMC_SpdAct);
     //Serial.println( ADS.readADC(GASPEDAL1));
     if (!digitalRead(IGNITION)) {
         Serial.println("Standby 680");
@@ -717,21 +738,21 @@ void BACKBONE( void * pvParameters ){
     armColingSys(1);
     armBattery(1);
 
-    digitalWrite(RELAIS6, HIGH);  // DMC KL15
-    digitalWrite(RELAIS7, HIGH);  // BSC KL15
+    digitalWrite(DMCKL15, HIGH);  // DMC KL15
+    digitalWrite(BSCKL15, HIGH);  // BSC KL15
 
     // Reverse light control based on gear state
     if (currentGear == Reverse) {
-        digitalWrite(RELAIS5, HIGH);  // Turn on reverse light
+        digitalWrite(BCKLIGHT, HIGH);  // Turn on reverse light
     } else {
-        digitalWrite(RELAIS5, LOW);   // Turn off reverse light
+        digitalWrite(BCKLIGHT, LOW);   // Turn off reverse light
     }
     break;
 
 
     case Charging:
-      digitalWrite(RELAIS4, HIGH);  // NLG KL15
-      digitalWrite(RELAIS6, HIGH);  // BSC KL15
+      digitalWrite(NLGKL15, HIGH);  // NLG KL15
+      digitalWrite(DMCKL15, HIGH);  // BSC KL15
         //Check if Con  unlock interrupt is set
         if(conUlockInterrupt){
           if(NLG_S_ConLocked){
@@ -747,7 +768,7 @@ void BACKBONE( void * pvParameters ){
         }
         else{
         //Serial.println("Charging");
-        digitalWrite(RELAIS4, HIGH);
+        digitalWrite(NLGKL15, HIGH);
         armColingSys(1);
         
         chargeManage();
@@ -844,7 +865,7 @@ void chargeManage() {
         }
     } else {
         armBattery(0);
-        digitalWrite(RELAIS4, LOW);
+        digitalWrite(NLGKL15, LOW);
     }
 }
 
@@ -853,16 +874,16 @@ void chargeManage() {
 //**********************//
 
 void armColingSys(bool arm){
-  //switch relais2 on VCU for pump
+  //switch PUMP on VCU for pump
   //switch relais3 on VCU for FAN
  
   //Serial.println("Cooling armed");
   if(batteryArmed){
     if(arm  && ((DMC_TempInv > 65)|(DMC_TempMot > 80)|(NLG_CoolingRequest > 50 ))){
-      digitalWrite(RELAIS2, 1);
+      digitalWrite(PUMP, 1);
     }
     else if(((DMC_TempInv < 40)&&(DMC_TempMot < 50)&&(NLG_CoolingRequest < 0 ))){
-      digitalWrite(RELAIS2, 0);
+      digitalWrite(PUMP, 0);
     }
  }
 }
@@ -897,7 +918,7 @@ void armBattery(bool arm) {
             // Check if actual HV voltage is within ±20V of target voltage
             if ((BSC6_HVVOL_ACT >= (BMS_U_BAT - 20)) && (BSC6_HVVOL_ACT <= (BMS_U_BAT + 20)) && (BSC6_HVVOL_ACT > 50)) {
                 HasPrecharged = 1;           // Mark precharge as complete
-                digitalWrite(RELAIS3, 1);    // Connect HV system
+                digitalWrite(CONTACTOR, 1);    // Connect HV system
                 enableBSC = 0;               // Disable BSC after precharging
                 //Serial.println("Precharging complete. HV system connected.");
             } else {
@@ -929,7 +950,7 @@ void armBattery(bool arm) {
         batteryArmed = 0;
         enableBSC = 0;
         HasPrecharged = 0;
-        digitalWrite(RELAIS3, 0);            // Disconnect HV system
+        digitalWrite(CONTACTOR, 0);            // Disconnect HV system
         //Serial.println("Battery disconnected or BMS voltage too low.");
     }
 }
