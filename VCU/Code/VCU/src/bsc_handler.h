@@ -1,13 +1,15 @@
+// bsc_handler.h
 #pragma once
-#include "config.h"
+#include "base_can_handler.h"
+#include "message_scaling.h"
 #include "vehicle_parameters.h"
 
-class BSCHandler {
+class BSCHandler : public BaseCANHandler, protected MessageScaling {
 public:
-    BSCHandler(mcp2515_can& can);
+    explicit BSCHandler(mcp2515_can& can);
     void sendBSC();
     void receiveBSC();
-    
+
     struct BSCData {
         float hvVoltage;
         float lvVoltage;
@@ -16,20 +18,15 @@ public:
         uint8_t mode;
     };
 
-    BSCData getData() const { return {
-        BSC6_HVVOL_ACT,
-        BSC6_LVVOLT_ACT,
-        BSC6_HVCUR_ACT,
-        BSC6_LVCUR_ACT,
-        BSC6_MODE
-    }; }
-
+    BSCData getData() const;
     void setMode(bool mode) { modeBSC = mode; }
     void enable(bool en) { enableBSC = en; }
+    void setVoltages(int hv, int lv) { 
+        Hvoltage = hv;
+        Lvoltage = lv;
+    }
 
 private:
-    mcp2515_can& canBus;
-    byte readDataBSC[MAX_DATA_SIZE] = {0};
     unsigned char controllBufferBSC[8] = {0};
     unsigned char limitBufferBSC[8] = {0};
 
@@ -43,8 +40,12 @@ private:
     // Control variables
     bool enableBSC = false;
     bool modeBSC = BSC6_BUCK;
-    int Hvoltage = MAX_U_BAT;
+    int Hvoltage = VehicleParams::Power::MAX_U_BAT;
     int Lvoltage = 14;
+    uint8_t LvoltageScale = 0;
+    uint8_t HvoltageScale = 0;
+    uint8_t BSC6_HVVOL_LOWLIM_SCALED = 0;
+    uint8_t BSC6_HVCUR_UPLIM_BUCK_SCALED = 0;
 
     void scaleValues();
     void packControlMessage();

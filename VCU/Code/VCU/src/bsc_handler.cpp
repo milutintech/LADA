@@ -1,40 +1,55 @@
+// bsc_handler.cpp
 #include "bsc_handler.h"
 
-BSCHandler::BSCHandler(mcp2515_can& can) : canBus(can) {}
+BSCHandler::BSCHandler(mcp2515_can& can) : BaseCANHandler(can) {}
 
 void BSCHandler::sendBSC() {
-    LvoltageScale = static_cast<uint8_t>(Lvoltage * 10);
-    HvoltageScale = static_cast<uint8_t>((Hvoltage - 220));
-
-    // Control message
-    controllBufferBSC[0] = (enableBSC << 0) | (modeBSC << 1) | 0x80;
-    controllBufferBSC[1] = LvoltageScale;
-    controllBufferBSC[2] = HvoltageScale;
-
-    // Limit message
-    BSC6_HVVOL_LOWLIM_SCALED = BSC6_HVVOL_LOWLIM - 220;
-    BSC6_HVCUR_UPLIM_BUCK_SCALED = static_cast<uint8_t>(BSC6_HVCUR_UPLIM_BUCK * 10);
-
-    limitBufferBSC[0] = BSC6_HVVOL_LOWLIM_SCALED;
-    limitBufferBSC[1] = BSC6_LVCUR_UPLIM_BUCK;
-    limitBufferBSC[2] = BSC6_HVCUR_UPLIM_BUCK_SCALED;
-
-    canBus.sendMsgBuf(BSC_COMM, 0, 3, controllBufferBSC);
-    canBus.sendMsgBuf(BSC_LIM, 0, 6, limitBufferBSC);
+    scaleValues();
+    packControlMessage();
+    packLimitMessage();
+    
+    sendMessage(BSC_COMM, 3, controllBufferBSC);
+    sendMessage(BSC_LIM, 6, limitBufferBSC);
 }
 
 void BSCHandler::receiveBSC() {
-    if (canBus.checkReceive() != CAN_MSGAVAIL) return;
+    CANMessage msg;
+    if (!receiveMessage(msg)) return;
 
-    uint8_t len;
-    canBus.readMsgBuf(&len, readDataBSC);
-    uint32_t id = canBus.getCanId();
-
-    if (id == 0x26A) {
-        BSC6_HVVOL_ACT = ((readDataBSC[0] << 8) | readDataBSC[1]) * 0.1;
-        BSC6_LVVOLT_ACT = readDataBSC[2] * 0.1;
-        BSC6_HVCUR_ACT = (((readDataBSC[3] << 8) | readDataBSC[4]) * 0.1) - 25;
-        BSC6_LVCUR_ACT = ((readDataBSC[5] << 8) | readDataBSC[6]) - 280;
-        BSC6_MODE = readDataBSC[7] >> 4;
+    if (msg.id == 0x26A) {
+        BSC6_HVVOL_ACT = unscaleVoltage((msg.data[0] << 8) | msg.data[1]);
+        BSC6_LVVOLT_ACT = unscaleVoltage(msg.data[2]);
+        BSC6_HVCUR_ACT = unscaleCurrent((msg.data[3] << 8) | msg.data[4]);
+        BSC6_LVCUR_ACT = static_cast<float>((msg.data[5] << 8) | msg.data[6] - 280);
+        BSC6_MODE = msg.data[7] >> 4;
     }
+}
+
+BSCHandler::BSCData BSCHandler::getData() const {
+    return {
+        BSC6_HVVOL_ACT,
+        BSC6_LVVOLT_ACT,
+        BSC6_HVCUR_ACT,
+        BSC6_LVCUR_ACT,
+        BSC6_MODE
+    };
+}
+
+void BSCHandler::scaleValues() {
+    LvoltageScale = static_cast<uint8_t>(Lvoltage * 10);
+    HvoltageScale = static_cast<uint8_t>((Hvoltage - 220));
+    BSC6_HVVOL_LOWLIM_SCALED = VehicleParams::Power::MIN_U_BAT - 220;
+    BSC6_HVCUR_UPLIM_BUCK_SCALED = static_cast<uint8_t>(VehicleParams::Power::BSC_LV_BUCK * 10);
+}
+
+void BSCHandler::packControlMessage() {
+    controllBufferBSC[0] = (enableBSC << 0) | (modeBSC << 1) | 0x80;
+    controllBufferBSC[1] = LvoltageScale;
+    controllBufferBSC[2] = HvoltageScale;
+}
+
+void BSCHandler::packLimitMessage() {
+    limitBufferBSC[0] = BSC6_HVVOL_LOWLIM_SCALED;
+    limitBufferBSC[1] = VehicleParams::Power::BSC_LV_BUCK;
+    limitBufferBSC[2] = BSC6_HVCUR_UPLIM_BUCK_SCALED;
 }
