@@ -1,117 +1,149 @@
+// Author: Christian Obrecht
+// Description: Main entry point and core management for VCU
+
 #include <Arduino.h>
 #include <esp_task_wdt.h>
 #include <Wire.h>
 #include <SPI.h>
+#include "mcp2515_can.h"
+#include <esp_adc_cal.h>
+#include <esp32-hal-adc.h>
 #include "ADS1X15.h"
 #include "AD5593R.h"
-#include "mode_manager.h"
-#include "bsc_handler.h"
-#include "dmc_handler.h"
-#include "nlg_handler.h"
-#include "bms_handler.h"
 
-// Global objects
+#include "state_manager.h"
+#include "can_manager.h"
+#include "vehicle_control.h"
+#include "setup.h"
+#include "config.h"
+
+// Global instances
+ADS1115 ads(0x48);
+CANManager canManager(Pins::SPI_CS_PIN);
+StateManager stateManager;
+VehicleControl vehicleControl(ads);
+
+// Task handles for dual core operation
+TaskHandle_t canTaskHandle = nullptr;
+TaskHandle_t controlTaskHandle = nullptr;
+
+// System state variables
+uint8_t vehicleMode = 0;  // 0=Standby, 1=Run, 2=Charging
+uint8_t wakeupReason = 0;
+
+// Create custom SPI instance
 SPIClass *customSPI = nullptr;
-mcp2515_can CAN(SPI_CS_PIN);
-ADS1115 ADS(0x48);
-ModeManager modeManager;
-BSCHandler bscHandler(CAN);
-DMCHandler dmcHandler(CAN);
-NLGHandler nlgHandler(CAN);
-BMSHandler bmsHandler(CAN);
 
-// Task handles
-TaskHandle_t Task1;
-TaskHandle_t Task2;
-
-// Interrupt handler for connector unlock
-void IRAM_ATTR unlockCON() {
-    if(nlgHandler.isConnectorLocked()) {
-        modeManager.changeMode(VehicleMode::Charging);
-        conUlockInterrupt = true;
-    } else {
-        modeManager.changeMode(VehicleMode::Standby);
-    }
-}
-
-void initializeHardware() {
-    // Initialize SPI
-    customSPI = new SPIClass(HSPI);
-    customSPI->begin(SCK, MISO, MOSI, SPI_CS_PIN);
-    CAN.setSPI(customSPI);
-
-    // Initialize I2C and ADC
-    Wire.begin(1, 2);
-    ADS.begin();
-    ADS.setGain(2);
-    initADAC(0b1001000, 1, 1);
-    setADCpin(0);
-
-    // Initialize GPIO
-    pinMode(IGNITION, INPUT);
-    pinMode(NLG_HW_Wakeup, INPUT);
-    pinMode(UNLCKCON, INPUT);
-    pinMode(CONTACTOR, OUTPUT);
-    pinMode(PUMP, OUTPUT);
-    pinMode(NLGKL15, OUTPUT);
-    pinMode(DMCKL15, OUTPUT);
-    pinMode(BSCKL15, OUTPUT);
-    pinMode(BCKLIGHT, OUTPUT);
-
-    // Setup interrupts
-    esp_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK, ESP_EXT1_WAKEUP_ANY_HIGH);
-    attachInterrupt(digitalPinToInterrupt(UNLCKCON), unlockCON, RISING);
-}
-
-void CAN_COM(void* pvParameters) {
-    Serial.begin(115200);
+// CAN Communication Task (Core 0)
+void canTask(void* parameter) {
+    Serial.print("CAN Task running on core: ");
+    Serial.println(xPortGetCoreID());
     
-    while (CAN_OK != CAN.begin(CAN_500KBPS)) {
-        Serial.println("CAN init fail");
-        delay(100);
-    }
+    // Initialize watchdog for this task
+    esp_task_wdt_init(5, true);
     
-    while(true) {
+    for(;;) {
+        // Reset watchdog
         esp_task_wdt_init(5, true);
-        bmsHandler.receiveBMS();
-        modeManager.handleCommunication();
-        delay(1); // Prevent watchdog timeout
+        
+        // Handle CAN communication
+        canManager.update();
+        
+        // Update vehicle control with latest motor data
+        const DMCData& dmcData = canManager.getDMCData();
+        vehicleControl.setMotorSpeed(dmcData.speedActual);
+        
+        // Calculate and apply torque demand if in RUN mode
+        if (stateManager.getCurrentState() == VehicleState::RUN) {
+            int16_t torque = vehicleControl.calculateTorque();
+            canManager.setTorqueDemand(torque);
+            canManager.setEnableDMC(vehicleControl.isDMCEnabled());
+        }
+        
+        // Fast cycle delay (10ms)
+        vTaskDelay(pdMS_TO_TICKS(Constants::FAST_CYCLE_MS));
     }
 }
 
-void BACKBONE(void* pvParameters) {
-    while(true) {
+// Vehicle Control Task (Core 1)
+void controlTask(void* parameter) {
+    Serial.print("Control Task running on core: ");
+    Serial.println(xPortGetCoreID());
+    
+    // Initialize watchdog for this task
+    esp_task_wdt_init(5, true);
+    
+    // Initial wakeup handling
+    stateManager.handleWakeup();
+    
+    for(;;) {
+        // Reset watchdog
         esp_task_wdt_init(5, true);
-        modeManager.handleCurrentMode();
-        delay(1); // Prevent watchdog timeout
+        
+        // Update state management
+        stateManager.update();
+        
+        // Update system parameters from CAN data
+        const BMSData& bmsData = canManager.getBMSData();
+        const DMCData& dmcData = canManager.getDMCData();
+        const NLGData& nlgData = canManager.getNLGData();
+        
+        // Update state manager with latest data
+        stateManager.setBatteryVoltage(bmsData.voltage);
+        stateManager.setInverterTemp(dmcData.tempInverter);
+        stateManager.setMotorTemp(dmcData.tempMotor);
+        stateManager.setCoolingRequest(nlgData.coolingRequest);
+        
+        // Update CAN manager with state information
+        canManager.setEnableBSC(stateManager.isBatteryArmed());
+        
+        // Slow cycle delay (50ms)
+        vTaskDelay(pdMS_TO_TICKS(Constants::SLOW_CYCLE_MS));
     }
+}
+
+void createTasks() {
+    // Create CAN task on Core 0
+    xTaskCreatePinnedToCore(
+        canTask,          // Task function
+        "CAN_Task",       // Task name
+        10000,            // Stack size
+        NULL,             // Parameters
+        1,               // Priority
+        &canTaskHandle,   // Task handle
+        0                // Core ID (0)
+    );
+    
+    // Create Control task on Core 1
+    xTaskCreatePinnedToCore(
+        controlTask,      // Task function
+        "Control_Task",   // Task name
+        20000,           // Stack size
+        NULL,            // Parameters
+        1,               // Priority
+        &controlTaskHandle, // Task handle
+        1                // Core ID (1)
+    );
 }
 
 void setup() {
-    initializeHardware();
-    
-    // Create tasks
-    xTaskCreatePinnedToCore(
-        CAN_COM,
-        "Task1",
-        10000,
-        NULL,
-        1,
-        &Task1,
-        0
+    // Initialize hardware
+    SystemSetup::initializeSystem(
+        ads,
+        canManager,
+        stateManager,
+        vehicleControl,
+        canTaskHandle,
+        controlTaskHandle
     );
-    
-    xTaskCreatePinnedToCore(
-        BACKBONE,
-        "Task2",
-        20000,
-        NULL,
-        1,
-        &Task2,
-        1
-    );
+
+    // Create the tasks
+    createTasks();
+
+    Serial.println("Tasks created and system initialized!");
 }
 
 void loop() {
-    // Empty - tasks handle main functionality
+    // Empty - tasks handle everything
+    vTaskDelete(NULL);
 }
