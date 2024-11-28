@@ -28,7 +28,7 @@ void SystemSetup::initializeSystem(
     
     // Initialize SPI for CAN
     initializeSPI();
-    
+    initializeUART();
     // Initialize CAN
     canManager.begin();
     
@@ -76,7 +76,9 @@ void SystemSetup::initializeADC(ADS1115& ads) {
 void SystemSetup::initializeSPI() {
     SPI.begin(Pins::SCK, Pins::MISO, Pins::MOSI, Pins::SPI_CS_PIN);
 }
-
+void SystemSetup::initializeUART(){
+    Serial.begin(115200);
+}
 void SystemSetup::initializeSleep() {
     esp_sleep_enable_ext0_wakeup(static_cast<gpio_num_t>(Pins::IGNITION), 1);
     esp_sleep_enable_ext1_wakeup(Pins::BUTTON_PIN_BITMASK, ESP_EXT1_WAKEUP_ANY_HIGH);

@@ -23,6 +23,7 @@ private:
     static void initializeI2C();
     static void initializeADC(ADS1115& ads);
     static void initializeSPI();
+    static void initializeUART();
     
     // System configuration
     static void initializeSleep();
