@@ -1,10 +1,11 @@
 #pragma once
 #include <Arduino.h>
+#include <cmath>
+#include <algorithm>
 #include "config.h"
 #include "vehicle_parameters.h"
 #include "ADS1X15.h"
 
-// GearRatio enum moved to config.h to avoid Arduino.h LOW/HIGH conflicts
 class VehicleControl {
 public:
     explicit VehicleControl(ADS1115& ads);
@@ -34,12 +35,13 @@ private:
     int16_t handleRegenMode(float throttlePosition, float speed);
     int16_t handleOPDMode(float throttlePosition, float speed);
     
-    // OPD mode calculations
-    int16_t calculateForwardOPDTorque(float normalizedPosition, float speedPercent);
-    int16_t calculateReverseOPDTorque(float normalizedPosition, float speedPercent);
-    float calculateRegenSpeedFactor();
+    // OPD specific calculations
+    float calculateCoastUpperBound(float speed);
+    float calculateCoastLowerBound(float speed);
+    float calculateMaxRegenerativeTorque(float speed);
+    float calculateMaxDriveTorque(float speed);
     
-    // Torque processing
+    // General torque processing
     int16_t applyTorqueLimits(int16_t requestedTorque);
     int16_t applyDeadbandHysteresis(int16_t torque);
     

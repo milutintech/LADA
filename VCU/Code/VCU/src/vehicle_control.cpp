@@ -30,7 +30,7 @@ int16_t VehicleControl::calculateTorque() {
     }
     
     // Calculate throttle position with gamma correction
-    float throttlePosition = pow(rawThrottle / 100.0f, 1.5f) * 100.0f;
+    float throttlePosition = pow(rawThrottle / 100.0f, VehicleParams::Control::PEDAL_GAMMA) * 100.0f;
     
     // Handle neutral gear
     if (currentGear == GearState::NEUTRAL) {
@@ -75,179 +75,134 @@ int32_t VehicleControl::samplePedalPosition() {
 }
 
 float VehicleControl::calculateVehicleSpeed() {
-    if(currentGearRatio == GearRatio::REDUCED) {
-        return motorSpeed * 60 / VehicleParams::Transmission::REDUCED_RATIO 
-               / VehicleParams::Transmission::DIFF_RATIO 
-               * VehicleParams::Transmission::WHEEL_CIRC;
-    } else {
-        return motorSpeed * 60 / VehicleParams::Transmission::NORMAL_RATIO 
-               / VehicleParams::Transmission::DIFF_RATIO 
-               * VehicleParams::Transmission::WHEEL_CIRC;
-    }
+    float ratio = (currentGearRatio == GearRatio::REDUCED) ? 
+                  VehicleParams::Transmission::REDUCED_RATIO : 
+                  VehicleParams::Transmission::NORMAL_RATIO;
+                  
+    return motorSpeed * 60.0f / ratio / 
+           VehicleParams::Transmission::DIFF_RATIO * 
+           VehicleParams::Transmission::WHEEL_CIRC;
 }
 
 int16_t VehicleControl::handleLegacyMode(float throttlePosition) {
-    float normalizedThrottle = pow(throttlePosition / 100.0f, 1.5f);
+    float normalizedThrottle = pow(throttlePosition / 100.0f, VehicleParams::Control::PEDAL_GAMMA);
     return normalizedThrottle * (currentGear == GearState::DRIVE ? 
            -VehicleParams::Motor::MAX_TRQ : VehicleParams::Motor::MAX_REVERSE_TRQ);
 }
 
 int16_t VehicleControl::handleRegenMode(float throttlePosition, float speed) {
-    const float ZERO_SPEED_WINDOW = 0.5f;
-    const float MIN_SPEED_FOR_REGEN = 100.0f;
-    const float HIGH_SPEED_THRESHOLD = 1000.0f;
-    const float REGEN_END_POINT = 35.0f;
-    const float COAST_END_POINT = 40.0f;
-    
     if (currentGear == GearState::DRIVE) {
-        if (abs(motorSpeed) < ZERO_SPEED_WINDOW) {
+        if (abs(motorSpeed) < VehicleParams::Regen::ZERO_SPEED) {
             // At standstill
-            if (throttlePosition > COAST_END_POINT) {
-                float accelFactor = (throttlePosition - COAST_END_POINT) / (100.0f - COAST_END_POINT);
-                accelFactor = pow(accelFactor, VehicleParams::Control::PEDAL_GAMMA);
+            if (throttlePosition > VehicleParams::Regen::COAST_END) {
+                float accelFactor = (throttlePosition - VehicleParams::Regen::COAST_END) / 
+                                  (100.0f - VehicleParams::Regen::COAST_END);
                 return -accelFactor * VehicleParams::Motor::MAX_TRQ;
             }
             return 0;
         }
-        else if (motorSpeed < -MIN_SPEED_FOR_REGEN) {
+        else if (motorSpeed < -VehicleParams::Regen::MIN_SPEED) {
             // Forward motion
-            if (throttlePosition < REGEN_END_POINT) {
+            if (throttlePosition < VehicleParams::Regen::END_POINT) {
                 // Regen zone
-                float regenFactor = 1.0f - (throttlePosition / REGEN_END_POINT);
-                regenFactor = pow(regenFactor, 1.8f);
-                
-                float speedFactor = 1.0f;
-                if (abs(motorSpeed) > HIGH_SPEED_THRESHOLD) {
-                    speedFactor = 1.2f;
-                }
-                
-                return regenFactor * VehicleParams::Motor::MAX_REQ_TRQ * speedFactor;
+                float regenFactor = 1.0f - (throttlePosition / VehicleParams::Regen::END_POINT);
+                return regenFactor * VehicleParams::Motor::MAX_REQ_TRQ;
             }
-            else if (throttlePosition < COAST_END_POINT) {
+            else if (throttlePosition < VehicleParams::Regen::COAST_END) {
                 // Coast zone
                 return 0;
             }
             else {
                 // Acceleration zone
-                float accelFactor = (throttlePosition - COAST_END_POINT) / (100.0f - COAST_END_POINT);
-                accelFactor = pow(accelFactor, VehicleParams::Control::PEDAL_GAMMA);
+                float accelFactor = (throttlePosition - VehicleParams::Regen::COAST_END) / 
+                                  (100.0f - VehicleParams::Regen::COAST_END);
                 return -accelFactor * VehicleParams::Motor::MAX_TRQ;
             }
-        }
-        else {
-            // Wrong direction protection
-            if (throttlePosition > COAST_END_POINT) {
-                return -VehicleParams::Motor::MAX_TRQ * 0.3f;
-            }
-            return 0;
         }
     }
     return 0;
 }
 
 int16_t VehicleControl::handleOPDMode(float throttlePosition, float speed) {
-    const float speedPercent = constrain(abs(speed) / MAX_VEHICLE_SPEED, 0.0f, 1.0f);
-    const float coastPosition = VehicleParams::Control::COAST_POSITION_MIN + 
-                              (speedPercent * VehicleParams::Control::COAST_POSITION_MAX);
-    const float normalizedPosition = (throttlePosition - coastPosition) / coastPosition;
-    
-    if (currentGear == GearState::DRIVE) {
-        return calculateForwardOPDTorque(normalizedPosition, speedPercent);
-    }
-    else if (currentGear == GearState::REVERSE) {
-        return calculateReverseOPDTorque(normalizedPosition, speedPercent);
-    }
-    
-    return 0;
-}
-
-int16_t VehicleControl::calculateForwardOPDTorque(float normalizedPosition, float speedPercent) {
-    const float ZERO_SPEED_THRESHOLD = 0.5f;
-    
-    if (abs(motorSpeed) < ZERO_SPEED_THRESHOLD) {
-        if (normalizedPosition > 0) {
-            float accelFactor = pow(normalizedPosition, VehicleParams::Control::PEDAL_GAMMA);
-            return -accelFactor * VehicleParams::Motor::MAX_TRQ;
+    // Speed limit enforcement
+    if (speed >= VehicleParams::OPD::MAX_SPEED) {
+        // Only allow regen/negative torque at max speed
+        float coastUpper = VehicleParams::OPD::PHI;
+        if (throttlePosition <= coastUpper) {
+            float normalizedPosition = throttlePosition / coastUpper;
+            float regenTorque = VehicleParams::OPD::MAX_REGEN * 
+                               (VehicleParams::Motor::MAX_TRQ / 100.0f) * 
+                               (1.0f - normalizedPosition);
+            digitalWrite(Pins::BCKLIGHT, regenTorque > VehicleParams::OPD::BRAKE_LIGHT_THRESHOLD ? HIGH : LOW);
+            return currentGear == GearState::DRIVE ? regenTorque : -regenTorque;
         }
         return 0;
     }
-    
-    if (normalizedPosition > 0) {
-        float accelFactor = pow(normalizedPosition, VehicleParams::Control::PEDAL_GAMMA);
-        float speedBasedTorque = VehicleParams::Motor::MAX_TRQ * 
-                                (1.0f - (speedPercent * 0.3f));
-        return -accelFactor * speedBasedTorque;
-    }
-    else {
-        float regenFactor = -normalizedPosition;
-        float speedFactor = calculateRegenSpeedFactor();
-        return regenFactor * VehicleParams::Motor::MAX_REQ_TRQ * speedFactor;
-    }
-}
 
-int16_t VehicleControl::calculateReverseOPDTorque(float normalizedPosition, float speedPercent) {
-    const float ZERO_SPEED_THRESHOLD = 0.5f;
+    const float speedPercent = constrain(abs(speed) / VehicleParams::OPD::MAX_SPEED, 0.0f, 1.0f);
     
-    if (abs(motorSpeed) < ZERO_SPEED_THRESHOLD) {
-        if (normalizedPosition > VehicleParams::Control::MIN_PEDAL_THRESHOLD) {
-            float accelFactor = pow(normalizedPosition / 100.0f, VehicleParams::Control::PEDAL_GAMMA);
-            return accelFactor * VehicleParams::Motor::MAX_REVERSE_TRQ;
-        }
+    // Calculate coast boundaries
+    float coastUpper = VehicleParams::OPD::PHI * pow(speedPercent, 1.0f/VehicleParams::OPD::SHAPE_FACTOR);
+    float coastLower = coastUpper - VehicleParams::OPD::COAST_RANGE * speedPercent;
+    
+    // Anti-rollback protection
+    if (speed < VehicleParams::OPD::ROLLBACK_SPEED && throttlePosition < coastLower) {
+        float rollbackTorque = VehicleParams::OPD::ROLLBACK_TORQUE * 
+                              (VehicleParams::Motor::MAX_TRQ / 100.0f);
+        return currentGear == GearState::DRIVE ? -rollbackTorque : rollbackTorque;
+    }
+    
+    // Coast zone handling
+    if (throttlePosition >= coastLower && throttlePosition <= coastUpper) {
         return 0;
     }
     
-    if (motorSpeed >= 0.0f) {
-        if (normalizedPosition > 0) {
-            if (normalizedPosition > VehicleParams::Control::MIN_PEDAL_THRESHOLD) {
-                float accelFactor = pow(normalizedPosition, VehicleParams::Control::PEDAL_GAMMA);
-                float speedBasedTorque = VehicleParams::Motor::MAX_REVERSE_TRQ * 
-                                       (1.0f - (speedPercent * 0.3f));
-                return accelFactor * speedBasedTorque;
-            }
-            return 0;
+    if (throttlePosition > coastUpper) {
+        // Acceleration with speed-based limiting
+        float normalizedPosition = (throttlePosition - coastUpper) / (100.0f - coastUpper);
+        float maxTorque = VehicleParams::Motor::MAX_TRQ;
+        
+        // Progressively reduce torque as we approach max speed
+        float speedFactor = 1.0f - pow(speedPercent, 2.0f);
+        
+        if (speed < 20.0f) {
+            maxTorque = maxTorque * (0.8f + (20.0f - speed) / 100.0f);
         }
-        else {
-            float regenFactor = -normalizedPosition;
-            float speedFactor = calculateRegenSpeedFactor();
-            return -regenFactor * VehicleParams::Motor::MAX_REVERSE_TRQ * speedFactor;
+        
+        float torque = maxTorque * speedFactor * pow(normalizedPosition, 1.5f);
+        return currentGear == GearState::DRIVE ? -torque : torque;
+    } else {
+        // Regenerative braking
+        float normalizedPosition = throttlePosition / coastLower;
+        float maxRegen = VehicleParams::OPD::MAX_REGEN * 
+                        (VehicleParams::Motor::MAX_TRQ / 100.0f);
+        
+        if (speed > 60.0f) {
+            maxRegen *= (1.0f - (speed - 60.0f) * 0.005f);
         }
+        
+        float regenTorque = maxRegen * (1.0f - normalizedPosition);
+        digitalWrite(Pins::BCKLIGHT, regenTorque > VehicleParams::OPD::BRAKE_LIGHT_THRESHOLD ? HIGH : LOW);
+        
+        return currentGear == GearState::DRIVE ? regenTorque : -regenTorque;
     }
-    else {
-        // Wrong direction protection
-        return VehicleParams::Motor::MAX_REVERSE_TRQ * 0.3f;
-    }
-}
-
-float VehicleControl::calculateRegenSpeedFactor() {
-    if (abs(motorSpeed) < VehicleParams::Regen::FADE_START) {
-        float speedFactor = abs(motorSpeed) / VehicleParams::Regen::FADE_START;
-        return constrain(speedFactor, 0.0f, 1.0f);
-    }
-    return 1.0f;
 }
 
 int16_t VehicleControl::applyTorqueLimits(int16_t requestedTorque) {
     float torqueDiff = requestedTorque - lastTorque;
     
     if (abs(requestedTorque) > abs(lastTorque)) {
-        if (torqueDiff > VehicleParams::Motor::MAX_ACCEL_STEP) {
-            requestedTorque = lastTorque + VehicleParams::Motor::MAX_ACCEL_STEP;
-        }
-        else if (torqueDiff < -VehicleParams::Motor::MAX_ACCEL_STEP) {
-            requestedTorque = lastTorque - VehicleParams::Motor::MAX_ACCEL_STEP;
-        }
-    }
-    else {
-        if (torqueDiff > VehicleParams::Motor::MAX_DECEL_STEP) {
-            requestedTorque = lastTorque + VehicleParams::Motor::MAX_DECEL_STEP;
-        }
-        else if (torqueDiff < -VehicleParams::Motor::MAX_DECEL_STEP) {
-            requestedTorque = lastTorque - VehicleParams::Motor::MAX_DECEL_STEP;
-        }
+        torqueDiff = constrain(torqueDiff, 
+                             -VehicleParams::Motor::MAX_DECEL_STEP,
+                             VehicleParams::Motor::MAX_ACCEL_STEP);
+    } else {
+        torqueDiff = constrain(torqueDiff, 
+                             -VehicleParams::Motor::MAX_DECEL_STEP,
+                             VehicleParams::Motor::MAX_DECEL_STEP);
     }
     
-    lastTorque = requestedTorque;
-    return requestedTorque;
+    lastTorque = lastTorque + torqueDiff;
+    return lastTorque;
 }
 
 int16_t VehicleControl::applyDeadbandHysteresis(int16_t torque) {
@@ -255,19 +210,16 @@ int16_t VehicleControl::applyDeadbandHysteresis(int16_t torque) {
         if (abs(torque) > VehicleParams::Motor::TORQUE_DEADBAND_HIGH) {
             wasInDeadband = false;
             enableDMC = true;
-        }
-        else {
+        } else {
             torque = 0;
             enableDMC = true;
         }
-    }
-    else {
+    } else {
         if (abs(torque) < VehicleParams::Motor::TORQUE_DEADBAND_LOW) {
             wasInDeadband = true;
             torque = 0;
             enableDMC = true;
-        }
-        else {
+        } else {
             enableDMC = true;
         }
     }

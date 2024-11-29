@@ -31,15 +31,6 @@ namespace VehicleParams {
         static constexpr float TORQUE_DEADBAND_LOW = 18.0f;   // Lower deadband threshold
     };
 
-    // Regenerative Braking Parameters
-    struct Regen {
-        static constexpr float FADE_START = 400.0f;    // Speed where regen starts fading
-        static constexpr float ZERO_SPEED = 0.5f;      // Speed considered as zero
-        static constexpr float MIN_SPEED = 100.0f;     // Minimum speed for regen
-        static constexpr float END_POINT = 35.0f;      // Pedal position where regen ends
-        static constexpr float COAST_END = 40.0f;      // Pedal position where coast ends
-    };
-
     // Power Management
     struct Power {
         static constexpr int DMC_DC_MOT = 600;     // DMC motor power limit
@@ -65,6 +56,28 @@ namespace VehicleParams {
         static constexpr float MIN_PEDAL_THRESHOLD = 2.0f;  // Minimum pedal threshold
         static constexpr float COAST_POSITION_MIN = 20.0f;  // Minimum coast pedal position
         static constexpr float COAST_POSITION_MAX = 50.0f;  // Maximum coast pedal position
+    };
+
+        // Regenerative Braking Parameters
+    struct Regen {
+        static constexpr float FADE_START = 400.0f;    // Speed where regen starts fading
+        static constexpr float ZERO_SPEED = 0.5f;      // Speed considered as zero
+        static constexpr float MIN_SPEED = 100.0f;     // Minimum speed for regen
+        static constexpr float END_POINT = 35.0f;      // Pedal position where regen ends
+        static constexpr float COAST_END = 40.0f;      // Pedal position where coast ends
+    };
+
+    //OPD config
+    struct OPD {
+        static constexpr double MAX_SPEED = 120.0;        // kph
+        static constexpr double COAST_RANGE = 10.0;       // % of pedal travel
+        static constexpr double PHI = 35.0;               // Pedal stroke at top speed
+        static constexpr double SHAPE_FACTOR = 2.0;       // Controls pedal map shape
+        static constexpr double ROLLBACK_SPEED = 3.0;     // kph
+        static constexpr double ROLLBACK_TORQUE = 15.0;   // % of max torque
+        static constexpr double MAX_REGEN = 80.0;         // Maximum regen torque %
+        static constexpr double MAX_DRIVE = 100.0;        // Maximum drive torque %
+        static constexpr double BRAKE_LIGHT_THRESHOLD = 20.0; // % torque for brake lights
     };
 
     // System Timing
