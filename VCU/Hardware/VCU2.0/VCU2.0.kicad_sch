@@ -875,7 +875,7 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 128 255 128 1.0000)
 		)
 		(uuid "4ac81430-f92e-4636-9262-896562be446d")
 		(property "Sheetname" "PowerMGMT"
@@ -1113,7 +1113,7 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 128 255 128 1.0000)
 		)
 		(uuid "50dd8d4a-b7d8-4def-aa26-41edfacd50e5")
 		(property "Sheetname" "Connector"
@@ -1132,6 +1132,15 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Field2" ""
+			(at 175.26 48.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "P6H" input
@@ -1401,7 +1410,7 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 128 255 128 1.0000)
 		)
 		(uuid "b051d9b7-67f6-4723-8427-387650723333")
 		(property "Sheetname" "Supply"
@@ -1439,7 +1448,7 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 128 255 128 1.0000)
 		)
 		(uuid "c6313a13-3f93-42cf-aca0-496fc82eaf5c")
 		(property "Sheetname" "esp32S3"
@@ -1716,10 +1725,10 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 128 255 128 1.0000)
 		)
 		(uuid "e5117eb9-18a3-4e8f-bd4d-5445d344d7ca")
-		(property "Sheetname" "IO"
+		(property "Sheetname" "e"
 			(at 140.97 48.1834 0)
 			(effects
 				(font
