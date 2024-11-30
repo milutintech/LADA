@@ -16,20 +16,18 @@
 #include "vehicle_control.h"
 #include "setup.h"
 #include "config.h"
+#include "SerialConsole.h"
 
 // Global instances
 ADS1115 ads(0x48);
 CANManager canManager(Pins::SPI_CS_PIN);
 StateManager stateManager;
 VehicleControl vehicleControl(ads);
+SerialConsole serialConsole(canManager, stateManager, vehicleControl);
 
 // Task handles for dual core operation
 TaskHandle_t canTaskHandle = nullptr;
 TaskHandle_t controlTaskHandle = nullptr;
-
-// System state variables
-uint8_t vehicleMode = 0;  // 0=Standby, 1=Run, 2=Charging
-uint8_t wakeupReason = 0;
 
 // Create custom SPI instance
 SPIClass *customSPI = nullptr;
@@ -82,6 +80,9 @@ void controlTask(void* parameter) {
         
         // Update state management
         stateManager.update();
+
+        // Update serial console
+        serialConsole.update();
         
         // Update system parameters from CAN data
         const BMSData& bmsData = canManager.getBMSData();

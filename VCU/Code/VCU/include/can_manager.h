@@ -63,12 +63,6 @@ public:
     void sendDMC();
     void sendNLG();
     
-    // Receive methods
-    void receiveBMS();
-    void receiveBSC();
-    void receiveDMC();
-    void receiveNLG();
-    
     // Data access methods
     const BMSData& getBMSData() const { return bmsData; }
     const DMCData& getDMCData() const { return dmcData; }
@@ -83,12 +77,19 @@ public:
     void setModeBSC(bool mode) { modeBSC = mode; }
     
 private:
+    // Interrupt handling
+    static void IRAM_ATTR handleInterrupt();
+    static volatile bool messageAvailable;
+    void processCANMessage();
+    
+    // Message processing methods
+    void processBMSMessage(uint8_t* buf);
+    void processBSCMessage(uint8_t* buf);
+    void processDMCMessage(uint32_t id, uint8_t* buf);
+    void processNLGMessage(uint32_t id, uint8_t* buf);
+    
     // Internal methods
-    void handleRunMode();
-    void handleChargingMode();
-    void updateCurrentLimits();
     void resetMessageBuffers();
-    void samplePedalPositions();
     
     // Hardware
     mcp2515_can CAN;
@@ -98,7 +99,7 @@ private:
     uint8_t controlBufferDMC[8];
     uint8_t controlBufferBSC[8];
     uint8_t limitBufferBSC[8];
-    uint8_t limitBufferDMC[8];  // Added missing buffer
+    uint8_t limitBufferDMC[8];
     uint8_t controlBufferNLG[8];
     
     // Data storage
@@ -119,7 +120,4 @@ private:
     // Timing
     unsigned long lastFastCycle;
     unsigned long lastSlowCycle;
-    
-    // ADC samples
-    int16_t pedalSamples[4];
 };

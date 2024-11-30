@@ -76,8 +76,12 @@ void SystemSetup::initializeADC(ADS1115& ads) {
 void SystemSetup::initializeSPI() {
     SPI.begin(Pins::SCK, Pins::MISO, Pins::MOSI, Pins::SPI_CS_PIN);
 }
-void SystemSetup::initializeUART(){
+void SystemSetup::initializeUART() {
     Serial.begin(115200);
+    while(!Serial) {
+        ; // Wait for Serial to be ready
+    }
+    Serial.println("\nVCU System Starting...");
 }
 void SystemSetup::initializeSleep() {
     esp_sleep_enable_ext0_wakeup(static_cast<gpio_num_t>(Pins::IGNITION), 1);
