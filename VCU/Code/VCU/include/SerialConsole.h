@@ -15,13 +15,22 @@ private:
     void handleSet(String target, String parameter, String value);
     void printHelp();
     
-    CANManager& canManager;
-    StateManager& stateManager;
-    VehicleControl& vehicleControl;
-    String inputBuffer;
+    // New detailed state reporting functions
+    void printDetailedState();
+    void printRunStateDetails(const BMSData& bms, const DMCData& dmc);
+    void printChargingStateDetails(const BMSData& bms, const NLGData& nlg);
+    void printPrechargeDetails(const BMSData& bms, const BSCData& bsc);
+    void printErrorStates(const BMSData& bms, const DMCData& dmc, const NLGData& nlg);
+    void printPowerTrainStatus(const BMSData& bms, const DMCData& dmc);
+    void printThermalStatus(const DMCData& dmc, const NLGData& nlg);
     
     // Helper methods for formatting output
     void printValue(const String& name, int value, const String& unit = "");
     void printValue(const String& name, float value, const String& unit = "");
     void printValue(const String& name, bool value);
+    
+    CANManager& canManager;
+    StateManager& stateManager;
+    VehicleControl& vehicleControl;
+    String inputBuffer;
 };

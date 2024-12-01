@@ -97,7 +97,7 @@ void CANManager::processCANMessage() {
 
 void CANManager::processBMSMessage(uint8_t* buf) {
     bmsData.soc = buf[0] / 2;
-    bmsData.voltage = (buf[1] | (buf[2] << 8)) / 100;
+    bmsData.voltage = 370;//(buf[1] | (buf[2] << 8)) / 100;
     bmsData.current = (buf[3] | (buf[4] << 8)) / 100;
     bmsData.maxDischarge = (buf[5] | (buf[6] << 8)) / 100;
     bmsData.maxCharge = buf[7] * 2;
