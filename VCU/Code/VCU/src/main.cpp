@@ -880,10 +880,14 @@ void armColingSys(bool arm){
   //Serial.println("Cooling armed");
   if(batteryArmed){
     if(arm  && ((DMC_TempInv > 65)|(DMC_TempMot > 80)|(NLG_CoolingRequest > 50 ))){
-      digitalWrite(PUMP, 1);
+      digitalWrite(LWP6, 1);
+      digitalWrite(LWP7, 1);
+
     }
     else if(((DMC_TempInv < 40)&&(DMC_TempMot < 50)&&(NLG_CoolingRequest < 0 ))){
-      digitalWrite(PUMP, 0);
+      digitalWrite(LWP6, 0);
+      digitalWrite(LWP7, 0);
+
     }
  }
 }
@@ -920,6 +924,7 @@ void armBattery(bool arm) {
             if ((BSC6_HVVOL_ACT >= (BMS_U_BAT - 20)) && (BSC6_HVVOL_ACT <= (BMS_U_BAT + 20)) && (BSC6_HVVOL_ACT > 50)) {
                 HasPrecharged = 1;           // Mark precharge as complete
                 digitalWrite(CONTACTOR, 1);    // Connect HV system
+                digitalWrite(LWP5, 1);
                 enableBSC = 0;               // Disable BSC after precharging
                 Serial.println("Precharging complete. HV system connected.");
             } else {
@@ -954,6 +959,7 @@ void armBattery(bool arm) {
         enableBSC = 0;
         HasPrecharged = 0;
         digitalWrite(CONTACTOR, 0);            // Disconnect HV system
+        digitalWrite(LWP5, 0);            // Disconnect HV system
         //Serial.println("Battery disconnected or BMS voltage too low.");
     }
 }
