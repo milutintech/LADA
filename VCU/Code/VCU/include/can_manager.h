@@ -77,11 +77,6 @@ public:
     void setModeBSC(bool mode) { modeBSC = mode; }
     
 private:
-    // Interrupt handling
-    static void IRAM_ATTR handleInterrupt();
-    static volatile bool messageAvailable;
-    void processCANMessage();
-    
     // Message processing methods
     void processBMSMessage(uint8_t* buf);
     void processBSCMessage(uint8_t* buf);
@@ -90,6 +85,7 @@ private:
     
     // Internal methods
     void resetMessageBuffers();
+    void checkAndProcessMessages();
     
     // Hardware
     mcp2515_can CAN;

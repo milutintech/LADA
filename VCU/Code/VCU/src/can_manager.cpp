@@ -1,8 +1,6 @@
 #include "can_manager.h"
 #include <esp_task_wdt.h>
 
-volatile bool CANManager::messageAvailable = false;
-
 CANManager::CANManager(uint8_t cs_pin) 
     : CAN(cs_pin)
     , lastFastCycle(0)
@@ -30,23 +28,12 @@ void CANManager::begin() {
         delay(100);
     }
     
-    // Setup interrupt
-    pinMode(Pins::CAN_INT_PIN, INPUT);
-    attachInterrupt(digitalPinToInterrupt(Pins::CAN_INT_PIN), handleInterrupt, FALLING);
-    
     Serial.println("CAN init OK!");
 }
 
-void IRAM_ATTR CANManager::handleInterrupt() {
-    messageAvailable = true;
-}
-
 void CANManager::update() {
-    // Process any pending CAN messages
-    if (messageAvailable) {
-        processCANMessage();
-        messageAvailable = false;
-    }
+    // Check for and process any available CAN messages
+    checkAndProcessMessages();
     
     // Time-based message sending
     unsigned long currentTime = millis();
@@ -65,36 +52,43 @@ void CANManager::update() {
     }
 }
 
-void CANManager::processCANMessage() {
+void CANManager::checkAndProcessMessages() {
     uint8_t len;
     uint8_t buf[8];
     
-    if (CAN.readMsgBuf(&len, buf) == CAN_OK) {
-        uint32_t id = CAN.getCanId();
-        
-        switch(id) {
-            case 0x001:  // BMS message
-                processBMSMessage(buf);
-                break;
-                
-            case 0x26A:  // BSC message
-                processBSCMessage(buf);
-                break;
-                
-            case 0x258:  // DMC Status
-            case 0x259:  // DMC Power
-            case 0x458:  // DMC Temperature
-                processDMCMessage(id, buf);
-                break;
-                
-            case CANIds::NLG_ACT_LIM:
-            case CANIds::NLG_ACT_PLUG:
-                processNLGMessage(id, buf);
-                break;
+    while (CAN_MSGAVAIL == CAN.checkReceive()) {
+        if (CAN.readMsgBuf(&len, buf) == CAN_OK) {
+            uint32_t id = CAN.getCanId();
+            
+            switch(id) {
+                case 0x001:  // BMS message
+                    processBMSMessage(buf);
+                    break;
+                    
+                case 0x26A:  // BSC message
+                    processBSCMessage(buf);
+                    break;
+                    
+                case 0x258:  // DMC Status
+                    processDMCMessage(id, buf);
+                    break;
+                case 0x259:  // DMC Power
+                    processDMCMessage(id, buf);
+                    break;
+                case 0x458:  // DMC Temperature
+                    processDMCMessage(id, buf);
+                    break;
+                    
+                case CANIds::NLG_ACT_LIM:
+                    processNLGMessage(id, buf);
+                    break;
+                case CANIds::NLG_ACT_PLUG:
+                    processNLGMessage(id, buf);
+                    break;
+            }
         }
     }
 }
-
 void CANManager::processBMSMessage(uint8_t* buf) {
     bmsData.soc = buf[0] / 2;
     bmsData.voltage = 370;//(buf[1] | (buf[2] << 8)) / 100;
