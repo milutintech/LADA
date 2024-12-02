@@ -7,34 +7,11 @@
 
 class SystemSetup {
 public:
-    // Main initialization function
-    static void initializeSystem(
-        ADS1115& ads,
-        CANManager& canManager,
-        StateManager& stateManager,
-        VehicleControl& vehicleControl,
-        TaskHandle_t& canTaskHandle,
-        TaskHandle_t& controlTaskHandle
-    );
+    static void initializeGPIO();
+    static void initializeSleep();
 
 private:
-    // Hardware initialization
-    static void initializeGPIO();
-    static void initializeI2C();
-    static void initializeADC(ADS1115& ads);
-    static void initializeSPI();
-    static void initializeUART();
-    
-    // System configuration
-    static void initializeSleep();
-    static void initializeWatchdog();
-    static void setupInterrupts();
-    
-    // Default pin states
     static void setDefaultPinStates();
-    
-    // Initial safety checks
-    static void performInitialSafetyChecks();
     
     // Private constructor to prevent instantiation
     SystemSetup() = delete;

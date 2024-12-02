@@ -139,7 +139,13 @@ void SerialConsole::handleGet(String target, String parameter) {
     }
     else if (target == "vcu") {
         if (parameter == "state") {
-            printDetailedState();
+            String stateStr;
+            switch(stateManager.getCurrentState()) {
+                case VehicleState::STANDBY: stateStr = "STANDBY"; break;
+                case VehicleState::RUN: stateStr = "RUN"; break;
+                case VehicleState::CHARGING: stateStr = "CHARGING"; break;
+            }
+            Serial.println("VCU State: " + stateStr);
         }
     }
 }
@@ -148,6 +154,26 @@ void SerialConsole::handleSet(String target, String parameter, String value) {
     if (target == "vcu") {
         String valueLower = value;
         valueLower.toLowerCase();
+        
+        if (parameter == "drivemode") {
+            if (valueLower == "legacy") {
+                vehicleControl.setDrivingMode(DriveMode::LEGACY);
+                Serial.println("Drive mode: LEGACY");
+            }
+            else if (valueLower == "regen") {
+                vehicleControl.setDrivingMode(DriveMode::REGEN);
+                Serial.println("Drive mode: REGEN");
+            }
+            else if (valueLower == "opd") {
+                vehicleControl.setDrivingMode(DriveMode::OPD);
+                Serial.println("Drive mode: OPD");
+            }
+            else {
+                Serial.println("Invalid drive mode. Use: legacy, regen, or opd");
+            }
+            return;
+        }
+        
         bool state = (value == "1" || valueLower == "true");
         
         if (parameter == "bsckl15") {
@@ -169,119 +195,6 @@ void SerialConsole::handleSet(String target, String parameter, String value) {
     }
 }
 
-void SerialConsole::printDetailedState() {
-    VehicleState currentState = stateManager.getCurrentState();
-    const BMSData& bms = canManager.getBMSData();
-    const BSCData& bsc = canManager.getBSCData();
-    const DMCData& dmc = canManager.getDMCData();
-    const NLGData& nlg = canManager.getNLGData();
-
-    // Print main state
-    switch(currentState) {
-        case VehicleState::STANDBY:
-            Serial.println("VCU Main State: STANDBY");
-            printValue("Wake Signal", digitalRead(Pins::IGNITION) || digitalRead(Pins::NLG_HW_Wakeup));
-            printValue("Battery Voltage", bms.voltage, "V");
-            break;
-            
-        case VehicleState::RUN:
-            Serial.println("VCU Main State: RUN");
-            printRunStateDetails(bms, dmc);
-            break;
-            
-        case VehicleState::CHARGING:
-            Serial.println("VCU Main State: CHARGING");
-            printChargingStateDetails(bms, nlg);
-            break;
-    }
-
-    // Print sub-states and system status
-    if (!stateManager.isPreCharged() && stateManager.isBatteryArmed()) {
-        printPrechargeDetails(bms, bsc);
-    }
-
-    // Print error states if any
-    printErrorStates(bms, dmc, nlg);
-
-    // Print power train status
-    printPowerTrainStatus(bms, dmc);
-
-    // Print thermal management status
-    printThermalStatus(dmc, nlg);
-}
-
-void SerialConsole::printRunStateDetails(const BMSData& bms, const DMCData& dmc) {
-    Serial.println("\nRun State Details:");
-    printValue("Battery Armed", stateManager.isBatteryArmed());
-    printValue("Precharge Complete", stateManager.isPreCharged());
-    printValue("DMC Ready", dmc.ready);
-    printValue("DMC Running", dmc.running);
-    printValue("Battery SOC", bms.soc, "%");
-    printValue("Available Discharge Current", bms.maxDischarge, "A");
-    printValue("Motor Speed", dmc.speedActual, "rpm");
-    printValue("Motor Torque", dmc.torqueActual, "Nm");
-}
-
-void SerialConsole::printChargingStateDetails(const BMSData& bms, const NLGData& nlg) {
-    Serial.println("\nCharging State Details:");
-    printValue("SOC", bms.soc, "%");
-    printValue("Charging Current", nlg.dcHvCurrentAct / 10.0f, "A");
-    printValue("Battery Voltage", bms.voltage, "V");
-    printValue("Connector Locked", nlg.connectorLocked);
-    printValue("Max Charging Current", bms.maxCharge, "A");
-    printValue("Charger State", nlg.stateAct);
-    printValue("Control Pilot State", nlg.stateCtrlPilot);
-}
-
-void SerialConsole::printPrechargeDetails(const BMSData& bms, const BSCData& bsc) {
-    Serial.println("\nPrecharge Status:");
-    printValue("Battery Voltage", bms.voltage, "V");
-    printValue("HV Bus Voltage", bsc.hvVoltageAct, "V");
-    float progress = (bsc.hvVoltageAct / bms.voltage) * 100.0f;
-    printValue("Precharge Progress", progress, "%");
-    printValue("BSC Mode", bsc.mode == BSCModes::BSC6_BOOST ? "BOOST" : "BUCK");
-}
-
-void SerialConsole::printErrorStates(const BMSData& bms, const DMCData& dmc, const NLGData& nlg) {
-    bool hasErrors = false;
-    Serial.println("\nSystem Errors:");
-    
-    if (bms.voltage < VehicleParams::Battery::MIN_VOLTAGE) {
-        Serial.println("ERROR: Battery voltage too low");
-        hasErrors = true;
-    }
-    if (dmc.tempMotor > VehicleParams::Temperature::MOT_HIGH) {
-        Serial.println("ERROR: Motor temperature too high");
-        hasErrors = true;
-    }
-    if (dmc.tempInverter > VehicleParams::Temperature::INV_HIGH) {
-        Serial.println("ERROR: Inverter temperature too high");
-        hasErrors = true;
-    }
-    
-    if (!hasErrors) {
-        Serial.println("No active errors");
-    }
-}
-
-void SerialConsole::printPowerTrainStatus(const BMSData& bms, const DMCData& dmc) {
-    Serial.println("\nPowertrain Status:");
-    printValue("Battery Voltage", bms.voltage, "V");
-    printValue("Battery Current", bms.current, "A");
-    printValue("Motor Power", dmc.mechPower, "W");
-    printValue("Inverter Efficiency", 
-              dmc.mechPower != 0 ? (dmc.dcVoltageAct * dmc.dcCurrentAct / dmc.mechPower) * 100 : 0, 
-              "%");
-}
-
-void SerialConsole::printThermalStatus(const DMCData& dmc, const NLGData& nlg) {
-    Serial.println("\nThermal Management:");
-    printValue("Motor Temperature", dmc.tempMotor, "°C");
-    printValue("Inverter Temperature", dmc.tempInverter, "°C");
-    printValue("Charger Temperature", nlg.tempCoolPlate, "°C");
-    printValue("Cooling Request", nlg.coolingRequest, "%");
-}
-
 void SerialConsole::printHelp() {
     Serial.println("Available commands:");
     Serial.println("\nGet commands:");
@@ -290,6 +203,7 @@ void SerialConsole::printHelp() {
     Serial.println("  get:dmc:[motortemp|invertertemp|status|all]");
     Serial.println("  get:vcu:state");
     Serial.println("\nSet commands:");
+    Serial.println("  set:vcu:drivemode:[legacy|regen|opd]");
     Serial.println("  set:vcu:bsckl15:[0|1]");
     Serial.println("  set:vcu:dmckl15:[0|1]");
     Serial.println("  set:vcu:nlgkl15:[0|1]");
