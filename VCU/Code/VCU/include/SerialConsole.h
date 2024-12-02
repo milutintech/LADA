@@ -3,6 +3,7 @@
 #include "can_manager.h"
 #include "state_manager.h"
 #include "vehicle_control.h"
+#include "config.h"  // Add this to access BSCModes and Pins
 
 class SerialConsole {
 public:

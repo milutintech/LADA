@@ -137,7 +137,33 @@ void SerialConsole::handleGet(String target, String parameter) {
             printValue("Running", dmc.running);
         }
     }
-    else if (target == "vcu") {
+    else if (target == "bsc") {
+        const BSCData& bsc = canManager.getBSCData();
+        if (parameter == "hvvoltage") {
+            printValue("BSC HV Voltage", bsc.hvVoltageAct, "V");
+        }
+        else if (parameter == "lvcurrent") {
+            printValue("BSC LV Current", bsc.lvCurrentAct, "A");
+        }
+        else if (parameter == "hvcurrent") {
+            printValue("BSC HV Current", bsc.hvCurrentAct, "A");
+        }
+        else if (parameter == "lvvoltage") {
+            printValue("BSC LV Voltage", bsc.lvVoltageAct, "V");
+        }
+        else if (parameter == "mode") {
+            printValue("BSC Mode", bsc.mode == BSCModes::BSC6_BUCK ? "Buck" : "Boost");
+        }
+        else if (parameter == "all") {
+            Serial.println("BSC Status:");
+            printValue("HV Voltage", bsc.hvVoltageAct, "V");
+            printValue("LV Voltage", bsc.lvVoltageAct, "V");
+            printValue("HV Current", bsc.hvCurrentAct, "A");
+            printValue("LV Current", bsc.lvCurrentAct, "A");
+            printValue("Mode", bsc.mode == BSCModes::BSC6_BUCK ? "Buck" : "Boost");
+        }
+    }
+       else if (target == "vcu") {
         if (parameter == "state") {
             String stateStr;
             switch(stateManager.getCurrentState()) {
@@ -146,6 +172,34 @@ void SerialConsole::handleGet(String target, String parameter) {
                 case VehicleState::CHARGING: stateStr = "CHARGING"; break;
             }
             Serial.println("VCU State: " + stateStr);
+        }
+        else if (parameter == "all") {
+            Serial.println("\nVCU Status Overview:");
+            // Basic state
+            String stateStr;
+            switch(stateManager.getCurrentState()) {
+                case VehicleState::STANDBY: stateStr = "STANDBY"; break;
+                case VehicleState::RUN: stateStr = "RUN"; break;
+                case VehicleState::CHARGING: stateStr = "CHARGING"; break;
+            }
+            Serial.println("Current State: " + stateStr);
+            
+            // Battery and precharge status
+            printValue("Battery Armed", stateManager.isBatteryArmed());
+            printValue("Precharge Complete", stateManager.isPreCharged());
+            
+            // Pin states
+            printValue("DMC KL15", digitalRead(Pins::DMCKL15));
+            printValue("BSC KL15", digitalRead(Pins::BSCKL15));
+            printValue("NLG KL15", digitalRead(Pins::NLGKL15));
+            printValue("Contactor", digitalRead(Pins::CONTACTOR));
+            printValue("Cooling Pump", digitalRead(Pins::PUMP));
+            
+            // Charging status if relevant
+            if (stateManager.getCurrentState() == VehicleState::CHARGING) {
+                printValue("Charging Active", stateManager.isCharging());
+                printValue("Connector Locked", stateManager.isConnectorLocked());
+            }
         }
     }
 }
@@ -201,7 +255,8 @@ void SerialConsole::printHelp() {
     Serial.println("  get:nlg:[state|voltage|current|temp|all]");
     Serial.println("  get:bms:[soc|voltage|current|maxcurrent|all]");
     Serial.println("  get:dmc:[motortemp|invertertemp|status|all]");
-    Serial.println("  get:vcu:state");
+    Serial.println("  get:bsc:[hvvoltage|lvvoltage|hvcurrent|lvcurrent|mode|all]");
+    Serial.println("  get:vcu:[state|all]");
     Serial.println("\nSet commands:");
     Serial.println("  set:vcu:drivemode:[legacy|regen|opd]");
     Serial.println("  set:vcu:bsckl15:[0|1]");
