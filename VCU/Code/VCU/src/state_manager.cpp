@@ -137,6 +137,7 @@ void StateManager::armBattery(bool arm) {
                     (hvVoltageActual > 50)) {
                     hasPreCharged = true;
                     digitalWrite(Pins::CONTACTOR, HIGH);
+                    digitalWrite(Pins::LWP5, HIGH);
                     enableBSC = false;
                 }
             }
@@ -161,6 +162,7 @@ void StateManager::armBattery(bool arm) {
         enableBSC = false;
         hasPreCharged = false;
         digitalWrite(Pins::CONTACTOR, LOW);
+        digitalWrite(Pins::LWP5, LOW);
     }
 }
 
@@ -169,11 +171,13 @@ void StateManager::armCoolingSys(bool arm) {
         if (arm && ((inverterTemp > VehicleParams::Temperature::INV_HIGH) || 
                    (motorTemp > VehicleParams::Temperature::MOT_HIGH) || 
                    (coolingRequest > 50))) {
-            digitalWrite(Pins::PUMP, HIGH);
+            digitalWrite(Pins::LWP6, HIGH);
+            digitalWrite(Pins::LWP7, HIGH);
         } else if ((inverterTemp < VehicleParams::Temperature::INV_LOW) && 
                   (motorTemp < VehicleParams::Temperature::MOT_LOW) && 
                   (coolingRequest < 0)) {
-            digitalWrite(Pins::PUMP, LOW);
+            digitalWrite(Pins::LWP6, LOW);
+            digitalWrite(Pins::LWP7, LOW); 
         }
     }
 }
