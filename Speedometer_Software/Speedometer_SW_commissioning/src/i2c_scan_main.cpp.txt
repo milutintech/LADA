@@ -1,0 +1,101 @@
+// src/main.cpp
+#include <Arduino.h>
+#include <Wire.h>
+
+#define SDA_PIN 1
+#define SCL_PIN 2
+
+// Structure to hold device information
+struct KnownDevice {
+    const char* name;
+    uint8_t address;
+    bool hasVariantAddr;  // Some devices can have multiple addresses
+    uint8_t variantAddr;  // Alternative address if applicable
+};
+
+// Database of known I2C devices
+// This list can be expanded with more devices
+const KnownDevice knownDevices[] = {
+    {"TLC59108 LED Driver", 0x40, true, 0x41},
+    {"SSD1306 OLED Display", 0x3C, true, 0x3D},
+    {"BMP280 Pressure Sensor", 0x76, true, 0x77},
+    {"BME280 Environment Sensor", 0x76, true, 0x77},
+    {"MPU6050 Accelerometer/Gyro", 0x68, true, 0x69},
+    {"ADS1115 ADC", 0x48, true, 0x49},
+    {"DS3231 RTC", 0x68, false, 0},
+    {"BH1750 Light Sensor", 0x23, true, 0x5C},
+    {"VL53L0X Laser Distance", 0x29, false, 0},
+    {"PCF8574 I/O Expander", 0x20, true, 0x27},  // Can be 0x20-0x27
+    {"MCP23017 I/O Expander", 0x20, true, 0x27}, // Can be 0x20-0x27
+    {"PCA9685 PWM Controller", 0x40, true, 0x7F}, // Can be 0x40-0x7F
+    {"LCD with I2C backpack", 0x27, true, 0x3F},
+    {"MAX17043 Battery Gauge", 0x36, false, 0},
+    {"INA219 Current Sensor", 0x40, true, 0x4F}
+};
+
+// Function to try to identify a device at a given address
+void identifyDevice(uint8_t address) {
+    bool deviceIdentified = false;
+    
+    // Check against our known devices database
+    for (const auto& device : knownDevices) {
+        if (address == device.address || (device.hasVariantAddr && address == device.variantAddr)) {
+            Serial.print(" -> Possible device: ");
+            Serial.print(device.name);
+            
+            // Additional device-specific identification could be added here
+            // For example, reading specific registers that are unique to certain devices
+            
+            deviceIdentified = true;
+            // Note: Multiple devices might share same address
+        }
+    }
+    
+    if (!deviceIdentified) {
+        Serial.println(" -> Unknown device");
+    } else {
+        Serial.println(); // New line after device identification
+    }
+}
+
+void scanI2C() {
+    byte error, address;
+    int devicesFound = 0;
+    
+    Serial.println("\nScanning I2C bus...");
+    
+    for (address = 1; address < 128; address++) {
+        Wire.beginTransmission(address);
+        error = Wire.endTransmission();
+        
+        if (error == 0) {
+            Serial.printf("Device found at address 0x%02X (decimal: %d)", address, address);
+            devicesFound++;
+            identifyDevice(address);
+            
+        } else if (error == 4) {
+            Serial.printf("Unknown error at address 0x%02X\n", address);
+        }
+    }
+    
+    if (devicesFound == 0) {
+        Serial.println("No I2C devices found\n");
+    } else {
+        Serial.printf("\nFound %d device(s)\n", devicesFound);
+    }
+}
+
+void setup() {
+    Serial.begin(115200);
+    delay(1000); // Give serial time to initialize
+    
+    // Initialize I2C
+    Wire.begin(SDA_PIN, SCL_PIN);
+    
+    Serial.println("\nEnhanced I2C Scanner with Device Identification");
+}
+
+void loop() {
+    scanI2C();
+    delay(5000); // Wait 5 seconds before next scan
+}

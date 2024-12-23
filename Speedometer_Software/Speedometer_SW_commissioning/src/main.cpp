@@ -1,65 +1,126 @@
-// src/main.cpp
 #include <Arduino.h>
-#include <Adafruit_NeoPixel.h>
+#include <Wire.h>
+#include "TLC59108.h"
 
-#define LED_PIN 14
-#define LED_COUNT 69
-#define GROUP_SIZE 5  // Number of LEDs to light up at once
-#define DELAY_MS 100  // Delay between animation steps
+// I2C Pins
+#define SDA_PIN 1
+#define SCL_PIN 2
+#define DIGIT_RESET_1 15
+#define DIGIT_RESET_2 16
 
-Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+// Debug flag
+#define DEBUG 1
 
-// Colors
-uint32_t colors[] = {
-    strip.Color(255, 0, 0),     // Red
-    strip.Color(0, 255, 0),     // Green
-    strip.Color(0, 0, 255),     // Blue
-    strip.Color(255, 255, 0),   // Yellow
-    strip.Color(0, 255, 255)    // Cyan
-};
-const int NUM_COLORS = sizeof(colors) / sizeof(colors[0]);
+// Simple test with just one TLC59108
+TLC59108 *display;
+
+void scanI2C() {
+    byte error, address;
+    int devices = 0;
+ 
+    Serial.println("Scanning I2C bus...");
+ 
+    for(address = 1; address < 127; address++ ) {
+        Wire.beginTransmission(address);
+        error = Wire.endTransmission();
+ 
+        if (error == 0) {
+            Serial.printf("I2C device found at address 0x%02X\n", address);
+            devices++;
+        }
+    }
+    
+    if (devices == 0) {
+        Serial.println("No I2C devices found");
+    }
+}
 
 void setup() {
-    strip.begin();
-    strip.setBrightness(50);  // Set to 50% brightness to start
-    strip.show();  // Initialize all pixels to 'off'
+    // Initialize Serial for debugging
+    Serial.begin(115200);
+    delay(1000);
+    Serial.println("\nStarting Basic TLC59108 Test - Common Cathode Mode");
+    
+    // Initialize I2C
+    Wire.begin(SDA_PIN, SCL_PIN);
+    
+    // Scan I2C bus
+    scanI2C();
+    
+    // Initialize reset pins
+    pinMode(DIGIT_RESET_1, OUTPUT);
+    pinMode(DIGIT_RESET_2, OUTPUT);
+    
+    // Perform hardware reset
+    digitalWrite(DIGIT_RESET_1, LOW);
+    digitalWrite(DIGIT_RESET_2, LOW);
+    delay(1);
+    digitalWrite(DIGIT_RESET_1, HIGH);
+    digitalWrite(DIGIT_RESET_2, HIGH);
+    delay(1);
+    
+    // Initialize first TLC59108
+    byte address = TLC59108::I2C_ADDR::BASE;  // 0x40
+    Serial.printf("Initializing TLC59108 at address 0x%02X\n", address);
+    
+    display = new TLC59108(Wire, address);
+    
+    // Initialize with no hardware reset pin (we already did it)
+    uint8_t initResult = display->init();
+    Serial.printf("Init result: %d\n", initResult);
+    
+    // Set all channels to PWM mode
+    uint8_t modeResult = display->setLedOutputMode(TLC59108::LED_MODE::PWM_IND);
+    Serial.printf("Set mode result: %d\n", modeResult);
+    
+    // Turn all segments off initially (0 for common cathode)
+    for (int i = 0; i < 8; i++) {
+        display->setBrightness(i, 0);
+    }
 }
 
 void loop() {
-    // Pattern 1: Moving group of lit LEDs
-    for (int startPos = 0; startPos < LED_COUNT; startPos++) {
-        strip.clear();
+    // Basic test pattern - just trying to turn on LEDs
+    
+    // Test 1: Cycle through each segment individually
+    Serial.println("Testing individual segments...");
+    for (int segment = 0; segment < 8; segment++) {
+        Serial.printf("Testing segment %d\n", segment);
         
-        // Light up GROUP_SIZE LEDs at current position
-        for (int i = 0; i < GROUP_SIZE; i++) {
-            int pos = (startPos + i) % LED_COUNT;
-            strip.setPixelColor(pos, colors[startPos % NUM_COLORS]);
+        // Turn all segments off
+        for (int i = 0; i < 8; i++) {
+            display->setBrightness(i, 0);
         }
         
-        strip.show();
-        delay(DELAY_MS);
+        // Turn on current segment (255 for common cathode)
+        display->setBrightness(segment, 255);
+        
+        // Print debug info
+        Serial.printf("Set segment %d to ON (255)\n", segment);
+        
+        delay(2000);
     }
     
-    // Pattern 2: Random groups of LEDs
-    for (int i = 0; i < 20; i++) {  // Do 20 random groups
-        strip.clear();
-        
-        int startPos = random(0, LED_COUNT);
-        uint32_t color = colors[random(0, NUM_COLORS)];
-        
-        for (int j = 0; j < GROUP_SIZE; j++) {
-            int pos = (startPos + j) % LED_COUNT;
-            strip.setPixelColor(pos, color);
-        }
-        
-        strip.show();
-        delay(DELAY_MS * 2);
+    // Test 2: All segments on
+    Serial.println("All segments ON");
+    for (int i = 0; i < 8; i++) {
+        display->setBrightness(i, 255);
     }
+    delay(3000);
     
-    // Pattern 3: All LEDs same color, changing colors
-    for (int colorIndex = 0; colorIndex < NUM_COLORS; colorIndex++) {
-        strip.fill(colors[colorIndex]);
-        strip.show();
-        delay(500);
+    // Test 3: All segments off
+    Serial.println("All segments OFF");
+    for (int i = 0; i < 8; i++) {
+        display->setBrightness(i, 0);
     }
+    delay(3000);
+    
+    // Test 4: Brightness ramp on first segment
+    Serial.println("Testing brightness ramp on segment 0");
+    for (int brightness = 0; brightness <= 255; brightness += 5) {
+        display->setBrightness(0, brightness);
+        Serial.printf("Segment 0 brightness: %d\n", brightness);
+        delay(50);
+    }
+    delay(1000);
 }
