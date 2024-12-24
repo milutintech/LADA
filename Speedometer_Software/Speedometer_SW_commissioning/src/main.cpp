@@ -2,125 +2,157 @@
 #include <Wire.h>
 #include "TLC59108.h"
 
-// I2C Pins
-#define SDA_PIN 1
-#define SCL_PIN 2
-#define DIGIT_RESET_1 15
-#define DIGIT_RESET_2 16
+// Display configuration
+#define NUM_ICS 15
+#define TOTAL_KM_START 0      // First 6 digits
+#define TRIP_KM_START 6       // Next 4 digits
+#define SPEED_START 10        // Next 3 digits
+#define MODE_SEGMENT_START 13 // Last 2 ICs for 14-segment display
 
-// Debug flag
-#define DEBUG 1
+// 7-segment display patterns (0-9) - Inverted for common anode, mirrored layout
+const uint8_t SEVEN_SEG_PATTERNS[] = {
+    0b11000000,  // 0 (segments: abcdef)
+    0b11111001,  // 1 (segments: bc)
+    0b10100100,  // 2 (segments: abdeg)
+    0b10110000,  // 3 (segments: abcdg)
+    0b10011001,  // 4 (segments: bcfg)
+    0b10010010,  // 5 (segments: acdfg)
+    0b10000010,  // 6 (segments: acdefg)
+    0b11111000,  // 7 (segments: abc)
+    0b10000000,  // 8 (segments: abcdefg)
+    0b10010000   // 9 (segments: abcdfg)
+};
 
-// Simple test with just one TLC59108
-TLC59108 *display;
+// 14-segment patterns for alphanumeric characters
+const uint16_t FOURTEEN_SEG_PATTERNS[] = {
+    0b00000011111111,  // A
+    0b00000000111111,  // B
+    0b00000011000110,  // C
+    0b00100010001111,  // D
+    0b00000011000111,  // E
+    0b00000011000001,  // F
+    // Add more characters as needed
+};
 
-void scanI2C() {
-    byte error, address;
-    int devices = 0;
- 
-    Serial.println("Scanning I2C bus...");
- 
-    for(address = 1; address < 127; address++ ) {
-        Wire.beginTransmission(address);
-        error = Wire.endTransmission();
- 
-        if (error == 0) {
-            Serial.printf("I2C device found at address 0x%02X\n", address);
-            devices++;
+// PRNDS
+
+class DisplayController {
+private:
+    TLC59108** displays;
+    
+    void setSevenSegment(uint8_t icIndex, uint8_t digit, bool showDot = false) {
+        if (icIndex >= NUM_ICS) return;
+        
+        uint8_t pattern = SEVEN_SEG_PATTERNS[digit % 10];
+        
+        // Set individual segments (a-g)
+        for (uint8_t segment = 0; segment < 7; segment++) {
+            uint8_t brightness = !(pattern & (1 << (6 - segment))) ? 255 : 0;
+            displays[icIndex]->setBrightness(segment, brightness);
+        }
+        
+        // Set decimal point (DP)
+        displays[icIndex]->setBrightness(7, showDot ? 255 : 0);
+    }
+    
+    void setFourteenSegment(uint8_t startIC, char character) {
+        if (startIC >= NUM_ICS - 1) return;
+        
+        uint16_t pattern = FOURTEEN_SEG_PATTERNS[character - 'A'];
+        
+        // First IC controls segments a-g
+        for (uint8_t segment = 0; segment < 7; segment++) {
+            bool isOn = pattern & (1 << segment);
+            displays[startIC]->setBrightness(segment, isOn ? 255 : 0);
+        }
+        
+        // Second IC controls segments h-n
+        for (uint8_t segment = 0; segment < 7; segment++) {
+            bool isOn = pattern & (1 << (segment + 7));
+            displays[startIC + 1]->setBrightness(segment, isOn ? 255 : 0);
+        }
+    }
+
+public:
+    DisplayController() {
+        displays = new TLC59108*[NUM_ICS];
+        
+        // Initialize I2C
+        Wire.begin(1, 2);  // SDA = 1, SCL = 2
+        
+        // Initialize all TLC59108 instances
+        for (int i = 0; i < NUM_ICS; i++) {
+            byte address = 0x40 + i;  // Base address 0x40, increment for each IC
+            displays[i] = new TLC59108(Wire, address);
+            displays[i]->begin();  // Initialize chip
+            displays[i]->setOutputMode(2);  // PWM Individual mode
+            for (int j = 0; j < 8; j++) {
+                displays[i]->setBrightness(j, 0);  // Turn all segments off initially
+            }
         }
     }
     
-    if (devices == 0) {
-        Serial.println("No I2C devices found");
+    void displayTotalKm(unsigned long km) {
+        for (uint8_t i = 0; i < 6; i++) {
+            uint8_t digit = km % 10;
+            setSevenSegment(TOTAL_KM_START + (5 - i), digit, false);
+            km /= 10;
+        }
     }
-}
+    
+    void displayTripKm(unsigned long km) {
+        // Multiply by 10 to handle one decimal place
+        unsigned long tripValue = km * 10;
+        for (uint8_t i = 0; i < 4; i++) {
+            uint8_t digit = tripValue % 10;
+            setSevenSegment(TRIP_KM_START + (3 - i), digit, i == 2);  // Decimal point at the right position
+            tripValue /= 10;
+        }
+    }
+    
+    void displaySpeed(unsigned int speed) {
+        for (uint8_t i = 0; i < 3; i++) {
+            uint8_t digit = speed % 10;
+            setSevenSegment(SPEED_START + (2 - i), digit);
+            speed /= 10;
+        }
+    }
+    
+    void displayDriveMode(char mode) {
+        setFourteenSegment(MODE_SEGMENT_START, mode);
+    }
+    
+    void clear() {
+        for (int i = 0; i < NUM_ICS; i++) {
+            displays[i]->setAllBrightness(0);
+        }
+    }
+    
+    ~DisplayController() {
+        for (int i = 0; i < NUM_ICS; i++) {
+            delete displays[i];
+        }
+        delete[] displays;
+    }
+};
+
+DisplayController* display;
 
 void setup() {
-    // Initialize Serial for debugging
     Serial.begin(115200);
     delay(1000);
-    Serial.println("\nStarting Basic TLC59108 Test - Common Cathode Mode");
+    Serial.println("Initializing Display System");
     
-    // Initialize I2C
-    Wire.begin(SDA_PIN, SCL_PIN);
+    display = new DisplayController();
     
-    // Scan I2C bus
-    scanI2C();
-    
-    // Initialize reset pins
-    pinMode(DIGIT_RESET_1, OUTPUT);
-    pinMode(DIGIT_RESET_2, OUTPUT);
-    
-    // Perform hardware reset
-    digitalWrite(DIGIT_RESET_1, LOW);
-    digitalWrite(DIGIT_RESET_2, LOW);
-    delay(1);
-    digitalWrite(DIGIT_RESET_1, HIGH);
-    digitalWrite(DIGIT_RESET_2, HIGH);
-    delay(1);
-    
-    // Initialize first TLC59108
-    byte address = TLC59108::I2C_ADDR::BASE;  // 0x40
-    Serial.printf("Initializing TLC59108 at address 0x%02X\n", address);
-    
-    display = new TLC59108(Wire, address);
-    
-    // Initialize with no hardware reset pin (we already did it)
-    uint8_t initResult = display->init();
-    Serial.printf("Init result: %d\n", initResult);
-    
-    // Set all channels to PWM mode
-    uint8_t modeResult = display->setLedOutputMode(TLC59108::LED_MODE::PWM_IND);
-    Serial.printf("Set mode result: %d\n", modeResult);
-    
-    // Turn all segments off initially (0 for common cathode)
-    for (int i = 0; i < 8; i++) {
-        display->setBrightness(i, 0);
-    }
+    // Test all display components
+    display->displayTotalKm(123456);
+    display->displayTripKm(12.34);
+    display->displaySpeed(85);
+    display->displayDriveMode('D');
 }
 
 void loop() {
-    // Basic test pattern - just trying to turn on LEDs
-    
-    // Test 1: Cycle through each segment individually
-    Serial.println("Testing individual segments...");
-    for (int segment = 0; segment < 8; segment++) {
-        Serial.printf("Testing segment %d\n", segment);
-        
-        // Turn all segments off
-        for (int i = 0; i < 8; i++) {
-            display->setBrightness(i, 0);
-        }
-        
-        // Turn on current segment (255 for common cathode)
-        display->setBrightness(segment, 255);
-        
-        // Print debug info
-        Serial.printf("Set segment %d to ON (255)\n", segment);
-        
-        delay(2000);
-    }
-    
-    // Test 2: All segments on
-    Serial.println("All segments ON");
-    for (int i = 0; i < 8; i++) {
-        display->setBrightness(i, 255);
-    }
-    delay(3000);
-    
-    // Test 3: All segments off
-    Serial.println("All segments OFF");
-    for (int i = 0; i < 8; i++) {
-        display->setBrightness(i, 0);
-    }
-    delay(3000);
-    
-    // Test 4: Brightness ramp on first segment
-    Serial.println("Testing brightness ramp on segment 0");
-    for (int brightness = 0; brightness <= 255; brightness += 5) {
-        display->setBrightness(0, brightness);
-        Serial.printf("Segment 0 brightness: %d\n", brightness);
-        delay(50);
-    }
-    delay(1000);
+    // Add your display update logic here
+    delay(100);
 }
