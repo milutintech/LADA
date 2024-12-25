@@ -23,18 +23,24 @@ const uint8_t SEVEN_SEG_PATTERNS[] = {
     0b10010000   // 9 (segments: abcdfg)
 };
 
-// 14-segment patterns for alphanumeric characters
+// 14-segment patterns for alphanumeric characters PRNDS
 const uint16_t FOURTEEN_SEG_PATTERNS[] = {
-    0b00000011111111,  // A
-    0b00000000111111,  // B
-    0b00000011000110,  // C
+    0b10001000110011,  // P
+    0b10011000110011,  // R
+    0b00010001110110,  // N
     0b00100010001111,  // D
-    0b00000011000111,  // E
-    0b00000011000001,  // F
-    // Add more characters as needed
+    0b10001000101101,  // S
 };
 
 // PRNDS
+
+enum DriveMode {
+    MODE_P = 0,
+    MODE_R = 1,
+    MODE_N = 2, 
+    MODE_D = 3,
+    MODE_S = 4
+};
 
 class DisplayController {
 private:
@@ -74,6 +80,14 @@ private:
     }
 
 public:
+    enum DriveMode {
+        MODE_P = 0,
+        MODE_R = 1,
+        MODE_N = 2, 
+        MODE_D = 3,
+        MODE_S = 4
+    };
+
     DisplayController() {
         displays = new TLC59108*[NUM_ICS];
         
@@ -118,8 +132,22 @@ public:
         }
     }
     
-    void displayDriveMode(char mode) {
-        setFourteenSegment(MODE_SEGMENT_START, mode);
+    void displayDriveMode(DriveMode mode) {
+        if (mode >= MODE_P && mode <= MODE_S) {
+            uint16_t pattern = FOURTEEN_SEG_PATTERNS[mode];
+            
+            // First IC controls segments a-g
+            for (uint8_t segment = 0; segment < 7; segment++) {
+                bool isOn = pattern & (1 << segment);
+                displays[MODE_SEGMENT_START]->setBrightness(segment, isOn ? 255 : 0);
+            }
+            
+            // Second IC controls segments h-n
+            for (uint8_t segment = 0; segment < 7; segment++) {
+                bool isOn = pattern & (1 << (segment + 7));
+                displays[MODE_SEGMENT_START + 1]->setBrightness(segment, isOn ? 255 : 0);
+            }
+        }
     }
     
     void clear() {
@@ -149,7 +177,7 @@ void setup() {
     display->displayTotalKm(123456);
     display->displayTripKm(12.34);
     display->displaySpeed(85);
-    display->displayDriveMode('D');
+    display->displayDriveMode(DisplayController::MODE_N);
 }
 
 void loop() {
