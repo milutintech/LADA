@@ -11,16 +11,16 @@
 
 // 7-segment display patterns (0-9) - Inverted for common anode, mirrored layout
 const uint8_t SEVEN_SEG_PATTERNS[] = {
-    0b11000000,  // 0 (segments: abcdef)
-    0b11111001,  // 1 (segments: bc)
-    0b10100100,  // 2 (segments: abdeg)
-    0b10110000,  // 3 (segments: abcdg)
-    0b10011001,  // 4 (segments: bcfg)
-    0b10010010,  // 5 (segments: acdfg)
-    0b10000010,  // 6 (segments: acdefg)
-    0b11111000,  // 7 (segments: abc)
+    0b10000001,  // 0 (segments: abcdef)
+    0b11001111,  // 1 (segments: bc)
+    0b00010010,  // 2 (segments: abdeg)
+    0b00000110,  // 3 (segments: abcdg)
+    0b01001100,  // 4 (segments: bcfg)
+    0b00100100,  // 5 (segments: acdfg)
+    0b10100000,  // 6 (segments: acdefg)
+    0b10001111,  // 7 (segments: abc)
     0b10000000,  // 8 (segments: abcdefg)
-    0b10010000   // 9 (segments: abcdfg)
+    0b10000100   // 9 (segments: abcdfg)
 };
 
 // 14-segment patterns for alphanumeric characters PRNDS
@@ -53,7 +53,7 @@ private:
         
         // Set individual segments (a-g)
         for (uint8_t segment = 0; segment < 7; segment++) {
-            uint8_t brightness = !(pattern & (1 << (6 - segment))) ? 255 : 0;
+            uint8_t brightness = !(pattern & (1 << (6 - segment))) ? 50 : 0;
             displays[icIndex]->setBrightness(segment, brightness);
         }
         
@@ -69,13 +69,13 @@ private:
         // First IC controls segments a-g
         for (uint8_t segment = 0; segment < 7; segment++) {
             bool isOn = pattern & (1 << segment);
-            displays[startIC]->setBrightness(segment, isOn ? 255 : 0);
+            displays[startIC]->setBrightness(segment, isOn ? 50 : 0);
         }
         
         // Second IC controls segments h-n
         for (uint8_t segment = 0; segment < 7; segment++) {
             bool isOn = pattern & (1 << (segment + 7));
-            displays[startIC + 1]->setBrightness(segment, isOn ? 255 : 0);
+            displays[startIC + 1]->setBrightness(segment, isOn ? 50 : 0);
         }
     }
 
@@ -109,17 +109,16 @@ public:
     void displayTotalKm(unsigned long km) {
         for (uint8_t i = 0; i < 6; i++) {
             uint8_t digit = km % 10;
-            setSevenSegment(TOTAL_KM_START + (5 - i), digit, false);
+            setSevenSegment(TOTAL_KM_START + i, digit, false);  // Changed (5-i) to i
             km /= 10;
         }
     }
     
     void displayTripKm(unsigned long km) {
-        // Multiply by 10 to handle one decimal place
-        unsigned long tripValue = km * 10;
+        unsigned long tripValue = km;
         for (uint8_t i = 0; i < 4; i++) {
             uint8_t digit = tripValue % 10;
-            setSevenSegment(TRIP_KM_START + (3 - i), digit, i == 2);  // Decimal point at the right position
+            setSevenSegment(TRIP_KM_START + i, digit, i == 1);  // Decimal point after first digit
             tripValue /= 10;
         }
     }
@@ -127,7 +126,7 @@ public:
     void displaySpeed(unsigned int speed) {
         for (uint8_t i = 0; i < 3; i++) {
             uint8_t digit = speed % 10;
-            setSevenSegment(SPEED_START + (2 - i), digit);
+            setSevenSegment(SPEED_START + i, digit);
             speed /= 10;
         }
     }
@@ -174,8 +173,8 @@ void setup() {
     display = new DisplayController();
     
     // Test all display components
-    display->displayTotalKm(123456);
-    display->displayTripKm(12.34);
+    display->displayTotalKm(777777);
+    display->displayTripKm(1234);
     display->displaySpeed(85);
     display->displayDriveMode(DisplayController::MODE_N);
 }
