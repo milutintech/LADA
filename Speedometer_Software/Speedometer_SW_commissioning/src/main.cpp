@@ -77,9 +77,31 @@ public:
     }
     
     void displaySpeed(unsigned int speed) {
+        // Special case for 0
+        if (speed == 0) {
+            displays[SPEED_START + 1]->setAllBrightness(0);
+            displays[SPEED_START + 2]->setAllBrightness(0);
+            setSevenSegment(SPEED_START, 0, false);
+            return;
+        }
+
+        unsigned int temp = speed;
+        int numDigits = 0;
+        
+        // Count number of digits
+        while (temp > 0) {
+            temp /= 10;
+            numDigits++;
+        }
+        
+        // Display digits
         for (uint8_t i = 0; i < 3; i++) {
-            uint8_t digit = speed % 10;
-            setSevenSegment(SPEED_START + i, digit);
+            if (i < numDigits) {
+                uint8_t digit = speed % 10;
+                setSevenSegment(SPEED_START + i, digit, false);
+            } else {
+                displays[SPEED_START + i]->setAllBrightness(0);
+            }
             speed /= 10;
         }
     }
@@ -159,7 +181,7 @@ public:
                 tripKm++;
             }
             
-            speed = random(0, 181);
+            speed = random(0, 211);
             
             if (currentTime - modeChangeTime >= 2000) {
                 currentDriveMode = (currentDriveMode + 1) % 5;
