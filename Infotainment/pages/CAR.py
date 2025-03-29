@@ -9,9 +9,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import base64
-import time
-from Packages.LADA_Infotainment_CAN.LADA_Infotainment_CAN import CANCommunication as can
-from Packages.LADA_Infotainment_CARD.LADA_Infotainment_CARD import CarControlRFID as rfid
 
 # --- Colors ---
 Grey100 = "#F5F5F5"
@@ -30,12 +27,13 @@ MBlue   = "#005ca8"
 
 # --- Constants ---
 
+
 st.set_page_config(page_title="LADAsys", page_icon=":blue_car:", layout="wide")
 
 # --- Variables ---
 
 
-# --- Functions --$
+# --- Functions ---
 def get_base64(bin_file):
     with open(bin_file, 'rb') as f:
         data = f.read()
@@ -74,6 +72,10 @@ div.stButton > button:first-child {
 }
 </style>
 """
+#height: 300px;
+
+
+
 
 st.markdown(
     """
@@ -97,7 +99,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
 st.markdown(vertical_center_css, unsafe_allow_html=True)
 
 # --- Main ---
@@ -105,39 +106,37 @@ st.markdown(vertical_center_css, unsafe_allow_html=True)
 
 
 # --- Title ---
-st.title("HOME")
+st.title("CAR")
 
 
 # Use a column layout with a flex container to center content vertically
-col0, col1, col2, col3, col4, col5 = st.columns([1, 2,2, 2,2, 1])
+col0, col1, col2, col3, col4 = st.columns([1, 1,1,3.5, 1])
 
 with col1:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
     # Place your content here; for demonstration, a button is used
-    if st.button("CAR"):
-        st.switch_page("pages/CAR.py")
-    st.markdown('</div>', unsafe_allow_html=True)
-
-with col2:
-    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
-    # Place your content here; for demonstration, a button is used
-    if st.button("Charging"):
-        st.switch_page("pages/Charging.py")
+    if st.button("Home"):
+        st.switch_page('LADAsys.py')
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col3:
     st.markdown('<div class="flex-container">', unsafe_allow_html=True)
     # Place your content here; for demonstration, a button is used
-    if st.button("Debug"):
-        st.switch_page("pages/Debug.py")
+    if st.toggle("Activate High Tork (1100Nm)"):
+        st.write("High Tork activated! (1100Nm)")
+    else:
+        st.write("Low Tork Mode! (800Nm)")
+
+    if st.toggle("Activate Offroad Mode"):
+        st.write("Offroad Mode activated!")
+    else:
+        st.write("Onroad Mode!")
+
+    TorkNow = 420
+    latest_iteration = st.empty()
+    latest_iteration.text(f'Current Tork: {TorkNow}Nm')
     st.markdown('</div>', unsafe_allow_html=True)
 
-with col4:
-    st.markdown('<div class="flex-container">', unsafe_allow_html=True)
-    # Place your content here; for demonstration, a button is used
-    if st.button("Valet Mode"):
-        st.switch_page("pages/Valet.py")
-    st.markdown('</div>', unsafe_allow_html=True)
-
-#time.sleep(1)
-#st.rerun()
+    
+    
+    
