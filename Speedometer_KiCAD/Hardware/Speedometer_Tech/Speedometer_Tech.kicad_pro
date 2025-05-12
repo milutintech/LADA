@@ -469,7 +469,7 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "../../../../../../Downloads/Speedometer_Tech.step",
       "svg": "",
       "vrml": ""
     },
@@ -577,7 +577,7 @@
   "sheets": [
     [
       "7a911dfa-7957-409a-ad31-10c26a0bf949",
-      ""
+      "Root"
     ],
     [
       "7f25a167-5e25-4142-beba-23f2a558c57e",

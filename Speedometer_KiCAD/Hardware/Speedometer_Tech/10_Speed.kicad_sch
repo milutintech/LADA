@@ -27498,6 +27498,7 @@
 	)
 	(label "~{DIG-RST}"
 		(at 38.1 281.7622 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27508,6 +27509,7 @@
 	)
 	(label "~{DIG-RST}"
 		(at 53.34 129.3622 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27518,6 +27520,7 @@
 	)
 	(label "~{DIG-RST}"
 		(at 154.94 129.3622 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27528,6 +27531,7 @@
 	)
 	(label "~{DIG-RST}"
 		(at 83.82 210.6422 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27538,6 +27542,7 @@
 	)
 	(label "~{DIG-RST}"
 		(at 83.82 248.7422 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27548,6 +27553,7 @@
 	)
 	(label "~{DIG-RST}"
 		(at 254 129.3622 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)

@@ -3563,6 +3563,7 @@
 	)
 	(label "SigIn08"
 		(at 210.82 170.0022 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3573,6 +3574,7 @@
 	)
 	(label "SigIn09"
 		(at 335.28 149.6822 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3583,6 +3585,7 @@
 	)
 	(label "SigIn09"
 		(at 210.82 172.5422 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3593,6 +3596,7 @@
 	)
 	(label "SigIn03"
 		(at 335.28 129.3622 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3603,6 +3607,7 @@
 	)
 	(label "SigIn04"
 		(at 210.82 119.2022 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3613,6 +3618,7 @@
 	)
 	(label "SigIn10"
 		(at 335.28 152.2222 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3623,6 +3629,7 @@
 	)
 	(label "SigIn06"
 		(at 335.28 136.9822 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3633,6 +3640,7 @@
 	)
 	(label "SigIn03"
 		(at 210.82 76.0222 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3643,6 +3651,7 @@
 	)
 	(label "SigIn00"
 		(at 210.82 68.4022 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3653,6 +3662,7 @@
 	)
 	(label "SigIn02"
 		(at 210.82 73.4822 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3663,6 +3673,7 @@
 	)
 	(label "SigIn05"
 		(at 210.82 121.7422 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3673,6 +3684,7 @@
 	)
 	(label "SigIn14"
 		(at 335.28 162.3822 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3683,6 +3695,7 @@
 	)
 	(label "SigIn07"
 		(at 210.82 126.8222 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3693,6 +3706,7 @@
 	)
 	(label "SigIn08"
 		(at 335.28 147.1422 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3703,6 +3717,7 @@
 	)
 	(label "SigIn07"
 		(at 335.28 139.5222 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3713,6 +3728,7 @@
 	)
 	(label "SigIn11"
 		(at 335.28 154.7622 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3723,6 +3739,7 @@
 	)
 	(label "SigIn14"
 		(at 210.82 225.8822 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3733,6 +3750,7 @@
 	)
 	(label "SigIn00"
 		(at 335.28 121.7422 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3743,6 +3761,7 @@
 	)
 	(label "SigIn01"
 		(at 210.82 70.9422 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3753,6 +3772,7 @@
 	)
 	(label "SigIn11"
 		(at 210.82 177.6222 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3763,6 +3783,7 @@
 	)
 	(label "SigIn13"
 		(at 335.28 159.8422 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3773,6 +3794,7 @@
 	)
 	(label "SigIn05"
 		(at 335.28 134.4422 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3783,6 +3805,7 @@
 	)
 	(label "SigIn10"
 		(at 210.82 175.0822 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3793,6 +3816,7 @@
 	)
 	(label "SigIn15"
 		(at 210.82 228.4222 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3803,6 +3827,7 @@
 	)
 	(label "SigIn12"
 		(at 210.82 220.8022 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3813,6 +3838,7 @@
 	)
 	(label "SigIn13"
 		(at 210.82 223.3422 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3823,6 +3849,7 @@
 	)
 	(label "SigIn04"
 		(at 335.28 131.9022 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3833,6 +3860,7 @@
 	)
 	(label "SigIn06"
 		(at 210.82 124.2822 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3843,6 +3871,7 @@
 	)
 	(label "SigIn02"
 		(at 335.28 126.8222 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3853,6 +3882,7 @@
 	)
 	(label "SigIn15"
 		(at 335.28 164.9222 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3863,6 +3893,7 @@
 	)
 	(label "SigIn12"
 		(at 335.28 157.3022 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3873,6 +3904,7 @@
 	)
 	(label "SigIn01"
 		(at 335.28 124.2822 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)

@@ -29,6 +29,8 @@ public:
 
 private:
     TLC59108** displays;
+    byte* icAddresses;     // Array to store the actual I2C addresses for each display
+    bool* validDisplays;   // Array to track which displays are valid/present
     void setSevenSegment(uint8_t icIndex, uint8_t digit, bool showDot = false);
 };
 

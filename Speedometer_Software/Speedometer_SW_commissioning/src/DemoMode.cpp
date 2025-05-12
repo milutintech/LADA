@@ -7,7 +7,7 @@ DemoMode::DemoMode(DisplayController* disp, SpeedometerController* speedo)
 void DemoMode::loop() {
     unsigned long currentMillis = millis();
     
-    // Update every 50ms
+    // Update every 20ms (50Hz)
     if (currentMillis - lastUpdate >= 20) {
         lastUpdate = currentMillis;
         
@@ -15,56 +15,68 @@ void DemoMode::loop() {
         kmDecimal++;
         if (kmDecimal >= 10) {
             kmDecimal = 0;
-            totalKm++;
             tripKm++;
+            totalKm++;
         }
         display->displayTotalKm(totalKm);
         display->displayTripKm(tripKm, kmDecimal);
         
-        // Update torque (-100 to +400)
+        // Update DC current for torque bar (-450A to +450A)
+        // Simulate driving & regen cycles
         if (increasing) {
-            torque += 5;
-            if (torque >= 400) increasing = false;
+            dcCurrent += 5;
+            if (dcCurrent >= 450) increasing = false;
         } else {
-            torque -= 5;
-            if (torque <= -100) increasing = true;
+            dcCurrent -= 5;
+            if (dcCurrent <= -150) increasing = true;
         }
-        Serial.printf("Setting torque to: %d\n", torque);
-        speedo->updateTorque(torque);
+        speedo->updateTorque(dcCurrent);
         
         // Update SOC (0-100%)
         static unsigned long lastSocUpdate = 0;
-        if (currentMillis - lastSocUpdate >= 500) {  // Every second
+        if (currentMillis - lastSocUpdate >= 500) {  // Every 0.5 second
             lastSocUpdate = currentMillis;
             soc = (soc > 0) ? soc - 1 : 100;
-            Serial.printf("Setting SOC to: %d%%\n", soc);
             speedo->updateSOC(soc);
         }
         
         // Update temperature (30-110°C)
         static unsigned long lastTempUpdate = 0;
-        if (currentMillis - lastTempUpdate >= 250) {  // Every 0.5 seconds
+        if (currentMillis - lastTempUpdate >= 250) {  // Every 0.25 seconds
             lastTempUpdate = currentMillis;
             temperature++;
             if (temperature > 110) temperature = 30;
-            Serial.printf("Setting temperature to: %d°C\n", temperature);
             speedo->updateTemperature(temperature);
         }
         
         // Update error lights
         static unsigned long lastErrorUpdate = 0;
-        if (currentMillis - lastErrorUpdate >= 1000) {  // Every 2 seconds
+        if (currentMillis - lastErrorUpdate >= 1000) {  // Every second
             lastErrorUpdate = currentMillis;
             errorFlags = (1 << currentError);
-            Serial.printf("Setting error flag: 0x%04X (light %d)\n", errorFlags, currentError);
             speedo->updateErrorLights(errorFlags);
             currentError = (currentError + 1) % 13;
         }
         
-        // Update speed (0-200)
-        speed = (speed + 1) % 201;
-        //display->displaySpeed(speed);
-        display->displaySpeed(888);
+        // Update speed (0-200 km/h)
+        static unsigned long lastSpeedUpdate = 0;
+        if (currentMillis - lastSpeedUpdate >= 100) {  // Every 0.1 seconds
+            lastSpeedUpdate = currentMillis;
+            
+            // Create a realistic speed curve
+            if (speedIncreasing) {
+                speed += random(1, 3);  // Random increase for realism
+                if (speed >= 120) speedIncreasing = false;
+            } else {
+                speed -= random(1, 3);  // Random decrease
+                if (speed <= 0) {
+                    speed = 0;
+                    speedIncreasing = true;
+                }
+            }
+            
+            display->displaySpeed(speed);
+        }
         
         // Change drive mode
         if (currentMillis - lastModeChange >= modeChangeInterval) {
@@ -73,7 +85,14 @@ void DemoMode::loop() {
             display->displayDriveMode(driveMode);
         }
         
-        // Important: Show the updates!
-        speedo->show();
+        // Update brightness periodically
+        static unsigned long lastBrightnessUpdate = 0;
+        if (currentMillis - lastBrightnessUpdate >= 5000) {  // Every 5 seconds
+            lastBrightnessUpdate = currentMillis;
+            brightness = (brightness <= 100) ? 200 : 100;  // Toggle between two levels
+            speedo->setIllumination(brightness);
+        }
+        
+        // No need to call show here as it's handled in the main loop
     }
 }

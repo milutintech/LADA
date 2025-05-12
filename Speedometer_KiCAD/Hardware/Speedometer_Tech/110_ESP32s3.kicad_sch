@@ -6645,6 +6645,7 @@
 	)
 	(label "USB D+"
 		(at 220.98 80.4672 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6655,6 +6656,7 @@
 	)
 	(label "MISO"
 		(at 71.12 88.0872 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6665,6 +6667,7 @@
 	)
 	(label "EN"
 		(at 177.8 133.8072 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6675,6 +6678,7 @@
 	)
 	(label "USB D-"
 		(at 203.2 70.3072 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6685,6 +6689,7 @@
 	)
 	(label "SDA"
 		(at 149.86 171.9072 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6695,6 +6700,7 @@
 	)
 	(label "USB D-"
 		(at 152.4 70.3072 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6705,6 +6711,7 @@
 	)
 	(label "EN"
 		(at 198.12 136.3472 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6715,6 +6722,7 @@
 	)
 	(label "USB D+"
 		(at 111.76 83.0072 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6725,6 +6733,7 @@
 	)
 	(label "MTCK"
 		(at 111.76 98.2472 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6735,6 +6744,7 @@
 	)
 	(label "SCK"
 		(at 71.12 85.5472 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6745,6 +6755,7 @@
 	)
 	(label "MTMS"
 		(at 111.76 105.8672 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6755,6 +6766,7 @@
 	)
 	(label "EN"
 		(at 215.9 174.4472 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6765,6 +6777,7 @@
 	)
 	(label "SCL"
 		(at 73.66 80.4672 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6775,6 +6788,7 @@
 	)
 	(label "TX"
 		(at 73.66 70.3072 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6785,6 +6799,7 @@
 	)
 	(label "USB D-"
 		(at 111.76 80.4672 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6795,6 +6810,7 @@
 	)
 	(label "RX"
 		(at 149.86 133.8072 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6805,6 +6821,7 @@
 	)
 	(label "Q1"
 		(at 88.9 156.6672 90)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6815,6 +6832,7 @@
 	)
 	(label "USB D+"
 		(at 152.4 67.7672 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6825,6 +6843,7 @@
 	)
 	(label "RX"
 		(at 198.12 133.8072 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6835,6 +6854,7 @@
 	)
 	(label "USB D+"
 		(at 203.2 67.7672 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6845,6 +6865,7 @@
 	)
 	(label "MTCK"
 		(at 215.9 166.8272 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6855,6 +6876,7 @@
 	)
 	(label "TX"
 		(at 177.8 131.2672 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6865,6 +6887,7 @@
 	)
 	(label "MTDO"
 		(at 111.76 100.7872 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6875,6 +6898,7 @@
 	)
 	(label "MOSI"
 		(at 71.12 90.6272 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6885,6 +6909,7 @@
 	)
 	(label "USB D-"
 		(at 220.98 67.7672 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6895,6 +6920,7 @@
 	)
 	(label "RX"
 		(at 73.66 67.7672 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6905,6 +6931,7 @@
 	)
 	(label "CS"
 		(at 71.12 93.1672 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6915,6 +6942,7 @@
 	)
 	(label "MTDI"
 		(at 215.9 171.9072 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6925,6 +6953,7 @@
 	)
 	(label "TX"
 		(at 198.12 131.2672 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6935,6 +6964,7 @@
 	)
 	(label "SDA"
 		(at 73.66 77.9272 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6945,6 +6975,7 @@
 	)
 	(label "EN"
 		(at 63.5 57.6072 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6955,6 +6986,7 @@
 	)
 	(label "MTMS"
 		(at 215.9 164.2872 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6965,6 +6997,7 @@
 	)
 	(label "MTDO"
 		(at 215.9 169.3672 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6975,6 +7008,7 @@
 	)
 	(label "MTDI"
 		(at 111.76 103.3272 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6985,6 +7019,7 @@
 	)
 	(label "SCL"
 		(at 149.86 174.4472 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7940,7 +7975,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Value" ""
+		(property "Value" "~"
 			(at 109.982 166.5732 0)
 			(effects
 				(font
@@ -8360,7 +8395,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Value" ""
+		(property "Value" "~"
 			(at 32.766 76.1492 0)
 			(effects
 				(font
@@ -12422,7 +12457,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Value" ""
+		(property "Value" "~"
 			(at 48.006 88.8492 0)
 			(effects
 				(font
@@ -14078,7 +14113,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Value" ""
+		(property "Value" "~"
 			(at 56.642 166.5732 0)
 			(effects
 				(font
