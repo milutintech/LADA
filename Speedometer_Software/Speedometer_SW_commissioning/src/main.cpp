@@ -5,18 +5,20 @@
 #include "SpeedometerController.h"
 #include "DisplayPatterns.h"
 #include "DemoMode.h"
-#include "SpeedometerPins.h"  // Include our new pin definitions
+#include "SpeedometerPins.h"
+#include "InputController.h"
 
 // Global instances
 DisplayController* display = nullptr;
 SpeedometerController* speedoController = nullptr;
+InputController* inputController = nullptr;
 bool demoModeActive = false;
 DemoMode* demoMode = nullptr;
 
 // Variables for trip odometer reset
-const int TRIP_RESET_PIN = 13;  // IO13 for trip reset button
+const int TRIP_RESET_PIN = 13;
 unsigned long lastTripResetPress = 0;
-const unsigned long RESET_DEBOUNCE_TIME = 2000; // 2 seconds press to reset
+const unsigned long RESET_DEBOUNCE_TIME = 2000;
 
 // Function to toggle between demo mode and real data
 void toggleDemoMode() {
@@ -35,6 +37,12 @@ void setup() {
     // Initialize I2C with correct pins
     Wire.begin(I2C_SDA_PIN, I2C_SCL_PIN);
     
+    // Initialize input controller
+    inputController = new InputController(0x20);
+    if (!inputController->begin()) {
+        Serial.println("Failed to initialize MCP23017 input controller!");
+    }
+    
     // Initialize display controller
     display = new DisplayController();
     
@@ -50,35 +58,49 @@ void setup() {
     // Set default illumination brightness
     speedoController->setIllumination(100);
     
-    // Initial display will be handled by the odometer values loaded from EEPROM
-    
     Serial.println("Initialization complete. Running in normal mode.");
     Serial.println("Send 'd' to toggle demo mode.");
+    Serial.println("Send 'i' to show input states.");
     Serial.println("Press and hold trip reset button to reset trip odometer.");
 }
 
-void loop() {
-    // Check for serial commands
+void handleSerialCommands() {
     if (Serial.available() > 0) {
         char cmd = Serial.read();
-        if (cmd == 'd' || cmd == 'D') {
-            toggleDemoMode();
+        
+        switch (cmd) {
+            case 'd':
+            case 'D':
+                toggleDemoMode();
+                break;
+                
+            case 'i':
+            case 'I':
+                if (inputController) {
+                    inputController->printInputStates();
+                }
+                break;
+                
+            default:
+                Serial.println("Commands: 'd'=demo mode, 'i'=input states");
+                break;
         }
     }
+}
+
+void loop() {
+    // Handle serial commands
+    handleSerialCommands();
     
     // Check for trip reset button press
     if (digitalRead(TRIP_RESET_PIN) == LOW) {
-        // Button is pressed
         if (lastTripResetPress == 0) {
-            // First detection of press
             lastTripResetPress = millis();
         } else if (millis() - lastTripResetPress >= RESET_DEBOUNCE_TIME) {
-            // Button has been pressed for the required time
             speedoController->resetTripOdometer();
-            lastTripResetPress = 0;  // Reset to prevent multiple triggers
+            lastTripResetPress = 0;
         }
     } else {
-        // Button is released
         lastTripResetPress = 0;
     }
     
@@ -88,8 +110,19 @@ void loop() {
     } else {
         // Run in normal CAN data mode
         speedoController->processCANMessages();
+        
+        // Update error lights from mixed input sources
+        if (inputController) {
+            uint8_t soc = speedoController->getSOC();
+            float lvVoltage = speedoController->getLVVoltage();
+            bool dmcErrors = speedoController->getDMCHasErrors();
+            
+            uint16_t errorFlags = inputController->getErrorLightFlags(soc, lvVoltage, dmcErrors);
+            speedoController->updateErrorLights(errorFlags);
+        }
+        
         speedoController->show();
     }
     
-    delay(10); // Small delay to prevent tight looping
+    delay(10);
 }

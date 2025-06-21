@@ -1,7 +1,7 @@
 #include "SpeedometerController.h"
 #include "DisplayController.h"
-#include "SpeedometerPins.h"  // Include our pin definitions
-#include <EEPROM.h>  // Added for odometer storage
+#include "SpeedometerPins.h"
+#include <EEPROM.h>
 
 // Define EEPROM addresses for storing odometer values
 #define EEPROM_TOTAL_ODO_ADDR 0
@@ -17,6 +17,7 @@ namespace CANIds {
     constexpr uint16_t DMC_STATUS = 0x258;    // DMC Status (torqueAvailable, torqueActual, speedActual)
     constexpr uint16_t DMC_POWER = 0x259;     // DMC Power (dcVoltageAct, dcCurrentAct, acCurrentAct, mechPower)
     constexpr uint16_t DMC_TEMP = 0x458;      // DMC Temperature (tempInverter, tempMotor, tempSystem)
+    constexpr uint16_t DMC_ERRORS = 0x25A;    // DMC Error flags
     constexpr uint16_t BMS_STATUS = 0x010;    // BMS Status (soc, voltage, current)
     constexpr uint16_t DMC_CTRL = 0x210;      // DMC Control (enablePosSpeed, enableNegSpeed for gear detection)
 }
@@ -44,6 +45,72 @@ void SpeedometerController::debugPrint(String msg) {
     #endif
 }
 
+// HSL to RGB conversion function
+uint32_t SpeedometerController::hslToRgb(float h, float s, float l) {
+    float c = (1.0 - abs(2.0 * l - 1.0)) * s;
+    float x = c * (1.0 - abs(fmod(h / 60.0, 2.0) - 1.0));
+    float m = l - c / 2.0;
+    
+    float r, g, b;
+    
+    if (h >= 0 && h < 60) {
+        r = c; g = x; b = 0;
+    } else if (h >= 60 && h < 120) {
+        r = x; g = c; b = 0;
+    } else if (h >= 120 && h < 180) {
+        r = 0; g = c; b = x;
+    } else if (h >= 180 && h < 240) {
+        r = 0; g = x; b = c;
+    } else if (h >= 240 && h < 300) {
+        r = x; g = 0; b = c;
+    } else {
+        r = c; g = 0; b = x;
+    }
+    
+    // Convert to 0-255 range and apply brightness adjustment
+    uint8_t red = (uint8_t)((r + m) * 255);
+    uint8_t green = (uint8_t)((g + m) * 255);
+    uint8_t blue = (uint8_t)((b + m) * 255);
+    
+    return pixels.Color(red, green, blue);
+}
+
+// Get temperature-based color (green to red fade starting at 80°C)
+uint32_t SpeedometerController::getTemperatureColor(uint8_t temp) {
+    float hue;
+    
+    if (temp <= 80) {
+        // Green for temps up to 80°C
+        hue = 120.0; // Pure green
+    } else {
+        // Fade from green (120°) to red (0°) for temps 80-110°C
+        float tempRange = constrain(temp, 80, 110);
+        hue = map(tempRange, 80, 110, 120, 0); // Linear interpolation from green to red
+    }
+    
+    // Use full saturation and moderate lightness for good visibility
+    return hslToRgb(hue, 1.0, 0.5);
+}
+
+// Get SOC-based color (green to red fade from 25% to 5%, then stay red)
+uint32_t SpeedometerController::getSOCColor(uint8_t percentage) {
+    float hue;
+    
+    if (percentage >= 25) {
+        // Green for SOC 25% and above
+        hue = 120.0; // Pure green
+    } else if (percentage >= 5) {
+        // Fade from green (120°) to red (0°) for SOC 25% to 5%
+        hue = map(percentage, 5, 25, 0, 120); // Linear interpolation from red to green
+    } else {
+        // Red for SOC below 5%
+        hue = 0.0; // Pure red
+    }
+    
+    // Use full saturation and moderate lightness for good visibility
+    return hslToRgb(hue, 1.0, 0.5);
+}
+
 bool SpeedometerController::begin() {
     debugPrint("Initializing SpeedometerController...");
     
@@ -52,16 +119,15 @@ bool SpeedometerController::begin() {
         debugPrint("Failed to initialize EEPROM");
     } else {
         debugPrint("EEPROM initialized");
-        // Load odometer values from EEPROM
         loadOdometersFromEEPROM();
     }
     
     // Initialize NeoPixels
     pixels.begin();
-    pixels.setBrightness(100);  // Start with lower brightness
+    pixels.setBrightness(100);
     pixels.clear();
     pixels.show();
-    delay(100);  // Give the NeoPixels time to initialize
+    delay(100);
 
     // Test pattern - light up each section in different colors
     debugPrint("Running startup test pattern...");
@@ -164,10 +230,18 @@ bool SpeedometerController::begin() {
     dcCurrentAct = 0;
     vehicleSpeed = 0;
     gearState = GEAR_NEUTRAL;
+    
+    // Initialize BSC values
+    hvVoltageAct = 0.0;
+    lvVoltageAct = 12.0;  // Default to normal 12V
+    hvCurrentAct = 0.0;
+    lvCurrentAct = 0.0;
+    
+    // Initialize DMC error flag
+    dmcHasErrors = false;
 
     // Update the display with loaded odometer values
     if (display) {
-        // Convert to integer values with one decimal for trip
         unsigned long totalKm = static_cast<unsigned long>(totalOdometer);
         unsigned long tripKm = static_cast<unsigned long>(tripOdometer);
         uint8_t tripDecimal = static_cast<uint8_t>((tripOdometer - tripKm) * 10);
@@ -181,18 +255,15 @@ bool SpeedometerController::begin() {
 }
 
 void SpeedometerController::loadOdometersFromEEPROM() {
-    // Check if EEPROM has been initialized
     uint8_t initialized = EEPROM.read(EEPROM_INITIALIZED_ADDR);
     
     if (initialized == EEPROM_MAGIC_VALUE) {
-        // Read the stored values
         EEPROM.get(EEPROM_TOTAL_ODO_ADDR, totalOdometer);
         EEPROM.get(EEPROM_TRIP_ODO_ADDR, tripOdometer);
         
         debugPrint("Loaded from EEPROM - Total: " + String(totalOdometer) + 
                   " km, Trip: " + String(tripOdometer) + " km");
     } else {
-        // Initialize EEPROM with default values
         totalOdometer = 0.0;
         tripOdometer = 0.0;
         
@@ -209,7 +280,6 @@ void SpeedometerController::saveOdometersToEEPROM() {
     static unsigned long lastSaveTime = 0;
     unsigned long currentTime = millis();
     
-    // Save values every 10 minutes or when there's a significant change
     if (currentTime - lastSaveTime >= 600000) {  // 10 minutes
         EEPROM.put(EEPROM_TOTAL_ODO_ADDR, totalOdometer);
         EEPROM.put(EEPROM_TRIP_ODO_ADDR, tripOdometer);
@@ -223,11 +293,9 @@ void SpeedometerController::saveOdometersToEEPROM() {
 void SpeedometerController::resetTripOdometer() {
     tripOdometer = 0.0;
     
-    // Save to EEPROM immediately
     EEPROM.put(EEPROM_TRIP_ODO_ADDR, tripOdometer);
     EEPROM.commit();
     
-    // Update display
     if (display) {
         display->displayTripKm(0, 0);
     }
@@ -244,8 +312,18 @@ void SpeedometerController::processCANMessages() {
             uint32_t id = canBus->getCanId();
             
             switch (id) {
+                case CANIds::BSC_VAL: {
+                    // Process BSC message (0x26A) for LV voltage
+                    hvVoltageAct = ((buf[0] << 8) | buf[1]) * 0.1f;
+                    lvVoltageAct = buf[2] * 0.1f;
+                    hvCurrentAct = (((buf[3] << 8) | buf[4]) * 0.1f) - 25.0f;
+                    lvCurrentAct = ((buf[5] << 8) | buf[6]) - 280.0f;
+                    
+                    debugPrint("BSC Data - HV: " + String(hvVoltageAct) + "V, LV: " + String(lvVoltageAct) + "V");
+                    break;
+                }
+                
                 case CANIds::DMC_STATUS:
-                    // Process DMC status message (torque, speed)
                     torqueAvailable = ((buf[2] << 8) | buf[3]) * 0.01;
                     torqueActual = ((buf[4] << 8) | buf[5]) * 0.01;
                     speedActual = static_cast<float>(static_cast<int16_t>((buf[6] << 8) | buf[7]));
@@ -253,87 +331,84 @@ void SpeedometerController::processCANMessages() {
                     break;
                     
                 case CANIds::DMC_POWER: {
-                    // Process DMC power message
                     dcVoltageAct = ((buf[0] << 8) | buf[1]) * 0.1;
                     
-                    // FIX: Properly handle signed current using int16_t cast
                     int16_t currentRaw = (buf[2] << 8) | buf[3];
                     dcCurrentAct = static_cast<float>(currentRaw) * 0.1;
                     
                     acCurrentAct = static_cast<float>(static_cast<int16_t>((buf[4] << 8) | buf[5])) * 0.25;
                     mechPower = static_cast<int32_t>(static_cast<int16_t>((buf[6] << 8) | buf[7])) * 16;
                     
-                    // Debug print the raw current and converted value to verify sign handling
                     debugPrint("Raw current: 0x" + String(currentRaw, HEX) + 
                               ", Converted: " + String(dcCurrentAct) + "A");
                     
-                    // Update torque display based on DC current
                     updateTorque(static_cast<int16_t>(dcCurrentAct));
                     break;
                 }
                     
                 case CANIds::DMC_TEMP: {
-                    // Process DMC temperature message using correct scaling factors
-                    // SigDMC_TempInv: 0.5°C/bit, signed
                     int16_t tempInvRaw = (buf[0] << 8) | buf[1];
                     tempInverter = tempInvRaw * 0.5;
                     
-                    // SigDMC_TempMot: 0.5°C/bit, signed
                     int16_t tempMotRaw = (buf[2] << 8) | buf[3];
                     tempMotor = tempMotRaw * 0.5;
                     
-                    // SigDMC_TempSys: 1°C/bit, unsigned, with -50°C offset
                     tempSystem = buf[4] - 50;
                     
-                    // Show the highest temperature of the three
                     float highestTemp = max(tempInverter, max(tempMotor, static_cast<float>(tempSystem)));
                     
-                    // Debug print all temperatures to diagnose the issue
                     debugPrint("Temp values - Inverter: " + String(tempInverter) + 
                                "°C, Motor: " + String(tempMotor) + 
                                "°C, System: " + String(tempSystem) + 
                                "°C, Highest: " + String(highestTemp) + "°C");
                                
-                    // Explicitly constrain the temperature to reasonable values before updating
-                    // This prevents any potential undefined behavior from bad CAN data
                     float constrainedTemp = constrain(highestTemp, 0, 100);
                     updateTemperature(static_cast<uint8_t>(constrainedTemp));
                     break;
                 }
+
+                case CANIds::DMC_ERRORS: {
+                    // Process DMC error message (0x25A)
+                    uint64_t errorBits = 0;
+                    
+                    // Combine all 8 bytes into 64-bit value
+                    for (int i = 0; i < 8; i++) {
+                        errorBits |= ((uint64_t)buf[i] << (i * 8));
+                    }
+                    
+                    // Check if any error bits (0-47) are set
+                    uint64_t errorMask = 0x0000FFFFFFFFFFFF; // Mask for bits 0-47
+                    dmcHasErrors = (errorBits & errorMask) != 0;
+                    
+                    debugPrint("DMC Errors: 0x" + String((uint32_t)(errorBits >> 32), HEX) + 
+                              String((uint32_t)errorBits, HEX) + ", Has Errors: " + String(dmcHasErrors));
+                    break;
+                }
                     
                 case CANIds::BMS_STATUS:
-                    // Process BMS status message
-                    soc = buf[0] / 2;  // Scale to percentage
+                    soc = buf[0] / 2;
                     bmsVoltage = (buf[2] | (buf[1] << 8)) / 10;
-                    // FIX: Handle signed current properly
                     bmsCurrent = static_cast<int16_t>(buf[4] | (buf[3] << 8));
                     updateSOC(soc);
                     break;
                     
                 case CANIds::DMC_CTRL: {
-                    // Parse gear state from enablePosSpeed and enableNegSpeed
-                    bool enablePosSpeed = buf[0] & 0x01;  // Bit 0
-                    bool enableNegSpeed = buf[0] & 0x02;  // Bit 1
+                    bool enablePosSpeed = buf[0] & 0x01;
+                    bool enableNegSpeed = buf[0] & 0x02;
                     
                     GearState newGearState;
                     
-                    // Fix gear state determination logic
                     if (enableNegSpeed && !enablePosSpeed) {
-                        // Only negative speed enabled = Drive
                         newGearState = GEAR_DRIVE;
                     } else if (enablePosSpeed && !enableNegSpeed) {
-                        // Only positive speed enabled = Reverse
                         newGearState = GEAR_REVERSE;
                     } else {
-                        // Both off or both on = Neutral
                         newGearState = GEAR_NEUTRAL;
                     }
                     
-                    // Only update display if gear state has changed
                     if (newGearState != gearState) {
                         gearState = newGearState;
                         
-                        // Update the display with the new gear state
                         if (display) {
                             DisplayController::DriveMode displayMode;
                             switch (gearState) {
@@ -359,27 +434,20 @@ void SpeedometerController::processCANMessages() {
         }
     }
     
-    // Update odometer based on vehicle speed
     updateOdometer();
 }
 
 void SpeedometerController::updateOdometer() {
     unsigned long currentTime = millis();
     
-    // Update odometer every second
     if (currentTime - lastOdometerUpdate >= 1000) {
-        // Calculate distance traveled in kilometers
-        // vehicleSpeed is in kph, so we need to convert to km/s and multiply by elapsed time
-        float elapsedHours = (currentTime - lastOdometerUpdate) / 3600000.0;  // Convert ms to hours
-        float distanceTraveled = vehicleSpeed * elapsedHours;  // Distance in km
+        float elapsedHours = (currentTime - lastOdometerUpdate) / 3600000.0;
+        float distanceTraveled = vehicleSpeed * elapsedHours;
         
-        // Update odometers
         totalOdometer += distanceTraveled;
         tripOdometer += distanceTraveled;
         
-        // Update the display
         if (display) {
-            // Convert to integer values with one decimal for trip
             unsigned long totalKm = static_cast<unsigned long>(totalOdometer);
             unsigned long tripKm = static_cast<unsigned long>(tripOdometer);
             uint8_t tripDecimal = static_cast<uint8_t>((tripOdometer - tripKm) * 10);
@@ -389,8 +457,6 @@ void SpeedometerController::updateOdometer() {
         }
         
         lastOdometerUpdate = currentTime;
-        
-        // Save odometer values to EEPROM periodically
         saveOdometersToEEPROM();
     }
 }
@@ -398,21 +464,15 @@ void SpeedometerController::updateOdometer() {
 void SpeedometerController::updateVehicleSpeed() {
     unsigned long currentTime = millis();
     
-    // Only update speed display if significant time has passed or speed has changed
     if (currentTime - lastSpeedUpdate >= 100 || abs(speedActual - lastSpeedActual) > 10) {
-        // Calculate vehicle speed from motor speed using VCU's conversion formula
-        // This is based on the calculation in VehicleControl::calculateVehicleSpeed()
-        const float NORMAL_RATIO = 1.2f;  // From VehicleParams::Transmission::NORMAL_RATIO
-        const float DIFF_RATIO = 3.9f;    // From VehicleParams::Transmission::DIFF_RATIO
-        const float WHEEL_CIRC = 2.08f;   // From VehicleParams::Transmission::WHEEL_CIRC (meters)
+        const float NORMAL_RATIO = 1.2f;
+        const float DIFF_RATIO = 3.9f;
+        const float WHEEL_CIRC = 2.08f;
         
-        // Convert RPM to kph
         vehicleSpeed = abs(speedActual) * 60.0f / NORMAL_RATIO / DIFF_RATIO * WHEEL_CIRC/1000.0f;
         
-        // Low-pass filter for smoother display
         currentSpeed = (currentSpeed * 0.7) + (vehicleSpeed * 0.3);
         
-        // Update the speed display
         if (display) {
             display->displaySpeed(static_cast<unsigned int>(currentSpeed));
         }
@@ -427,71 +487,58 @@ void SpeedometerController::updateTorque(int16_t current) {
     static unsigned long lastUpdate = 0;
     unsigned long currentTime = millis();
     
-    // Only update if the value has changed significantly or enough time has passed
     if (abs(current - lastCurrent) > 20 || (currentTime - lastUpdate) > 200) {
         lastCurrent = current;
         lastUpdate = currentTime;
         
         debugPrint("Updating torque based on current: " + String(current) + "A");
         
-        // Clear all torque pixels first for a clean slate
         for(int i = 0; i < TORQUE_PIXELS; i++) {
             pixels.setPixelColor(i, 0);
         }
         
-        // Center LED (LED 4) is GREEN at idle
-        pixels.setPixelColor(4, pixels.Color(0, 255, 0));  // Green for center at all times
+        pixels.setPixelColor(4, pixels.Color(0, 255, 0));
         
-        if (current < -10) {  // Negative current/Regen - sweep UP from center (LEDs 3-0)
-            // Map from -10 to -450A to 0 to 4 LEDs (excluding center LED which is always on)
+        if (current < -10) {
             int numLeds = map(constrain(-current, 10, 450), 10, 450, 1, 4);
             
-            // Light up the LEDs in sequence from center upward with GREEN for regen
-            // Start at LED 3 (just above center) and work upward to LED 0
             for(int i = 0; i < numLeds; i++) {
-                pixels.setPixelColor(3 - i, pixels.Color(0, 255, 0)); // Green for regen
+                pixels.setPixelColor(3 - i, pixels.Color(0, 255, 0));
             }
-        } else if (current > 10) {  // Positive current/Driving - sweep DOWN from center (LEDs 5-19)
-            // Map from 10 to 450A to 0 to 15 LEDs
+        } else if (current > 10) {
             int numLeds = map(constrain(current, 10, 450), 10, 450, 1, 15);
             
-            // Light up the LEDs in sequence from center downward with ORANGE for power
-            // Start at LED 5 (just below center) and work downward
             for(int i = 0; i < numLeds; i++) {
-                pixels.setPixelColor(5 + i, pixels.Color(255, 165, 0)); // Orange for driving (255, 165, 0)
+                pixels.setPixelColor(5 + i, pixels.Color(255, 165, 0));
             }
         }
-        // If between -10 and 10, only the center green LED remains lit
     }
 }
 
-
 void SpeedometerController::updateSOC(uint8_t percentage) {
     debugPrint("Updating SOC: " + String(percentage) + "%");
-    int offset = TORQUE_PIXELS;  // Start after torque pixels
+    int offset = TORQUE_PIXELS;
     
-    // Clear previous SOC pixels
+    // Clear all SOC pixels first
     for(int i = offset; i < offset + SOC_PIXELS; i++) {
         pixels.setPixelColor(i, 0);
     }
     
-    // Light up SOC LEDs
     int ledsToLight = map(percentage, 0, 100, 0, SOC_PIXELS);
     debugPrint("SOC LEDs to light: " + String(ledsToLight));
     
+    // Light up LEDs with color-coded values
     for (int i = 0; i < ledsToLight; i++) {
-        uint32_t color = pixels.Color(0, 255, 0);  // Green for all charge levels
+        uint32_t color = getSOCColor(percentage);
         pixels.setPixelColor(offset + i, color);
     }
 
-    // Restore SOC markers with dim green
+    // Update SOC marker pixels with dimmed green
     offset += SOC_PIXELS;
     for (int i = 0; i < SOC_MARKER_PIXELS; i++) {
-        pixels.setPixelColor(offset + i, pixels.Color(0, 64, 0));  // Dim green for markers
+        pixels.setPixelColor(offset + i, pixels.Color(0, 64, 0));
     }
 }
-
-
 
 void SpeedometerController::updateErrorLights(uint16_t errorFlags) {
     debugPrint("Updating error lights: 0x" + String(errorFlags, HEX));
@@ -513,7 +560,6 @@ void SpeedometerController::updateErrorLights(uint16_t errorFlags) {
         pixels.Color(255, 0, 0)      // Check Engine - Red
     };
 
-    // Update each error light
     for (int i = 0; i < ERROR_PIXELS; i++) {
         uint32_t color = (errorFlags & (1 << i)) ? errorColors[i] : 0;
         pixels.setPixelColor(offset + i, color);
@@ -524,24 +570,24 @@ void SpeedometerController::updateTemperature(uint8_t temp) {
     debugPrint("Updating temperature display: " + String(temp) + "°C");
     int offset = TORQUE_PIXELS + SOC_PIXELS + SOC_MARKER_PIXELS + ERROR_PIXELS;
     
-    // Clear previous temperature pixels
+    // Clear all temperature pixels first
     for(int i = offset; i < offset + TEMP_PIXELS; i++) {
         pixels.setPixelColor(i, 0);
     }
     
-    // Map temperature (0-110°C) to LEDs - full range as specified
     int ledsToLight = map(constrain(temp, 0, 110), 0, 110, 0, TEMP_PIXELS);
     debugPrint("Temperature LEDs to light: " + String(ledsToLight));
     
+    // Light up LEDs with color-coded temperature values
     for (int i = 0; i < ledsToLight; i++) {
-        uint32_t color = pixels.Color(0, 255, 0);  // Green for all temperature levels
+        uint32_t color = getTemperatureColor(temp);
         pixels.setPixelColor(offset + i, color);
     }
 
-    // Restore temperature markers with a dim green color (instead of white)
+    // Update temperature marker pixels with dimmed green
     offset += TEMP_PIXELS;
     for (int i = 0; i < TEMP_MARKER_PIXELS; i++) {
-        pixels.setPixelColor(offset + i, pixels.Color(0, 64, 0));  // Dim green for markers
+        pixels.setPixelColor(offset + i, pixels.Color(0, 64, 0));
     }
 }
 
@@ -559,7 +605,6 @@ void SpeedometerController::show() {
     static unsigned long lastShowTime = 0;
     unsigned long currentTime = millis();
     
-    // Update at approximately 50Hz (20ms)
     if (currentTime - lastShowTime >= 20) {
         lastShowTime = currentTime;
         pixels.show();

@@ -39,12 +39,17 @@ public:
     void setIllumination(uint8_t brightness);
     void processCANMessages();
     void show();
-    void resetTripOdometer(); // Added for resetting trip meter
+    void resetTripOdometer();
+    
+    // Getter methods for InputController
+    uint8_t getSOC() const { return soc; }
+    float getLVVoltage() const { return lvVoltageAct; }
+    bool getDMCHasErrors() const { return dmcHasErrors; }
 
 private:
     Adafruit_NeoPixel pixels;
-    mcp2515_can* canBus;      // Changed to match VCU codebase
-    SPIClass* customSPI;      // Added to match VCU implementation
+    mcp2515_can* canBus;
+    SPIClass* customSPI;
     
     // CAN message data storage
     float torqueAvailable;    // Available torque (Nm)
@@ -60,6 +65,15 @@ private:
     uint8_t soc;              // State of charge (%)
     float bmsVoltage;         // Battery voltage (V)
     int16_t bmsCurrent;       // Battery current (A)
+    
+    // BSC data from 0x26A
+    float hvVoltageAct;       // HV voltage (V)
+    float lvVoltageAct;       // LV voltage (V) - Used for battery low warning
+    float hvCurrentAct;       // HV current (A)
+    float lvCurrentAct;       // LV current (A)
+    
+    // DMC error flags from 0x25A
+    bool dmcHasErrors;        // True if any DMC error is active
     
     // Derived values
     float vehicleSpeed;       // Calculated vehicle speed (kph)
@@ -90,6 +104,11 @@ private:
     // EEPROM methods for odometer persistence
     void loadOdometersFromEEPROM();
     void saveOdometersToEEPROM();
+    
+    // Color helper functions for fading effects
+    uint32_t hslToRgb(float h, float s, float l);
+    uint32_t getTemperatureColor(uint8_t temp);
+    uint32_t getSOCColor(uint8_t percentage);
 };
 
 #endif // SPEEDOMETER_CONTROLLER_H
