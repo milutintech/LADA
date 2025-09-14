@@ -79,13 +79,13 @@ uint32_t SpeedometerController::hslToRgb(float h, float s, float l) {
 uint32_t SpeedometerController::getTemperatureColor(uint8_t temp) {
     float hue;
     
-    if (temp <= 80) {
-        // Green for temps up to 80°C
+    if (temp <= 90) {
+        // Green for temps up to 90°C
         hue = 120.0; // Pure green
     } else {
-        // Fade from green (120°) to red (0°) for temps 80-110°C
-        float tempRange = constrain(temp, 80, 110);
-        hue = map(tempRange, 80, 110, 120, 0); // Linear interpolation from green to red
+        // Fade from green (120°) to red (0°) for temps 90-110°C
+        float tempRange = constrain(temp, 90, 110);
+        hue = map(tempRange, 90, 110, 120, 0); // Linear interpolation from green to red
     }
     
     // Use full saturation and moderate lightness for good visibility
@@ -99,17 +99,18 @@ uint32_t SpeedometerController::getSOCColor(uint8_t percentage) {
     if (percentage >= 25) {
         // Green for SOC 25% and above
         hue = 120.0; // Pure green
-    } else if (percentage >= 5) {
-        // Fade from green (120°) to red (0°) for SOC 25% to 5%
-        hue = map(percentage, 5, 25, 0, 120); // Linear interpolation from red to green
+    } else if (percentage >= 15) {
+        // Fade from green (120°) to red (0°) for SOC 25% to 15%
+        hue = map(percentage, 15, 25, 0, 120); // Linear interpolation from red to green
     } else {
-        // Red for SOC below 5%
+        // Red for SOC below 15%
         hue = 0.0; // Pure red
     }
     
     // Use full saturation and moderate lightness for good visibility
     return hslToRgb(hue, 1.0, 0.5);
 }
+
 
 bool SpeedometerController::begin() {
     debugPrint("Initializing SpeedometerController...");
@@ -280,7 +281,7 @@ void SpeedometerController::saveOdometersToEEPROM() {
     static unsigned long lastSaveTime = 0;
     unsigned long currentTime = millis();
     
-    if (currentTime - lastSaveTime >= 600000) {  // 10 minutes
+    if (currentTime - lastSaveTime >= 1000) {  // Every 1 second instead of 10 minutes
         EEPROM.put(EEPROM_TOTAL_ODO_ADDR, totalOdometer);
         EEPROM.put(EEPROM_TRIP_ODO_ADDR, tripOdometer);
         EEPROM.commit();
@@ -297,7 +298,7 @@ void SpeedometerController::resetTripOdometer() {
     EEPROM.commit();
     
     if (display) {
-        display->displayTripKm(0, 0);
+        //display->displayTripKm(0, 0);
     }
     
     debugPrint("Trip odometer reset");
@@ -449,11 +450,10 @@ void SpeedometerController::updateOdometer() {
         
         if (display) {
             unsigned long totalKm = static_cast<unsigned long>(totalOdometer);
-            unsigned long tripKm = static_cast<unsigned long>(tripOdometer);
-            uint8_t tripDecimal = static_cast<uint8_t>((tripOdometer - tripKm) * 10);
-            
             display->displayTotalKm(totalKm);
-            display->displayTripKm(tripKm, tripDecimal);
+            
+            // Don't update trip display here anymore - SOC uses it now
+            // display->displayTripKm(tripKm, tripDecimal); // REMOVED
         }
         
         lastOdometerUpdate = currentTime;
@@ -517,6 +517,15 @@ void SpeedometerController::updateTorque(int16_t current) {
 
 void SpeedometerController::updateSOC(uint8_t percentage) {
     debugPrint("Updating SOC: " + String(percentage) + "%");
+    
+    // Use the trip display to show SOC instead of the dedicated SOC pixels
+    if (display) {
+        // Display SOC as a percentage with one decimal place
+        // For example: SOC 87% would show as 87.0
+        display->displayTripKm(percentage, 0);
+    }
+    
+    // Optional: Still update the SOC pixels for backup/additional indication
     int offset = TORQUE_PIXELS;
     
     // Clear all SOC pixels first
