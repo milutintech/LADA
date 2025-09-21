@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "aa59c736-1b49-42a8-9631-951d3cb74dd7")
 	(paper "A3")
 	(lib_symbols
@@ -65,7 +65,7 @@
 			(symbol "3V3_ARROW_0_0"
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 -1.27)
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -77,7 +77,7 @@
 				)
 				(polyline
 					(pts
-						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+						(xy 0 0) (xy 0 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -89,7 +89,8 @@
 				)
 				(pin power_in line
 					(at 0 0 0)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "3V3"
 						(effects
 							(font
@@ -106,6 +107,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:5V_ARROW"
 			(power)
@@ -167,7 +169,7 @@
 			(symbol "5V_ARROW_0_0"
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 -1.27)
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -179,7 +181,7 @@
 				)
 				(polyline
 					(pts
-						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+						(xy 0 0) (xy 0 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -191,7 +193,8 @@
 				)
 				(pin power_in line
 					(at 0 0 0)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "5V"
 						(effects
 							(font
@@ -208,6 +211,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_0_02cd4be3c70576c341d710602a673aa"
 			(exclude_from_sim no)
@@ -268,18 +272,6 @@
 			(symbol "Designator_0_02cd4be3c70576c341d710602a673aa_1_0"
 				(polyline
 					(pts
-						(xy 0 -3.556) (xy 0 -3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 0 -1.778) (xy 0 -1.016)
 					)
 					(stroke
@@ -292,7 +284,7 @@
 				)
 				(polyline
 					(pts
-						(xy 2.54 -3.302) (xy -2.54 -3.302)
+						(xy 0 -3.556) (xy 0 -3.81)
 					)
 					(stroke
 						(width 0.254)
@@ -305,6 +297,18 @@
 				(polyline
 					(pts
 						(xy 2.54 -1.778) (xy -2.54 -1.778)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -3.302) (xy -2.54 -3.302)
 					)
 					(stroke
 						(width 0.254)
@@ -351,6 +355,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_0_1029c3af85768c4190bb7ad29bc67b5"
 			(exclude_from_sim no)
@@ -554,6 +559,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_0_11868f565c42a9108669ba33697ecf6"
 			(exclude_from_sim no)
@@ -614,18 +620,6 @@
 			(symbol "Designator_0_11868f565c42a9108669ba33697ecf6_1_0"
 				(polyline
 					(pts
-						(xy 0 -3.556) (xy 0 -3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 0 -1.778) (xy 0 -1.016)
 					)
 					(stroke
@@ -638,7 +632,7 @@
 				)
 				(polyline
 					(pts
-						(xy 2.54 -3.302) (xy -2.54 -3.302)
+						(xy 0 -3.556) (xy 0 -3.81)
 					)
 					(stroke
 						(width 0.254)
@@ -651,6 +645,18 @@
 				(polyline
 					(pts
 						(xy 2.54 -1.778) (xy -2.54 -1.778)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -3.302) (xy -2.54 -3.302)
 					)
 					(stroke
 						(width 0.254)
@@ -697,6 +703,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_0_IHLP5050CEER1R5M01"
 			(exclude_from_sim no)
@@ -756,20 +763,8 @@
 			)
 			(symbol "Designator_0_IHLP5050CEER1R5M01_1_0"
 				(arc
-					(start 3.81 1.27)
+					(start 2.54 0)
 					(mid 2.912 0.898)
-					(end 2.54 0)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 5.08 0)
-					(mid 4.708 0.898)
 					(end 3.81 1.27)
 					(stroke
 						(width 0.254)
@@ -780,8 +775,8 @@
 					)
 				)
 				(arc
-					(start 6.35 1.27)
-					(mid 5.452 0.898)
+					(start 3.81 1.27)
+					(mid 4.708 0.898)
 					(end 5.08 0)
 					(stroke
 						(width 0.254)
@@ -792,8 +787,8 @@
 					)
 				)
 				(arc
-					(start 7.62 0)
-					(mid 7.248 0.898)
+					(start 5.08 0)
+					(mid 5.452 0.898)
 					(end 6.35 1.27)
 					(stroke
 						(width 0.254)
@@ -804,8 +799,8 @@
 					)
 				)
 				(arc
-					(start 8.89 1.27)
-					(mid 7.992 0.898)
+					(start 6.35 1.27)
+					(mid 7.248 0.898)
 					(end 7.62 0)
 					(stroke
 						(width 0.254)
@@ -816,8 +811,8 @@
 					)
 				)
 				(arc
-					(start 10.16 0)
-					(mid 9.788 0.898)
+					(start 7.62 0)
+					(mid 7.992 0.898)
 					(end 8.89 1.27)
 					(stroke
 						(width 0.254)
@@ -828,8 +823,8 @@
 					)
 				)
 				(arc
-					(start 11.43 1.27)
-					(mid 10.532 0.898)
+					(start 8.89 1.27)
+					(mid 9.788 0.898)
 					(end 10.16 0)
 					(stroke
 						(width 0.254)
@@ -840,9 +835,21 @@
 					)
 				)
 				(arc
-					(start 12.7 0)
-					(mid 12.328 0.898)
+					(start 10.16 0)
+					(mid 10.532 0.898)
 					(end 11.43 1.27)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 11.43 1.27)
+					(mid 12.328 0.898)
+					(end 12.7 0)
 					(stroke
 						(width 0.254)
 						(type solid)
@@ -888,6 +895,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_0_TPS51386"
 			(exclude_from_sim no)
@@ -976,24 +984,6 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 30.48 -43.18 180)
-					(length 5.08)
-					(name "AGND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin input line
 					(at -5.08 -15.24 0)
 					(length 5.08)
@@ -1005,6 +995,42 @@
 						)
 					)
 					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -20.32 0)
+					(length 5.08)
+					(name "PG"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -35.56 0)
+					(length 5.08)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1031,16 +1057,16 @@
 					)
 				)
 				(pin passive line
-					(at 30.48 -45.72 180)
+					(at 30.48 0 180)
 					(length 5.08)
-					(name "PGND"
+					(name "VBST"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "2"
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1049,16 +1075,16 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -20.32 0)
+					(at 30.48 -7.62 180)
 					(length 5.08)
-					(name "PG"
+					(name "SW"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "3"
+					(number "7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1121,16 +1147,16 @@
 					)
 				)
 				(pin passive line
-					(at 30.48 -7.62 180)
+					(at 30.48 -43.18 180)
 					(length 5.08)
-					(name "SW"
+					(name "AGND"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "7"
+					(number "10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1139,34 +1165,16 @@
 					)
 				)
 				(pin passive line
-					(at 30.48 0 180)
+					(at 30.48 -45.72 180)
 					(length 5.08)
-					(name "VBST"
+					(name "PGND"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -35.56 0)
-					(length 5.08)
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1175,6 +1183,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_0_b4654b650e69147ec39a6b967a45e02"
 			(exclude_from_sim no)
@@ -1235,18 +1244,6 @@
 			(symbol "Designator_0_b4654b650e69147ec39a6b967a45e02_1_0"
 				(polyline
 					(pts
-						(xy 0 -3.556) (xy 0 -3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 0 -1.778) (xy 0 -1.016)
 					)
 					(stroke
@@ -1259,7 +1256,7 @@
 				)
 				(polyline
 					(pts
-						(xy 2.54 -3.302) (xy -2.54 -3.302)
+						(xy 0 -3.556) (xy 0 -3.81)
 					)
 					(stroke
 						(width 0.254)
@@ -1272,6 +1269,18 @@
 				(polyline
 					(pts
 						(xy 2.54 -1.778) (xy -2.54 -1.778)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -3.302) (xy -2.54 -3.302)
 					)
 					(stroke
 						(width 0.254)
@@ -1318,6 +1327,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_1_1029c3af85768c4190bb7ad29bc67b5"
 			(exclude_from_sim no)
@@ -1378,7 +1388,7 @@
 			(symbol "Designator_1_1029c3af85768c4190bb7ad29bc67b5_1_0"
 				(polyline
 					(pts
-						(xy -1.27 5.842) (xy 1.27 7.112)
+						(xy -1.27 10.922) (xy 1.27 12.192)
 					)
 					(stroke
 						(width 0.254)
@@ -1402,7 +1412,19 @@
 				)
 				(polyline
 					(pts
-						(xy -1.27 10.922) (xy 1.27 12.192)
+						(xy -1.27 5.842) (xy 1.27 7.112)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 12.7) (xy 0 13.462)
 					)
 					(stroke
 						(width 0.254)
@@ -1438,19 +1460,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 12.7) (xy 0 13.462)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 7.112) (xy -1.27 8.382)
+						(xy 1.27 12.192) (xy 0 12.7)
 					)
 					(stroke
 						(width 0.254)
@@ -1474,7 +1484,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 12.192) (xy 0 12.7)
+						(xy 1.27 7.112) (xy -1.27 8.382)
 					)
 					(stroke
 						(width 0.254)
@@ -1482,24 +1492,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-				(pin passive line
-					(at 0 0 90)
-					(length 5.08)
-					(name "1"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
 					)
 				)
 				(pin passive line
@@ -1520,7 +1512,26 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 0 0 90)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_1_CAP-NP-2"
 			(exclude_from_sim no)
@@ -1593,7 +1604,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0 3.302)
+						(xy 0 5.08) (xy 0 4.318)
 					)
 					(stroke
 						(width 0.254)
@@ -1605,7 +1616,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 5.08) (xy 0 4.318)
+						(xy 0 2.54) (xy 0 3.302)
 					)
 					(stroke
 						(width 0.254)
@@ -1628,24 +1639,6 @@
 					)
 				)
 				(pin passive line
-					(at 0 0 90)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
 					(at 0 7.62 270)
 					(length 2.54)
 					(name "2"
@@ -1663,7 +1656,26 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_1_RES_0"
 			(exclude_from_sim no)
@@ -1736,24 +1748,6 @@
 					)
 				)
 				(pin passive line
-					(at 2.54 -2.54 90)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin passive line
 					(at 2.54 7.62 270)
 					(length 2.54)
 					(name "2"
@@ -1771,7 +1765,26 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 2.54 -2.54 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_3_ONSC-A1K3-3"
 			(exclude_from_sim no)
@@ -1832,18 +1845,6 @@
 			(symbol "Designator_3_ONSC-A1K3-3_1_0"
 				(polyline
 					(pts
-						(xy 0 -2.54) (xy -2.54 0) (xy -5.08 -2.54) (xy 0 -2.54)
-					)
-					(stroke
-						(width -0.0001)
-						(type solid)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
 						(xy 0 1.016) (xy -1.016 0) (xy -4.064 0) (xy -5.08 -1.016)
 					)
 					(stroke
@@ -1854,22 +1855,16 @@
 						(type none)
 					)
 				)
-				(pin passive line
-					(at -2.54 -7.62 90)
-					(length 5.08)
-					(name "A"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
+				(polyline
+					(pts
+						(xy 0 -2.54) (xy -2.54 0) (xy -5.08 -2.54) (xy 0 -2.54)
 					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
+					(stroke
+						(width -0.0001)
+						(type solid)
+					)
+					(fill
+						(type outline)
 					)
 				)
 				(pin passive line
@@ -1883,6 +1878,24 @@
 						)
 					)
 					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -2.54 -7.62 90)
+					(length 5.08)
+					(name "A"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1923,6 +1936,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:GND_BAR"
 			(power)
@@ -2008,7 +2022,8 @@
 				)
 				(pin power_in line
 					(at 0 0 0)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -2025,6 +2040,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:KL30i_ARROW"
 			(power)
@@ -2086,7 +2102,7 @@
 			(symbol "KL30i_ARROW_0_0"
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 -1.27)
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -2098,7 +2114,7 @@
 				)
 				(polyline
 					(pts
-						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+						(xy 0 0) (xy 0 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -2110,7 +2126,8 @@
 				)
 				(pin power_in line
 					(at 0 0 0)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "KL30i"
 						(effects
 							(font
@@ -2127,7 +2144,19 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
+	)
+	(text "PG = Power Good indicator"
+		(exclude_from_sim no)
+		(at 55.88 258.9022 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "80a1c6a6-c0c2-47e3-a048-0205e55bc212")
 	)
 	(junction
 		(at 198.12 220.8022)
@@ -3257,17 +3286,6 @@
 		)
 		(uuid "fd9605a4-0f87-4bdc-8c56-416b1f0ddf07")
 	)
-	(text "PG = Power Good indicator"
-		(exclude_from_sim no)
-		(at 55.88 258.9022 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "80a1c6a6-c0c2-47e3-a048-0205e55bc212")
-	)
 	(symbol
 		(lib_id "Speedometer_Tech-altium-import:Designator_0_11868f565c42a9108669ba33697ecf6")
 		(at 304.8 185.2422 0)
@@ -4015,7 +4033,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "084fc811-6b66-4812-b9ae-a636ce62f70b")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0253"
 			(at 55.88 106.5022 0)
 			(effects
 				(font
@@ -4065,7 +4083,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0253")
 					(unit 1)
 				)
 			)
@@ -4080,7 +4098,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "106f3de2-7f66-4711-a874-e2c55bff6233")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0274"
 			(at 55.88 182.7022 0)
 			(effects
 				(font
@@ -4130,7 +4148,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0274")
 					(unit 1)
 				)
 			)
@@ -4145,7 +4163,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1335be06-a911-4a66-b0bc-2b6416be6a4b")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0266"
 			(at 289.56 190.3222 0)
 			(effects
 				(font
@@ -4195,7 +4213,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0266")
 					(unit 1)
 				)
 			)
@@ -4210,7 +4228,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "142d1c05-7455-4baa-a99c-fc059791a470")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0249"
 			(at 104.14 134.4422 0)
 			(effects
 				(font
@@ -4260,7 +4278,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0249")
 					(unit 1)
 				)
 			)
@@ -4275,7 +4293,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "149a5971-1c49-4589-b281-ca67fec36073")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0264"
 			(at 198.12 147.1422 0)
 			(effects
 				(font
@@ -4325,7 +4343,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0264")
 					(unit 1)
 				)
 			)
@@ -5836,7 +5854,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "19253d58-972e-4761-b979-3a627bf757e1")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0278"
 			(at 104.14 210.6422 0)
 			(effects
 				(font
@@ -5886,7 +5904,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0278")
 					(unit 1)
 				)
 			)
@@ -6290,7 +6308,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2cd74487-aacb-40a9-9f59-d67283b37de6")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0255"
 			(at 320.04 103.9622 0)
 			(effects
 				(font
@@ -6340,7 +6358,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0255")
 					(unit 1)
 				)
 			)
@@ -6694,7 +6712,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "32692b64-5e57-4b34-bbfb-4ef5507f182b")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0270"
 			(at 320.04 190.3222 0)
 			(effects
 				(font
@@ -6744,7 +6762,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0270")
 					(unit 1)
 				)
 			)
@@ -7457,7 +7475,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3c05d665-da61-47ea-ab64-5530fba227b1")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0276"
 			(at 68.58 182.7022 0)
 			(effects
 				(font
@@ -7507,7 +7525,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0276")
 					(unit 1)
 				)
 			)
@@ -7931,7 +7949,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4e82cd8b-3374-43ea-b782-266297126e2e")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0273"
 			(at 55.88 172.5422 0)
 			(effects
 				(font
@@ -7981,7 +7999,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0273")
 					(unit 1)
 				)
 			)
@@ -8617,7 +8635,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5bf23d97-22d3-44b8-b03c-2db3606810d8")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0248"
 			(at 96.52 134.4422 0)
 			(effects
 				(font
@@ -8667,7 +8685,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0248")
 					(unit 1)
 				)
 			)
@@ -8751,7 +8769,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5fe01f24-bb17-45ea-afb9-32b0d4d98959")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0279"
 			(at 96.52 182.7022 0)
 			(effects
 				(font
@@ -8801,7 +8819,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0279")
 					(unit 1)
 				)
 			)
@@ -8816,7 +8834,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "604f1ccc-c22e-4d1c-819e-c69410ee71da")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0267"
 			(at 304.8 190.3222 0)
 			(effects
 				(font
@@ -8866,7 +8884,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0267")
 					(unit 1)
 				)
 			)
@@ -9678,7 +9696,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6e5bc7f7-0d5a-4cf7-9b5f-2f78ced83aac")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0250"
 			(at 96.52 106.5022 0)
 			(effects
 				(font
@@ -9728,7 +9746,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0250")
 					(unit 1)
 				)
 			)
@@ -10550,7 +10568,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7e25f785-d1f8-4cc9-94a9-db9220cb0a71")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0271"
 			(at 137.16 147.1422 0)
 			(effects
 				(font
@@ -10600,7 +10618,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0271")
 					(unit 1)
 				)
 			)
@@ -10615,7 +10633,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "80c47149-330f-42b9-8dd7-674bba4b893f")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0260"
 			(at 304.8 114.1222 0)
 			(effects
 				(font
@@ -10665,7 +10683,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0260")
 					(unit 1)
 				)
 			)
@@ -11069,7 +11087,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "862f720f-fa93-40c7-9934-34d8f23022fe")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0259"
 			(at 320.04 114.1222 0)
 			(effects
 				(font
@@ -11119,7 +11137,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0259")
 					(unit 1)
 				)
 			)
@@ -12580,7 +12598,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a14b933e-fb64-409c-887d-b59b8a33af49")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0263"
 			(at 116.84 210.6422 0)
 			(effects
 				(font
@@ -12630,7 +12648,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0263")
 					(unit 1)
 				)
 			)
@@ -13702,7 +13720,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ad8b8b1c-f63b-4105-90a0-3515d69791a6")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0254"
 			(at 55.88 96.3422 0)
 			(effects
 				(font
@@ -13752,7 +13770,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0254")
 					(unit 1)
 				)
 			)
@@ -13767,7 +13785,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "aeb28f7c-5a6b-4c2c-a734-c31c375c0b55")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0265"
 			(at 256.54 213.1822 0)
 			(effects
 				(font
@@ -13817,7 +13835,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0265")
 					(unit 1)
 				)
 			)
@@ -13832,7 +13850,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b2bf49ab-eb6e-4a8d-b0a0-d33566797ec3")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0256"
 			(at 256.54 136.9822 0)
 			(effects
 				(font
@@ -13882,7 +13900,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0256")
 					(unit 1)
 				)
 			)
@@ -14325,7 +14343,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b8e8ae5b-05c3-4fb9-9e60-b327cbba99aa")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0262"
 			(at 137.16 223.3422 0)
 			(effects
 				(font
@@ -14375,7 +14393,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0262")
 					(unit 1)
 				)
 			)
@@ -14390,7 +14408,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bc3e282d-1b8b-4bae-87cf-4ae89477ea79")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0261"
 			(at 198.12 223.3422 0)
 			(effects
 				(font
@@ -14440,7 +14458,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0261")
 					(unit 1)
 				)
 			)
@@ -14455,7 +14473,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bd6a05c7-16e4-4114-aaac-4ec6a40db859")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0275"
 			(at 81.28 182.7022 0)
 			(effects
 				(font
@@ -14505,7 +14523,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0275")
 					(unit 1)
 				)
 			)
@@ -14520,7 +14538,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "be3880f6-0fa6-40da-be25-aa6ccdb3c799")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0251"
 			(at 81.28 106.5022 0)
 			(effects
 				(font
@@ -14570,7 +14588,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0251")
 					(unit 1)
 				)
 			)
@@ -14585,7 +14603,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c72b83c6-ebfb-4afa-8d85-f906acd8465c")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0268"
 			(at 274.32 190.3222 0)
 			(effects
 				(font
@@ -14635,7 +14653,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0268")
 					(unit 1)
 				)
 			)
@@ -14749,7 +14767,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c907e0fd-ea52-4e85-8564-f2e372b6fe74")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0257"
 			(at 289.56 114.1222 0)
 			(effects
 				(font
@@ -14799,7 +14817,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0257")
 					(unit 1)
 				)
 			)
@@ -15278,7 +15296,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ce876b92-4d15-440f-b270-58012a5ab22d")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0258"
 			(at 274.32 114.1222 0)
 			(effects
 				(font
@@ -15328,7 +15346,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0258")
 					(unit 1)
 				)
 			)
@@ -15343,7 +15361,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "deee6b05-33f1-41e2-aee0-34ff96d104dd")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0277"
 			(at 96.52 210.6422 0)
 			(effects
 				(font
@@ -15393,7 +15411,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0277")
 					(unit 1)
 				)
 			)
@@ -15408,7 +15426,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e4701b0f-ad9d-481d-84ce-976dd0d34f6e")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0272"
 			(at 116.84 134.4422 0)
 			(effects
 				(font
@@ -15458,7 +15476,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0272")
 					(unit 1)
 				)
 			)
@@ -16542,7 +16560,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f6226cc6-60bf-4ee7-9c9d-6f562bfaf391")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0269"
 			(at 320.04 180.1622 0)
 			(effects
 				(font
@@ -16592,7 +16610,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0269")
 					(unit 1)
 				)
 			)
@@ -17405,7 +17423,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fe5404ad-73d9-4b7d-be84-2cd081efbcd7")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0252"
 			(at 68.58 106.5022 0)
 			(effects
 				(font
@@ -17455,7 +17473,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR?")
+					(reference "#PWR0252")
 					(unit 1)
 				)
 			)

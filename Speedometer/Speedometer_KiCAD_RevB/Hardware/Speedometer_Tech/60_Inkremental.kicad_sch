@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "901bc3c7-d24a-4fac-a28e-283c0e3a8ed8")
 	(paper "A3")
 	(lib_symbols
@@ -65,7 +65,7 @@
 			(symbol "3V3_ARROW_0_0"
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 -1.27)
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -77,7 +77,7 @@
 				)
 				(polyline
 					(pts
-						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+						(xy 0 0) (xy 0 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -89,7 +89,8 @@
 				)
 				(pin power_in line
 					(at 0 0 0)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "3V3"
 						(effects
 							(font
@@ -106,6 +107,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_1_1029c3af85768c4190bb7ad29bc67b5"
 			(exclude_from_sim no)
@@ -166,7 +168,7 @@
 			(symbol "Designator_1_1029c3af85768c4190bb7ad29bc67b5_1_0"
 				(polyline
 					(pts
-						(xy -1.27 5.842) (xy 1.27 7.112)
+						(xy -1.27 10.922) (xy 1.27 12.192)
 					)
 					(stroke
 						(width 0.254)
@@ -190,7 +192,19 @@
 				)
 				(polyline
 					(pts
-						(xy -1.27 10.922) (xy 1.27 12.192)
+						(xy -1.27 5.842) (xy 1.27 7.112)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 12.7) (xy 0 13.462)
 					)
 					(stroke
 						(width 0.254)
@@ -226,19 +240,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 12.7) (xy 0 13.462)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 7.112) (xy -1.27 8.382)
+						(xy 1.27 12.192) (xy 0 12.7)
 					)
 					(stroke
 						(width 0.254)
@@ -262,7 +264,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 12.192) (xy 0 12.7)
+						(xy 1.27 7.112) (xy -1.27 8.382)
 					)
 					(stroke
 						(width 0.254)
@@ -270,24 +272,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-				(pin passive line
-					(at 0 0 90)
-					(length 5.08)
-					(name "1"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
 					)
 				)
 				(pin passive line
@@ -308,7 +292,26 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 0 0 90)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_3_1adf0dd01260c80cf25a44bfd6b99ba"
 			(exclude_from_sim no)
@@ -367,9 +370,10 @@
 				)
 			)
 			(symbol "Designator_3_1adf0dd01260c80cf25a44bfd6b99ba_1_0"
-				(circle
-					(center -5.08 -6.858)
-					(radius 0.508)
+				(polyline
+					(pts
+						(xy -7.62 0) (xy -6.096 0)
+					)
 					(stroke
 						(width 0.254)
 						(type solid)
@@ -378,9 +382,10 @@
 						(type none)
 					)
 				)
-				(circle
-					(center -5.08 -3.302)
-					(radius 0.508)
+				(polyline
+					(pts
+						(xy -7.62 0) (xy -5.08 0)
+					)
 					(stroke
 						(width 0.254)
 						(type solid)
@@ -415,7 +420,7 @@
 				)
 				(polyline
 					(pts
-						(xy -7.62 0) (xy -6.096 0)
+						(xy -5.08 0) (xy -5.08 -2.54)
 					)
 					(stroke
 						(width 0.254)
@@ -425,10 +430,20 @@
 						(type none)
 					)
 				)
-				(polyline
-					(pts
-						(xy -7.62 0) (xy -5.08 0)
+				(circle
+					(center -5.08 -3.302)
+					(radius 0.508)
+					(stroke
+						(width 0.254)
+						(type solid)
 					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center -5.08 -6.858)
+					(radius 0.508)
 					(stroke
 						(width 0.254)
 						(type solid)
@@ -451,43 +466,7 @@
 				)
 				(polyline
 					(pts
-						(xy -5.08 0) (xy -5.08 -2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy -4.826 -3.81) (xy -3.302 -6.35)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -2.54 -10.16) (xy -5.08 -10.16)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -2.54 -10.16) (xy -4.064 -10.16)
 					)
 					(stroke
 						(width 0.254)
@@ -521,17 +500,41 @@
 						(type none)
 					)
 				)
+				(polyline
+					(pts
+						(xy -2.54 -10.16) (xy -5.08 -10.16)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 -10.16) (xy -4.064 -10.16)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
 				(pin passive line
-					(at 0 -10.16 180)
+					(at -10.16 0 0)
 					(length 5.08)
-					(name "1"
+					(name "4"
 						(effects
 							(font
 								(size 0 0)
 							)
 						)
 					)
-					(number "1"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -576,16 +579,16 @@
 					)
 				)
 				(pin passive line
-					(at -10.16 0 0)
+					(at 0 -10.16 180)
 					(length 5.08)
-					(name "4"
+					(name "1"
 						(effects
 							(font
 								(size 0 0)
 							)
 						)
 					)
-					(number "4"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -594,6 +597,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:GND_BAR"
 			(power)
@@ -679,7 +683,8 @@
 				)
 				(pin power_in line
 					(at 0 0 0)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -696,6 +701,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(junction
@@ -829,7 +835,6 @@
 	(hierarchical_label "BTN"
 		(shape passive)
 		(at 170.18 172.5422 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -847,7 +852,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "443e8a65-c5bf-4d6c-85a1-b727fa1c5eb6")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0209"
 			(at 162.56 147.1422 0)
 			(effects
 				(font
@@ -897,7 +902,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/61ba4488-526a-42d1-832c-2c412551b9ed"
-					(reference "#PWR?")
+					(reference "#PWR0209")
 					(unit 1)
 				)
 			)
@@ -1271,7 +1276,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "862d894b-5da6-4976-a0a6-9595f0f2fc86")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0210"
 			(at 162.56 195.4022 0)
 			(effects
 				(font
@@ -1321,7 +1326,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/61ba4488-526a-42d1-832c-2c412551b9ed"
-					(reference "#PWR?")
+					(reference "#PWR0210")
 					(unit 1)
 				)
 			)

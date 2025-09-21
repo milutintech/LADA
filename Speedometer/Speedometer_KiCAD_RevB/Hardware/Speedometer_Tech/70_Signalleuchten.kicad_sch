@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "9170a24e-bed6-4401-9624-a4048d9145a1")
 	(paper "A3")
 	(lib_symbols
@@ -65,7 +65,7 @@
 			(symbol "5V_ARROW_0_0"
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 -1.27)
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -77,7 +77,7 @@
 				)
 				(polyline
 					(pts
-						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+						(xy 0 0) (xy 0 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -89,7 +89,8 @@
 				)
 				(pin power_in line
 					(at 0 0 0)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "5V"
 						(effects
 							(font
@@ -106,6 +107,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_1_WS2812B-4020_2"
 			(exclude_from_sim no)
@@ -176,24 +178,6 @@
 						(type background)
 					)
 				)
-				(pin input line
-					(at 2.54 -12.7 90)
-					(length 5.08)
-					(name "DIN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin power_in line
 					(at -2.54 12.7 270)
 					(length 5.08)
@@ -248,7 +232,26 @@
 						)
 					)
 				)
+				(pin input line
+					(at 2.54 -12.7 90)
+					(length 5.08)
+					(name "DIN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:GND_BAR"
 			(power)
@@ -334,7 +337,8 @@
 				)
 				(pin power_in line
 					(at 0 0 0)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -351,7 +355,19 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
+	)
+	(text "7x WS2812B-4020 = 7 * 12mA * 5V = 0.42W"
+		(exclude_from_sim no)
+		(at 25.4 45.5422 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ed7eb69c-bb8d-49eb-b756-b6bf4d29caa3")
 	)
 	(junction
 		(at 320.04 162.3822)
@@ -1157,21 +1173,9 @@
 		)
 		(uuid "ecde821e-7a9c-46a9-b2ca-9f5a9fb40f36")
 	)
-	(text "7x WS2812B-4020 = 7 * 12mA * 5V = 0.42W"
-		(exclude_from_sim no)
-		(at 25.4 45.5422 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ed7eb69c-bb8d-49eb-b756-b6bf4d29caa3")
-	)
 	(hierarchical_label "SigIn"
 		(shape input)
 		(at 330.2 195.4022 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1183,7 +1187,6 @@
 	(hierarchical_label "SigOut"
 		(shape output)
 		(at 50.8 195.4022 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1666,7 +1669,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "28322f59-2fd8-4aa5-96e8-33abbe15144c")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0212"
 			(at 335.28 162.3822 0)
 			(effects
 				(font
@@ -1716,7 +1719,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/885dc56c-2be8-4b1b-9aa3-a3c4adf2e602"
-					(reference "#PWR?")
+					(reference "#PWR0212")
 					(unit 1)
 				)
 			)
@@ -2971,7 +2974,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "be527d39-17ed-4d15-b540-acaf743b02f2")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0211"
 			(at 335.28 167.4622 0)
 			(effects
 				(font
@@ -3021,7 +3024,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/885dc56c-2be8-4b1b-9aa3-a3c4adf2e602"
-					(reference "#PWR?")
+					(reference "#PWR0211")
 					(unit 1)
 				)
 			)

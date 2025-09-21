@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "0808872f-92ae-4029-93d2-9995e3932b4f")
 	(paper "A3")
 	(lib_symbols
@@ -65,7 +65,7 @@
 			(symbol "5V_ARROW_0_0"
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 -1.27)
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -77,7 +77,7 @@
 				)
 				(polyline
 					(pts
-						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+						(xy 0 0) (xy 0 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -89,7 +89,8 @@
 				)
 				(pin power_in line
 					(at 0 0 0)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "5V"
 						(effects
 							(font
@@ -106,6 +107,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:Designator_0_WS2812B-4020_2"
 			(exclude_from_sim no)
@@ -176,6 +178,24 @@
 						(type background)
 					)
 				)
+				(pin output line
+					(at -12.7 2.54 0)
+					(length 5.08)
+					(name "DOUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin input line
 					(at -12.7 -2.54 0)
 					(length 5.08)
@@ -212,24 +232,6 @@
 						)
 					)
 				)
-				(pin output line
-					(at -12.7 2.54 0)
-					(length 5.08)
-					(name "DOUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin power_in line
 					(at 12.7 -2.54 180)
 					(length 5.08)
@@ -249,6 +251,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Speedometer_Tech-altium-import:GND_BAR"
 			(power)
@@ -334,7 +337,8 @@
 				)
 				(pin power_in line
 					(at 0 0 0)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -351,7 +355,74 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
+	)
+	(text "18x WS2812B-4020 = 18 * 12mA * 5V = 1.08W"
+		(exclude_from_sim no)
+		(at 25.4 45.5422 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "05818b1a-3f0e-4bba-846c-5ba863d07ac3")
+	)
+	(text "°C"
+		(exclude_from_sim no)
+		(at 292.1 124.2822 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify bottom)
+		)
+		(uuid "1d04fff2-aa53-4fe2-b265-37d075a9cb46")
+	)
+	(text "30"
+		(exclude_from_sim no)
+		(at 292.1 248.7422 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify bottom)
+		)
+		(uuid "491aeae5-4906-4c29-bfe3-f3f989ebb31a")
+	)
+	(text "70"
+		(exclude_from_sim no)
+		(at 292.1 164.9222 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify bottom)
+		)
+		(uuid "65a03ef4-da25-460b-b6dc-5b23c6902596")
+	)
+	(text "Kühlwasser Symbol"
+		(exclude_from_sim no)
+		(at 292.1 205.5622 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify bottom)
+		)
+		(uuid "798baf55-6d9d-4166-8b7f-53b123363933")
+	)
+	(text "110"
+		(exclude_from_sim no)
+		(at 292.1 83.6422 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify bottom)
+		)
+		(uuid "d4ee399b-9533-4636-a9f2-4417aec7e2d0")
 	)
 	(junction
 		(at 154.94 177.6222)
@@ -1843,76 +1914,9 @@
 		)
 		(uuid "ff387abd-12f0-45ee-87e0-96ddac9b7b17")
 	)
-	(text "18x WS2812B-4020 = 18 * 12mA * 5V = 1.08W"
-		(exclude_from_sim no)
-		(at 25.4 45.5422 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "05818b1a-3f0e-4bba-846c-5ba863d07ac3")
-	)
-	(text "°C"
-		(exclude_from_sim no)
-		(at 292.1 124.2822 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify bottom)
-		)
-		(uuid "1d04fff2-aa53-4fe2-b265-37d075a9cb46")
-	)
-	(text "30"
-		(exclude_from_sim no)
-		(at 292.1 248.7422 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify bottom)
-		)
-		(uuid "491aeae5-4906-4c29-bfe3-f3f989ebb31a")
-	)
-	(text "70"
-		(exclude_from_sim no)
-		(at 292.1 164.9222 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify bottom)
-		)
-		(uuid "65a03ef4-da25-460b-b6dc-5b23c6902596")
-	)
-	(text "Kühlwasser Symbol"
-		(exclude_from_sim no)
-		(at 292.1 205.5622 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify bottom)
-		)
-		(uuid "798baf55-6d9d-4166-8b7f-53b123363933")
-	)
-	(text "110"
-		(exclude_from_sim no)
-		(at 292.1 83.6422 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify bottom)
-		)
-		(uuid "d4ee399b-9533-4636-a9f2-4417aec7e2d0")
-	)
 	(hierarchical_label "TempOut"
 		(shape output)
 		(at 101.6 271.6022 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1924,7 +1928,6 @@
 	(hierarchical_label "TempIn"
 		(shape input)
 		(at 101.6 261.4422 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2097,7 +2100,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "070e5b25-a177-4927-b9f9-3a6b227c5ece")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0144"
 			(at 256.54 256.3622 0)
 			(effects
 				(font
@@ -2147,7 +2150,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/fac9d2fd-8f56-4aa0-a061-7ec6e5122621"
-					(reference "#PWR?")
+					(reference "#PWR0144")
 					(unit 1)
 				)
 			)
@@ -2162,7 +2165,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0d68a2bc-ca6d-4b55-9fdc-5fd885a731b9")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0145"
 			(at 261.62 76.0222 0)
 			(effects
 				(font
@@ -2212,7 +2215,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/fac9d2fd-8f56-4aa0-a061-7ec6e5122621"
-					(reference "#PWR?")
+					(reference "#PWR0145")
 					(unit 1)
 				)
 			)
@@ -2227,7 +2230,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2d55df0d-634f-47ca-9e9c-39901a70741a")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0146"
 			(at 210.82 76.0222 0)
 			(effects
 				(font
@@ -2277,7 +2280,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/fac9d2fd-8f56-4aa0-a061-7ec6e5122621"
-					(reference "#PWR?")
+					(reference "#PWR0146")
 					(unit 1)
 				)
 			)
@@ -2602,7 +2605,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3bbe7c6e-c7ac-4385-964b-46e9122f2413")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0147"
 			(at 160.02 76.0222 0)
 			(effects
 				(font
@@ -2652,7 +2655,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/fac9d2fd-8f56-4aa0-a061-7ec6e5122621"
-					(reference "#PWR?")
+					(reference "#PWR0147")
 					(unit 1)
 				)
 			)
@@ -3287,7 +3290,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8af2c966-2bb5-438c-8a1b-a52ed94cb65b")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0149"
 			(at 205.74 261.4422 0)
 			(effects
 				(font
@@ -3337,7 +3340,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/fac9d2fd-8f56-4aa0-a061-7ec6e5122621"
-					(reference "#PWR?")
+					(reference "#PWR0149")
 					(unit 1)
 				)
 			)
@@ -4282,7 +4285,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c7b1d5c5-c69e-457d-90d1-929daaa95eb9")
-		(property "Reference" "#PWR?"
+		(property "Reference" "#PWR0148"
 			(at 154.94 243.6622 0)
 			(effects
 				(font
@@ -4332,7 +4335,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/fac9d2fd-8f56-4aa0-a061-7ec6e5122621"
-					(reference "#PWR?")
+					(reference "#PWR0148")
 					(unit 1)
 				)
 			)
