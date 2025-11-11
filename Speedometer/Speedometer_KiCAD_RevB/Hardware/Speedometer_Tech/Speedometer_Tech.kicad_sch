@@ -5,6 +5,373 @@
 	(uuid "7a911dfa-7957-409a-ad31-10c26a0bf949")
 	(paper "A3")
 	(lib_symbols
+		(symbol "Connector:Conn_01x03_Pin"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x03_Pin"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x03, script generated"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x03_Pin_1_1"
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 2.54) (xy 0.8636 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 5.08 2.54 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Mechanical:Fiducial"
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board yes)
+			(property "Reference" "FID"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Fiducial"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Fiducial Marker"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "fiducial marker"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Fiducial*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Fiducial_0_1"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Mechanical:MountingHole"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board yes)
+			(property "Reference" "H"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Mounting Hole without connection"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "MountingHole_0_1"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Speedometer_Tech-altium-import:5V_ARROW"
 			(power)
 			(exclude_from_sim no)
@@ -525,200 +892,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Mounting hole M4"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "*PTH-M4D7X7-Footprint-1*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "root_0_PTH-M4D7X7-Symbol-1_1_0"
-				(circle
-					(center 0 0)
-					(radius 1.27)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 0 0)
-					(radius 2.54)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at 0 -7.62 90)
-					(length 5.08)
-					(name "1"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "*Passermarke-Footprint-1*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "root_0_Passermarke-Symbol-1_1_0"
-				(circle
-					(center 0 0)
-					(radius 1)
-					(stroke
-						(width -0.0001)
-						(type solid)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(circle
-					(center 0 0)
-					(radius 2)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start 2.54 2.54)
-					(end -2.54 -2.54)
-					(stroke
-						(width 0.254)
-						(type solid)
-						(color 128 0 0 1)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Speedometer_Tech-altium-import:root_0_RES-2"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -828,200 +1001,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Speedometer_Tech-altium-import:root_2_3P-SMD/THT"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "*3P-SMD/THT*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "root_2_3P-SMD/THT_1_0"
-				(circle
-					(center -7.62 5.08)
-					(radius 0.762)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(circle
-					(center -7.62 2.54)
-					(radius 0.762)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start -6.858 0.762)
-					(end -8.382 -0.762)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start -5.08 7.62)
-					(end -12.7 -2.54)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -5.08 5.08) (xy -6.858 5.08)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -5.08 2.54) (xy -6.858 2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -5.08 0) (xy -6.858 0)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at 0 5.08 180)
-					(length 5.08)
-					(name "3"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 2.54 180)
-					(length 5.08)
-					(name "2"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 0 180)
-					(length 5.08)
-					(name "1"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 	)
 	(rectangle
 		(start 335.28 35.3822)
@@ -1105,6 +1084,12 @@
 		(uuid "0da445a2-dc2d-4379-a163-ce663c3ca2dc")
 	)
 	(junction
+		(at 200.66 208.28)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "18e22742-c043-4082-950f-e0aa8c9a0fc1")
+	)
+	(junction
 		(at 200.66 81.1022)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1171,22 +1156,16 @@
 		(uuid "84660f60-7610-429d-b219-c196ae58257a")
 	)
 	(junction
-		(at 205.74 205.5622)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8b22c99a-c0e6-45bd-8954-fac79d5ef3f1")
-	)
-	(junction
 		(at 25.4 281.7622)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9235c4a7-3382-49da-a555-6d525f7ca00d")
 	)
 	(junction
-		(at 200.66 208.1022)
+		(at 205.74 205.74)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b19c87e0-7faf-4158-9f8f-871ea5e9ff29")
+		(uuid "98b09339-774c-4f80-a2ca-613dff897fa4")
 	)
 	(junction
 		(at 45.72 281.7622)
@@ -1194,41 +1173,9 @@
 		(color 0 0 0 0)
 		(uuid "b74e526e-9e5c-43bc-9827-c9ad36163ae5")
 	)
-	(no_connect
-		(at 220.98 286.8422)
-		(uuid "40284944-3f2b-4e36-b80b-843affe5990c")
-	)
-	(no_connect
-		(at 266.7 286.8422)
-		(uuid "7db32d28-847f-4c4a-aed3-424bbf325532")
-	)
-	(no_connect
-		(at 251.46 286.8422)
-		(uuid "b660446e-9f98-4f09-8393-d9c4e331b759")
-	)
-	(no_connect
-		(at 236.22 286.8422)
-		(uuid "c35067df-b4ea-45f2-aec2-b607f0dd7162")
-	)
-	(no_connect
-		(at 274.32 286.8422)
-		(uuid "d820b312-529a-4db3-b92a-f52dcd07ae96")
-	)
-	(no_connect
-		(at 243.84 286.8422)
-		(uuid "e4b77989-4241-420a-8108-70bcd0ad78c8")
-	)
-	(no_connect
-		(at 259.08 286.8422)
-		(uuid "f22b5f6d-536b-466e-93d3-0211daeb964c")
-	)
-	(no_connect
-		(at 228.6 286.8422)
-		(uuid "f8a25df7-9609-4354-9485-ee8ecf9b3b0f")
-	)
 	(wire
 		(pts
-			(xy 177.8 205.5622) (xy 205.74 205.5622)
+			(xy 177.8 205.74) (xy 205.74 205.74)
 		)
 		(stroke
 			(width 0)
@@ -1238,7 +1185,7 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 182.7022) (xy 195.58 55.7022)
+			(xy 195.58 182.88) (xy 195.58 55.7022)
 		)
 		(stroke
 			(width 0)
@@ -1248,7 +1195,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 182.7022) (xy 195.58 182.7022)
+			(xy 228.6 182.88) (xy 195.58 182.88)
 		)
 		(stroke
 			(width 0)
@@ -1268,7 +1215,7 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 154.7622) (xy 228.6 154.7622)
+			(xy 177.8 154.94) (xy 228.6 154.94)
 		)
 		(stroke
 			(width 0)
@@ -1278,13 +1225,23 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 205.5622) (xy 228.6 205.5622)
+			(xy 205.74 205.74) (xy 228.6 205.74)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "0c5a9eca-3eb4-48d2-9b3e-97f7f0c41eea")
+	)
+	(wire
+		(pts
+			(xy 62.23 60.96) (xy 66.04 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "11301ade-d21c-4a05-81cc-ff9de09c0680")
 	)
 	(wire
 		(pts
@@ -1338,6 +1295,16 @@
 	)
 	(wire
 		(pts
+			(xy 177.8 220.98) (xy 228.6 220.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "21805610-09f4-4424-a3c4-314480ff0d6d")
+	)
+	(wire
+		(pts
 			(xy 177.8 86.1822) (xy 210.82 86.1822)
 		)
 		(stroke
@@ -1358,7 +1325,7 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 96.3422) (xy 215.9 147.1422)
+			(xy 215.9 96.3422) (xy 215.9 147.32)
 		)
 		(stroke
 			(width 0)
@@ -1378,7 +1345,17 @@
 	)
 	(wire
 		(pts
-			(xy 200.66 208.1022) (xy 228.6 208.1022)
+			(xy 62.23 66.04) (xy 66.04 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "335afc20-960d-47da-89ee-b748ea78d10f")
+	)
+	(wire
+		(pts
+			(xy 200.66 208.28) (xy 228.6 208.28)
 		)
 		(stroke
 			(width 0)
@@ -1408,13 +1385,33 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 152.2222) (xy 228.6 152.2222)
+			(xy 177.8 152.4) (xy 228.6 152.4)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "3d38b515-b434-4688-a651-93d758dc40ff")
+	)
+	(wire
+		(pts
+			(xy 147.32 163.83) (xy 152.4 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "405a21bc-cc70-4391-876a-cb3906b3b0c8")
+	)
+	(wire
+		(pts
+			(xy 177.8 160.02) (xy 228.6 160.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48f79206-fe2f-4dac-9c29-e49cecc37209")
 	)
 	(wire
 		(pts
@@ -1438,7 +1435,7 @@
 	)
 	(wire
 		(pts
-			(xy 210.82 203.0222) (xy 210.82 86.1822)
+			(xy 210.82 203.2) (xy 210.82 86.1822)
 		)
 		(stroke
 			(width 0)
@@ -1448,7 +1445,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 203.0222) (xy 210.82 203.0222)
+			(xy 228.6 203.2) (xy 210.82 203.2)
 		)
 		(stroke
 			(width 0)
@@ -1498,26 +1495,6 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 63.3222) (xy 66.04 63.3222)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6609c3d5-0407-4adf-847c-7efd94b63c59")
-	)
-	(wire
-		(pts
-			(xy 200.66 81.1022) (xy 200.66 208.1022)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "68088117-7c85-4a2c-bc4e-8a7f851051f7")
-	)
-	(wire
-		(pts
 			(xy 30.48 274.1422) (xy 25.4 274.1422)
 		)
 		(stroke
@@ -1525,6 +1502,16 @@
 			(type default)
 		)
 		(uuid "698ed4d1-6e3b-481d-a0d7-f57a2194adf7")
+	)
+	(wire
+		(pts
+			(xy 177.8 215.9) (xy 228.6 215.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "71d85202-8c72-472e-b3fa-5729519678af")
 	)
 	(wire
 		(pts
@@ -1558,7 +1545,7 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 208.1022) (xy 200.66 208.1022)
+			(xy 177.8 208.28) (xy 200.66 208.28)
 		)
 		(stroke
 			(width 0)
@@ -1578,7 +1565,17 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 147.1422) (xy 228.6 147.1422)
+			(xy 62.23 63.5) (xy 76.2 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "86b98edc-2665-4113-ba72-6e2ab684e36b")
+	)
+	(wire
+		(pts
+			(xy 215.9 147.32) (xy 228.6 147.32)
 		)
 		(stroke
 			(width 0)
@@ -1615,6 +1612,16 @@
 			(type default)
 		)
 		(uuid "94efad61-df22-4a66-b3de-1d3bdb80873e")
+	)
+	(wire
+		(pts
+			(xy 152.4 166.37) (xy 149.86 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "97cb38c6-50c3-4e70-9741-6e171adcbfc4")
 	)
 	(wire
 		(pts
@@ -1658,6 +1665,26 @@
 	)
 	(wire
 		(pts
+			(xy 149.86 186.69) (xy 152.4 186.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b63298ab-3673-453e-b87f-914340914211")
+	)
+	(wire
+		(pts
+			(xy 200.66 81.1022) (xy 200.66 208.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b92841e7-d659-4d4f-b4c1-664bfc57ec05")
+	)
+	(wire
+		(pts
 			(xy 177.8 81.1022) (xy 200.66 81.1022)
 		)
 		(stroke
@@ -1665,6 +1692,16 @@
 			(type default)
 		)
 		(uuid "b9c69c36-95d9-4b43-88ec-bb2da22f5cca")
+	)
+	(wire
+		(pts
+			(xy 149.86 166.37) (xy 149.86 186.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b9ebaca9-941a-40d8-897e-1dd14734bbc1")
 	)
 	(wire
 		(pts
@@ -1678,7 +1715,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 157.3022) (xy 177.8 157.3022)
+			(xy 228.6 157.48) (xy 177.8 157.48)
 		)
 		(stroke
 			(width 0)
@@ -1758,23 +1795,13 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 162.3822) (xy 228.6 162.3822)
+			(xy 177.8 162.56) (xy 228.6 162.56)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "e5ea0a81-fdf6-49cf-804c-8b0861f15cd0")
-	)
-	(wire
-		(pts
-			(xy 205.74 205.5622) (xy 205.74 76.0222)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e7e85666-3ee6-4524-88a8-4ff0e2dafac1")
 	)
 	(wire
 		(pts
@@ -1788,7 +1815,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 210.6422) (xy 177.8 210.6422)
+			(xy 228.6 210.82) (xy 177.8 210.82)
 		)
 		(stroke
 			(width 0)
@@ -1808,6 +1835,26 @@
 	)
 	(wire
 		(pts
+			(xy 205.74 76.0222) (xy 205.74 205.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f10bfa6b-ca53-490f-93b5-427e3dc6de8b")
+	)
+	(wire
+		(pts
+			(xy 177.8 218.44) (xy 228.6 218.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f6c45a37-815d-4812-be68-6e7b9e062e21")
+	)
+	(wire
+		(pts
 			(xy 45.72 261.4422) (xy 45.72 258.9022)
 		)
 		(stroke
@@ -1815,6 +1862,26 @@
 			(type default)
 		)
 		(uuid "f7eb87b6-9e48-4a8f-a17a-d56510be6237")
+	)
+	(wire
+		(pts
+			(xy 147.32 189.23) (xy 147.32 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f836d52f-1a20-43c2-8c21-b3f630105bb9")
+	)
+	(wire
+		(pts
+			(xy 152.4 189.23) (xy 147.32 189.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc65ef2f-a56f-430c-92f8-072139d2a733")
 	)
 	(wire
 		(pts
@@ -1827,44 +1894,35 @@
 		(uuid "fe843dc4-4b6c-46e9-adc6-e54d6362612e")
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
-		(at 259.08 279.2222 0)
+		(lib_id "Mechanical:Fiducial")
+		(at 293.37 280.67 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
-		(uuid "06b47d60-ebbd-4e3e-af24-0ac1d818bdd2")
-		(property "Reference" "PTH6"
-			(at 256.54 276.6822 0)
+		(fields_autoplaced yes)
+		(uuid "0188b088-8a54-4dd2-ac19-02b0514a5fe8")
+		(property "Reference" "FID3"
+			(at 295.91 279.3999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left)
 			)
 		)
-		(property "Value" "PTH-M4D7X7"
-			(at 256.54 289.8902 0)
+		(property "Value" "Fiducial"
+			(at 295.91 281.9399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
-				(hide yes)
+				(justify left)
 			)
 		)
-		(property "Footprint" "PTH-M4D7X7-Footprint-1"
-			(at 259.08 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 259.08 279.2222 0)
+		(property "Footprint" "Fiducial:Fiducial_0.5mm_Mask1mm"
+			(at 293.37 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1872,8 +1930,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Mounting hole M4"
-			(at 259.08 279.2222 0)
+		(property "Datasheet" "~"
+			(at 293.37 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1881,116 +1939,54 @@
 				(hide yes)
 			)
 		)
-		(property "MOUNTING TECHNOLOGY" ""
-			(at 256.54 275.4122 0)
+		(property "Description" "Fiducial Marker"
+			(at 293.37 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
 				(hide yes)
 			)
-		)
-		(property "MAX OPERATING TEMPERATURE" ""
-			(at 256.54 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHS COMPLIANT" ""
-			(at 256.54 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PINS" ""
-			(at 256.54 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" ""
-			(at 256.54 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" ""
-			(at 256.54 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "bccc5f4a-6c8e-4a31-8409-83cecc8f7486")
 		)
 		(instances
-			(project ""
+			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "PTH6")
+					(reference "FID3")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_2_3P-SMD/THT")
-		(at 66.04 65.8622 0)
+		(lib_id "Mechanical:MountingHole")
+		(at 259.08 283.21 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
-		(uuid "0b0b767e-f075-42f0-b993-45e20fa769e3")
-		(property "Reference" "P001"
-			(at 53.34 58.2422 0)
+		(fields_autoplaced yes)
+		(uuid "04339755-b352-4e48-9be0-ef76473f40a9")
+		(property "Reference" "H6"
+			(at 261.62 281.9399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left)
 			)
 		)
-		(property "Value" "3P-SMD/THT"
-			(at 53.34 70.9422 0)
+		(property "Value" "MountingHole"
+			(at 261.62 284.4799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left)
 			)
 		)
-		(property "Footprint" "3P-SMD/THT"
-			(at 66.04 65.8622 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 66.04 65.8622 0)
+		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_ISO7380"
+			(at 259.08 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1998,8 +1994,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 66.04 65.8622 0)
+		(property "Datasheet" "~"
+			(at 259.08 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2007,63 +2003,54 @@
 				(hide yes)
 			)
 		)
-		(pin "1"
-			(uuid "cc1b7824-43cb-4d82-a7c4-f95f6a84e89f")
-		)
-		(pin "2"
-			(uuid "c363e189-5ffa-42b5-a3dd-97645561a015")
-		)
-		(pin "3"
-			(uuid "64fe619f-a7cd-4ca9-bdf8-1800ead97524")
+		(property "Description" "Mounting Hole without connection"
+			(at 259.08 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(instances
-			(project ""
+			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "P001")
+					(reference "H6")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
-		(at 220.98 279.2222 0)
+		(lib_id "Mechanical:MountingHole")
+		(at 243.84 283.21 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
-		(uuid "0e08b8eb-6e0e-4d3b-8c81-c70988929d40")
-		(property "Reference" "PTH1"
-			(at 218.44 276.6822 0)
+		(fields_autoplaced yes)
+		(uuid "083336b3-0f6c-42e1-9005-0e9d900e6379")
+		(property "Reference" "H4"
+			(at 246.38 281.9399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left)
 			)
 		)
-		(property "Value" "PTH-M4D7X7"
-			(at 218.44 289.8902 0)
+		(property "Value" "MountingHole"
+			(at 246.38 284.4799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
-				(hide yes)
+				(justify left)
 			)
 		)
-		(property "Footprint" "PTH-M4D7X7-Footprint-1"
-			(at 220.98 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 220.98 279.2222 0)
+		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_ISO7380"
+			(at 243.84 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2071,8 +2058,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Mounting hole M4"
-			(at 220.98 279.2222 0)
+		(property "Datasheet" "~"
+			(at 243.84 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2080,126 +2067,8 @@
 				(hide yes)
 			)
 		)
-		(property "MOUNTING TECHNOLOGY" ""
-			(at 218.44 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" ""
-			(at 218.44 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHS COMPLIANT" ""
-			(at 218.44 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PINS" ""
-			(at 218.44 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" ""
-			(at 218.44 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" ""
-			(at 218.44 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "1b09f5c4-3494-4232-8517-ffa914b34fe1")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "PTH1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1")
-		(at 284.48 286.8422 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "166072f3-9a90-4282-b635-beb3ba884cb0")
-		(property "Reference" "M*2"
-			(at 281.94 284.3022 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "Passermarke"
-			(at 281.94 291.9222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Passermarke-Footprint-1"
-			(at 284.48 286.8422 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 284.48 286.8422 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 284.48 286.8422 0)
+		(property "Description" "Mounting Hole without connection"
+			(at 243.84 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2208,9 +2077,9 @@
 			)
 		)
 		(instances
-			(project ""
+			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "M*2")
+					(reference "H4")
 					(unit 1)
 				)
 			)
@@ -2283,7 +2152,7 @@
 	)
 	(symbol
 		(lib_id "Speedometer_Tech-altium-import:GND_BAR")
-		(at 66.04 65.8622 0)
+		(at 66.04 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2291,7 +2160,7 @@
 		(dnp no)
 		(uuid "239287fd-c54c-4741-9a88-e99b7263797e")
 		(property "Reference" "#PWR0101"
-			(at 66.04 65.8622 0)
+			(at 66.04 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2300,7 +2169,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 66.04 69.6722 0)
+			(at 66.04 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2308,7 +2177,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 66.04 65.8622 0)
+			(at 66.04 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2317,7 +2186,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 66.04 65.8622 0)
+			(at 66.04 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2326,7 +2195,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 66.04 65.8622 0)
+			(at 66.04 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2731,6 +2600,77 @@
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
 					(reference "R000")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x03_Pin")
+		(at 57.15 63.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2e841936-4116-4e59-b955-8664cb05fb64")
+		(property "Reference" "J1"
+			(at 57.785 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x03_Pin"
+			(at 57.785 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Horizontal"
+			(at 57.15 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 57.15 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 57.15 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "3e57a04f-90d5-471c-9e1c-cf9d4f15d1c6")
+		)
+		(pin "2"
+			(uuid "491018c7-4d32-49bd-b7d2-ed7a3077db50")
+		)
+		(pin "1"
+			(uuid "cd197d5d-e9f9-4c6c-97d2-b100ad20499c")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "J1")
 					(unit 1)
 				)
 			)
@@ -3192,44 +3132,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
-		(at 243.84 279.2222 0)
+		(lib_id "Mechanical:MountingHole")
+		(at 266.7 283.21 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
-		(uuid "325627ae-7545-4f02-aac8-7a5c8f4c17d9")
-		(property "Reference" "PTH4"
-			(at 241.3 276.6822 0)
+		(fields_autoplaced yes)
+		(uuid "3776dbb9-7b08-4035-8699-0f0fec740187")
+		(property "Reference" "H7"
+			(at 269.24 281.9399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left)
 			)
 		)
-		(property "Value" "PTH-M4D7X7"
-			(at 241.3 289.8902 0)
+		(property "Value" "MountingHole"
+			(at 269.24 284.4799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
-				(hide yes)
+				(justify left)
 			)
 		)
-		(property "Footprint" "PTH-M4D7X7-Footprint-1"
-			(at 243.84 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 243.84 279.2222 0)
+		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_ISO7380"
+			(at 266.7 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3237,8 +3168,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Mounting hole M4"
-			(at 243.84 279.2222 0)
+		(property "Datasheet" "~"
+			(at 266.7 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3246,327 +3177,19 @@
 				(hide yes)
 			)
 		)
-		(property "MOUNTING TECHNOLOGY" ""
-			(at 241.3 275.4122 0)
+		(property "Description" "Mounting Hole without connection"
+			(at 266.7 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
 				(hide yes)
 			)
-		)
-		(property "MAX OPERATING TEMPERATURE" ""
-			(at 241.3 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHS COMPLIANT" ""
-			(at 241.3 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PINS" ""
-			(at 241.3 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" ""
-			(at 241.3 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" ""
-			(at 241.3 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3b4a9564-3dec-405b-97ad-474c4067a66a")
 		)
 		(instances
-			(project ""
+			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "PTH4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
-		(at 251.46 279.2222 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3b69c50a-e195-4d2d-a352-6dc16d73bc88")
-		(property "Reference" "PTH5"
-			(at 248.92 276.6822 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "PTH-M4D7X7"
-			(at 248.92 289.8902 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "PTH-M4D7X7-Footprint-1"
-			(at 251.46 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 251.46 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting hole M4"
-			(at 251.46 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MOUNTING TECHNOLOGY" ""
-			(at 248.92 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" ""
-			(at 248.92 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHS COMPLIANT" ""
-			(at 248.92 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PINS" ""
-			(at 248.92 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" ""
-			(at 248.92 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" ""
-			(at 248.92 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "552773e5-cc20-4ddf-8fd6-85ce107f255b")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "PTH5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
-		(at 274.32 279.2222 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4927da24-0e8e-4fc3-8d01-ab250a812673")
-		(property "Reference" "PTH8"
-			(at 271.78 276.6822 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "PTH-M4D7X7"
-			(at 271.78 289.8902 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "PTH-M4D7X7-Footprint-1"
-			(at 274.32 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 274.32 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting hole M4"
-			(at 274.32 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MOUNTING TECHNOLOGY" ""
-			(at 271.78 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" ""
-			(at 271.78 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHS COMPLIANT" ""
-			(at 271.78 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PINS" ""
-			(at 271.78 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" ""
-			(at 271.78 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" ""
-			(at 271.78 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ef92e61a-51f1-4971-9820-52f12dbd5aa7")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "PTH8")
+					(reference "H7")
 					(unit 1)
 				)
 			)
@@ -4028,44 +3651,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
-		(at 228.6 279.2222 0)
+		(lib_id "Mechanical:Fiducial")
+		(at 298.45 280.67 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
-		(uuid "5760490f-c59c-4135-a9ed-4bb7978e6189")
-		(property "Reference" "PTH2"
-			(at 226.06 276.6822 0)
+		(fields_autoplaced yes)
+		(uuid "5a5c8971-85ce-444e-b493-dc015fad4277")
+		(property "Reference" "FID5"
+			(at 300.99 279.3999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left)
 			)
 		)
-		(property "Value" "PTH-M4D7X7"
-			(at 226.06 289.8902 0)
+		(property "Value" "Fiducial"
+			(at 300.99 281.9399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
-				(hide yes)
+				(justify left)
 			)
 		)
-		(property "Footprint" "PTH-M4D7X7-Footprint-1"
-			(at 228.6 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 228.6 279.2222 0)
+		(property "Footprint" "Fiducial:Fiducial_0.5mm_Mask1mm"
+			(at 298.45 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4073,8 +3687,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Mounting hole M4"
-			(at 228.6 279.2222 0)
+		(property "Datasheet" "~"
+			(at 298.45 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4082,117 +3696,54 @@
 				(hide yes)
 			)
 		)
-		(property "MOUNTING TECHNOLOGY" ""
-			(at 226.06 275.4122 0)
+		(property "Description" "Fiducial Marker"
+			(at 298.45 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
 				(hide yes)
 			)
-		)
-		(property "MAX OPERATING TEMPERATURE" ""
-			(at 226.06 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHS COMPLIANT" ""
-			(at 226.06 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PINS" ""
-			(at 226.06 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" ""
-			(at 226.06 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" ""
-			(at 226.06 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6e8d9764-d581-4e58-8fc7-b4af12f1d075")
 		)
 		(instances
-			(project ""
+			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "PTH2")
+					(reference "FID5")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1")
-		(at 289.56 286.8422 0)
+		(lib_id "Mechanical:Fiducial")
+		(at 288.29 285.75 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
-		(uuid "72faa2d7-5585-42af-974c-af925ebf7781")
-		(property "Reference" "M*4"
-			(at 287.02 284.3022 0)
+		(fields_autoplaced yes)
+		(uuid "67e0fafc-96cf-4bf7-803e-464178a0751a")
+		(property "Reference" "FID2"
+			(at 290.83 284.4799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left)
 			)
 		)
-		(property "Value" "Passermarke"
-			(at 287.02 291.9222 0)
+		(property "Value" "Fiducial"
+			(at 290.83 287.0199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
-				(hide yes)
+				(justify left)
 			)
 		)
-		(property "Footprint" "Passermarke-Footprint-1"
-			(at 289.56 286.8422 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 289.56 286.8422 0)
+		(property "Footprint" "Fiducial:Fiducial_0.5mm_Mask1mm"
+			(at 288.29 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4200,8 +3751,17 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 289.56 286.8422 0)
+		(property "Datasheet" "~"
+			(at 288.29 285.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fiducial Marker"
+			(at 288.29 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4210,136 +3770,9 @@
 			)
 		)
 		(instances
-			(project ""
+			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "M*4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
-		(at 266.7 279.2222 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "74890777-a24d-4259-855a-ea138f5a23fb")
-		(property "Reference" "PTH7"
-			(at 264.16 276.6822 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "PTH-M4D7X7"
-			(at 264.16 289.8902 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "PTH-M4D7X7-Footprint-1"
-			(at 266.7 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 266.7 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting hole M4"
-			(at 266.7 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MOUNTING TECHNOLOGY" ""
-			(at 264.16 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" ""
-			(at 264.16 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHS COMPLIANT" ""
-			(at 264.16 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PINS" ""
-			(at 264.16 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" ""
-			(at 264.16 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" ""
-			(at 264.16 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "46ddc975-53f3-4852-912f-a368b8c9333e")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "PTH7")
+					(reference "FID2")
 					(unit 1)
 				)
 			)
@@ -4736,44 +4169,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1")
-		(at 294.64 281.7622 0)
+		(lib_id "Mechanical:MountingHole")
+		(at 228.6 283.21 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
-		(uuid "8017dd9a-aecf-4112-8721-c77918dd9fdb")
-		(property "Reference" "M*5"
-			(at 292.1 279.2222 0)
+		(fields_autoplaced yes)
+		(uuid "90875598-5fc3-40d2-a365-61cfbd9e44d9")
+		(property "Reference" "H2"
+			(at 231.14 281.9399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left)
 			)
 		)
-		(property "Value" "Passermarke"
-			(at 292.1 286.8422 0)
+		(property "Value" "MountingHole"
+			(at 231.14 284.4799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
-				(hide yes)
+				(justify left)
 			)
 		)
-		(property "Footprint" "Passermarke-Footprint-1"
-			(at 294.64 281.7622 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 294.64 281.7622 0)
+		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_ISO7380"
+			(at 228.6 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4781,8 +4205,17 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 294.64 281.7622 0)
+		(property "Datasheet" "~"
+			(at 228.6 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 228.6 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4791,136 +4224,9 @@
 			)
 		)
 		(instances
-			(project ""
+			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "M*5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_PTH-M4D7X7-Symbol-1")
-		(at 236.22 279.2222 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9049a86c-7752-4b92-91c4-6533ac231e4c")
-		(property "Reference" "PTH3"
-			(at 233.68 276.6822 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "PTH-M4D7X7"
-			(at 233.68 289.8902 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "PTH-M4D7X7-Footprint-1"
-			(at 236.22 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 236.22 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting hole M4"
-			(at 236.22 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MOUNTING TECHNOLOGY" ""
-			(at 233.68 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" ""
-			(at 233.68 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHS COMPLIANT" ""
-			(at 233.68 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PINS" ""
-			(at 233.68 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" ""
-			(at 233.68 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" ""
-			(at 233.68 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "813b298a-5691-4d0c-ad46-13fd849c2152")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "PTH3")
+					(reference "H2")
 					(unit 1)
 				)
 			)
@@ -5317,6 +4623,198 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 236.22 283.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9ac75a9e-1bbe-4cd9-85cb-8f631a844af3")
+		(property "Reference" "H3"
+			(at 238.76 281.9399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 238.76 284.4799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_ISO7380"
+			(at 236.22 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 236.22 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 236.22 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "H3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 220.98 283.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "aaa7e706-45a4-4d2c-8b16-4452ec00bbf4")
+		(property "Reference" "H1"
+			(at 223.52 281.9399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 223.52 284.4799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_ISO7380"
+			(at 220.98 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 220.98 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 220.98 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "H1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 274.32 283.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "af4a553d-ddff-475c-a2a2-dfe3d53bf2db")
+		(property "Reference" "H8"
+			(at 276.86 281.9399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 276.86 284.4799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_ISO7380"
+			(at 274.32 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 274.32 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 274.32 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "H8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
 		(at 33.02 276.6822 0)
 		(unit 1)
@@ -5701,70 +5199,6 @@
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
 					(reference "R002")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1")
-		(at 289.56 281.7622 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d0f7a09b-1a15-4569-b25c-b2b20b8fbeb0")
-		(property "Reference" "M*3"
-			(at 287.02 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "Passermarke"
-			(at 287.02 286.8422 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Passermarke-Footprint-1"
-			(at 289.56 281.7622 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 289.56 281.7622 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 289.56 281.7622 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "M*3")
 					(unit 1)
 				)
 			)
@@ -6161,44 +5595,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1")
-		(at 284.48 281.7622 0)
+		(lib_id "Mechanical:Fiducial")
+		(at 288.29 280.67 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
-		(uuid "da2e354f-46c3-43a7-8dae-270201445ed3")
-		(property "Reference" "M*1"
-			(at 281.94 279.2222 0)
+		(fields_autoplaced yes)
+		(uuid "d391fba2-8a1c-4118-b025-529a20bfe2f1")
+		(property "Reference" "FID1"
+			(at 290.83 279.3999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left)
 			)
 		)
-		(property "Value" "Passermarke"
-			(at 281.94 286.8422 0)
+		(property "Value" "Fiducial"
+			(at 290.83 281.9399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
-				(hide yes)
+				(justify left)
 			)
 		)
-		(property "Footprint" "Passermarke-Footprint-1"
-			(at 284.48 281.7622 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 284.48 281.7622 0)
+		(property "Footprint" "Fiducial:Fiducial_0.5mm_Mask1mm"
+			(at 288.29 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6206,8 +5631,17 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 284.48 281.7622 0)
+		(property "Datasheet" "~"
+			(at 288.29 280.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fiducial Marker"
+			(at 288.29 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6218,71 +5652,7 @@
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "M*1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_Passermarke-Symbol-1")
-		(at 294.64 286.8422 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e0f39458-e5c1-4ebd-8aa0-e29ae95854ad")
-		(property "Reference" "M*6"
-			(at 292.1 284.3022 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "Passermarke"
-			(at 292.1 291.9222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Passermarke-Footprint-1"
-			(at 294.64 286.8422 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 294.64 286.8422 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 294.64 286.8422 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "M*6")
+					(reference "FID1")
 					(unit 1)
 				)
 			)
@@ -6744,8 +6114,200 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:Fiducial")
+		(at 293.37 285.75 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ef40ae92-cca8-4e2c-9cda-ceb41e4c4005")
+		(property "Reference" "FID4"
+			(at 295.91 284.4799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Fiducial"
+			(at 295.91 287.0199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Fiducial:Fiducial_0.5mm_Mask1mm"
+			(at 293.37 285.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 293.37 285.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fiducial Marker"
+			(at 293.37 285.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "FID4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 251.46 283.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f16cc822-0ebd-432b-9d17-cb6258ef2735")
+		(property "Reference" "H5"
+			(at 254 281.9399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 254 284.4799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_ISO7380"
+			(at 251.46 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 251.46 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 251.46 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "H5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:Fiducial")
+		(at 298.45 285.75 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f540b743-e048-4728-97b6-12cf44acaf79")
+		(property "Reference" "FID6"
+			(at 300.99 284.4799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Fiducial"
+			(at 300.99 287.0199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Fiducial:Fiducial_0.5mm_Mask1mm"
+			(at 298.45 285.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 298.45 285.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fiducial Marker"
+			(at 298.45 285.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "FID6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Speedometer_Tech-altium-import:5V_ARROW")
-		(at 66.04 60.7822 180)
+		(at 66.04 60.96 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6753,7 +6315,7 @@
 		(dnp no)
 		(uuid "f9fee2d5-bc9b-47f4-96b4-62385578f73d")
 		(property "Reference" "#PWR0102"
-			(at 66.04 60.7822 0)
+			(at 66.04 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6762,7 +6324,7 @@
 			)
 		)
 		(property "Value" "5V"
-			(at 66.04 56.9722 0)
+			(at 66.04 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6770,7 +6332,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 66.04 60.7822 0)
+			(at 66.04 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6779,7 +6341,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 66.04 60.7822 0)
+			(at 66.04 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6788,7 +6350,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 66.04 60.7822 0)
+			(at 66.04 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6825,8 +6387,8 @@
 			(color 128 255 128 1.0000)
 		)
 		(uuid "14c68b90-3114-4578-b394-c022dfe8aa51")
-		(property "Sheetname" "Designator"
-			(at 152.4 180.1622 0)
+		(property "Sheetname" "SigIn"
+			(at 152.4 181.9906 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6835,16 +6397,16 @@
 			)
 		)
 		(property "Sheetfile" "80_SignalInput.kicad_sch"
-			(at 152.4 182.7022 0)
+			(at 152.4 234.0868 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left top)
 			)
 		)
 		(pin "SCL" passive
-			(at 177.8 205.5622 0)
+			(at 177.8 205.74 0)
 			(uuid "382afa09-b625-4320-b5fd-f7a06813de5a")
 			(effects
 				(font
@@ -6854,7 +6416,7 @@
 			)
 		)
 		(pin "SDA" passive
-			(at 177.8 208.1022 0)
+			(at 177.8 208.28 0)
 			(uuid "e37b66c3-5fdd-4d54-b3f4-4ee62649bbff")
 			(effects
 				(font
@@ -6864,8 +6426,58 @@
 			)
 		)
 		(pin "~{RESET}" passive
-			(at 177.8 210.6422 0)
+			(at 177.8 210.82 0)
 			(uuid "9bff1558-a9b2-4d8d-bd2d-6d5a631c4ea3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "CAN-H" passive
+			(at 152.4 186.69 180)
+			(uuid "5d8aae86-5c9e-4a28-9d70-7d4d493bb40c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "CAN-L" passive
+			(at 152.4 189.23 180)
+			(uuid "ccb721f5-5fb9-4cfa-aab7-455860707b4d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "USB-GND" passive
+			(at 177.8 220.98 0)
+			(uuid "06144a8b-ef5b-4bc7-bbf1-755a3acc970d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "USB-N" passive
+			(at 177.8 218.44 0)
+			(uuid "2dd7f6cf-f6f0-4bee-8b4b-b378e10a3998")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "USB-P" passive
+			(at 177.8 215.9 0)
+			(uuid "5da9d7d9-f309-46b6-963d-8667da188cf9")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6877,6 +6489,188 @@
 			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
 					(page "9")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 228.6 144.78)
+		(size 46.99 81.28)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "316d927d-970a-416e-9670-38b76bd0d5db")
+		(property "Sheetname" "esp32s3"
+			(at 228.6 144.0684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "esp32S3.kicad_sch"
+			(at 228.6 226.6446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "BTN" passive
+			(at 228.6 147.32 180)
+			(uuid "34130029-4f01-478e-845c-db5e8e81fbdf")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "NeoPixelData" output
+			(at 228.6 182.88 180)
+			(uuid "fbf463ba-2438-4610-a124-6e2ebbf36c8b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "~{RESET}" passive
+			(at 228.6 210.82 180)
+			(uuid "f58d1b58-137d-4fda-9b59-37fa1bf2960d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "~{DIG-RST}" passive
+			(at 228.6 203.2 180)
+			(uuid "8cbbb023-572d-4ef9-9865-fa88e0549c5e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "MOSI" passive
+			(at 228.6 154.94 180)
+			(uuid "847585c9-f69c-47c0-a817-c15e1c698cb7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "CS" output
+			(at 228.6 152.4 180)
+			(uuid "be1b00a8-f17c-4bbb-b604-dbf8753a2988")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "INTR" passive
+			(at 228.6 162.56 180)
+			(uuid "9a25e6ef-c433-48fb-a173-6c1c7ce68218")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SCLK" passive
+			(at 228.6 160.02 180)
+			(uuid "be24cb01-a769-44f2-aba3-9c61f255ea4d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "MISO" passive
+			(at 228.6 157.48 180)
+			(uuid "83f1d6d8-37dd-474e-9f26-83f39bbd87bd")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SDA" input
+			(at 228.6 208.28 180)
+			(uuid "b6920bd6-672f-4bab-b3ed-2e3cdcdcf3e4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SCL" input
+			(at 228.6 205.74 180)
+			(uuid "677c8d81-31b2-4ce8-b360-1a0418c8d042")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "USB-GND" passive
+			(at 228.6 220.98 180)
+			(uuid "3da899ea-21a9-49e1-80dc-eea7ea60d8c4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "USB-N" passive
+			(at 228.6 218.44 180)
+			(uuid "24b386b7-83e5-4c38-9fb6-29f72f520203")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "USB-P" passive
+			(at 228.6 215.9 180)
+			(uuid "7bcf55c7-2299-43b0-8dc5-51a93f1e28ff")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(page "13")
 				)
 			)
 		)
@@ -6898,7 +6692,7 @@
 			(color 128 255 128 1.0000)
 		)
 		(uuid "319b260d-4b4a-4549-a756-1056bfcc362f")
-		(property "Sheetname" "Designator"
+		(property "Sheetname" "SOC"
 			(at 304.8 40.4622 0)
 			(effects
 				(font
@@ -6961,7 +6755,7 @@
 			(color 128 255 128 1.0000)
 		)
 		(uuid "61ba4488-526a-42d1-832c-2c412551b9ed")
-		(property "Sheetname" "Designator"
+		(property "Sheetname" "BTN"
 			(at 88.9 73.4822 0)
 			(effects
 				(font
@@ -7014,7 +6808,7 @@
 			(color 128 255 128 1.0000)
 		)
 		(uuid "7f25a167-5e25-4142-beba-23f2a558c57e")
-		(property "Sheetname" "Designator"
+		(property "Sheetname" "Speed"
 			(at 228.6 65.8622 0)
 			(effects
 				(font
@@ -7087,7 +6881,7 @@
 			(color 128 255 128 1.0000)
 		)
 		(uuid "885dc56c-2be8-4b1b-9aa3-a3c4adf2e602")
-		(property "Sheetname" "Designator"
+		(property "Sheetname" "States"
 			(at 76.2 98.8822 0)
 			(effects
 				(font
@@ -7134,149 +6928,6 @@
 		)
 	)
 	(sheet
-		(at 228.6 144.6022)
-		(size 50.8 127)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0)
-			(type solid)
-			(color 128 0 0 1)
-		)
-		(fill
-			(color 128 255 128 1.0000)
-		)
-		(uuid "92d531c1-28be-4e94-a9f0-c6f899ed80c5")
-		(property "Sheetname" "Designator"
-			(at 228.6 142.0622 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "110_ESP32s3.kicad_sch"
-			(at 228.6 144.6022 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(pin "CS" output
-			(at 228.6 152.2222 180)
-			(uuid "5dca6bc6-c3af-47c0-89ed-f3c52433be8c")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "INTR" passive
-			(at 228.6 162.3822 180)
-			(uuid "92012445-fff6-49b9-9862-fd82182c8bfb")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "MOSI" passive
-			(at 228.6 154.7622 180)
-			(uuid "1afbfade-6817-46be-b0c8-f531fb8a54d7")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "MISO" passive
-			(at 228.6 157.3022 180)
-			(uuid "bd2f107c-dcce-45ce-9e46-63245765b25f")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "SCL" passive
-			(at 228.6 205.5622 180)
-			(uuid "4f1c67fe-76f9-410c-9f11-276b2031fdff")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "SDA" passive
-			(at 228.6 208.1022 180)
-			(uuid "e4164564-44a0-4c16-81e8-28f44bc33ea4")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "~{RESET}" passive
-			(at 228.6 210.6422 180)
-			(uuid "af97abe3-dd1c-4bd0-96f7-a9bd8bba7051")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "NeoPixelData" output
-			(at 228.6 182.7022 180)
-			(uuid "67da3284-56bf-4e63-bd61-c95694e83d1f")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "~{DIG-RST}" passive
-			(at 228.6 203.0222 180)
-			(uuid "aa35e7df-496e-4a69-8fa5-2e88519c51c4")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "BTN" input
-			(at 228.6 147.1422 180)
-			(uuid "b54f0d33-7632-4836-ad6f-ed4aba12044d")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "Speedometer_Tech"
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(page "12")
-				)
-			)
-		)
-	)
-	(sheet
 		(at 152.4 144.6022)
 		(size 25.4 25.4)
 		(exclude_from_sim no)
@@ -7293,8 +6944,8 @@
 			(color 128 255 128 1.0000)
 		)
 		(uuid "b38a2589-c423-411c-a19f-0b86ec6c154c")
-		(property "Sheetname" "Designator"
-			(at 152.4 142.0622 0)
+		(property "Sheetname" "CAN"
+			(at 152.4 143.8906 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7303,16 +6954,16 @@
 			)
 		)
 		(property "Sheetfile" "90_CAN.kicad_sch"
-			(at 152.4 144.6022 0)
+			(at 152.4 170.5868 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left top)
 			)
 		)
 		(pin "CS" input
-			(at 177.8 152.2222 0)
+			(at 177.8 152.4 0)
 			(uuid "09a8cbd3-c408-4ee7-b810-5f0b9861df06")
 			(effects
 				(font
@@ -7322,7 +6973,7 @@
 			)
 		)
 		(pin "INTR" passive
-			(at 177.8 162.3822 0)
+			(at 177.8 162.56 0)
 			(uuid "96ef18b1-5a4c-44a7-93e1-c408fca7d6d5")
 			(effects
 				(font
@@ -7332,7 +6983,7 @@
 			)
 		)
 		(pin "MOSI" passive
-			(at 177.8 154.7622 0)
+			(at 177.8 154.94 0)
 			(uuid "35535cfb-d472-4efd-ae26-198e890e3a4f")
 			(effects
 				(font
@@ -7342,13 +6993,43 @@
 			)
 		)
 		(pin "MISO" passive
-			(at 177.8 157.3022 0)
+			(at 177.8 157.48 0)
 			(uuid "705c44cd-16cf-4c1d-80a5-1cffdb691487")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+		(pin "SCLK" passive
+			(at 177.8 160.02 0)
+			(uuid "8a0b9283-e977-4ad5-8e25-ee0c35285ed5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "CAN-H" passive
+			(at 152.4 166.37 180)
+			(uuid "9b012ab7-cf18-4282-9417-f18022f5a979")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "CAN-L" passive
+			(at 152.4 163.83 180)
+			(uuid "6c03733f-981c-455f-80b3-fb063c617454")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
 		)
 		(instances
@@ -7376,7 +7057,7 @@
 			(color 128 255 128 1.0000)
 		)
 		(uuid "cc625872-66aa-4d7c-a056-bf228c047f21")
-		(property "Sheetname" "Designator"
+		(property "Sheetname" "Distance"
 			(at 127 65.8622 0)
 			(effects
 				(font
@@ -7449,7 +7130,7 @@
 			(color 128 255 128 1.0000)
 		)
 		(uuid "de88d757-f807-4a53-8f0b-a2d0f7ee584a")
-		(property "Sheetname" "Designator"
+		(property "Sheetname" "Torq"
 			(at 203.2 40.4622 0)
 			(effects
 				(font
@@ -7512,7 +7193,7 @@
 			(color 128 255 128 1.0000)
 		)
 		(uuid "f138c796-e146-4c77-bc56-ffb525c33bbf")
-		(property "Sheetname" "Designator"
+		(property "Sheetname" "DC-DC"
 			(at 152.4 243.6622 0)
 			(effects
 				(font
@@ -7555,7 +7236,7 @@
 			(color 128 255 128 1.0000)
 		)
 		(uuid "fac9d2fd-8f56-4aa0-a061-7ec6e5122621")
-		(property "Sheetname" "Designator"
+		(property "Sheetname" "Temp"
 			(at 76.2 40.4622 0)
 			(effects
 				(font
@@ -7574,7 +7255,7 @@
 			)
 		)
 		(pin "TempOut" output
-			(at 76.2 63.3222 180)
+			(at 76.2 63.5 180)
 			(uuid "650ff50a-f57a-41da-b37c-fd824de0727e")
 			(effects
 				(font

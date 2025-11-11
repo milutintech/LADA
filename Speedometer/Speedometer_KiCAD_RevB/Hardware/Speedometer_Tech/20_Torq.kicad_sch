@@ -1094,16 +1094,6 @@
 	)
 	(wire
 		(pts
-			(xy 417.83 -17.78) (xy 435.61 -17.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1b63690f-bacf-488a-ab31-9b9d15827ee9")
-	)
-	(wire
-		(pts
 			(xy 31.75 190.5) (xy 34.29 190.5)
 		)
 		(stroke
@@ -2464,6 +2454,16 @@
 	)
 	(wire
 		(pts
+			(xy 434.34 -17.78) (xy 417.83 -17.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c2f3967b-d346-4c7f-881b-c3e63086eef1")
+	)
+	(wire
+		(pts
 			(xy 196.85 -7.62) (xy 196.85 -10.16)
 		)
 		(stroke
@@ -2855,7 +2855,7 @@
 	)
 	(hierarchical_label "TorqOut"
 		(shape input)
-		(at 435.61 -17.78 0)
+		(at 434.34 -17.78 0)
 		(effects
 			(font
 				(size 1.27 1.27)

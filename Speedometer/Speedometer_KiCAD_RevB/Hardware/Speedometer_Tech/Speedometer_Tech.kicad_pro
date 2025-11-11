@@ -606,47 +606,47 @@
     ],
     [
       "7f25a167-5e25-4142-beba-23f2a558c57e",
-      "Designator"
+      "Speed"
     ],
     [
       "de88d757-f807-4a53-8f0b-a2d0f7ee584a",
-      "Designator"
+      "Torq"
     ],
     [
       "319b260d-4b4a-4549-a756-1056bfcc362f",
-      "Designator"
+      "SOC"
     ],
     [
       "fac9d2fd-8f56-4aa0-a061-7ec6e5122621",
-      "Designator"
+      "Temp"
     ],
     [
       "cc625872-66aa-4d7c-a056-bf228c047f21",
-      "Designator"
+      "Distance"
     ],
     [
       "61ba4488-526a-42d1-832c-2c412551b9ed",
-      "Designator"
+      "BTN"
     ],
     [
       "885dc56c-2be8-4b1b-9aa3-a3c4adf2e602",
-      "Designator"
+      "States"
     ],
     [
       "14c68b90-3114-4578-b394-c022dfe8aa51",
-      "Designator"
+      "SigIn"
     ],
     [
       "b38a2589-c423-411c-a19f-0b86ec6c154c",
-      "Designator"
+      "CAN"
     ],
     [
       "f138c796-e146-4c77-bc56-ffb525c33bbf",
-      "Designator"
+      "DC-DC"
     ],
     [
-      "92d531c1-28be-4e94-a9f0-c6f899ed80c5",
-      "Designator"
+      "316d927d-970a-416e-9670-38b76bd0d5db",
+      "esp32s3"
     ]
   ],
   "text_variables": {
