@@ -1,4 +1,4 @@
-26196726278376314
+26205547104389822
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -586,6 +586,13 @@ Matias/ALPS keyswitch, ISO Enter, http://matias.ca/switches/
 Matias ALPS keyswitch ISO enter
 0
 2
+2
+Button_Switch_Keyboard
+Untitled
+
+
+0
+20
 2
 Button_Switch_SMD
 Nidec_Copal_CAS-120A
@@ -51730,6 +51737,13 @@ four-pin M8
 6
 5
 Connector_USB
+TYPEC-300D-BCP16H100
+
+
+0
+20
+20
+Connector_USB
 USB3_A_Molex_48393-001
 USB 3.0, type A, right angle, http://www.molex.com/pdm_docs/sd/483930003_sd.pdf
 USB 3.0 type A right angle
@@ -59454,6 +59468,27 @@ Display_7Segment
 ELD_426XXXX
 http://www.everlight.com/file/ProductFile/D426SYGWA-S530-E2.pdf
 Double digit 7 segment brilliant yellow green LED
+0
+10
+10
+Display_7Segment
+GS2011AG-G
+
+
+0
+10
+10
+Display_7Segment
+GS4011AG-G
+
+
+0
+16
+16
+Display_7Segment
+GS8011AR-G
+
+
 0
 10
 10

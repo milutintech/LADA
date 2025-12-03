@@ -748,7 +748,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name '3V3'"
 			(at 162.56 147.32 0)
 			(effects
 				(font
@@ -813,7 +813,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name 'GND'"
 			(at 162.56 195.58 0)
 			(effects
 				(font

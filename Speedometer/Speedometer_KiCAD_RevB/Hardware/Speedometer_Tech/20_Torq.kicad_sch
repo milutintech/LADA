@@ -499,12 +499,6 @@
 		(uuid "0c26f484-99b4-496f-a3c0-0c036b1dcd3d")
 	)
 	(junction
-		(at 52.07 261.62)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0d4fc284-f5f5-4641-9475-1c7768c852be")
-	)
-	(junction
 		(at 267.97 -27.94)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -901,12 +895,6 @@
 		(uuid "eae5ddf7-dbf8-4319-9266-6eaf34e410dd")
 	)
 	(junction
-		(at 31.75 261.62)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f6a8474e-3ea7-4bc3-8e02-be0e905894e1")
-	)
-	(junction
 		(at 52.07 -5.08)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1204,16 +1192,6 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 279.4) (xy 34.29 279.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "31c1f156-0f4f-42be-ae24-57b45eb61316")
-	)
-	(wire
-		(pts
 			(xy 346.71 -17.78) (xy 349.25 -17.78)
 		)
 		(stroke
@@ -1371,16 +1349,6 @@
 			(type default)
 		)
 		(uuid "3fa153e5-eea8-46a6-9e6a-be083bde8da8")
-	)
-	(wire
-		(pts
-			(xy 52.07 261.62) (xy 52.07 279.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3fc91240-3229-4e23-a992-94669dde36eb")
 	)
 	(wire
 		(pts
@@ -1754,16 +1722,6 @@
 	)
 	(wire
 		(pts
-			(xy 41.91 269.24) (xy 41.91 271.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6cb77033-5d3f-436d-8c70-15c52f638ada")
-	)
-	(wire
-		(pts
 			(xy 49.53 226.06) (xy 52.07 226.06)
 		)
 		(stroke
@@ -2014,16 +1972,6 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 261.62) (xy 31.75 279.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "901f2325-56d3-4ca6-938a-f1fe0a125c7e")
-	)
-	(wire
-		(pts
 			(xy 52.07 172.72) (xy 52.07 190.5)
 		)
 		(stroke
@@ -2064,7 +2012,7 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 293.37) (xy 41.91 293.37)
+			(xy 34.29 275.59) (xy 41.91 275.59)
 		)
 		(stroke
 			(width 0)
@@ -2424,7 +2372,7 @@
 	)
 	(wire
 		(pts
-			(xy 41.91 287.02) (xy 41.91 293.37)
+			(xy 41.91 269.24) (xy 41.91 275.59)
 		)
 		(stroke
 			(width 0)
@@ -2441,16 +2389,6 @@
 			(type default)
 		)
 		(uuid "c0cafa03-7a7e-4291-a352-fdd72e4fe0b5")
-	)
-	(wire
-		(pts
-			(xy 49.53 279.4) (xy 52.07 279.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c12c286f-486c-4e50-bfe0-0e6ea3f425e9")
 	)
 	(wire
 		(pts
@@ -2844,7 +2782,7 @@
 	)
 	(hierarchical_label "TorqIn"
 		(shape input)
-		(at 34.29 293.37 180)
+		(at 34.29 275.59 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3536,7 +3474,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name 'GND'"
 			(at 90.17 -7.62 0)
 			(effects
 				(font
@@ -6385,163 +6323,6 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B-2020")
-		(at 41.91 279.4 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "7c65aca4-9b16-45bb-8e66-98cd51fbf151")
-		(property "Reference" "U204"
-			(at 36.83 287.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "WS2812B-4020_2"
-			(at 49.53 287.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
-			(at 49.53 278.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
-			(at 51.435 276.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
-			(at 41.91 279.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PRICE" "None"
-			(at 36.83 292.608 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MP" "WS2812B-4020"
-			(at 36.83 292.608 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "AVAILABILITY" "Not in stock"
-			(at 36.83 292.608 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=snap"
-			(at 36.83 292.608 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CHECK_PRICES" "https://www.snapeda.com/parts/WS2812B-4020/Worldsemi/view-part/?ref=eda"
-			(at 36.83 292.608 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ALTIUM_VALUE" "*"
-			(at 36.83 292.608 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE" "Package"
-			(at 36.83 292.608 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MF" "Worldsemi"
-			(at 36.83 292.608 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4c9cddd7-8762-4884-b583-8c3ac7b2f071")
-		)
-		(pin "2"
-			(uuid "3ff01778-fc99-4987-b117-0e88bbca50b8")
-		)
-		(pin "3"
-			(uuid "3ad4fc50-eb3c-4546-9f4c-48895d33b8db")
-		)
-		(pin "4"
-			(uuid "4c9aed57-a29a-485d-be86-922c3b7db7c8")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/de88d757-f807-4a53-8f0b-a2d0f7ee584a"
-					(reference "U204")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "LED:WS2812B-2020")
 		(at 72.39 -17.78 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -7369,7 +7150,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name '5V'"
 			(at 90.17 -27.94 0)
 			(effects
 				(font

@@ -209,6 +209,130 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:R"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "R res resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Mechanical:Fiducial"
 			(exclude_from_sim no)
 			(in_bom no)
@@ -892,119 +1016,10 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Speedometer_Tech-altium-import:root_0_RES-2"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "*RESC1608X55X25ML10T15*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "root_0_RES-2_1_0"
-				(polyline
-					(pts
-						(xy 5.08 0) (xy 4.064 0) (xy 3.81 -0.508) (xy 3.302 0.508) (xy 2.794 -0.508) (xy 2.286 0.508)
-						(xy 1.778 -0.508) (xy 1.27 0.508) (xy 1.016 0) (xy 0 0)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at -2.54 0 0)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 0 180)
-					(length 2.54)
-					(name "2"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 	)
 	(rectangle
-		(start 335.28 35.3822)
-		(end 71.12 119.2022)
+		(start 71.12 35.3822)
+		(end 335.28 119.2022)
 		(stroke
 			(width 0.254)
 			(type solid)
@@ -1051,7 +1066,7 @@
 	)
 	(text "Dauerplus"
 		(exclude_from_sim no)
-		(at 33.02 256.3622 0)
+		(at 33.02 261.4422 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1060,7 +1075,7 @@
 		)
 		(uuid "748e2d1a-1f14-4d14-aea0-bb27166f2653")
 	)
-	(text "Zahrzeug-GND"
+	(text "Fahrzeug-GND"
 		(exclude_from_sim no)
 		(at 33.02 271.6022 0)
 		(effects
@@ -1072,110 +1087,50 @@
 		(uuid "c7e528ba-8db8-4775-9acf-e1d971597241")
 	)
 	(junction
-		(at 205.74 76.0222)
+		(at 25.4 281.94)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "02f0a429-948d-4464-8766-9f5ff23b7bfb")
+		(uuid "14cc94ba-0e4a-4f7b-a8fb-cf649856dd75")
 	)
 	(junction
-		(at 25.4 258.9022)
+		(at 45.72 281.94)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "0da445a2-dc2d-4379-a163-ce663c3ca2dc")
+		(uuid "99152d67-8b27-4103-87ab-19c59bbc219f")
 	)
 	(junction
-		(at 200.66 208.28)
+		(at 185.42 208.28)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "18e22742-c043-4082-950f-e0aa8c9a0fc1")
+		(uuid "b4f283db-21f5-4bb7-a38a-c88b4d4f8311")
 	)
 	(junction
-		(at 200.66 81.1022)
+		(at 210.82 86.36)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "1c6c05d1-0fc4-42a0-a9b3-ba405c56f7ae")
+		(uuid "b83a5a86-0652-4eec-9489-e4493d7bca45")
 	)
 	(junction
-		(at 210.82 86.1822)
+		(at 25.4 264.16)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "215e19bf-20ad-47be-993a-aaeb0bb0d722")
+		(uuid "c91468f7-6f90-469d-8c4e-1326be84629b")
 	)
 	(junction
-		(at 45.72 261.4422)
+		(at 190.5 205.74)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "231e3cac-d9e1-49ad-930f-2c6c1d2b5ae8")
+		(uuid "cf6f4d94-91ae-4a98-a3cf-e897cbbd086b")
 	)
 	(junction
-		(at 45.72 276.6822)
+		(at 45.72 264.16)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "2c4d16cc-d26b-4bbf-ae34-538c42034645")
-	)
-	(junction
-		(at 25.4 263.9822)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3d0c7c11-6b3b-415d-b163-4f5a4310a529")
-	)
-	(junction
-		(at 45.72 279.2222)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3e27cc2b-ebc7-41d8-a6f8-75bf58ecdaeb")
-	)
-	(junction
-		(at 45.72 263.9822)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5730b129-ab83-4567-88bb-9039f9097d64")
-	)
-	(junction
-		(at 25.4 276.6822)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5acea223-56d3-4444-a7f3-569691eb6d5b")
-	)
-	(junction
-		(at 25.4 261.4422)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "621b0a5b-8331-4b12-8692-01b711d57212")
-	)
-	(junction
-		(at 45.72 258.9022)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7fd8c3d8-78d9-4186-9e1c-16efe261ccd8")
-	)
-	(junction
-		(at 25.4 279.2222)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "84660f60-7610-429d-b219-c196ae58257a")
-	)
-	(junction
-		(at 25.4 281.7622)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "9235c4a7-3382-49da-a555-6d525f7ca00d")
-	)
-	(junction
-		(at 205.74 205.74)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "98b09339-774c-4f80-a2ca-613dff897fa4")
-	)
-	(junction
-		(at 45.72 281.7622)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b74e526e-9e5c-43bc-9827-c9ad36163ae5")
+		(uuid "d499ce6d-e70d-434a-9145-2c3caae8a2e2")
 	)
 	(wire
 		(pts
-			(xy 177.8 205.74) (xy 205.74 205.74)
+			(xy 177.8 205.74) (xy 190.5 205.74)
 		)
 		(stroke
 			(width 0)
@@ -1185,7 +1140,7 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 182.88) (xy 195.58 55.7022)
+			(xy 195.58 182.88) (xy 195.58 55.88)
 		)
 		(stroke
 			(width 0)
@@ -1205,16 +1160,6 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 263.9822) (xy 25.4 263.9822)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "09f07a48-484f-4f05-a5fd-e8ba48e08bde")
-	)
-	(wire
-		(pts
 			(xy 177.8 154.94) (xy 228.6 154.94)
 		)
 		(stroke
@@ -1222,16 +1167,6 @@
 			(type default)
 		)
 		(uuid "0a98da35-1615-45d9-850d-99ce0acccfe8")
-	)
-	(wire
-		(pts
-			(xy 205.74 205.74) (xy 228.6 205.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0c5a9eca-3eb4-48d2-9b3e-97f7f0c41eea")
 	)
 	(wire
 		(pts
@@ -1245,23 +1180,13 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 274.1422) (xy 45.72 276.6822)
+			(xy 25.4 264.16) (xy 31.75 264.16)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "11ae5a5e-1c98-40c7-b710-099f4273a8f6")
-	)
-	(wire
-		(pts
-			(xy 25.4 281.7622) (xy 30.48 281.7622)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1217d9b7-a524-4cc1-99bf-eeb69a46688f")
+		(uuid "12ce1471-c7de-48ae-9a3b-6c7064c02ac3")
 	)
 	(wire
 		(pts
@@ -1275,17 +1200,17 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 266.5222) (xy 25.4 263.9822)
+			(xy 190.5 205.74) (xy 228.6 205.74)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1ba45b2f-30f6-4f96-93e9-7b79e3066ef8")
+		(uuid "17c882ef-4a37-4c0b-a267-1e9d32b2e654")
 	)
 	(wire
 		(pts
-			(xy 195.58 55.7022) (xy 203.2 55.7022)
+			(xy 195.58 55.88) (xy 203.2 55.88)
 		)
 		(stroke
 			(width 0)
@@ -1305,7 +1230,7 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 86.1822) (xy 210.82 86.1822)
+			(xy 177.8 86.36) (xy 210.82 86.36)
 		)
 		(stroke
 			(width 0)
@@ -1315,7 +1240,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 279.2222) (xy 25.4 279.2222)
+			(xy 31.75 279.4) (xy 25.4 279.4)
 		)
 		(stroke
 			(width 0)
@@ -1345,6 +1270,16 @@
 	)
 	(wire
 		(pts
+			(xy 185.42 208.28) (xy 228.6 208.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32c66f75-d035-40fc-b734-25a2cabd192c")
+	)
+	(wire
+		(pts
 			(xy 62.23 66.04) (xy 66.04 66.04)
 		)
 		(stroke
@@ -1355,33 +1290,13 @@
 	)
 	(wire
 		(pts
-			(xy 200.66 208.28) (xy 228.6 208.28)
+			(xy 177.8 208.28) (xy 185.42 208.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "3429a4f8-38b0-4136-811a-0400302e0650")
-	)
-	(wire
-		(pts
-			(xy 45.72 279.2222) (xy 45.72 281.7622)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3835d02f-1882-4f4b-8ad8-1e09c5b4624b")
-	)
-	(wire
-		(pts
-			(xy 200.66 81.1022) (xy 228.6 81.1022)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "39080a01-3d06-4342-a364-1540f864468d")
 	)
 	(wire
 		(pts
@@ -1405,6 +1320,16 @@
 	)
 	(wire
 		(pts
+			(xy 25.4 264.16) (xy 25.4 266.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "47a1e677-01bf-45bb-88ed-2c7944f0869c")
+	)
+	(wire
+		(pts
 			(xy 177.8 160.02) (xy 228.6 160.02)
 		)
 		(stroke
@@ -1425,17 +1350,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 274.1422) (xy 45.72 274.1422)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4e80d070-fff5-42f4-9622-07a7f40661c8")
-	)
-	(wire
-		(pts
-			(xy 210.82 203.2) (xy 210.82 86.1822)
+			(xy 210.82 203.2) (xy 210.82 86.36)
 		)
 		(stroke
 			(width 0)
@@ -1465,43 +1380,23 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 276.6822) (xy 45.72 276.6822)
+			(xy 177.8 81.28) (xy 185.42 81.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5a89f3ac-f7c6-466f-9a5a-7b51a9e9e1ef")
+		(uuid "56d7d17e-961a-4447-9a45-f40403ef394a")
 	)
 	(wire
 		(pts
-			(xy 45.72 276.6822) (xy 45.72 279.2222)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5d3d14ce-fba7-4166-af21-68b40adf1efa")
-	)
-	(wire
-		(pts
-			(xy 279.4 55.7022) (xy 304.8 55.7022)
+			(xy 279.4 55.88) (xy 280.67 55.88)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "6007a486-667c-4a05-b610-6634a23db1b5")
-	)
-	(wire
-		(pts
-			(xy 30.48 274.1422) (xy 25.4 274.1422)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "698ed4d1-6e3b-481d-a0d7-f57a2194adf7")
 	)
 	(wire
 		(pts
@@ -1515,53 +1410,23 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 263.9822) (xy 45.72 261.4422)
+			(xy 45.72 279.4) (xy 45.72 281.94)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "75d1018b-b54a-4789-bc07-f32302856c4a")
+		(uuid "7bcfd209-d4a9-49e3-96fa-64f63df44465")
 	)
 	(wire
 		(pts
-			(xy 40.64 266.5222) (xy 45.72 266.5222)
+			(xy 200.66 200.66) (xy 200.66 81.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "7979fd49-8a34-4286-bdbb-b63cb7c7d7d1")
-	)
-	(wire
-		(pts
-			(xy 25.4 279.2222) (xy 25.4 281.7622)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "79d09c08-b435-420b-a697-aec5e4d52773")
-	)
-	(wire
-		(pts
-			(xy 177.8 208.28) (xy 200.66 208.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "815a49c4-f798-4c78-8369-9da18cbdd863")
-	)
-	(wire
-		(pts
-			(xy 30.48 266.5222) (xy 25.4 266.5222)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8215e1b4-cf23-4c6e-9c74-5da1f3b1e9ef")
+		(uuid "7ee29b2e-c587-491e-baaf-52b21ff5340e")
 	)
 	(wire
 		(pts
@@ -1595,7 +1460,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 281.7622) (xy 45.72 281.7622)
+			(xy 39.37 281.94) (xy 45.72 281.94)
 		)
 		(stroke
 			(width 0)
@@ -1605,13 +1470,23 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 274.1422) (xy 25.4 276.6822)
+			(xy 185.42 81.28) (xy 185.42 208.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "94efad61-df22-4a66-b3de-1d3bdb80873e")
+		(uuid "8c5fccc8-4e13-441f-96e0-2e5a72586952")
+	)
+	(wire
+		(pts
+			(xy 45.72 264.16) (xy 45.72 266.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92d626b4-93f9-4363-8b53-70c596041c39")
 	)
 	(wire
 		(pts
@@ -1625,6 +1500,16 @@
 	)
 	(wire
 		(pts
+			(xy 205.74 198.12) (xy 205.74 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "99338ff1-563b-493e-8c4e-bb7f79587387")
+	)
+	(wire
+		(pts
 			(xy 116.84 96.3422) (xy 215.9 96.3422)
 		)
 		(stroke
@@ -1635,7 +1520,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 258.9022) (xy 45.72 258.9022)
+			(xy 39.37 264.16) (xy 45.72 264.16)
 		)
 		(stroke
 			(width 0)
@@ -1645,23 +1530,43 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 261.4422) (xy 25.4 258.9022)
+			(xy 228.6 198.12) (xy 205.74 198.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9bb24e20-962a-41ef-baac-f029c775bf3d")
+		(uuid "9b69cad4-7294-409b-963e-c5a8784be559")
 	)
 	(wire
 		(pts
-			(xy 40.64 279.2222) (xy 45.72 279.2222)
+			(xy 205.74 76.2) (xy 228.6 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a33b2f74-8fbc-4ac9-9552-09cb3c71edb3")
+	)
+	(wire
+		(pts
+			(xy 39.37 279.4) (xy 45.72 279.4)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "afbdf6f2-f95b-4099-bce8-e26eba1679a9")
+	)
+	(wire
+		(pts
+			(xy 25.4 279.4) (xy 25.4 281.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b6105f46-0034-4af0-88f2-fe198bdef6bb")
 	)
 	(wire
 		(pts
@@ -1675,23 +1580,13 @@
 	)
 	(wire
 		(pts
-			(xy 200.66 81.1022) (xy 200.66 208.28)
+			(xy 25.4 281.94) (xy 31.75 281.94)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b92841e7-d659-4d4f-b4c1-664bfc57ec05")
-	)
-	(wire
-		(pts
-			(xy 177.8 81.1022) (xy 200.66 81.1022)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b9c69c36-95d9-4b43-88ec-bb2da22f5cca")
+		(uuid "b7973ce0-1fe4-41ed-a7b3-9841f3c2d458")
 	)
 	(wire
 		(pts
@@ -1705,16 +1600,6 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 258.9022) (xy 30.48 258.9022)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c3c3ad3a-e43f-4472-ab90-166ff062017a")
-	)
-	(wire
-		(pts
 			(xy 228.6 157.48) (xy 177.8 157.48)
 		)
 		(stroke
@@ -1725,7 +1610,17 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 261.4422) (xy 45.72 261.4422)
+			(xy 280.67 55.7022) (xy 304.8 55.7022)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6747cb3-ebb4-475a-9c6f-70c947d3832d")
+	)
+	(wire
+		(pts
+			(xy 39.37 266.7) (xy 45.72 266.7)
 		)
 		(stroke
 			(width 0)
@@ -1735,47 +1630,37 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 261.4422) (xy 25.4 261.4422)
+			(xy 200.66 81.28) (xy 228.6 81.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d15c37ca-d313-4a74-9dbe-3940ceda56c2")
+		(uuid "d1cd7f7c-074c-48af-a949-c3fe28faebc3")
 	)
 	(wire
 		(pts
-			(xy 25.4 263.9822) (xy 25.4 261.4422)
+			(xy 228.6 200.66) (xy 200.66 200.66)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d76021bb-5488-4761-96e2-b6b3c6fbaa52")
+		(uuid "d4147015-3784-48f3-94c2-c51ca2ac8b89")
 	)
 	(wire
 		(pts
-			(xy 30.48 276.6822) (xy 25.4 276.6822)
+			(xy 25.4 266.7) (xy 31.75 266.7)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "dad45fde-6d9a-4c32-a4ea-43decdc60ecf")
+		(uuid "d6eba783-a3ca-42d6-b9e7-5dc821daaa6c")
 	)
 	(wire
 		(pts
-			(xy 25.4 276.6822) (xy 25.4 279.2222)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "de8fb83c-4972-4d34-ab72-aa26f2fcf972")
-	)
-	(wire
-		(pts
-			(xy 210.82 86.1822) (xy 228.6 86.1822)
+			(xy 210.82 86.36) (xy 228.6 86.36)
 		)
 		(stroke
 			(width 0)
@@ -1785,13 +1670,13 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 76.0222) (xy 228.6 76.0222)
+			(xy 280.67 55.88) (xy 280.67 55.7022)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "dff3b410-89b6-443b-baaa-048b105883ee")
+		(uuid "dfde6b0f-ecd3-4f73-aa49-fe4e4313c5ef")
 	)
 	(wire
 		(pts
@@ -1805,16 +1690,6 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 266.5222) (xy 45.72 263.9822)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ea23d510-e96d-4976-bf74-98b0fad86425")
-	)
-	(wire
-		(pts
 			(xy 228.6 210.82) (xy 177.8 210.82)
 		)
 		(stroke
@@ -1825,17 +1700,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 263.9822) (xy 45.72 263.9822)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "eeafdf8d-19d1-4143-8295-14bc6e833976")
-	)
-	(wire
-		(pts
-			(xy 205.74 76.0222) (xy 205.74 205.74)
+			(xy 190.5 76.2) (xy 190.5 205.74)
 		)
 		(stroke
 			(width 0)
@@ -1852,16 +1717,6 @@
 			(type default)
 		)
 		(uuid "f6c45a37-815d-4812-be68-6e7b9e062e21")
-	)
-	(wire
-		(pts
-			(xy 45.72 261.4422) (xy 45.72 258.9022)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f7eb87b6-9e48-4a8f-a17a-d56510be6237")
 	)
 	(wire
 		(pts
@@ -1885,7 +1740,7 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 76.0222) (xy 205.74 76.0222)
+			(xy 177.8 76.2) (xy 190.5 76.2)
 		)
 		(stroke
 			(width 0)
@@ -2087,7 +1942,7 @@
 	)
 	(symbol
 		(lib_id "Speedometer_Tech-altium-import:KL30_ARROW")
-		(at 25.4 258.9022 180)
+		(at 25.4 264.16 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2095,7 +1950,7 @@
 		(dnp no)
 		(uuid "16aebccf-74d3-44d5-98f7-d109c5d539b7")
 		(property "Reference" "#PWR0106"
-			(at 25.4 258.9022 0)
+			(at 25.4 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2104,7 +1959,7 @@
 			)
 		)
 		(property "Value" "KL30"
-			(at 25.4 255.0922 0)
+			(at 25.4 260.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2112,7 +1967,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 25.4 258.9022 0)
+			(at 25.4 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2121,7 +1976,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 25.4 258.9022 0)
+			(at 25.4 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2129,8 +1984,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 25.4 258.9022 0)
+		(property "Description" "Power symbol creates a global label with name 'KL30'"
+			(at 25.4 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2194,7 +2049,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name 'GND'"
 			(at 66.04 66.04 0)
 			(effects
 				(font
@@ -2210,396 +2065,6 @@
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
 					(reference "#PWR0101")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
-		(at 33.02 281.7622 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "2461928a-6cbb-4a19-868c-9fc623cdf8b5")
-		(property "Reference" "R000"
-			(at 32.766 281.0002 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "RC0603JR-070RL"
-			(at 32.766 285.0642 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RESC1608X55X25ML10T15"
-			(at 33.02 281.7622 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 33.02 281.7622 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
-			(at 33.02 281.7622 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WIDTH" "0.8mm"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" "155degC"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TOLERANCE" "5%"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE REFERENCE" "0603"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HEIGHT" "0.45mm"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DEPTH" "0.8mm"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING" "50V"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TERMINATION" "SMD/SMT"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE QUANTITY" "5000"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" "0603"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (IMPERIAL)" "0603"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RADIATION HARDENING" "No"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "NUMBER OF PINS" "2"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LENGTH" "1.6mm"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LEAD FREE" "LeadFree"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING (DC)" "50V"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MILITARY STANDARD" "Not"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "POWER RATING" "100mW"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RESISTANCE" "0mOhm"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER URL" "http://www.yageo.com/"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGING" "TapeandReel"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (METRIC)" "1608"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" "-55degC"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "COMPOSITION" "ThickFilm"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" "Yageo"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHSCOMPLIANT" "true"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CONTACT PLATING" "Tin"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "REACH SVHC" "NoSVHC"
-			(at 29.972 277.9522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "4396beed-112b-4a33-aa2b-12459ded79a5")
-		)
-		(pin "1"
-			(uuid "43221eaf-411a-4344-9524-27c9173d914c")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "R000")
 					(unit 1)
 				)
 			)
@@ -2678,7 +2143,7 @@
 	)
 	(symbol
 		(lib_id "Speedometer_Tech-altium-import:KL31_BAR")
-		(at 25.4 281.7622 0)
+		(at 25.4 281.94 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2686,7 +2151,7 @@
 		(dnp no)
 		(uuid "30a56ad1-132d-4e57-813a-05661d71e7e7")
 		(property "Reference" "#PWR0105"
-			(at 25.4 281.7622 0)
+			(at 25.4 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2695,7 +2160,7 @@
 			)
 		)
 		(property "Value" "KL31"
-			(at 25.4 285.5722 0)
+			(at 25.4 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2703,7 +2168,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 25.4 281.7622 0)
+			(at 25.4 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2712,7 +2177,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 25.4 281.7622 0)
+			(at 25.4 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2720,8 +2185,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 25.4 281.7622 0)
+		(property "Description" "Power symbol creates a global label with name 'KL31'"
+			(at 25.4 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2736,396 +2201,6 @@
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
 					(reference "#PWR0105")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
-		(at 33.02 266.5222 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3201835c-6620-48b8-85ff-d8aa87f8fd64")
-		(property "Reference" "R004"
-			(at 32.766 265.7602 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "RC0603JR-070RL"
-			(at 32.766 269.8242 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RESC1608X55X25ML10T15"
-			(at 33.02 266.5222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 33.02 266.5222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
-			(at 33.02 266.5222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WIDTH" "0.8mm"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" "155degC"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TOLERANCE" "5%"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE REFERENCE" "0603"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HEIGHT" "0.45mm"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DEPTH" "0.8mm"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING" "50V"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TERMINATION" "SMD/SMT"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE QUANTITY" "5000"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" "0603"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (IMPERIAL)" "0603"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RADIATION HARDENING" "No"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "NUMBER OF PINS" "2"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LENGTH" "1.6mm"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LEAD FREE" "LeadFree"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING (DC)" "50V"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MILITARY STANDARD" "Not"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "POWER RATING" "100mW"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RESISTANCE" "0mOhm"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER URL" "http://www.yageo.com/"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGING" "TapeandReel"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (METRIC)" "1608"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" "-55degC"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "COMPOSITION" "ThickFilm"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" "Yageo"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHSCOMPLIANT" "true"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CONTACT PLATING" "Tin"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "REACH SVHC" "NoSVHC"
-			(at 29.972 262.7122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "fed21373-ddc6-4999-b027-5e47bccbaa49")
-		)
-		(pin "2"
-			(uuid "888634d4-debd-4d30-b595-87ec9dc1e42a")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "R004")
 					(unit 1)
 				)
 			)
@@ -3196,8 +2271,144 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 35.56 279.4 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "39a83c5a-391b-47fa-a232-4f343900a50d")
+		(property "Reference" "R001"
+			(at 35.56 273.05 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 35.56 275.59 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 35.56 281.178 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 35.56 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 35.56 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "03a41c02-a40c-4e32-92e2-fc99450621c4")
+		)
+		(pin "1"
+			(uuid "8295526e-9d5a-47fb-abbd-c4ade231b391")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "R001")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 35.56 266.7 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3bb9b49c-c1ff-479f-842b-22cf68372df2")
+		(property "Reference" "R002"
+			(at 35.56 260.35 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 35.56 262.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 35.56 268.478 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 35.56 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 35.56 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "a0a80d56-874f-4121-b9f5-378c66cf0cb1")
+		)
+		(pin "1"
+			(uuid "b865df3a-9eca-4781-a883-d1997d7b367f")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
+					(reference "R002")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Speedometer_Tech-altium-import:GND_BAR")
-		(at 45.72 281.7622 0)
+		(at 45.72 281.94 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3205,7 +2416,7 @@
 		(dnp no)
 		(uuid "4b3d046b-e920-4f1d-b793-5200b189371e")
 		(property "Reference" "#PWR0104"
-			(at 45.72 281.7622 0)
+			(at 45.72 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3214,7 +2425,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 45.72 285.5722 0)
+			(at 45.72 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3222,7 +2433,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 45.72 281.7622 0)
+			(at 45.72 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3231,7 +2442,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 45.72 281.7622 0)
+			(at 45.72 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3239,8 +2450,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 45.72 281.7622 0)
+		(property "Description" "Power symbol creates a global label with name 'GND'"
+			(at 45.72 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3255,396 +2466,6 @@
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
 					(reference "#PWR0104")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
-		(at 33.02 279.2222 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "552fd694-ab40-4b50-85c7-24419e455779")
-		(property "Reference" "R001"
-			(at 32.766 278.4602 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "RC0603JR-070RL"
-			(at 32.766 282.5242 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RESC1608X55X25ML10T15"
-			(at 33.02 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 33.02 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
-			(at 33.02 279.2222 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WIDTH" "0.8mm"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" "155degC"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TOLERANCE" "5%"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE REFERENCE" "0603"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HEIGHT" "0.45mm"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DEPTH" "0.8mm"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING" "50V"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TERMINATION" "SMD/SMT"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE QUANTITY" "5000"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" "0603"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (IMPERIAL)" "0603"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RADIATION HARDENING" "No"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "NUMBER OF PINS" "2"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LENGTH" "1.6mm"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LEAD FREE" "LeadFree"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING (DC)" "50V"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MILITARY STANDARD" "Not"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "POWER RATING" "100mW"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RESISTANCE" "0mOhm"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER URL" "http://www.yageo.com/"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGING" "TapeandReel"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (METRIC)" "1608"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" "-55degC"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "COMPOSITION" "ThickFilm"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" "Yageo"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHSCOMPLIANT" "true"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CONTACT PLATING" "Tin"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "REACH SVHC" "NoSVHC"
-			(at 29.972 275.4122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "28a291b6-dccf-42e6-872f-9a37a43b3717")
-		)
-		(pin "1"
-			(uuid "8bb851cb-c2f1-45e5-b8ac-65e32d8057da")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "R001")
 					(unit 1)
 				)
 			)
@@ -3779,44 +2600,33 @@
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
-		(at 33.02 261.4422 0)
+		(lib_id "Device:R")
+		(at 35.56 281.94 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7e165675-14b1-410b-9dc9-e89d62b4bd6e")
-		(property "Reference" "R006"
-			(at 32.766 260.6802 0)
+		(fields_autoplaced yes)
+		(uuid "872d3c95-add4-4daf-8a39-3675bc8d27d8")
+		(property "Reference" "R000"
+			(at 35.56 275.59 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
 			)
 		)
-		(property "Value" "RC0603JR-070RL"
-			(at 32.766 264.7442 0)
+		(property "Value" "0"
+			(at 35.56 278.13 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "RESC1608X55X25ML10T15"
-			(at 33.02 261.4422 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 33.02 261.4422 0)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 35.56 283.718 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3824,8 +2634,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
-			(at 33.02 261.4422 0)
+		(property "Datasheet" "~"
+			(at 35.56 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3833,336 +2643,25 @@
 				(hide yes)
 			)
 		)
-		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
-			(at 29.972 257.6322 0)
+		(property "Description" "Resistor"
+			(at 35.56 281.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
 				(hide yes)
 			)
-		)
-		(property "WIDTH" "0.8mm"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" "155degC"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TOLERANCE" "5%"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE REFERENCE" "0603"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HEIGHT" "0.45mm"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DEPTH" "0.8mm"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING" "50V"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TERMINATION" "SMD/SMT"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE QUANTITY" "5000"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" "0603"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (IMPERIAL)" "0603"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RADIATION HARDENING" "No"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "NUMBER OF PINS" "2"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LENGTH" "1.6mm"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LEAD FREE" "LeadFree"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING (DC)" "50V"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MILITARY STANDARD" "Not"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "POWER RATING" "100mW"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RESISTANCE" "0mOhm"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER URL" "http://www.yageo.com/"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGING" "TapeandReel"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (METRIC)" "1608"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" "-55degC"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "COMPOSITION" "ThickFilm"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" "Yageo"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHSCOMPLIANT" "true"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CONTACT PLATING" "Tin"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "REACH SVHC" "NoSVHC"
-			(at 29.972 257.6322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0d14116b-1d5c-4d35-85a2-59cb343e3a9a")
 		)
 		(pin "2"
-			(uuid "4e2d0196-0cfe-421b-97be-3f2d2a4a1b78")
+			(uuid "6c28fd26-2d52-4988-ade7-88a3825cb23c")
+		)
+		(pin "1"
+			(uuid "09aa5a35-cafd-46cb-8d98-95fb4122472b")
 		)
 		(instances
 			(project ""
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "R006")
+					(reference "R000")
 					(unit 1)
 				)
 			)
@@ -4227,396 +2726,6 @@
 			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
 					(reference "H2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
-		(at 33.02 263.9822 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9a312c61-79fe-4991-b90d-e0d077f7e452")
-		(property "Reference" "R005"
-			(at 32.766 263.2202 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "RC0603JR-070RL"
-			(at 32.766 267.2842 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RESC1608X55X25ML10T15"
-			(at 33.02 263.9822 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 33.02 263.9822 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
-			(at 33.02 263.9822 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WIDTH" "0.8mm"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" "155degC"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TOLERANCE" "5%"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE REFERENCE" "0603"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HEIGHT" "0.45mm"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DEPTH" "0.8mm"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING" "50V"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TERMINATION" "SMD/SMT"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE QUANTITY" "5000"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" "0603"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (IMPERIAL)" "0603"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RADIATION HARDENING" "No"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "NUMBER OF PINS" "2"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LENGTH" "1.6mm"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LEAD FREE" "LeadFree"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING (DC)" "50V"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MILITARY STANDARD" "Not"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "POWER RATING" "100mW"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RESISTANCE" "0mOhm"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER URL" "http://www.yageo.com/"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGING" "TapeandReel"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (METRIC)" "1608"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" "-55degC"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "COMPOSITION" "ThickFilm"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" "Yageo"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHSCOMPLIANT" "true"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CONTACT PLATING" "Tin"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "REACH SVHC" "NoSVHC"
-			(at 29.972 260.1722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "e2b4793f-dc59-4821-bae1-e3ef60137e62")
-		)
-		(pin "1"
-			(uuid "0ae052b4-1f91-4e2a-b69a-d67eb4eaab5e")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "R005")
 					(unit 1)
 				)
 			)
@@ -4815,425 +2924,17 @@
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
-		(at 33.02 276.6822 0)
+		(lib_id "Device:R")
+		(at 35.56 264.16 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "bda72c27-1664-4024-af4e-a5853dcf67ce")
-		(property "Reference" "R002"
-			(at 33.02 276.6822 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "RC0603JR-070RL"
-			(at 32.766 279.9842 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RESC1608X55X25ML10T15"
-			(at 33.02 276.6822 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 33.02 276.6822 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
-			(at 33.02 276.6822 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WIDTH" "0.8mm"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" "155degC"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TOLERANCE" "5%"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE REFERENCE" "0603"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HEIGHT" "0.45mm"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DEPTH" "0.8mm"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING" "50V"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TERMINATION" "SMD/SMT"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE QUANTITY" "5000"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" "0603"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (IMPERIAL)" "0603"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RADIATION HARDENING" "No"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "NUMBER OF PINS" "2"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LENGTH" "1.6mm"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LEAD FREE" "LeadFree"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING (DC)" "50V"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MILITARY STANDARD" "Not"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "POWER RATING" "100mW"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RESISTANCE" "0mOhm"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER URL" "http://www.yageo.com/"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGING" "TapeandReel"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (METRIC)" "1608"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" "-55degC"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "COMPOSITION" "ThickFilm"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" "Yageo"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHSCOMPLIANT" "true"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CONTACT PLATING" "Tin"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "REACH SVHC" "NoSVHC"
-			(at 29.972 272.8722 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "bf87fe06-c308-4870-80f2-f283e93570ab")
-		)
-		(pin "1"
-			(uuid "92166d6b-772c-4b22-b063-aa3159db9c8e")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "R002")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
-		(at 33.02 274.1422 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d12b4f9a-3d7d-4cbb-bb8e-79033800c859")
+		(fields_autoplaced yes)
+		(uuid "cbf6d5e9-75c2-403e-b8a8-9ace830e247e")
 		(property "Reference" "R003"
-			(at 32.766 273.3802 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "RC0603JR-070RL"
-			(at 32.766 277.4442 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RESC1608X55X25ML10T15"
-			(at 33.02 274.1422 0)
+			(at 35.56 257.81 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5241,8 +2942,16 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 33.02 274.1422 0)
+		(property "Value" "0"
+			(at 35.56 260.35 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 35.56 265.938 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5250,8 +2959,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
-			(at 33.02 274.1422 0)
+		(property "Datasheet" "~"
+			(at 35.56 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5259,334 +2968,23 @@
 				(hide yes)
 			)
 		)
-		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
-			(at 29.972 270.3322 0)
+		(property "Description" "Resistor"
+			(at 35.56 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WIDTH" "0.8mm"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" "155degC"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TOLERANCE" "5%"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE REFERENCE" "0603"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HEIGHT" "0.45mm"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DEPTH" "0.8mm"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING" "50V"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TERMINATION" "SMD/SMT"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE QUANTITY" "5000"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" "0603"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (IMPERIAL)" "0603"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RADIATION HARDENING" "No"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "NUMBER OF PINS" "2"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LENGTH" "1.6mm"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LEAD FREE" "LeadFree"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING (DC)" "50V"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MILITARY STANDARD" "Not"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "POWER RATING" "100mW"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RESISTANCE" "0mOhm"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER URL" "http://www.yageo.com/"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGING" "TapeandReel"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (METRIC)" "1608"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" "-55degC"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "COMPOSITION" "ThickFilm"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" "Yageo"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHSCOMPLIANT" "true"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CONTACT PLATING" "Tin"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "REACH SVHC" "NoSVHC"
-			(at 29.972 270.3322 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
 				(hide yes)
 			)
 		)
 		(pin "2"
-			(uuid "58ef821d-9dc4-41ca-8ca6-8f30830fc072")
+			(uuid "93a2aaa5-b233-4a7f-99a8-535dc3558b63")
 		)
 		(pin "1"
-			(uuid "5006d59c-a4d0-4c5a-8b7f-18fc3aef23c5")
+			(uuid "662eb3d7-1a39-4ff1-87f9-a6c4e4b0761a")
 		)
 		(instances
-			(project ""
+			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
 					(reference "R003")
 					(unit 1)
@@ -5659,398 +3057,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:root_0_RES-2")
-		(at 33.02 258.9022 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "eb1ec9d2-95a0-49f8-9f0e-93ad6b1afb89")
-		(property "Reference" "R007"
-			(at 32.766 258.1402 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "RC0603JR-070RL"
-			(at 32.766 262.2042 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RESC1608X55X25ML10T15"
-			(at 33.02 258.9022 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 33.02 258.9022 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Chip Resistor, 0 Ohm, +/- 5%, 0.1 W, -55 to 155 degC, 0603 (1608 Metric), RoHS, Tape and Reel"
-			(at 33.02 258.9022 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "TEMPERATURE COEFFICIENT" "200ppm/degreesC"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WIDTH" "0.8mm"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" "155degC"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TOLERANCE" "5%"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE REFERENCE" "0603"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HEIGHT" "0.45mm"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DEPTH" "0.8mm"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE DESCRIPTION" "2-Pin Surface Mount Device, Body 1.6 x 0.8 mm"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING" "50V"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TERMINATION" "SMD/SMT"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE QUANTITY" "5000"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" "0603"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (IMPERIAL)" "0603"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RADIATION HARDENING" "No"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "NUMBER OF PINS" "2"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LENGTH" "1.6mm"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LEAD FREE" "LeadFree"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "VOLTAGE RATING (DC)" "50V"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MILITARY STANDARD" "Not"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "POWER RATING" "100mW"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET URL" "http://www.yageo.com/NewPortal/yageodocoutput?fileName=/pdf/R-Chip/PYu-RC_Group_51_RoHS_L_5.pdf"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "RESISTANCE" "0mOhm"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER URL" "http://www.yageo.com/"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGING" "TapeandReel"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE CODE (METRIC)" "1608"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" "-55degC"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "COMPOSITION" "ThickFilm"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" "Yageo"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ROHSCOMPLIANT" "true"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CONTACT PLATING" "Tin"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "DATASHEET VERSION" "Rev. 5, 10/2016"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "REACH SVHC" "NoSVHC"
-			(at 29.972 255.0922 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3fe02a9a-03b6-49aa-a7cb-e999b4bdaa44")
-		)
-		(pin "2"
-			(uuid "cdd6249a-467d-4ab8-bd45-93f90125fe5f")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
-					(reference "R007")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Speedometer_Tech-altium-import:KL30i_ARROW")
-		(at 45.72 258.9022 180)
+		(at 45.72 264.16 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6058,7 +3066,7 @@
 		(dnp no)
 		(uuid "ec7c8e2d-7eff-4fb0-a35d-78427cc6364f")
 		(property "Reference" "#PWR0103"
-			(at 45.72 258.9022 0)
+			(at 45.72 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6067,7 +3075,7 @@
 			)
 		)
 		(property "Value" "KL30i"
-			(at 45.72 255.0922 0)
+			(at 45.72 260.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6075,7 +3083,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 45.72 258.9022 0)
+			(at 45.72 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6084,7 +3092,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 45.72 258.9022 0)
+			(at 45.72 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6092,8 +3100,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 45.72 258.9022 0)
+		(property "Description" "Power symbol creates a global label with name 'KL30i'"
+			(at 45.72 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6349,7 +3357,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name '5V'"
 			(at 66.04 60.96 0)
 			(effects
 				(font
@@ -6667,6 +3675,26 @@
 				(justify left)
 			)
 		)
+		(pin "SCL_2" passive
+			(at 228.6 198.12 180)
+			(uuid "bd0cceec-faa6-41ea-9b7d-b690cd6952d5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SDA_2" passive
+			(at 228.6 200.66 180)
+			(uuid "36292e54-effe-4f9e-8523-2881fb7ca606")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
 		(instances
 			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949"
@@ -6792,13 +3820,12 @@
 		)
 	)
 	(sheet
-		(at 228.6 68.4022)
+		(at 228.6 68.58)
 		(size 50.8 25.4)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(stroke
 			(width 0)
 			(type solid)
@@ -6809,7 +3836,7 @@
 		)
 		(uuid "7f25a167-5e25-4142-beba-23f2a558c57e")
 		(property "Sheetname" "Speed"
-			(at 228.6 65.8622 0)
+			(at 228.6 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6818,7 +3845,7 @@
 			)
 		)
 		(property "Sheetfile" "10_Speed.kicad_sch"
-			(at 228.6 68.4022 0)
+			(at 228.6 68.5038 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6826,8 +3853,8 @@
 				(justify left bottom)
 			)
 		)
-		(pin "SCL" passive
-			(at 228.6 76.0222 180)
+		(pin "SCL_2" passive
+			(at 228.6 76.2 180)
 			(uuid "9e5757a0-d1be-48e1-9f69-423af72cf7ad")
 			(effects
 				(font
@@ -6836,8 +3863,8 @@
 				(justify left)
 			)
 		)
-		(pin "SDA" passive
-			(at 228.6 81.1022 180)
+		(pin "SDA_2" passive
+			(at 228.6 81.28 180)
 			(uuid "06393e75-db3a-4e44-a8ed-c8f0c269a059")
 			(effects
 				(font
@@ -6847,7 +3874,7 @@
 			)
 		)
 		(pin "~{DIG-RST}" passive
-			(at 228.6 86.1822 180)
+			(at 228.6 86.36 180)
 			(uuid "533bba13-2498-4c82-a6dd-ed7c25339720")
 			(effects
 				(font
@@ -7041,7 +4068,7 @@
 		)
 	)
 	(sheet
-		(at 127 68.4022)
+		(at 127 68.58)
 		(size 50.8 25.4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7058,7 +4085,7 @@
 		)
 		(uuid "cc625872-66aa-4d7c-a056-bf228c047f21")
 		(property "Sheetname" "Distance"
-			(at 127 65.8622 0)
+			(at 127 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7067,7 +4094,7 @@
 			)
 		)
 		(property "Sheetfile" "50_Distance.kicad_sch"
-			(at 127 68.4022 0)
+			(at 127 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7076,7 +4103,7 @@
 			)
 		)
 		(pin "SCL" passive
-			(at 177.8 76.0222 0)
+			(at 177.8 76.2 0)
 			(uuid "1e8c7f8e-df9c-4e27-9841-1c4f3000315c")
 			(effects
 				(font
@@ -7086,7 +4113,7 @@
 			)
 		)
 		(pin "SDA" passive
-			(at 177.8 81.1022 0)
+			(at 177.8 81.28 0)
 			(uuid "9da84733-5e57-4069-ae1d-5b018b6c21da")
 			(effects
 				(font
@@ -7096,7 +4123,7 @@
 			)
 		)
 		(pin "~{DIG-RST}" passive
-			(at 177.8 86.1822 0)
+			(at 177.8 86.36 0)
 			(uuid "dd0a411d-2a63-420e-8e86-c727070f4677")
 			(effects
 				(font
@@ -7114,7 +4141,7 @@
 		)
 	)
 	(sheet
-		(at 203.2 43.0022)
+		(at 203.2 43.18)
 		(size 76.2 50.8)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7131,7 +4158,7 @@
 		)
 		(uuid "de88d757-f807-4a53-8f0b-a2d0f7ee584a")
 		(property "Sheetname" "Torq"
-			(at 203.2 40.4622 0)
+			(at 203.2 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7140,7 +4167,7 @@
 			)
 		)
 		(property "Sheetfile" "20_Torq.kicad_sch"
-			(at 203.2 43.0022 0)
+			(at 203.2 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7149,7 +4176,7 @@
 			)
 		)
 		(pin "TorqIn" input
-			(at 203.2 55.7022 180)
+			(at 203.2 55.88 180)
 			(uuid "1c773ea5-ed35-4109-96a9-5aabcff6cd60")
 			(effects
 				(font
@@ -7159,7 +4186,7 @@
 			)
 		)
 		(pin "TorqOut" output
-			(at 279.4 55.7022 0)
+			(at 279.4 55.88 0)
 			(uuid "62a0e206-9ce1-4cb8-93a9-aaa43ef9d136")
 			(effects
 				(font

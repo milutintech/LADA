@@ -452,7 +452,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "776228-1_1"
+		(symbol "Connector:776228-1"
 			(pin_names
 				(offset 1.016)
 			)
@@ -535,7 +535,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "776228-1_1_0_0"
+			(symbol "776228-1_0_0"
 				(rectangle
 					(start -5.08 -30.48)
 					(end 5.08 30.48)
@@ -2219,6 +2219,12 @@
 		)
 	)
 	(junction
+		(at 109.22 125.73)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0f692e81-81e4-43ac-88d5-12c36fdc9444")
+	)
+	(junction
 		(at 304.8 154.94)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2241,6 +2247,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d79eeb09-a1fe-4dd7-86d2-662e87a107aa")
+	)
+	(junction
+		(at 109.22 133.35)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dae59dc6-71b9-405c-b72d-244941eab292")
 	)
 	(junction
 		(at 297.18 149.86)
@@ -2422,6 +2434,16 @@
 	)
 	(wire
 		(pts
+			(xy 121.92 125.73) (xy 119.38 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1696e3c2-d1a0-4d2f-a3d4-a9496729081b")
+	)
+	(wire
+		(pts
 			(xy 237.49 67.31) (xy 250.19 67.31)
 		)
 		(stroke
@@ -2552,16 +2574,6 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 125.73) (xy 109.22 123.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3b12c99f-d8bb-4daf-a04d-8d124f461ad0")
-	)
-	(wire
-		(pts
 			(xy 237.49 154.94) (xy 250.19 154.94)
 		)
 		(stroke
@@ -2629,6 +2641,16 @@
 			(type default)
 		)
 		(uuid "5227c585-6d43-4c23-bdad-b0c4d7f29178")
+	)
+	(wire
+		(pts
+			(xy 109.22 125.73) (xy 111.76 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5665efed-46bd-43e3-8643-f429427aac6d")
 	)
 	(wire
 		(pts
@@ -3062,6 +3084,16 @@
 	)
 	(wire
 		(pts
+			(xy 109.22 133.35) (xy 111.76 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d064ade0-d2d2-40bb-80b8-13c126e53aea")
+	)
+	(wire
+		(pts
 			(xy 87.63 163.83) (xy 105.41 163.83)
 		)
 		(stroke
@@ -3239,6 +3271,16 @@
 			(type default)
 		)
 		(uuid "f65f7527-cc83-4682-8a72-812c3dcdb923")
+	)
+	(wire
+		(pts
+			(xy 119.38 133.35) (xy 121.92 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa4de018-9788-4720-9eed-60ccb5fca449")
 	)
 	(wire
 		(pts
@@ -4052,7 +4094,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name '3V3'"
 			(at 218.44 195.58 0)
 			(effects
 				(font
@@ -4068,6 +4110,74 @@
 			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
 					(reference "#PWR038")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 115.57 125.73 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0b3ed50d-19b9-4f4d-9036-2e99aa6190f0")
+		(property "Reference" "R17"
+			(at 115.57 119.38 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R"
+			(at 115.57 121.92 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 115.57 127.508 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 115.57 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 115.57 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "ba9693cd-cad0-439d-9a08-fce802770975")
+		)
+		(pin "1"
+			(uuid "78996dd1-719b-46ef-8cf4-1b98db41b66f")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
+					(reference "R17")
 					(unit 1)
 				)
 			)
@@ -4331,7 +4441,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name 'GND'"
 			(at 222.25 248.92 0)
 			(effects
 				(font
@@ -4396,7 +4506,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name '3V3'"
 			(at 218.44 52.07 0)
 			(effects
 				(font
@@ -4445,7 +4555,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 299.212 143.51 90)
 			(effects
 				(font
@@ -4531,7 +4641,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name 'GND'"
 			(at 247.65 193.04 0)
 			(effects
 				(font
@@ -4580,7 +4690,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 303.022 143.51 90)
 			(effects
 				(font
@@ -4880,7 +4990,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name 'KL31'"
 			(at 109.22 133.35 0)
 			(effects
 				(font
@@ -4945,7 +5055,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name 'GND'"
 			(at 300.99 167.64 0)
 			(effects
 				(font
@@ -5181,7 +5291,6 @@
 		)
 	)
 	(symbol
-		(lib_name "776228-1_1")
 		(lib_id "Connector:776228-1")
 		(at 80.01 148.59 0)
 		(unit 1)
@@ -5387,7 +5496,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name '3V3'"
 			(at 300.99 137.16 0)
 			(effects
 				(font
@@ -5543,7 +5652,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 295.402 161.29 90)
 			(effects
 				(font
@@ -5680,7 +5789,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 299.212 161.29 90)
 			(effects
 				(font
@@ -5830,71 +5939,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:KL30_ARROW")
-		(at 218.44 119.38 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "6de2c95a-c44a-4d37-8527-7b66238319c2")
-		(property "Reference" "#PWR034"
-			(at 218.44 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "KL30"
-			(at 218.44 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 218.44 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 218.44 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 218.44 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "f651996a-8e2f-4f83-8332-013eecc4afc7")
-		)
-		(instances
-			(project "Speedometer_Tech"
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
-					(reference "#PWR034")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Speedometer_Tech-altium-import:GND_BAR")
 		(at 247.65 121.92 0)
 		(unit 1)
@@ -5938,7 +5982,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name 'GND'"
 			(at 247.65 121.92 0)
 			(effects
 				(font
@@ -6094,7 +6138,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 303.022 161.29 90)
 			(effects
 				(font
@@ -6131,71 +6175,6 @@
 			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
 					(reference "R16")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:KL30_ARROW")
-		(at 218.44 46.99 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "83a60f92-3882-44bd-ab8d-962b9e30623e")
-		(property "Reference" "#PWR031"
-			(at 218.44 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "KL30"
-			(at 218.44 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 218.44 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 218.44 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 218.44 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "0e28366f-3aea-4b41-b522-70ead7960b5c")
-		)
-		(instances
-			(project "Speedometer_Tech"
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
-					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -6523,6 +6502,71 @@
 		)
 	)
 	(symbol
+		(lib_id "Speedometer_Tech-altium-import:KL30_ARROW")
+		(at 218.44 119.38 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9c72c60d-bccc-41a9-8859-e49a47fa197c")
+		(property "Reference" "#PWR010"
+			(at 218.44 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "KL30input"
+			(at 218.44 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 218.44 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 218.44 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name 'KL30'"
+			(at 218.44 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "b4b2c246-5e4f-45ae-bf7e-dfc96fdcad68")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
+					(reference "#PWR010")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Speedometer_Tech-altium-import:3V3_ARROW")
 		(at 218.44 124.46 180)
 		(unit 1)
@@ -6566,7 +6610,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name '3V3'"
 			(at 218.44 124.46 0)
 			(effects
 				(font
@@ -6582,71 +6626,6 @@
 			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
 					(reference "#PWR035")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:KL30_ARROW")
-		(at 222.25 241.3 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9e8cb2f6-4d74-4129-a567-2d530527ec92")
-		(property "Reference" "#PWR06"
-			(at 222.25 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "KL30"
-			(at 222.25 237.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 222.25 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 222.25 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 222.25 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "681b8f0c-031d-43f2-9e09-8d5b2d2de7a3")
-		)
-		(instances
-			(project "Speedometer_Tech"
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
-					(reference "#PWR06")
 					(unit 1)
 				)
 			)
@@ -6696,7 +6675,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name 'GND'"
 			(at 247.65 49.53 0)
 			(effects
 				(font
@@ -6712,6 +6691,74 @@
 			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
 					(reference "#PWR033")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 115.57 133.35 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a5337569-ab53-4749-a556-c46a71854e1b")
+		(property "Reference" "R18"
+			(at 115.57 127 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R"
+			(at 115.57 129.54 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 115.57 135.128 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 115.57 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 115.57 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "7bd268e0-8c89-46c4-b4df-85b602054249")
+		)
+		(pin "1"
+			(uuid "65c42c86-9c90-4141-99e9-78e27905d104")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
+					(reference "R18")
 					(unit 1)
 				)
 			)
@@ -6761,7 +6808,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name '3V3'"
 			(at 334.01 106.68 0)
 			(effects
 				(font
@@ -6890,6 +6937,266 @@
 		)
 	)
 	(symbol
+		(lib_id "Speedometer_Tech-altium-import:KL30_ARROW")
+		(at 121.92 125.73 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b00e672a-7f59-48e2-9dc8-ea401a58963f")
+		(property "Reference" "#PWR08"
+			(at 121.92 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "KL30input"
+			(at 121.92 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 121.92 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 121.92 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name 'KL30'"
+			(at 121.92 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "da5ee22b-5f55-4780-8425-265e6e9a4f26")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
+					(reference "#PWR08")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:GND_BAR")
+		(at 121.92 133.35 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b3e9e74c-0e1a-4706-adfe-ed2dbbf36fd0")
+		(property "Reference" "#PWR07"
+			(at 121.92 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 121.92 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 121.92 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 121.92 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name 'GND'"
+			(at 121.92 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "f68a3c58-f5b5-4738-8e04-7f698753fa40")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
+					(reference "#PWR07")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:KL30_ARROW")
+		(at 218.44 190.5 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b40ef846-feb7-48d3-bd57-61c64f53be43")
+		(property "Reference" "#PWR011"
+			(at 218.44 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "KL30input"
+			(at 218.44 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 218.44 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 218.44 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name 'KL30'"
+			(at 218.44 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "d5143ae6-5879-4ede-aab6-214f46563bec")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
+					(reference "#PWR011")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:KL30_ARROW")
+		(at 218.44 46.99 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c0bd801d-1d87-4e09-8e07-5729ecb72f34")
+		(property "Reference" "#PWR09"
+			(at 218.44 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "KL30input"
+			(at 218.44 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 218.44 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 218.44 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name 'KL30'"
+			(at 218.44 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "315988e0-e9c4-40d0-a539-46539f637a1e")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
+					(reference "#PWR09")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "4xxx:4010")
 		(at 229.87 90.17 0)
 		(unit 4)
@@ -6992,71 +7299,6 @@
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
 					(reference "U3")
 					(unit 4)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:KL30_ARROW")
-		(at 218.44 190.5 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c9254a18-0ffa-437a-b8af-72a458298ba1")
-		(property "Reference" "#PWR037"
-			(at 218.44 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "KL30"
-			(at 218.44 186.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 218.44 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 218.44 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 218.44 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "337d18c5-efb7-4149-a904-c91e14010377")
-		)
-		(instances
-			(project "Speedometer_Tech"
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
-					(reference "#PWR037")
-					(unit 1)
 				)
 			)
 		)
@@ -7169,6 +7411,71 @@
 		)
 	)
 	(symbol
+		(lib_id "Speedometer_Tech-altium-import:KL30_ARROW")
+		(at 222.25 241.3 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d0a8dfe8-35da-41db-8a0f-1dc5dada138e")
+		(property "Reference" "#PWR06"
+			(at 222.25 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "KL30input"
+			(at 222.25 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 222.25 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 222.25 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name 'KL30'"
+			(at 222.25 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "acee51c3-10a2-4f3e-8b24-50380bcbdb58")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/14c68b90-3114-4578-b394-c022dfe8aa51"
+					(reference "#PWR06")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Speedometer_Tech-altium-import:GND_BAR")
 		(at 334.01 162.56 0)
 		(unit 1)
@@ -7212,7 +7519,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name 'GND'"
 			(at 334.01 162.56 0)
 			(effects
 				(font
@@ -7732,7 +8039,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 295.402 143.51 90)
 			(effects
 				(font
@@ -7950,7 +8257,7 @@
 	)
 	(symbol
 		(lib_id "Speedometer_Tech-altium-import:KL30_ARROW")
-		(at 109.22 123.19 180)
+		(at 109.22 125.73 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7958,7 +8265,7 @@
 		(dnp no)
 		(uuid "ef196fba-c4c3-483e-96aa-4bfdfd2aea05")
 		(property "Reference" "#PWR0219"
-			(at 109.22 123.19 0)
+			(at 109.22 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7967,7 +8274,7 @@
 			)
 		)
 		(property "Value" "KL30"
-			(at 109.22 119.38 0)
+			(at 109.22 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7975,7 +8282,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 109.22 123.19 0)
+			(at 109.22 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7984,7 +8291,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 109.22 123.19 0)
+			(at 109.22 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7992,8 +8299,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 109.22 123.19 0)
+		(property "Description" "Power symbol creates a global label with name 'KL30'"
+			(at 109.22 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
