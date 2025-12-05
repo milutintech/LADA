@@ -1630,6 +1630,174 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:D"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "D"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Sim.Device" "D"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Sim.Pins" "1=K 2=A"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "D_0_1"
+				(polyline
+					(pts
+						(xy -1.27 1.27) (xy -1.27 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "D_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:R"
 			(pin_numbers
 				(hide yes)
@@ -3398,222 +3566,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Speedometer_Tech-altium-import:Designator_0_1d6ec82d83fb6aee721767c19dac4b9"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "DIODE SCHOTTKY 20V 500MA SOD123"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "*FP-425-04-MFG*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Designator_0_1d6ec82d83fb6aee721767c19dac4b9_1_0"
-				(polyline
-					(pts
-						(xy 5.08 2.54) (xy 5.08 -2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 2.54) (xy 10.16 0)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 0) (xy 4.318 0)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 -2.54) (xy 10.16 0)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 9.398 2.54) (xy 9.398 1.778)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.16 2.54) (xy 9.398 2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.16 2.54) (xy 10.16 -2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.16 0) (xy 10.922 0)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.16 -2.54) (xy 10.922 -2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.922 -2.54) (xy 10.922 -1.778)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at 0 0 0)
-					(length 5.08)
-					(name "A"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 15.24 0 180)
-					(length 5.08)
-					(name "C"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Speedometer_Tech-altium-import:GND_BAR"
 			(power)
 			(exclude_from_sim no)
@@ -5234,7 +5186,7 @@
 	)
 	(text "Imax-D41 = 500mA"
 		(exclude_from_sim no)
-		(at 251.46 92.71 0)
+		(at 251.968 79.756 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5327,10 +5279,10 @@
 		(uuid "2e033ba4-97a2-47b3-a49a-67856f630415")
 	)
 	(junction
-		(at 248.92 64.77)
+		(at 248.92 60.96)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "32740046-37f4-4508-b5a7-6f45584c4d2d")
+		(uuid "3e6a6afd-63ac-43c9-bfc1-4efefc46b6f1")
 	)
 	(junction
 		(at 50.8 153.67)
@@ -5357,10 +5309,22 @@
 		(uuid "5a042a15-01b3-4750-8cb7-7ae3c0febcf1")
 	)
 	(junction
+		(at 274.32 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "60018784-6c61-4aaa-99e2-efe30bb7c666")
+	)
+	(junction
 		(at 71.12 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "656fc243-1d4a-4359-9b0c-18c012de19ef")
+	)
+	(junction
+		(at 274.32 71.12)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "65e729d8-f162-4136-bea9-8fa4569bea19")
 	)
 	(junction
 		(at 127 137.16)
@@ -5411,28 +5375,22 @@
 		(uuid "7732ccbe-3742-4c74-8cfb-d53312d8f549")
 	)
 	(junction
-		(at 274.32 74.93)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "777cf5ee-fb68-481b-bf13-e1e5bc57bd50")
-	)
-	(junction
 		(at 50.8 179.07)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7bb5f6a4-718c-4fd8-9156-8625e4bf4ab8")
 	)
 	(junction
+		(at 248.92 71.12)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7ccc2e4e-aeb0-4bf1-bb4c-46e01f2fb642")
+	)
+	(junction
 		(at 53.34 161.29)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "816f54ae-2029-4756-acd4-6fc5418e4706")
-	)
-	(junction
-		(at 248.92 54.61)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "88a4a5d4-88e6-4430-a8d2-b599aca713bf")
 	)
 	(junction
 		(at 130.81 146.05)
@@ -5445,6 +5403,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b4ec15a6-824b-4d52-bbab-56d572aa1b7a")
+	)
+	(junction
+		(at 248.92 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b5b0b9f3-e679-43ce-bd1a-633fff7b03fc")
 	)
 	(junction
 		(at 92.71 44.45)
@@ -5477,12 +5441,6 @@
 		(uuid "d71f28d1-bf4b-417c-b159-967282e4bdf6")
 	)
 	(junction
-		(at 274.32 54.61)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d7c3ad93-c688-4d4e-8b62-fabdc59c1149")
-	)
-	(junction
 		(at 59.69 181.61)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5505,12 +5463,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "de59d5b0-b08c-4644-8912-c33bbad53779")
-	)
-	(junction
-		(at 248.92 74.93)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e3c37089-3f0a-4068-b58f-33e546226935")
 	)
 	(junction
 		(at 60.96 78.74)
@@ -5776,16 +5728,6 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 64.77) (xy 254 64.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "10719762-1ccb-4952-8c4b-f7d0ada05467")
-	)
-	(wire
-		(pts
 			(xy 60.96 184.15) (xy 59.69 184.15)
 		)
 		(stroke
@@ -5826,17 +5768,7 @@
 	)
 	(wire
 		(pts
-			(xy 274.32 54.61) (xy 269.24 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "161ab9ef-4368-4bf3-abc3-7006c9f0b636")
-	)
-	(wire
-		(pts
-			(xy 274.32 64.77) (xy 274.32 54.61)
+			(xy 274.32 60.96) (xy 274.32 57.15)
 		)
 		(stroke
 			(width 0)
@@ -6116,6 +6048,16 @@
 	)
 	(wire
 		(pts
+			(xy 248.92 57.15) (xy 248.92 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "378b738b-98c5-4258-ad87-36a51b4db686")
+	)
+	(wire
+		(pts
 			(xy 99.06 34.29) (xy 99.06 50.8)
 		)
 		(stroke
@@ -6176,16 +6118,6 @@
 	)
 	(wire
 		(pts
-			(xy 254 74.93) (xy 248.92 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "42527c70-cf1f-4144-aee7-273e8ae5c60f")
-	)
-	(wire
-		(pts
 			(xy 275.59 149.86) (xy 280.67 149.86)
 		)
 		(stroke
@@ -6233,6 +6165,16 @@
 			(type default)
 		)
 		(uuid "49e26f37-92a5-412e-a0dd-2f0e6658bb14")
+	)
+	(wire
+		(pts
+			(xy 274.32 68.58) (xy 274.32 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4c06a699-4f63-4e22-9764-97f4c01813a2")
 	)
 	(wire
 		(pts
@@ -6326,7 +6268,7 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 74.93) (xy 248.92 85.09)
+			(xy 248.92 71.12) (xy 248.92 74.93)
 		)
 		(stroke
 			(width 0)
@@ -6456,6 +6398,16 @@
 	)
 	(wire
 		(pts
+			(xy 264.16 57.15) (xy 274.32 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6a002aef-7618-4199-b698-ad97aec044da")
+	)
+	(wire
+		(pts
 			(xy 198.12 33.02) (xy 212.09 33.02)
 		)
 		(stroke
@@ -6546,7 +6498,7 @@
 	)
 	(wire
 		(pts
-			(xy 274.32 85.09) (xy 269.24 85.09)
+			(xy 274.32 71.12) (xy 264.16 71.12)
 		)
 		(stroke
 			(width 0)
@@ -6586,7 +6538,7 @@
 	)
 	(wire
 		(pts
-			(xy 269.24 64.77) (xy 274.32 64.77)
+			(xy 264.16 60.96) (xy 274.32 60.96)
 		)
 		(stroke
 			(width 0)
@@ -6646,6 +6598,16 @@
 	)
 	(wire
 		(pts
+			(xy 248.92 60.96) (xy 248.92 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "892aa6fc-8874-49bf-a1ec-948b14dde594")
+	)
+	(wire
+		(pts
 			(xy 48.26 148.59) (xy 52.07 148.59)
 		)
 		(stroke
@@ -6696,17 +6658,7 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 64.77) (xy 248.92 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8ebd4ce9-98c8-4a2f-b055-6f149c2604da")
-	)
-	(wire
-		(pts
-			(xy 248.92 54.61) (xy 248.92 64.77)
+			(xy 248.92 54.61) (xy 248.92 57.15)
 		)
 		(stroke
 			(width 0)
@@ -6726,7 +6678,7 @@
 	)
 	(wire
 		(pts
-			(xy 274.32 74.93) (xy 274.32 85.09)
+			(xy 274.32 74.93) (xy 274.32 71.12)
 		)
 		(stroke
 			(width 0)
@@ -6816,23 +6768,13 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 85.09) (xy 254 85.09)
+			(xy 248.92 74.93) (xy 256.54 74.93)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "99a589ed-bd49-471f-84b5-feb5a17d22fe")
-	)
-	(wire
-		(pts
-			(xy 254 54.61) (xy 248.92 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9a6e537b-5268-4937-b425-e662df6afedb")
 	)
 	(wire
 		(pts
@@ -6843,6 +6785,16 @@
 			(type default)
 		)
 		(uuid "9b170fb6-d14a-49ab-b6e9-efc7fea74c96")
+	)
+	(wire
+		(pts
+			(xy 248.92 57.15) (xy 256.54 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c81d5c7-d8f7-4cf2-86c2-1eab45c4bda9")
 	)
 	(wire
 		(pts
@@ -6913,6 +6865,16 @@
 			(type default)
 		)
 		(uuid "a5474f79-8690-48c2-b70e-8dbfda7d299f")
+	)
+	(wire
+		(pts
+			(xy 248.92 60.96) (xy 256.54 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a6417454-99db-43b8-b651-7c4a768df6e9")
 	)
 	(wire
 		(pts
@@ -7356,7 +7318,17 @@
 	)
 	(wire
 		(pts
-			(xy 269.24 74.93) (xy 274.32 74.93)
+			(xy 274.32 57.15) (xy 274.32 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ecf3530a-2c9b-4ae8-b8ef-760c2b948c8e")
+	)
+	(wire
+		(pts
+			(xy 264.16 74.93) (xy 274.32 74.93)
 		)
 		(stroke
 			(width 0)
@@ -7553,6 +7525,16 @@
 			(type default)
 		)
 		(uuid "fe9578c1-2560-4419-84bd-1d62bf9ab794")
+	)
+	(wire
+		(pts
+			(xy 248.92 71.12) (xy 256.54 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ffd8c443-c9fb-4c87-9bef-b148c9527943")
 	)
 	(label "MOSI"
 		(at 101.6 60.96 0)
@@ -9201,604 +9183,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:Designator_0_1d6ec82d83fb6aee721767c19dac4b9")
-		(at 254 64.77 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "35a7e6e9-f092-4d89-8890-45baa52c024f")
-		(property "Reference" "D1102"
-			(at 258.064 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "SBR80520LT1G"
-			(at 258.064 70.104 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" "FP-425-04-MFG"
-			(at 254 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 254 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "DIODE SCHOTTKY 20V 500MA SOD123"
-			(at 254 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" "-65°C"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" "SOD-123-2"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HALOGEN FREE" "Halogen Free"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "NUMBER OF PINS" "2"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" "125°C"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "AVERAGE RECTIFIED CURRENT" "500mA"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WEIGHT" "0.000363oz"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "FORWARD VOLTAGE" "385mV"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HEIGHT" "1.17mm"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "REVERSE VOLTAGE (DC)" "20V"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "FORWARD CURRENT" "500mA"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX REVERSE VOLTAGE (DC)" "20V"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ELEMENT CONFIGURATION" "Single"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WIDTH" "1.6mm"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX FORWARD SURGE CURRENT (IFSM)" "5.5A"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TERMINATION" "SMD/SMT"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX REPETITIVE REVERSE VOLTAGE (VRRM)" "20V"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE QUANTITY" "3000"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LENGTH" "2.69mm"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LEAD FREE" "Lead Free"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PEAK NON-REPETITIVE SURGE CURRENT" "5.5A"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGING" "Tape and Reel"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PEAK REVERSE CURRENT" "250uA"
-			(at 253.492 61.976 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "ecd16f34-5b7f-4599-b35f-d7cb97b93609")
-		)
-		(pin "1"
-			(uuid "c7e70f20-515c-4454-9f74-3d884b0e62fd")
-		)
-		(instances
-			(project "Speedometer_Tech"
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/316d927d-970a-416e-9670-38b76bd0d5db"
-					(reference "D1102")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:Designator_0_1d6ec82d83fb6aee721767c19dac4b9")
-		(at 254 74.93 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3f84b353-2359-41ed-9713-1154c554d9aa")
-		(property "Reference" "D1103"
-			(at 258.064 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "SBR80520LT1G"
-			(at 258.064 80.264 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" "FP-425-04-MFG"
-			(at 254 74.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 254 74.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "DIODE SCHOTTKY 20V 500MA SOD123"
-			(at 254 74.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" "-65°C"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" "SOD-123-2"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HALOGEN FREE" "Halogen Free"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "NUMBER OF PINS" "2"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" "125°C"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "AVERAGE RECTIFIED CURRENT" "500mA"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WEIGHT" "0.000363oz"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "FORWARD VOLTAGE" "385mV"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HEIGHT" "1.17mm"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "REVERSE VOLTAGE (DC)" "20V"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "FORWARD CURRENT" "500mA"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX REVERSE VOLTAGE (DC)" "20V"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ELEMENT CONFIGURATION" "Single"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WIDTH" "1.6mm"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX FORWARD SURGE CURRENT (IFSM)" "5.5A"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TERMINATION" "SMD/SMT"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX REPETITIVE REVERSE VOLTAGE (VRRM)" "20V"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE QUANTITY" "3000"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LENGTH" "2.69mm"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LEAD FREE" "Lead Free"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PEAK NON-REPETITIVE SURGE CURRENT" "5.5A"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGING" "Tape and Reel"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PEAK REVERSE CURRENT" "250uA"
-			(at 253.492 72.136 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "8139d252-d88a-44c5-b022-dcf26f99375d")
-		)
-		(pin "1"
-			(uuid "451bdd4b-684d-4572-8613-8208c2e801e1")
-		)
-		(instances
-			(project "Speedometer_Tech"
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/316d927d-970a-416e-9670-38b76bd0d5db"
-					(reference "D1103")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "ESP32-S3-WROOM-1(N8R2):ESP32-S3-WROOM-1(N8R2)")
 		(at 132.08 58.42 0)
 		(unit 1)
@@ -10545,34 +9929,33 @@
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:Designator_0_1d6ec82d83fb6aee721767c19dac4b9")
-		(at 254 85.09 0)
+		(lib_id "Device:D")
+		(at 260.35 60.96 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "5b792a67-c8cb-42ad-8b8a-a0496c69d8f7")
-		(property "Reference" "D1104"
-			(at 258.064 82.296 0)
+		(fields_autoplaced yes)
+		(uuid "5d179f4f-3095-4efb-9942-33125b828dbb")
+		(property "Reference" "D1102"
+			(at 260.35 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
 			)
 		)
 		(property "Value" "SBR80520LT1G"
-			(at 258.064 90.424 0)
+			(at 260.35 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
 			)
 		)
-		(property "Footprint" "FP-425-04-MFG"
-			(at 254 85.09 0)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 260.35 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10580,8 +9963,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 254 85.09 0)
+		(property "Datasheet" "~"
+			(at 260.35 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10589,8 +9972,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "DIODE SCHOTTKY 20V 500MA SOD123"
-			(at 254 85.09 0)
+		(property "Description" "Diode"
+			(at 260.35 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10598,246 +9981,34 @@
 				(hide yes)
 			)
 		)
-		(property "MIN OPERATING TEMPERATURE" "-65°C"
-			(at 253.492 82.296 0)
+		(property "Sim.Device" "D"
+			(at 260.35 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
 				(hide yes)
 			)
 		)
-		(property "CASE/PACKAGE" "SOD-123-2"
-			(at 253.492 82.296 0)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 260.35 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HALOGEN FREE" "Halogen Free"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "NUMBER OF PINS" "2"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" "125°C"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "AVERAGE RECTIFIED CURRENT" "500mA"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WEIGHT" "0.000363oz"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "FORWARD VOLTAGE" "385mV"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HEIGHT" "1.17mm"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "REVERSE VOLTAGE (DC)" "20V"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "FORWARD CURRENT" "500mA"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX REVERSE VOLTAGE (DC)" "20V"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ELEMENT CONFIGURATION" "Single"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WIDTH" "1.6mm"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX FORWARD SURGE CURRENT (IFSM)" "5.5A"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TERMINATION" "SMD/SMT"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX REPETITIVE REVERSE VOLTAGE (VRRM)" "20V"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE QUANTITY" "3000"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LENGTH" "2.69mm"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LEAD FREE" "Lead Free"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PEAK NON-REPETITIVE SURGE CURRENT" "5.5A"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGING" "Tape and Reel"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PEAK REVERSE CURRENT" "250uA"
-			(at 253.492 82.296 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
 				(hide yes)
 			)
 		)
 		(pin "2"
-			(uuid "eb34aa52-3b4c-4cd6-804e-6fdfd3d559bf")
+			(uuid "412b742c-5feb-4917-b72e-9a31b247a7e5")
 		)
 		(pin "1"
-			(uuid "267460b9-ee76-4436-a209-c31d5cf1dcd8")
+			(uuid "fb1a5a02-c849-4072-b9a2-9dd9e912bf66")
 		)
 		(instances
 			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/316d927d-970a-416e-9670-38b76bd0d5db"
-					(reference "D1104")
+					(reference "D1102")
 					(unit 1)
 				)
 			)
@@ -10968,6 +10139,92 @@
 			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/316d927d-970a-416e-9670-38b76bd0d5db"
 					(reference "#PWR048")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D")
+		(at 260.35 57.15 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7937ffde-1f9d-458f-ac72-2e25c7e280cf")
+		(property "Reference" "D1101"
+			(at 260.35 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SBR80520LT1G"
+			(at 260.35 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 260.35 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 260.35 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Diode"
+			(at 260.35 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 260.35 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 260.35 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "e42a8852-cb61-47da-a766-ae97771d89bc")
+		)
+		(pin "1"
+			(uuid "e746e0eb-b093-4a29-8107-32b6c2333efc")
+		)
+		(instances
+			(project ""
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/316d927d-970a-416e-9670-38b76bd0d5db"
+					(reference "D1101")
 					(unit 1)
 				)
 			)
@@ -12097,6 +11354,92 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:D")
+		(at 260.35 74.93 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "add6289c-72ba-490f-bdf0-ff71f803d34a")
+		(property "Reference" "D1104"
+			(at 260.35 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SBR80520LT1G"
+			(at 260.35 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 260.35 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 260.35 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Diode"
+			(at 260.35 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 260.35 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 260.35 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "4e16150b-2013-4a8e-9bef-3d3cb4865f00")
+		)
+		(pin "1"
+			(uuid "efd89078-2390-48af-9ad6-5b78bcb54708")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/316d927d-970a-416e-9670-38b76bd0d5db"
+					(reference "D1104")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "RN73H1JTTD5101B25:RN73H1JTTD5101B25")
 		(at 59.69 176.53 90)
 		(unit 1)
@@ -12423,7 +11766,7 @@
 	)
 	(symbol
 		(lib_id "Speedometer_Tech-altium-import:5V_ARROW")
-		(at 274.32 74.93 180)
+		(at 274.32 68.58 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12431,7 +11774,7 @@
 		(dnp no)
 		(uuid "b8685a6e-cfa7-4a32-9edb-f71434a9b91e")
 		(property "Reference" "#PWR0287"
-			(at 274.32 74.93 0)
+			(at 274.32 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12440,7 +11783,7 @@
 			)
 		)
 		(property "Value" "5V"
-			(at 274.32 71.12 0)
+			(at 274.32 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12448,7 +11791,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 274.32 74.93 0)
+			(at 274.32 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12457,7 +11800,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 274.32 74.93 0)
+			(at 274.32 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12466,7 +11809,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name '5V'"
-			(at 274.32 74.93 0)
+			(at 274.32 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12618,6 +11961,92 @@
 			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/316d927d-970a-416e-9670-38b76bd0d5db"
 					(reference "#PWR060")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D")
+		(at 260.35 71.12 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c62e906b-0f73-40db-8709-c0eeaca05985")
+		(property "Reference" "D1103"
+			(at 260.35 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SBR80520LT1G"
+			(at 260.35 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 260.35 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 260.35 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Diode"
+			(at 260.35 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 260.35 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 260.35 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "0b974c43-8fc6-4b73-a47a-a79c0716eafa")
+		)
+		(pin "1"
+			(uuid "7d892995-9632-4c01-b2e0-7c82a8eda4c7")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/316d927d-970a-416e-9670-38b76bd0d5db"
+					(reference "D1103")
 					(unit 1)
 				)
 			)
@@ -13101,7 +12530,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "footprint:C0603"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 50.8 153.67 0)
 			(effects
 				(font
@@ -13295,305 +12724,6 @@
 			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/316d927d-970a-416e-9670-38b76bd0d5db"
 					(reference "Q602")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Speedometer_Tech-altium-import:Designator_0_1d6ec82d83fb6aee721767c19dac4b9")
-		(at 254 54.61 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f3de15c2-5638-4558-8e04-b200b8842744")
-		(property "Reference" "D1101"
-			(at 258.064 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "SBR80520LT1G"
-			(at 258.064 59.944 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" "FP-425-04-MFG"
-			(at 254 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 254 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "DIODE SCHOTTKY 20V 500MA SOD123"
-			(at 254 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MIN OPERATING TEMPERATURE" "-65°C"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "CASE/PACKAGE" "SOD-123-2"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HALOGEN FREE" "Halogen Free"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "NUMBER OF PINS" "2"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX OPERATING TEMPERATURE" "125°C"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "AVERAGE RECTIFIED CURRENT" "500mA"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WEIGHT" "0.000363oz"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "FORWARD VOLTAGE" "385mV"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "HEIGHT" "1.17mm"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "REVERSE VOLTAGE (DC)" "20V"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "FORWARD CURRENT" "500mA"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX REVERSE VOLTAGE (DC)" "20V"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "ELEMENT CONFIGURATION" "Single"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "WIDTH" "1.6mm"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX FORWARD SURGE CURRENT (IFSM)" "5.5A"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "TERMINATION" "SMD/SMT"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "MAX REPETITIVE REVERSE VOLTAGE (VRRM)" "20V"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE QUANTITY" "3000"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LENGTH" "2.69mm"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "LEAD FREE" "Lead Free"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PEAK NON-REPETITIVE SURGE CURRENT" "5.5A"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PACKAGING" "Tape and Reel"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "PEAK REVERSE CURRENT" "250uA"
-			(at 253.492 51.816 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "3aa1d4a0-12f3-4a05-ae3f-0f13ecb842e9")
-		)
-		(pin "1"
-			(uuid "d75a3fef-88e6-48ae-97e1-1665c8ca2755")
-		)
-		(instances
-			(project "Speedometer_Tech"
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/316d927d-970a-416e-9670-38b76bd0d5db"
-					(reference "D1101")
 					(unit 1)
 				)
 			)

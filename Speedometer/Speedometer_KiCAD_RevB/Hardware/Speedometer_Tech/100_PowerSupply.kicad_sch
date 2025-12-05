@@ -1149,6 +1149,12 @@
 		(uuid "b12ea2d2-82a0-47b6-855b-9f3dc0e57b7e")
 	)
 	(junction
+		(at 185.42 99.06)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b6d7d61a-881d-4135-b944-43cc2a38c43c")
+	)
+	(junction
 		(at 157.48 99.06)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1159,6 +1165,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cc3226ca-ee0e-48a0-a92d-d153336aaf11")
+	)
+	(junction
+		(at 185.42 175.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d982ddff-b0dc-4287-a240-45b6e9f8eb01")
 	)
 	(junction
 		(at 125.73 175.26)
@@ -1207,6 +1219,16 @@
 			(type default)
 		)
 		(uuid "0c7d7f06-4edf-43e3-a724-5ae24498096f")
+	)
+	(wire
+		(pts
+			(xy 185.42 172.72) (xy 185.42 175.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "13df051b-5b91-4574-8f42-3b0eba4068b4")
 	)
 	(wire
 		(pts
@@ -1310,6 +1332,16 @@
 	)
 	(wire
 		(pts
+			(xy 185.42 96.52) (xy 185.42 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c669014-e285-4d55-ac94-2a8d82e59ad0")
+	)
+	(wire
+		(pts
 			(xy 91.44 99.06) (xy 95.25 99.06)
 		)
 		(stroke
@@ -1347,6 +1379,16 @@
 			(type default)
 		)
 		(uuid "6cc3b8ad-d88a-4bc9-b27d-f65c997872ff")
+	)
+	(wire
+		(pts
+			(xy 171.45 175.26) (xy 185.42 175.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "71f79f5a-a5a3-4271-9393-65d2aed3eefd")
 	)
 	(wire
 		(pts
@@ -1390,16 +1432,6 @@
 	)
 	(wire
 		(pts
-			(xy 171.45 172.72) (xy 171.45 175.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7f0d2282-def6-4d54-afc0-fb61952cb13b")
-	)
-	(wire
-		(pts
 			(xy 125.73 99.06) (xy 130.81 99.06)
 		)
 		(stroke
@@ -1427,16 +1459,6 @@
 			(type default)
 		)
 		(uuid "9375d878-11bc-4ed7-ad28-e9e23f580325")
-	)
-	(wire
-		(pts
-			(xy 171.45 96.52) (xy 171.45 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "96b7a340-aa01-49cb-9ff5-0201a65aab89")
 	)
 	(wire
 		(pts
@@ -1487,6 +1509,16 @@
 			(type default)
 		)
 		(uuid "9f42bed7-f1ac-417f-9328-bf6de5452e7e")
+	)
+	(wire
+		(pts
+			(xy 171.45 99.06) (xy 185.42 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a39a1683-77b8-4cd2-a57e-97c8f6e89cb8")
 	)
 	(wire
 		(pts
@@ -2072,71 +2104,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Speedometer_Tech-altium-import:3V3_ARROW")
-		(at 171.45 96.52 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "2cd74487-aacb-40a9-9f59-d67283b37de6")
-		(property "Reference" "#PWR0255"
-			(at 171.45 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "3V3"
-			(at 171.45 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 171.45 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 171.45 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name '3V3'"
-			(at 171.45 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "b0d3eb93-595a-4c4a-9781-48ff5117ca00")
-		)
-		(instances
-			(project ""
-				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
-					(reference "#PWR0255")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Speedometer_Tech-altium-import:GND_BAR")
 		(at 55.88 106.68 0)
 		(unit 1)
@@ -2553,6 +2520,71 @@
 		)
 	)
 	(symbol
+		(lib_id "Speedometer_Tech-altium-import:GND_BAR")
+		(at 185.42 182.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "577ac952-bf2e-4673-b95c-7cab48b4ba14")
+		(property "Reference" "#PWR064"
+			(at 185.42 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 185.42 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 185.42 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 185.42 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name 'GND'"
+			(at 185.42 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "e8571274-b373-4d03-a9c0-a860ff8b4bc6")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
+					(reference "#PWR064")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:L")
 		(at 134.62 99.06 90)
 		(unit 1)
@@ -2615,6 +2647,71 @@
 			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
 					(reference "L1001")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Speedometer_Tech-altium-import:3V3_ARROW")
+		(at 185.42 96.52 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "696a79ac-b0d9-4244-9f41-45573dcc01d4")
+		(property "Reference" "#PWR062"
+			(at 185.42 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "3V3"
+			(at 185.42 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 185.42 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 185.42 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name '3V3'"
+			(at 185.42 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "a910a228-4d0d-4acb-b29a-d65fc9f95ad2")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
+					(reference "#PWR062")
 					(unit 1)
 				)
 			)
@@ -3447,6 +3544,211 @@
 		)
 	)
 	(symbol
+		(lib_id "Speedometer_Tech-altium-import:GND_BAR")
+		(at 185.42 106.68 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d6fd11d9-1cc4-4a2d-ae88-be9e16f82653")
+		(property "Reference" "#PWR063"
+			(at 185.42 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 185.42 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 185.42 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 185.42 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name 'GND'"
+			(at 185.42 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "f01f611d-eabb-4080-9f49-c2c0678c25fd")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
+					(reference "#PWR063")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 185.42 102.87 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "dd43704f-4492-4176-9884-ecdaa4afe1aa")
+		(property "Reference" "C1006"
+			(at 189.23 101.5999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22uF"
+			(at 189.23 104.1399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 186.3852 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 185.42 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 185.42 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "25afffff-15f7-47b4-bcd6-78738e8acf07")
+		)
+		(pin "2"
+			(uuid "2f80b46e-81c6-41cc-889f-f506c7abc20a")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
+					(reference "C1006")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 185.42 179.07 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e3c71991-eea6-4fd5-a13f-ebea0c5894c1")
+		(property "Reference" "C1016"
+			(at 189.23 177.7999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22uF"
+			(at 189.23 180.3399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 186.3852 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 185.42 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 185.42 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5aa10ba3-f2a2-4ecd-829e-43815c1ebfde")
+		)
+		(pin "2"
+			(uuid "94fe4dba-7184-4aff-b00b-5e31dabfcd96")
+		)
+		(instances
+			(project "Speedometer_Tech"
+				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
+					(reference "C1016")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 157.48 179.07 0)
 		(unit 1)
@@ -3588,7 +3890,7 @@
 	)
 	(symbol
 		(lib_id "Speedometer_Tech-altium-import:5V_ARROW")
-		(at 171.45 172.72 180)
+		(at 185.42 172.72 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3596,7 +3898,7 @@
 		(dnp no)
 		(uuid "f6226cc6-60bf-4ee7-9c9d-6f562bfaf391")
 		(property "Reference" "#PWR0269"
-			(at 171.45 172.72 0)
+			(at 185.42 172.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3605,7 +3907,7 @@
 			)
 		)
 		(property "Value" "5V"
-			(at 171.45 168.91 0)
+			(at 185.42 168.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3613,7 +3915,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 171.45 172.72 0)
+			(at 185.42 172.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3622,7 +3924,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 171.45 172.72 0)
+			(at 185.42 172.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3631,7 +3933,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name '5V'"
-			(at 171.45 172.72 0)
+			(at 185.42 172.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3643,7 +3945,7 @@
 			(uuid "7805fa1a-aa25-46f9-a388-3e8d033543bb")
 		)
 		(instances
-			(project ""
+			(project "Speedometer_Tech"
 				(path "/7a911dfa-7957-409a-ad31-10c26a0bf949/f138c796-e146-4c77-bc56-ffb525c33bbf"
 					(reference "#PWR0269")
 					(unit 1)
