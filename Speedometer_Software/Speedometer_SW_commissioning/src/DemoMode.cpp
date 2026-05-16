@@ -11,15 +11,18 @@ void DemoMode::loop() {
     if (currentMillis - lastUpdate >= 20) {
         lastUpdate = currentMillis;
         
-        // Update kilometer counters
-        kmDecimal++;
-        if (kmDecimal >= 10) {
-            kmDecimal = 0;
-            tripKm++;
-            totalKm++;
+        // Update kilometer counters - increment by 0.1 km every 0.5 seconds
+        static unsigned long lastKmUpdate = 0;
+        if (currentMillis - lastKmUpdate >= 500) {  // Update every 0.5 seconds
+            lastKmUpdate = currentMillis;
+
+            // Add 0.1 km to both total and trip odometers
+            // This simulates driving at ~720 km/h (0.1 km per 0.5 seconds)
+            // The addDistance() function handles updating both odometers AND the displays
+            speedo->addDistance(0.1);
+
+            delayMicroseconds(500);  // Delay before any Bus 2 operations
         }
-        display->displayTotalKm(totalKm);
-        display->displayTripKm(tripKm, kmDecimal);
         
         // Update DC current for torque bar (-450A to +450A)
         // Simulate driving & regen cycles
@@ -60,9 +63,10 @@ void DemoMode::loop() {
         
         // Update speed (0-200 km/h)
         static unsigned long lastSpeedUpdate = 0;
+        // Offset by 50ms to avoid collision with distance updates (which happen at 0, 500, 1000ms...)
         if (currentMillis - lastSpeedUpdate >= 100) {  // Every 0.1 seconds
             lastSpeedUpdate = currentMillis;
-            
+
             // Create a realistic speed curve
             if (speedIncreasing) {
                 speed += random(1, 3);  // Random increase for realism
@@ -74,7 +78,7 @@ void DemoMode::loop() {
                     speedIncreasing = true;
                 }
             }
-            
+
             display->displaySpeed(speed);
         }
         

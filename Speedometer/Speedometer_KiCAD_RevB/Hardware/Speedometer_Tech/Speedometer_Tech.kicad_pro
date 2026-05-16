@@ -492,7 +492,7 @@
       "plot": "Speedometer_RevB_export/",
       "pos_files": "Speedometer_RevB_export/",
       "specctra_dsn": "",
-      "step": "../../../../../../Downloads/Speedometer_Tech.step",
+      "step": "../../Mechanik/Speedometer_Tech.step",
       "svg": "",
       "vrml": ""
     },
@@ -1233,6 +1233,18 @@
           "group_by": false,
           "label": "Description",
           "name": "Description",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Device",
+          "name": "Sim.Device",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Pins",
+          "name": "Sim.Pins",
           "show": false
         }
       ],

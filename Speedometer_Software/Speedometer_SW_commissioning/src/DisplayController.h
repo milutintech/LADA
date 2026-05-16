@@ -5,12 +5,19 @@
 #include <Wire.h>
 #include "TLC59108.h"
 #include "DisplayPatterns.h"
+#include "Globals.h"
 
 #define NUM_ICS 15
 #define TOTAL_KM_START 0
 #define TRIP_KM_START 6
 #define SPEED_START 10
 #define MODE_SEGMENT_START 13
+
+// I2C bus assignments
+#define BUS1_START 0   // Indices 0-9 use I2C Bus 1 (Total KM + Trip KM)
+#define BUS1_END 9
+#define BUS2_START 10  // Indices 10-14 use I2C Bus 2 (Speed + Drive Mode)
+#define BUS2_END 14
 
 class DisplayController {
 public:

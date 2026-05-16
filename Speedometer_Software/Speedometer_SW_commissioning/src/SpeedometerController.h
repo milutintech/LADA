@@ -9,13 +9,13 @@
 #include "SpeedometerPins.h"  // Include our new pin definitions
 
 // NeoPixel section sizes
-#define TORQUE_PIXELS 20       // 0-19: torque display
-#define SOC_PIXELS 8          // 20-27: state of charge
-#define SOC_MARKER_PIXELS 9    // 28-36: SOC markers
-#define ERROR_PIXELS 13        // 37-49: error lights
-#define TEMP_PIXELS 8         // 50-57: temperature
-#define TEMP_MARKER_PIXELS 10  // 58-67: temperature markers
-#define ILLUMINATION_PIXELS 30 // 68-97: illumination
+#define TORQUE_PIXELS 37       // 0-36: torque display (LED 6 is zero/center)
+#define SOC_PIXELS 16          // 37-52: state of charge
+#define SOC_MARKER_PIXELS 10   // 53-62: SOC markers (100%, 75%, 50%, 25%, E)
+#define ERROR_PIXELS 13        // 63-75: error/status lights
+#define TEMP_PIXELS 16         // 76-91: temperature
+#define TEMP_MARKER_PIXELS 10  // 92-101: temperature markers (30°C, 50°C, 70°C, 90°C, 110°C)
+#define ILLUMINATION_PIXELS 0  // No illumination LEDs
 #define TOTAL_PIXELS (TORQUE_PIXELS + SOC_PIXELS + SOC_MARKER_PIXELS + ERROR_PIXELS + TEMP_PIXELS + TEMP_MARKER_PIXELS + ILLUMINATION_PIXELS)
 
 // Gear state definitions to match VCU
@@ -25,8 +25,8 @@ enum GearState {
     GEAR_REVERSE = 2
 };
 
-// Debug prints
-#define DEBUG_PRINTS 1
+// Debug prints - Set to 0 to disable runtime debug messages (they're very slow!)
+#define DEBUG_PRINTS 0
 
 class SpeedometerController {
 public:
@@ -45,6 +45,11 @@ public:
     uint8_t getSOC() const { return soc; }
     float getLVVoltage() const { return lvVoltageAct; }
     bool getDMCHasErrors() const { return dmcHasErrors; }
+
+    // Getter and setter methods for odometer (used by demo mode)
+    float getTotalOdometer() const { return totalOdometer; }
+    float getTripOdometer() const { return tripOdometer; }
+    void addDistance(float km);
 
 private:
     Adafruit_NeoPixel pixels;
@@ -109,6 +114,9 @@ private:
     uint32_t hslToRgb(float h, float s, float l);
     uint32_t getTemperatureColor(uint8_t temp);
     uint32_t getSOCColor(uint8_t percentage);
+
+    // Brightness multiplier helpers
+    uint32_t applyBrightness(uint32_t color, uint8_t multiplier);
 };
 
 #endif // SPEEDOMETER_CONTROLLER_H

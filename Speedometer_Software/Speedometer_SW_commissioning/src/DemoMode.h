@@ -28,11 +28,6 @@ private:
     unsigned long lastModeChange = 0;
     unsigned long modeChangeInterval = 3000; // Change mode every 3 seconds
     uint8_t brightness = 100;     // Illumination brightness
-    
-    // Kilometer counters
-    unsigned long totalKm = 0;
-    unsigned long tripKm = 0;
-    uint8_t kmDecimal = 0;
 };
 
 #endif // DEMO_MODE_H

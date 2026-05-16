@@ -14,8 +14,12 @@
 #define CAN_CS_PIN 7      // IO7 for CS
 #define CAN_INT_PIN 12    // IO12 for INT (shown as 12 in the diagram)
 
-// I2C pins - Keep speedometer's original pins
+// I2C Bus 1 pins - Total KM and Trip KM displays
 #define I2C_SDA_PIN 1     // IO1 for SDA
 #define I2C_SCL_PIN 2     // IO2 for SCL
+
+// I2C Bus 2 pins - Speed and Drive Mode displays
+#define I2C2_SDA_PIN 19   // IO19 for SDA_2
+#define I2C2_SCL_PIN 20   // IO20 for SCL_2
 
 #endif // SPEEDOMETER_PINS_H

@@ -1,6 +1,7 @@
 #include "SpeedometerController.h"
 #include "DisplayController.h"
 #include "SpeedometerPins.h"
+#include "Globals.h"
 #include <EEPROM.h>
 
 // Define EEPROM addresses for storing odometer values
@@ -41,7 +42,7 @@ SpeedometerController::SpeedometerController() :
 
 void SpeedometerController::debugPrint(String msg) {
     #if DEBUG_PRINTS
-    Serial.println(msg);
+    DEBUG_PRINTLN(msg);
     #endif
 }
 
@@ -111,6 +112,18 @@ uint32_t SpeedometerController::getSOCColor(uint8_t percentage) {
     return hslToRgb(hue, 1.0, 0.5);
 }
 
+// Apply brightness multiplier to a color (0-255 multiplier)
+uint32_t SpeedometerController::applyBrightness(uint32_t color, uint8_t multiplier) {
+    uint8_t r = (color >> 16) & 0xFF;
+    uint8_t g = (color >> 8) & 0xFF;
+    uint8_t b = color & 0xFF;
+
+    r = (r * multiplier) / 255;
+    g = (g * multiplier) / 255;
+    b = (b * multiplier) / 255;
+
+    return pixels.Color(r, g, b);
+}
 
 bool SpeedometerController::begin() {
     debugPrint("Initializing SpeedometerController...");
@@ -125,7 +138,7 @@ bool SpeedometerController::begin() {
     
     // Initialize NeoPixels
     pixels.begin();
-    pixels.setBrightness(100);
+    pixels.setBrightness(brightnessNeoPixelGlobal);
     pixels.clear();
     pixels.show();
     delay(100);
@@ -293,15 +306,34 @@ void SpeedometerController::saveOdometersToEEPROM() {
 
 void SpeedometerController::resetTripOdometer() {
     tripOdometer = 0.0;
-    
+
     EEPROM.put(EEPROM_TRIP_ODO_ADDR, tripOdometer);
     EEPROM.commit();
-    
+
     if (display) {
-        //display->displayTripKm(0, 0);
+        display->displayTripKm(0, 0);
     }
-    
-    debugPrint("Trip odometer reset");
+
+    VERBOSE_PRINTLN("Trip odometer reset");
+}
+
+void SpeedometerController::addDistance(float km) {
+    // Add distance to both odometers
+    totalOdometer += km;
+    tripOdometer += km;
+
+    // Update displays
+    if (display) {
+        unsigned long totalKm = static_cast<unsigned long>(totalOdometer);
+        unsigned long tripKm = static_cast<unsigned long>(tripOdometer);
+        uint8_t tripDecimal = static_cast<uint8_t>((tripOdometer - tripKm) * 10);
+
+        display->displayTotalKm(totalKm);
+        display->displayTripKm(tripKm, tripDecimal);
+    }
+
+    // Save to EEPROM periodically (handled by saveOdometersToEEPROM)
+    saveOdometersToEEPROM();
 }
 
 void SpeedometerController::processCANMessages() {
@@ -486,30 +518,35 @@ void SpeedometerController::updateTorque(int16_t current) {
     static int16_t lastCurrent = 0;
     static unsigned long lastUpdate = 0;
     unsigned long currentTime = millis();
-    
+
     if (abs(current - lastCurrent) > 20 || (currentTime - lastUpdate) > 200) {
         lastCurrent = current;
         lastUpdate = currentTime;
-        
+
         debugPrint("Updating torque based on current: " + String(current) + "A");
-        
+
+        // Clear all torque pixels
         for(int i = 0; i < TORQUE_PIXELS; i++) {
             pixels.setPixelColor(i, 0);
         }
-        
-        pixels.setPixelColor(4, pixels.Color(0, 255, 0));
-        
+
+        // LED 6 is the zero/center point - always show it in green
+        pixels.setPixelColor(6, pixels.Color(0, 255, 0));
+
+        // Negative current (regen/braking) - show on left side (LEDs 0-5) in green
         if (current < -10) {
-            int numLeds = map(constrain(-current, 10, 450), 10, 450, 1, 4);
-            
+            int numLeds = map(constrain(-current, 10, 450), 10, 450, 1, 6);
+
             for(int i = 0; i < numLeds; i++) {
-                pixels.setPixelColor(3 - i, pixels.Color(0, 255, 0));
+                pixels.setPixelColor(5 - i, pixels.Color(0, 255, 0));
             }
-        } else if (current > 10) {
-            int numLeds = map(constrain(current, 10, 450), 10, 450, 1, 15);
-            
+        }
+        // Positive current (acceleration) - show on right side (LEDs 7-36) in orange
+        else if (current > 10) {
+            int numLeds = map(constrain(current, 10, 450), 10, 450, 1, 30);
+
             for(int i = 0; i < numLeds; i++) {
-                pixels.setPixelColor(5 + i, pixels.Color(255, 165, 0));
+                pixels.setPixelColor(7 + i, pixels.Color(255, 100, 0));  // Darker orange (more red, less yellow)
             }
         }
     }
@@ -542,7 +579,7 @@ void SpeedometerController::updateSOC(uint8_t percentage) {
         pixels.setPixelColor(offset + i, color);
     }
 
-    // Update SOC marker pixels with dimmed green
+    // Update SOC marker pixels (100%, 75%, 50%, 25%, E) - 10 markers with dimmed green
     offset += SOC_PIXELS;
     for (int i = 0; i < SOC_MARKER_PIXELS; i++) {
         pixels.setPixelColor(offset + i, pixels.Color(0, 64, 0));
@@ -578,22 +615,23 @@ void SpeedometerController::updateErrorLights(uint16_t errorFlags) {
 void SpeedometerController::updateTemperature(uint8_t temp) {
     debugPrint("Updating temperature display: " + String(temp) + "°C");
     int offset = TORQUE_PIXELS + SOC_PIXELS + SOC_MARKER_PIXELS + ERROR_PIXELS;
-    
+
     // Clear all temperature pixels first
     for(int i = offset; i < offset + TEMP_PIXELS; i++) {
         pixels.setPixelColor(i, 0);
     }
-    
+
+    // Map temperature (0-110°C) to 16 LEDs
     int ledsToLight = map(constrain(temp, 0, 110), 0, 110, 0, TEMP_PIXELS);
     debugPrint("Temperature LEDs to light: " + String(ledsToLight));
-    
+
     // Light up LEDs with color-coded temperature values
     for (int i = 0; i < ledsToLight; i++) {
         uint32_t color = getTemperatureColor(temp);
         pixels.setPixelColor(offset + i, color);
     }
 
-    // Update temperature marker pixels with dimmed green
+    // Update temperature marker pixels (30°C, 50°C, 70°C, 90°C, 110°C) - 10 markers with dimmed green
     offset += TEMP_PIXELS;
     for (int i = 0; i < TEMP_MARKER_PIXELS; i++) {
         pixels.setPixelColor(offset + i, pixels.Color(0, 64, 0));
